@@ -2,23 +2,41 @@ backend:
   name: github
   repo: aizgz/aizgz-concrete-mixer
   branch: main
-  base_url: https://aizgz.vercel.app
-  auth_endpoint: api/auth
 
-media_folder: "public/uploads"
+media_folder: "uploads"
 public_folder: "/uploads"
 
 collections:
+  # 1. 站点全局设置 (单文件配置)
+  - name: "settings"
+    label: "Site Settings (站点设置)"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "general"
+        label: "General Settings (联系方式与全局配置)"
+        file: "content/settings/general.json"
+        fields:
+          - { label: "Brand Name (品牌名称)", name: "brand_name", widget: "string", default: "AIZGZ" }
+          - { label: "Brand Tagline (品牌标语)", name: "brand_tagline", widget: "string", default: "MACHINERY" }
+          - { label: "WhatsApp Number (带国家代码, 如 8613800138000)", name: "whatsapp_number", widget: "string", default: "8612345678900" }
+          - { label: "Contact Email (联系邮箱)", name: "contact_email", widget: "string", default: "sales@aizgz.com" }
+          - { label: "Formspree Form ID (如 xxyyzz)", name: "formspree_id", widget: "string", default: "" }
+          - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Heavy Duty Concrete Mixers B2B Supplier" }
+          - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "Factory direct supply of professional electric, diesel, and gasoline concrete mixers built for international construction projects." }
+          - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide." }
+
+  # 2. 产品管理集合
   - name: "products"
-    label: "Concrete Mixers (搅拌机产品)"
+    label: "Concrete Mixers (产品管理)"
     folder: "content/products"
     create: true
     slug: "{{slug}}"
     fields:
       - { label: "Product Title (产品名称)", name: "title", widget: "string" }
-      - { label: "Model Number (型号)", name: "model", widget: "string" }
-      - { label: "Cover Image (产品主图)", name: "image", widget: "image" }
-      - { label: "Capacity (出料容量)", name: "capacity", widget: "string", required: false }
-      - { label: "Power Type (动力)", name: "power_type", widget: "select", options: ["Electric Engine", "Diesel Engine", "Gasoline Engine"] }
-      - { label: "Key Features (主要特点)", name: "features", widget: "list", required: false }
+      - { label: "Model Code (型号)", name: "model", widget: "string" }
+      - { label: "Capacity (容量)", name: "capacity", widget: "string" }
+      - { label: "Power Type (动力类型)", name: "power_type", widget: "select", options: ["Diesel", "Electric", "Gasoline"] }
+      - { label: "Product Image (产品图片)", name: "image", widget: "image" }
       - { label: "Detailed Description (详细介绍)", name: "body", widget: "markdown" }
