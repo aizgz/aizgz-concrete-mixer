@@ -18,10 +18,10 @@
         <span class="text-2xl font-bold tracking-wide text-amber-500">AIZGZ</span>
         <span class="text-xs bg-amber-500 text-slate-900 px-2 py-0.5 rounded font-semibold">MACHINERY</span>
       </div>
-      <nav class="space-x-6 text-sm font-medium flex items-center">
+      <nav class="space-x-8 text-sm font-medium flex items-center">
         <a href="#products" class="hover:text-amber-400 transition">Products</a>
         <a href="#about" class="hover:text-amber-400 transition">About Us</a>
-        <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded font-bold transition">Get a Quote</a>
+        <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-5 py-2 rounded-lg font-bold transition">Inquiry</a>
       </nav>
     </div>
   </header>
@@ -32,8 +32,8 @@
       <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Heavy Duty Concrete Mixers B2B Supplier</h1>
       <p class="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto mb-8">Factory direct supply of professional electric, diesel, and gasoline concrete mixers built for international construction projects.</p>
       <div class="flex justify-center space-x-4">
-        <a href="#products" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-lg shadow-lg transition">Browse Catalog</a>
-        <a href="#contact" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition">Request Quote</a>
+        <a href="#products" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-lg shadow-lg transition">Browse Products</a>
+        <a href="#contact" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition">Contact Us</a>
       </div>
     </div>
   </section>
@@ -63,7 +63,7 @@
   <section id="about" class="bg-white py-16 px-4 border-t border-slate-100">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl font-bold text-slate-900 mb-4">About AIZGZ Machinery</h2>
-      <p class="text-slate-600 leading-relaxed mb-6">
+      <p class="text-slate-600 leading-relaxed">
         We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide. With strict quality control, durable engines, and reliable global logistics, we provide custom solutions for contractors and distributors across the globe.
       </p>
     </div>
@@ -73,7 +73,7 @@
   <section id="contact" class="bg-slate-900 text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-amber-500 mb-2">Get a Quote / Contact Us</h2>
+        <h2 class="text-3xl font-bold text-amber-500 mb-2">Inquiry & Contact</h2>
         <p class="text-slate-300 text-sm">Tell us your requirements and our sales engineers will get back to you within 12 hours.</p>
       </div>
       
@@ -102,7 +102,7 @@
           <label class="block text-sm font-semibold text-slate-300 mb-2">Message / Requirements *</label>
           <textarea rows="4" required placeholder="Please state required quantity, target port, power supply requirements, etc." class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
         </div>
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-4 rounded-lg shadow-lg text-lg transition">Submit Inquiry</button>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-4 rounded-lg shadow-lg text-lg transition">Send Inquiry</button>
       </form>
     </div>
   </section>
@@ -203,8 +203,8 @@
           </div>
         </div>
         <div class="p-6 pt-0 border-t border-slate-50 mt-4 flex justify-between items-center space-x-2">
-          <button onclick="openModal('${encodeURIComponent(JSON.stringify(meta))}', '${encodeURIComponent(body)}')" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-3 py-2 rounded transition">Details</button>
-          <a href="#contact" onclick="fillInquiryModel('${meta.title || ''}')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-bold px-3 py-2 rounded transition">Get Quote &rarr;</a>
+          <button onclick="openModal('${encodeURIComponent(JSON.stringify(meta))}', '${encodeURIComponent(body)}')" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded transition">Details</button>
+          <a href="#contact" onclick="fillInquiryModel('${meta.title || ''}')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-bold px-4 py-2 rounded transition">Inquire Now &rarr;</a>
         </div>
       `;
 
@@ -234,14 +234,14 @@
         <div class="prose max-w-none text-slate-700 text-sm mb-6">
           ${marked.parse(body || '')}
         </div>
-        <a href="#contact" onclick="closeModal(); fillInquiryModel('${meta.title || ''}')" class="block text-center w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 rounded-lg transition">Request Quote for this Model</a>
+        <a href="#contact" onclick="closeModal(); fillInquiryModel('${meta.title || ''}')" class="block text-center w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 rounded-lg transition">Inquire About This Model</a>
       `;
 
       modal.classList.remove('hidden');
     }
 
     function closeModal() {
-      document.getElementById('product-modal'].classList.add('hidden');
+      document.getElementById('product-modal').classList.add('hidden');
     }
 
     function handleInquiry(e) {
