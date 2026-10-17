@@ -1,7 +1,7 @@
 backend:
   name: github
-  reop: aizgz/aizgz-concrete-mixer
-  branch: main
+  repo: aizgz/aizgz-concrete-mixer   # 你的 GitHub 用户名/仓库名
+  branch: main                       # 你的分支名
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
