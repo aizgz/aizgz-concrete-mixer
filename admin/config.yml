@@ -23,11 +23,12 @@ collections:
           - { label: "WhatsApp Number (带国家代码, 如 8613800138000)", name: "whatsapp_number", widget: "string", default: "8612345678900" }
           - { label: "Contact Email (联系邮箱)", name: "contact_email", widget: "string", default: "sales@aizgz.com" }
           - { label: "Formspree Form ID (如 xxyyzz)", name: "formspree_id", widget: "string", default: "" }
+          - { label: "Google Analytics ID (如 G-XXXXXXXXXX)", name: "ga_id", widget: "string", default: "" }
           - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Heavy Duty Concrete Mixers B2B Supplier" }
           - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "Factory direct supply of professional electric, diesel, and gasoline concrete mixers built for international construction projects." }
           - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide." }
 
-  # 2. 产品管理集合
+  # 2. 产品管理
   - name: "products"
     label: "Concrete Mixers (产品管理)"
     folder: "content/products"
@@ -40,3 +41,15 @@ collections:
       - { label: "Power Type (动力类型)", name: "power_type", widget: "select", options: ["Diesel", "Electric", "Gasoline"] }
       - { label: "Product Image (产品图片)", name: "image", widget: "image" }
       - { label: "Detailed Description (详细介绍)", name: "body", widget: "markdown" }
+
+  # 3. 发货与成功案例管理 (Success Stories / Shipping)
+  - name: "cases"
+    label: "Shipping & Cases (发货案例)"
+    folder: "content/cases"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title (标题/描述)", name: "title", widget: "string" }
+      - { label: "Destination Country (目的国/地区)", name: "country", widget: "string" }
+      - { label: "Photo (现场/发货照片)", name: "image", widget: "image" }
+      - { label: "Publish Date (日期)", name: "date", widget: "date" }
