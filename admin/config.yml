@@ -15,7 +15,7 @@ collections:
       preview: false
     files:
       - name: "general"
-        label: "General Settings (联系方式与全局配置)"
+        label: "General Settings (联系方式与社交账号配置)"
         file: "content/settings/general.json"
         fields:
           - { label: "Brand Name (品牌名称)", name: "brand_name", widget: "string", default: "AIZGZ" }
@@ -24,6 +24,8 @@ collections:
           - { label: "Contact Email (联系邮箱)", name: "contact_email", widget: "string", default: "sales@aizgz.com" }
           - { label: "Formspree Form ID (如 xxyyzz)", name: "formspree_id", widget: "string", default: "" }
           - { label: "Google Analytics ID (如 G-XXXXXXXXXX)", name: "ga_id", widget: "string", default: "" }
+          - { label: "YouTube Channel / Video URL (YouTube 频道或主页)", name: "youtube_url", widget: "string", default: "https://www.youtube.com" }
+          - { label: "TikTok Profile URL (TikTok 主页链接)", name: "tiktok_url", widget: "string", default: "https://www.tiktok.com" }
           - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Heavy Duty Concrete Mixers B2B Supplier" }
           - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "Factory direct supply of professional electric, diesel, and gasoline concrete mixers built for international construction projects." }
           - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide." }
@@ -42,7 +44,7 @@ collections:
       - { label: "Product Image (产品图片)", name: "image", widget: "image" }
       - { label: "Detailed Description (详细介绍)", name: "body", widget: "markdown" }
 
-  # 3. 发货与成功案例管理 (Success Stories / Shipping)
+  # 3. 发货与成功案例管理
   - name: "cases"
     label: "Shipping & Cases (发货案例)"
     folder: "content/cases"
@@ -53,3 +55,15 @@ collections:
       - { label: "Destination Country (目的国/地区)", name: "country", widget: "string" }
       - { label: "Photo (现场/发货照片)", name: "image", widget: "image" }
       - { label: "Publish Date (日期)", name: "date", widget: "date" }
+
+  # 4. 视频展厅管理 (YouTube / TikTok 视频)
+  - name: "videos"
+    label: "Video Showroom (视频展厅)"
+    folder: "content/videos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Video Title (视频名称)", name: "title", widget: "string" }
+      - { label: "Platform (平台)", name: "platform", widget: "select", options: ["YouTube", "TikTok"] }
+      - { label: "Video Embed / Watch URL (视频链接)", name: "video_url", widget: "string" }
+      - { label: "Cover Image / Thumbnail (视频封面图)", name: "image", widget: "image" }
