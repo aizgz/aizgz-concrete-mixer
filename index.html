@@ -21,7 +21,6 @@
       <nav class="space-x-6 text-sm font-medium flex items-center">
         <a href="#products" class="hover:text-amber-400 transition">Products</a>
         <a href="#about" class="hover:text-amber-400 transition">About Us</a>
-        <a href="#contact" class="hover:text-amber-400 transition">Contact Us</a>
         <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded font-bold transition">Get a Quote</a>
       </nav>
     </div>
@@ -34,7 +33,7 @@
       <p class="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto mb-8">Factory direct supply of professional electric, diesel, and gasoline concrete mixers built for international construction projects.</p>
       <div class="flex justify-center space-x-4">
         <a href="#products" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-lg shadow-lg transition">Browse Catalog</a>
-        <a href="#contact" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition">Inquire Now</a>
+        <a href="#contact" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition">Request Quote</a>
       </div>
     </div>
   </section>
@@ -60,12 +59,22 @@
     </div>
   </section>
 
+  <!-- About Us Section -->
+  <section id="about" class="bg-white py-16 px-4 border-t border-slate-100">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4">About AIZGZ Machinery</h2>
+      <p class="text-slate-600 leading-relaxed mb-6">
+        We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide. With strict quality control, durable engines, and reliable global logistics, we provide custom solutions for contractors and distributors across the globe.
+      </p>
+    </div>
+  </section>
+
   <!-- Contact Us / Email Inquiry Section -->
   <section id="contact" class="bg-slate-900 text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-amber-500 mb-2">Request a Fast Quote</h2>
-        <p class="text-slate-300 text-sm">Send us your specs or questions and our sales engineers will respond within 12 hours.</p>
+        <h2 class="text-3xl font-bold text-amber-500 mb-2">Get a Quote / Contact Us</h2>
+        <p class="text-slate-300 text-sm">Tell us your requirements and our sales engineers will get back to you within 12 hours.</p>
       </div>
       
       <form onsubmit="handleInquiry(event)" class="bg-slate-800 p-8 rounded-xl shadow-xl space-y-6">
@@ -90,7 +99,7 @@
           </div>
         </div>
         <div>
-          <label class="block text-sm font-semibold text-slate-300 mb-2">Message / Requirement Details *</label>
+          <label class="block text-sm font-semibold text-slate-300 mb-2">Message / Requirements *</label>
           <textarea rows="4" required placeholder="Please state required quantity, target port, power supply requirements, etc." class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
         </div>
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-4 rounded-lg shadow-lg text-lg transition">Submit Inquiry</button>
@@ -107,7 +116,7 @@
   </div>
 
   <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/8612345678900?text=Hello%2C%20I%20am%20interested%20in%20your%20Concrete%20Mixers." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl z-50 flex items-center space-x-2 group transition duration-300">
+  <a href="https://wa.me/8615037113544?text=Hello%2C%20I%20am%20interested%20in%20your%20Concrete%20Mixers." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl z-50 flex items-center space-x-2 group transition duration-300">
     <i class="fa-brands fa-whatsapp text-3xl"></i>
     <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-bold text-sm pr-1">Chat on WhatsApp</span>
   </a>
@@ -195,7 +204,7 @@
         </div>
         <div class="p-6 pt-0 border-t border-slate-50 mt-4 flex justify-between items-center space-x-2">
           <button onclick="openModal('${encodeURIComponent(JSON.stringify(meta))}', '${encodeURIComponent(body)}')" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-3 py-2 rounded transition">Details</button>
-          <a href="#contact" onclick="fillInquiryModel('${meta.title || ''}')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-bold px-3 py-2 rounded transition">Inquire Now &rarr;</a>
+          <a href="#contact" onclick="fillInquiryModel('${meta.title || ''}')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-bold px-3 py-2 rounded transition">Get Quote &rarr;</a>
         </div>
       `;
 
@@ -232,7 +241,7 @@
     }
 
     function closeModal() {
-      document.getElementById('product-modal').classList.add('hidden');
+      document.getElementById('product-modal'].classList.add('hidden');
     }
 
     function handleInquiry(e) {
