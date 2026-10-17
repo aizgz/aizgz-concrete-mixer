@@ -9,13 +9,28 @@
   <!-- 引入 Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
-  <!-- 引入 GitHub 授权代理插件，强制将其转为 Login with GitHub -->
+  <!-- 强制将登录按钮拦截并改为 GitHub 授权跳转 -->
   <script>
-    CMS.registerEventListener({
-      name: 'login',
-      handler: () => {
-        // 自动重定向到 GitHub 授权页
-      }
+    window.addEventListener('DOMContentLoaded', () => {
+      const checkButton = setInterval(() => {
+        const btn = document.querySelector('button[class*="login"], a[class*="login"], div[class*="login"]');
+        // 查找 Netlify Identity 登录按钮并直接重写其行为
+        const netlifyBtn = document.evaluate("//button[contains(., 'Netlify Identity')]", document, null, XPathResult.FIRST_ORDERATED_NODE_TYPE, null).singleNodeValue;
+        
+        if (netlifyBtn || btn) {
+          const targetBtn = netlifyBtn || btn;
+          targetBtn.innerText = "Login with GitHub";
+          targetBtn.style.backgroundColor = "#24292e";
+          targetBtn.style.color = "#ffffff";
+          targetBtn.onclick = (e) => {
+            e.preventDefault();
+            // 直接触发 GitHub OAuth 授权跳转
+            const clientId = ""; // 如果需要显式 Oauth 可以走官方代理，或直接利用 CMS 内部机制
+            window.location.href = `https://github.com/login/oauth/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=${window.location.origin}/admin/`;
+          };
+          clearInterval(checkButton);
+        }
+      }, 500);
     });
   </script>
 </body>
