@@ -1,0 +1,21 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "products"
+    label: "Concrete Mixers (搅拌机产品)"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Product Title (产品名称)", name: "title", widget: "string" }
+      - { label: "Model Number (型号)", name: "model", widget: "string" }
+      - { label: "Cover Image (产品主图)", name: "image", widget: "image" }
+      - { label: "Capacity (出料容量)", name: "capacity", widget: "string", required: false }
+      - { label: "Power Type (动力)", name: "power_type", widget: "select", options: ["Electric Engine", "Diesel Engine", "Gasoline Engine"] }
+      - { label: "Key Features (主要特点)", name: "features", widget: "list", required: false }
+      - { label: "Detailed Description (详细介绍)", name: "body", widget: "markdown" }
