@@ -11,9 +11,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-  <!-- Google Analytics Dynamic Injection Placeholder -->
-  <div id="ga-container"></div>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans relative">
 
@@ -26,17 +23,18 @@
       </div>
       <nav class="space-x-6 text-sm font-medium flex items-center">
         <a href="#products" class="hover:text-amber-400 transition" data-i18n="nav_products">Products</a>
-        <a href="#why-us" class="hover:text-amber-400 transition" data-i18n="nav_why">Why Us</a>
+        <a href="#videos" class="hover:text-amber-400 transition" data-i18n="nav_videos">Videos</a>
         <a href="#cases" class="hover:text-amber-400 transition" data-i18n="nav_cases">Shipping & Cases</a>
+        <a href="#why-us" class="hover:text-amber-400 transition" data-i18n="nav_why">Why Us</a>
         <a href="#faq" class="hover:text-amber-400 transition" data-i18n="nav_faq">FAQ</a>
         <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-lg font-bold transition" data-i18n="nav_inquiry">Inquiry</a>
         
-        <!-- Language Switcher Dropdown -->
+        <!-- Language Switcher -->
         <select id="lang-switcher" onchange="changeLanguage(this.value)" class="bg-slate-800 text-amber-400 text-xs font-bold border border-slate-700 rounded px-2 py-1 focus:outline-none">
           <option value="en">English</option>
-          <option value="es">Español (Spanish)</option>
-          <option value="ar">العربية (Arabic)</option>
-          <option value="ru">Русский (Russian)</option>
+          <option value="es">Español</option>
+          <option value="ar">العربية</option>
+          <option value="ru">Русский</option>
         </select>
       </nav>
     </div>
@@ -72,6 +70,30 @@
     </div>
   </section>
 
+  <!-- Video Showroom Section (YouTube & TikTok Showroom) -->
+  <section id="videos" class="bg-slate-900 text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+        <div>
+          <h2 class="text-3xl font-bold text-amber-500 mb-2" data-i18n="video_title">Factory Video Showroom</h2>
+          <p class="text-slate-400 text-sm" data-i18n="video_sub">Watch our concrete mixers in action and production line highlights</p>
+        </div>
+        <div class="flex space-x-4 mt-4 md:mt-0">
+          <a id="youtube-btn" href="#" target="_blank" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-bold text-sm flex items-center space-x-2 transition">
+            <i class="fa-brands fa-youtube text-lg"></i> <span>YouTube Channel</span>
+          </a>
+          <a id="tiktok-btn" href="#" target="_blank" class="bg-black hover:bg-slate-800 border border-slate-700 text-white px-4 py-2 rounded-lg font-bold text-sm flex items-center space-x-2 transition">
+            <i class="fa-brands fa-tiktok text-lg"></i> <span>TikTok Profile</span>
+          </a>
+        </div>
+      </div>
+
+      <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center text-slate-500 col-span-full py-8">Videos will be updated via CMS.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- Shipping & Success Cases Section -->
   <section id="cases" class="bg-white py-16 px-4 border-t border-slate-200">
     <div class="max-w-7xl mx-auto">
@@ -80,7 +102,6 @@
         <p class="text-slate-500 text-sm" data-i18n="cases_sub">Real container loading and project delivery photos across the world</p>
       </div>
       <div id="cases-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Dynamic loading cases -->
         <div class="text-center text-slate-400 col-span-full py-6">Loading shipping gallery...</div>
       </div>
     </div>
@@ -207,12 +228,12 @@
     const REPO_NAME = 'aizgz-concrete-mixer';
     let globalSettings = {};
 
-    // Multilingual Dictionary (English, Spanish, Arabic, Russian)
     const i18nText = {
       en: {
-        nav_products: "Products", nav_why: "Why Us", nav_cases: "Shipping & Cases", nav_faq: "FAQ", nav_inquiry: "Inquiry",
+        nav_products: "Products", nav_videos: "Videos", nav_cases: "Shipping & Cases", nav_why: "Why Us", nav_faq: "FAQ", nav_inquiry: "Inquiry",
         btn_browse: "Browse Products", btn_catalog: "Get Product Catalog (PDF)",
         prod_title: "Featured Machinery", prod_sub: "High-performance mixers engineered for reliability",
+        video_title: "Factory Video Showroom", video_sub: "Watch our concrete mixers in action and production line highlights",
         cases_title: "Global Shipping & Success Cases", cases_sub: "Real container loading and project delivery photos across the world",
         why_title: "Why Partner With AIZGZ?", why_sub: "Your reliable industrial equipment manufacturing partner",
         w1_title: "Factory Direct Supply", w1_desc: "Competitive wholesale pricing directly from the manufacturing line.",
@@ -228,9 +249,10 @@
         form_msg: "Message / Requirements *", form_submit: "Send Inquiry"
       },
       es: {
-        nav_products: "Productos", nav_why: "Por qué Nosotros", nav_cases: "Envios y Casos", nav_faq: "Preguntas", nav_inquiry: "Cotización",
+        nav_products: "Productos", nav_videos: "Videos", nav_cases: "Envíos y Casos", nav_why: "Por qué Nosotros", nav_faq: "Preguntas", nav_inquiry: "Cotización",
         btn_browse: "Ver Productos", btn_catalog: "Obtener Catálogo (PDF)",
         prod_title: "Maquinaria Destacada", prod_sub: "Mezcladoras de alto rendimiento diseñadas para durar",
+        video_title: "Sala de Exhibición en Video", video_sub: "Vea nuestras mezcladoras de concreto en acción",
         cases_title: "Envíos Globales y Casos de Éxito", cases_sub: "Fotos reales de carga de contenedores en todo el mundo",
         why_title: "¿Por qué elegir AIZGZ?", why_sub: "Su socio de fabricación de equipos industriales confiable",
         w1_title: "Suministro Directo", w1_desc: "Precios mayoristas competitivos directamente desde fábrica.",
@@ -246,9 +268,10 @@
         form_msg: "Mensaje / Requerimientos *", form_submit: "Enviar Consulta"
       },
       ar: {
-        nav_products: "المنتجات", nav_why: "لماذا نحن", nav_cases: "الشحن والحالات", nav_faq: "الأسئلة", nav_inquiry: "استفسار",
+        nav_products: "المنتجات", nav_videos: "الفيديوهات", nav_cases: "الشحن والحالات", nav_why: "لماذا نحن", nav_faq: "الأسئلة", nav_inquiry: "استفسار",
         btn_browse: "تصفح المنتجات", btn_catalog: "طلب الكتالوج (PDF)",
         prod_title: "الآلات المميزة", prod_sub: "خلاطات عالية الأداء مصممة للموثوقية",
+        video_title: "معرض فيديو المصنع", video_sub: "شاهد خلاطات الخرسانة الخاصة بنا أثناء العمل",
         cases_title: "الشحن العالمي وحالات النجاح", cases_sub: "صور حقيقية لتحميل الحاويات وتسليم المشاريع حول العالم",
         why_title: "لماذا تتشارك معنا AIZGZ؟", why_sub: "شريكك الموثوق في تصنيع المعدات الصناعية",
         w1_title: "توريد مباشر من المصنع", w1_desc: "أسعار الجملة التنافسية مباشرة من خط الإنتاج.",
@@ -264,9 +287,10 @@
         form_msg: "الرسالة / المتطلبات *", form_submit: "إرسال الاستفسار"
       },
       ru: {
-        nav_products: "Продукция", nav_why: "Почему мы", nav_cases: "Доставка и Кейсы", nav_faq: "FAQ", nav_inquiry: "Запрос",
+        nav_products: "Продукция", nav_videos: "Видео", nav_cases: "Доставка и Кейсы", nav_why: "Почему мы", nav_faq: "FAQ", nav_inquiry: "Запрос",
         btn_browse: "Каталог продукции", btn_catalog: "Скачать каталог (PDF)",
         prod_title: "Наше Оборудование", prod_sub: "Высокопроизводительные бетономешалки для надежной работы",
+        video_title: "Видеогалерея завода", video_sub: "Смотрите наши бетономешалки в работе",
         cases_title: "Глобальная Доставка и Проекты", cases_sub: "Реальные фото погрузки контейнеров и доставки по всему миру",
         why_title: "Почему выбирают AIZGZ?", why_sub: "Ваш надежный партнер по производству промышленного оборудования",
         w1_title: "Прямые поставки с завода", w1_desc: "Конкурентные оптовые цены напрямую с производственной линии.",
@@ -289,14 +313,9 @@
         const key = el.getAttribute('data-i18n');
         if (texts[key]) el.textContent = texts[key];
       });
-      if (lang === 'ar') {
-        document.documentElement.dir = 'rtl';
-      } else {
-        document.documentElement.dir = 'ltr';
-      }
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     }
 
-    // Load Settings & GA4 Analytics & Products & Cases
     async function loadSiteData() {
       try {
         const res = await fetch(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/content/settings/general.json`);
@@ -311,30 +330,26 @@
           if (globalSettings.whatsapp_number) {
             document.getElementById('whatsapp-link').href = `https://wa.me/${globalSettings.whatsapp_number}?text=Hello%2C%20I%20am%20interested%20in%20your%20Concrete%20Mixers.`;
           }
+          if (globalSettings.youtube_url) {
+            document.getElementById('youtube-btn').href = globalSettings.youtube_url;
+          }
+          if (globalSettings.tiktok_url) {
+            document.getElementById('tiktok-btn').href = globalSettings.tiktok_url;
+          }
 
-          // Inject Google Analytics if GA ID provided in CMS
           if (globalSettings.ga_id) {
             const gaScript1 = document.createElement('script');
             gaScript1.async = true;
             gaScript1.src = `https://www.googletagmanager.com/gtag/js?id=${globalSettings.ga_id}`;
             document.head.appendChild(gaScript1);
-
             const gaScript2 = document.createElement('script');
-            gaScript2.textContent = `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${globalSettings.ga_id}');
-            `;
+            gaScript2.textContent = `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${globalSettings.ga_id}');`;
             document.head.appendChild(gaScript2);
           }
         }
-      } catch (err) {
-        console.log("Using default settings.");
-      }
+      } catch (err) {}
     }
 
-    // Fetch Products
     async function fetchProducts() {
       const grid = document.getElementById('product-grid');
       const countEl = document.getElementById('product-count');
@@ -343,16 +358,13 @@
         if (!response.ok) throw new Error();
         const files = await response.json();
         const mdFiles = files.filter(f => f.name.endsWith('.md'));
-        
         if (mdFiles.length === 0) {
           grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">No products published yet.</div>`;
           countEl.textContent = '0 Products';
           return;
         }
-
         grid.innerHTML = '';
         countEl.textContent = `${mdFiles.length} Products Available`;
-
         for (const file of mdFiles) {
           const res = await fetch(file.download_url);
           const rawText = await res.text();
@@ -364,7 +376,6 @@
       }
     }
 
-    // Fetch Shipping & Success Cases
     async function fetchCases() {
       const grid = document.getElementById('cases-grid');
       try {
@@ -372,18 +383,15 @@
         if (!response.ok) throw new Error();
         const files = await response.json();
         const mdFiles = files.filter(f => f.name.endsWith('.md'));
-
         if (mdFiles.length === 0) {
           grid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-400">Shipping cases will be updated soon via CMS.</div>`;
           return;
         }
-
         grid.innerHTML = '';
         for (const file of mdFiles) {
           const res = await fetch(file.download_url);
           const rawText = await res.text();
           const { meta } = parseFrontMatter(rawText);
-
           const card = document.createElement('div');
           card.className = 'bg-slate-50 rounded-xl overflow-hidden shadow border border-slate-200';
           card.innerHTML = `
@@ -401,6 +409,40 @@
       } catch (err) {
         grid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-400">Cases gallery ready for upload in CMS.</div>`;
       }
+    }
+
+    async function fetchVideos() {
+      const grid = document.getElementById('videos-grid');
+      try {
+        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/videos`);
+        if (!response.ok) throw new Error();
+        const files = await response.json();
+        const mdFiles = files.filter(f => f.name.endsWith('.md'));
+        if (mdFiles.length === 0) return; // Keep default placeholder if empty
+
+        grid.innerHTML = '';
+        for (const file of mdFiles) {
+          const res = await fetch(file.download_url);
+          const rawText = await res.text();
+          const { meta } = parseFrontMatter(rawText);
+          const card = document.createElement('div');
+          card.className = 'bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow';
+          card.innerHTML = `
+            <div class="h-48 bg-slate-900 relative overflow-hidden flex items-center justify-center">
+              <img src="${meta.image || 'https://via.placeholder.com/600x400'}" class="w-full h-full object-cover opacity-80">
+              <a href="${meta.video_url || '#'}" target="_blank" class="absolute bg-amber-500 hover:bg-amber-600 text-slate-900 w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition">
+                <i class="fa-solid fa-play ml-0.5"></i>
+              </a>
+              <span class="absolute top-3 left-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded font-bold">${meta.platform || 'Video'}</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-white text-base">${meta.title || 'Factory Show'}</h3>
+              <a href="${meta.video_url || '#'}" target="_blank" class="text-xs text-amber-400 hover:underline mt-2 inline-block">Watch on ${meta.platform || 'Platform'} &rarr;</a>
+            </div>
+          `;
+          grid.appendChild(card);
+        }
+      } catch (err) {}
     }
 
     function parseFrontMatter(text) {
@@ -468,30 +510,24 @@
       const status = document.getElementById('form-status');
       const btn = document.getElementById('submit-btn');
       const form = e.target;
-
       if (!globalSettings.formspree_id) {
         alert("Formspree ID is not configured yet. Please configure it in CMS Site Settings.");
         return;
       }
-
       btn.disabled = true;
       btn.textContent = "Sending...";
-
       try {
         const response = await fetch(`https://formspree.io/f/${globalSettings.formspree_id}`, {
           method: 'POST',
           body: new FormData(form),
           headers: { 'Accept': 'application/json' }
         });
-
         if (response.ok) {
           status.className = "text-center text-sm mt-2 text-emerald-400 font-bold";
           status.textContent = "Thank you! Your inquiry has been sent successfully. We will contact you shortly.";
           status.classList.remove('hidden');
           form.reset();
-        } else {
-          throw new Error();
-        }
+        } else { throw new Error(); }
       } catch (err) {
         status.className = "text-center text-sm mt-2 text-rose-400 font-bold";
         status.textContent = "Oops! Something went wrong. Please try again or chat via WhatsApp.";
@@ -505,6 +541,7 @@
     loadSiteData();
     fetchProducts();
     fetchCases();
+    fetchVideos();
   </script>
 </body>
 </html>
