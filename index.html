@@ -1,18 +1,66 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Concrete Mixer B2B Platform</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; background: #f4f4f9; }
-        h1 { color: #333; }
-        .btn { display: inline-block; margin-top: 20px; padding: 12px 24px; background: #0070f3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heavy Duty Concrete Mixers | Professional B2B Supplier</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Heavy Duty Concrete Mixers B2B Supplier</h1>
-    <p>Welcome to our professional platform.</p>
-    <br>
-    <a class="btn" href="/admin/">进入 CMS 管理后台</a>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header / Navigation -->
+  <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <span class="text-2xl font-bold tracking-wide text-amber-500">AIZGZ</span>
+        <span class="text-xs bg-amber-500 text-slate-900 px-2 py-0.5 rounded font-semibold">MACHINERY</span>
+      </div>
+      <nav class="space-x-6 text-sm font-medium">
+        <a href="#products" class="hover:text-amber-400 transition">Products</a>
+        <a href="#about" class="hover:text-amber-400 transition">About Us</a>
+        <a href="/admin/" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded font-bold transition">CMS Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-slate-800 text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Heavy Duty Concrete Mixers B2B Supplier</h1>
+      <p class="text-slate-300 text-lg max-w-2xl mx-auto mb-8">High-performance electric, diesel, and gasoline concrete mixers built for industrial construction sites worldwide.</p>
+      <a href="#products" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-lg shadow-lg inline-block transition">View All Products</a>
+    </div>
+  </section>
+
+  <!-- Product Catalog Section -->
+  <section id="products" class="max-w-7xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-8 text-slate-900">Featured Machinery</h2>
+    
+    <!-- Products Grid (Dynamic from Markdown/CMS or API) -->
+    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card Placeholder 1 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 border border-gray-100">
+        <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-400 font-bold">
+          [Product Image]
+        </div>
+        <div class="p-6">
+          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">Diesel Power</span>
+          <h3 class="text-xl font-bold mt-2 text-slate-800">500L Heavy Duty Concrete Mixer</h3>
+          <p class="text-sm text-gray-500 mt-1">Model: CM-500D</p>
+          <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+            <span class="text-xs text-gray-400">Capacity: 500 Liters</span>
+            <a href="/admin/" class="text-amber-600 hover:text-amber-700 text-sm font-semibold">Inquire Now &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-center py-6 text-sm">
+    <p>&copy; 2026 AIZGZ Industrial Machinery Co., Ltd. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
