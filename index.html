@@ -69,7 +69,7 @@
     </div>
   </section>
 
-  <!-- Contact Us / Email Inquiry Section -->
+  <!-- Contact Us / Real Email Inquiry Section (Formspree Integrated) -->
   <section id="contact" class="bg-slate-900 text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-10">
@@ -77,30 +77,31 @@
         <p class="text-slate-300 text-sm">Tell us your requirements and our sales engineers will get back to you within 12 hours.</p>
       </div>
       
-      <form onsubmit="handleInquiry(event)" class="bg-slate-800 p-8 rounded-xl shadow-xl space-y-6">
+      <!-- 提示：请将下面的 YOUR_FORMSPREE_ID 替换为你申请到的 Formspree ID -->
+      <form action="https://formspree.io/f/mjyglqbe" method="POST" class="bg-slate-800 p-8 rounded-xl shadow-xl space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block text-sm font-semibold text-slate-300 mb-2">Your Name *</label>
-            <input type="text" required placeholder="John Doe" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <input type="text" name="name" required placeholder="John Doe" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
           <div>
             <label class="block text-sm font-semibold text-slate-300 mb-2">Your Email *</label>
-            <input type="email" required placeholder="sales@yourcompany.com" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <input type="email" name="_replyto" required placeholder="sales@yourcompany.com" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block text-sm font-semibold text-slate-300 mb-2">Phone / WhatsApp</label>
-            <input type="text" placeholder="+123456789" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <input type="text" name="phone" placeholder="+123456789" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
           <div>
             <label class="block text-sm font-semibold text-slate-300 mb-2">Interested Model</label>
-            <input type="text" id="inquiry-model" placeholder="e.g. CM-500 Diesel Mixer" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <input type="text" name="product_model" id="inquiry-model" placeholder="e.g. CM-500 Diesel Mixer" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
           </div>
         </div>
         <div>
           <label class="block text-sm font-semibold text-slate-300 mb-2">Message / Requirements *</label>
-          <textarea rows="4" required placeholder="Please state required quantity, target port, power supply requirements, etc." class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+          <textarea name="message" rows="4" required placeholder="Please state required quantity, target port, power supply requirements, etc." class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
         </div>
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-4 rounded-lg shadow-lg text-lg transition">Send Inquiry</button>
       </form>
@@ -115,7 +116,7 @@
     </div>
   </div>
 
-  <!-- WhatsApp Floating Button -->
+  <!-- WhatsApp Floating Button (更换为真实手机号，带国家代码) -->
   <a href="https://wa.me/8615037113544?text=Hello%2C%20I%20am%20interested%20in%20your%20Concrete%20Mixers." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl z-50 flex items-center space-x-2 group transition duration-300">
     <i class="fa-brands fa-whatsapp text-3xl"></i>
     <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-bold text-sm pr-1">Chat on WhatsApp</span>
@@ -242,12 +243,6 @@
 
     function closeModal() {
       document.getElementById('product-modal').classList.add('hidden');
-    }
-
-    function handleInquiry(e) {
-      e.preventDefault();
-      alert('Thank you for your inquiry! Our sales manager will contact you shortly.');
-      e.target.reset();
     }
 
     fetchProducts();
