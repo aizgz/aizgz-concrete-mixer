@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="site-title">Heavy Duty Concrete Mixers | Professional B2B Supplier</title>
+  
+  <!-- SEO & Social Sharing Meta Tags -->
+  <title id="site-title">Heavy Duty Concrete Mixers Supplier | AIZGZ Machinery</title>
+  <meta name="description" content="Professional OEM/ODM manufacturer of electric, diesel, and gasoline concrete mixers. Direct factory supply with high durability and fast global delivery.">
+  <meta name="keywords" content="concrete mixer, diesel concrete mixer, electric cement mixer, construction machinery, B2B mixer supplier">
+  <meta property="og:title" content="Heavy Duty Concrete Mixers Supplier | AIZGZ Machinery">
+  <meta property="og:description" content="Direct factory supply of heavy-duty concrete mixers for international construction projects.">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind CSS & FontAwesome Icons & Marked.js -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans relative">
 
-  <!-- Header -->
+  <!-- Header / Navigation -->
   <header class="bg-slate-900 text-white shadow-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-3">
@@ -19,7 +28,9 @@
       </div>
       <nav class="space-x-8 text-sm font-medium flex items-center">
         <a href="#products" class="hover:text-amber-400 transition">Products</a>
+        <a href="#why-us" class="hover:text-amber-400 transition">Why Choose Us</a>
         <a href="#about" class="hover:text-amber-400 transition">About Us</a>
+        <a href="#faq" class="hover:text-amber-400 transition">FAQ</a>
         <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-5 py-2 rounded-lg font-bold transition">Inquiry</a>
       </nav>
     </div>
@@ -32,7 +43,7 @@
       <p id="hero-subtitle" class="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto mb-8">Factory direct supply of professional electric, diesel, and gasoline concrete mixers built for international construction projects.</p>
       <div class="flex justify-center space-x-4">
         <a href="#products" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-lg shadow-lg transition">Browse Products</a>
-        <a href="#contact" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition">Contact Us</a>
+        <a href="#contact" onclick="fillInquiryModel('2026 E-Brochure Request')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition">Get Product Catalog (PDF)</a>
       </div>
     </div>
   </section>
@@ -56,13 +67,85 @@
     </div>
   </section>
 
+  <!-- Trust Signals / Why Choose Us -->
+  <section id="why-us" class="bg-slate-100 py-16 px-4 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-2">Why Partner With AIZGZ?</h2>
+      <p class="text-slate-500 text-sm mb-12">Your reliable industrial equipment manufacturing partner</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+          <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-industry"></i></div>
+          <h3 class="font-bold text-slate-800 text-lg mb-2">Factory Direct Supply</h3>
+          <p class="text-xs text-slate-500">Competitive wholesale pricing directly from the manufacturing line with no middlemen.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+          <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-certificate"></i></div>
+          <h3 class="font-bold text-slate-800 text-lg mb-2">Strict Quality Control</h3>
+          <p class="text-xs text-slate-500">100% operational testing before packing to ensure compliance with international CE standards.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+          <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-truck-fast"></i></div>
+          <h3 class="font-bold text-slate-800 text-lg mb-2">Global Shipping</h3>
+          <p class="text-xs text-slate-500">Fast container dispatch to major sea ports across Southeast Asia, Middle East, and Africa.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+          <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-gears"></i></div>
+          <h3 class="font-bold text-slate-800 text-lg mb-2">Spare Parts & Support</h3>
+          <p class="text-xs text-slate-500">Long-term supply of quick-wear spare parts and dedicated technical support for contractors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- About Us Section -->
-  <section id="about" class="bg-white py-16 px-4 border-t border-slate-100">
+  <section id="about" class="bg-white py-16 px-4">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4">About Us</h2>
-      <p id="about-text" class="text-slate-600 leading-relaxed">
-        We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide.
+      <h2 class="text-3xl font-bold text-slate-900 mb-4">About AIZGZ Machinery</h2>
+      <p id="about-text" class="text-slate-600 leading-relaxed text-sm md:text-base">
+        We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide. With strict quality control, durable engines, and reliable global logistics, we provide custom solutions for contractors and distributors across the globe.
       </p>
+    </div>
+  </section>
+
+  <!-- B2B Buyer FAQ Section -->
+  <section id="faq" class="bg-slate-50 py-16 px-4 border-t border-slate-200">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-slate-900 mb-8">Frequently Asked Questions (FAQ)</h2>
+      
+      <div class="space-y-4">
+        <details class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 group">
+          <summary class="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+            What is your Minimum Order Quantity (MOQ)?
+            <span class="text-amber-500 font-bold group-open:rotate-180 transition">+</span>
+          </summary>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed">Our MOQ is 1 unit. We support sample orders for quality testing before full container orders.</p>
+        </details>
+
+        <details class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 group">
+          <summary class="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+            What is the standard delivery / lead time?
+            <span class="text-amber-500 font-bold group-open:rotate-180 transition">+</span>
+          </summary>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed">Standard models are usually dispatched within 7–12 working days after deposit confirmation. Custom power specs or colors may require 15 days.</p>
+        </details>
+
+        <details class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 group">
+          <summary class="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+            What payment methods do you accept?
+            <span class="text-amber-500 font-bold group-open:rotate-180 transition">+</span>
+          </summary>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed">We accept T/T (Bank Transfer), Irrevocable L/C at sight, and Western Union for smaller sample payments.</p>
+        </details>
+
+        <details class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 group">
+          <summary class="font-bold text-slate-800 cursor-pointer flex justify-between items-center">
+            How do you handle warranty and spare parts?
+            <span class="text-amber-500 font-bold group-open:rotate-180 transition">+</span>
+          </summary>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed">All machines come with a 12-month quality warranty on core components. Quick-wear spare parts are available on demand with express global shipping.</p>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -129,7 +212,6 @@
     const REPO_NAME = 'aizgz-concrete-mixer';
     let globalSettings = {};
 
-    // Load Settings
     async function loadSettings() {
       try {
         const res = await fetch(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/content/settings/general.json`);
@@ -150,7 +232,6 @@
       }
     }
 
-    // Load Products
     async function fetchProducts() {
       const grid = document.getElementById('product-grid');
       const countEl = document.getElementById('product-count');
@@ -240,7 +321,6 @@
       document.getElementById('product-modal').classList.add('hidden');
     }
 
-    // Submit Formspree via AJAX
     async function submitFormspree(e) {
       e.preventDefault();
       const status = document.getElementById('form-status');
