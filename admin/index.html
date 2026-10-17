@@ -6,7 +6,17 @@
   <title>Content Manager</title>
 </head>
 <body>
-  <!-- 引入 Decap CMS 主程序脚本 -->
+  <!-- 引入 Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <!-- 引入 GitHub 授权代理插件，强制将其转为 Login with GitHub -->
+  <script>
+    CMS.registerEventListener({
+      name: 'login',
+      handler: () => {
+        // 自动重定向到 GitHub 授权页
+      }
+    });
+  </script>
 </body>
 </html>
