@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
@@ -6,27 +6,44 @@
   <title>Content Manager</title>
 </head>
 <body>
-  <!-- 加载 Decap CMS -->
+  <!-- 引入 Decap CMS 官方脚本 -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
-  <!-- 强制劫持 Netlify 登录按钮，变成真正的 GitHub 登录 -->
+
+  <!-- 强制把后端配置改为 GitHub + 你的 Vercel OAuth 接口 -->
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const timer = setInterval(() => {
-        // 抓取页面上的登录按钮
-        const btn = document.querySelector('button');
-        if (btn && (btn.innerText.includes('Netlify') || btn.innerText.includes('Login'))) {
-          btn.innerText = "Login with GitHub (Direct)";
-          btn.style.backgroundColor = "#24292e";
-          btn.style.color = "#ffffff";
-          btn.onclick = (e) => {
-            e.preventDefault();
-            // 直接引导至你的 GitHub 仓库主页进行确认，或者走官方授权
-            window.location.href = "https://github.com/login/oauth/authorize?client_id=YOUR_GITHUB_CLIENT_ID&redirect_uri=" + encodeURIComponent(window.location.origin + "/admin/");
-          };
-          clearInterval(timer);
-        }
-      }, 300);
+    window.CMS_MANUAL_INIT = true;
+    
+    // 强制使用你的 GitHub 后端和 Vercel API 授权接口
+    window.initCMS({
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'aizgz/aizgz-concrete-mixer',
+          branch: 'main',
+          base_url: 'https://aizgz.vercel.app',
+          auth_endpoint: 'api/auth'
+        },
+        media_folder: 'public/uploads',
+        public_folder: '/uploads',
+        collections: [
+          {
+            name: 'products',
+            label: 'Concrete Mixers (搅拌机产品)',
+            folder: 'content/products',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { label: 'Product Title (产品名称)', name: 'title', widget: 'string' },
+              { label: 'Model Number (型号)', name: 'model', widget: 'string' },
+              { label: 'Cover Image (产品主图)', name: 'image', widget: 'image' },
+              { label: 'Capacity (出料容量)', name: 'capacity', widget: 'string', required: false },
+              { label: 'Power Type (动力)', name: 'power_type', widget: 'select', options: ['Electric Engine', 'Diesel Engine', 'Gasoline Engine'] },
+              { label: 'Key Features (主要特点)', name: 'features', widget: 'list', required: false },
+              { label: 'Detailed Description (详细介绍)', name: 'body', widget: 'markdown' }
+            ]
+          }
+        ]
+      }
     });
   </script>
 </body>
