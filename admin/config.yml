@@ -2,7 +2,7 @@ backend:
   name: github
   repo: aizgz/aizgz-concrete-mixer
   branch: main
-  base_url: https://aizgz.vercel.app
+  base_url: https://aizgz.vercel.app # 如果还没绑定二级域名，可以暂改回 https://aizgz.vercel.app
   auth_endpoint: /api/auth
 
 media_folder: "uploads"
@@ -11,61 +11,84 @@ public_folder: "/uploads"
 collections:
   # 1. 站点全局设置
   - name: "settings"
-    label: "Site Settings (站点设置)"
+    label: "Site Settings (站点全局设置)"
     delete: false
     editor:
       preview: false
     files:
       - name: "general"
-        label: "General Settings (联系方式与社交账号配置)"
+        label: "General Settings (联系方式与品牌配置)"
         file: "content/settings/general.json"
         fields:
           - { label: "Brand Name (品牌名称)", name: "brand_name", widget: "string", default: "AIZGZ" }
-          - { label: "Brand Tagline (品牌标语)", name: "brand_tagline", widget: "string", default: "MACHINERY" }
+          - { label: "Brand Tagline (品牌标语)", name: "brand_tagline", widget: "string", default: "HEAVY MACHINERY" }
           - { label: "WhatsApp Number (带国家代码, 如 8613800138000)", name: "whatsapp_number", widget: "string", default: "8612345678900" }
           - { label: "Contact Email (联系邮箱)", name: "contact_email", widget: "string", default: "sales@aizgz.com" }
-          - { label: "Formspree Form ID (如 xxyyzz)", name: "formspree_id", widget: "string", default: "" }
-          - { label: "Google Analytics ID (如 G-XXXXXXXXXX)", name: "ga_id", widget: "string", default: "" }
-          - { label: "YouTube Channel / Video URL (YouTube 频道或主页)", name: "youtube_url", widget: "string", default: "https://www.youtube.com" }
-          - { label: "TikTok Profile URL (TikTok 主页链接)", name: "tiktok_url", widget: "string", default: "https://www.tiktok.com" }
-          - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Heavy Duty Concrete Mixers B2B Supplier" }
-          - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "Factory direct supply of professional electric, diesel, and gasoline concrete mixers built for international construction projects." }
-          - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide." }
+          - { label: "Formspree Form ID (询盘表单ID)", name: "formspree_id", widget: "string", default: "" }
+          - { label: "Google Analytics ID (谷歌统计ID)", name: "ga_id", widget: "string", default: "" }
+          - { label: "YouTube Channel / Video URL (YouTube主页)", name: "youtube_url", widget: "string", default: "https://www.youtube.com" }
+          - { label: "TikTok Profile URL (TikTok主页)", name: "tiktok_url", widget: "string", default: "https://www.tiktok.com" }
+          - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Global Supplier of Heavy Machinery & Dry Mortar Equipment" }
+          - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "Factory direct supply of dry mix mortar plants, tile adhesive lines, concrete equipment, and industrial machinery for international projects." }
+          - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "AIZGZ Machinery specializes in manufacturing and exporting high-performance construction machinery, dry mortar production lines, and industrial mixing equipment worldwide." }
 
-  # 2. 产品管理
+  # 2. 产品管理（广泛/通用型设备）
   - name: "products"
-    label: "Concrete Mixers (产品管理)"
+    label: "Equipment Products (产品管理)"
     folder: "content/products"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Product Title (产品名称)", name: "title", widget: "string" }
-      - { label: "Model Code (型号)", name: "model", widget: "string" }
-      - { label: "Capacity (容量)", name: "capacity", widget: "string" }
-      - { label: "Power Type (动力类型)", name: "power_type", widget: "select", options: ["Diesel", "Electric", "Gasoline"] }
-      - { label: "Product Image (产品图片)", name: "image", widget: "image" }
-      - { label: "Detailed Description (详细介绍)", name: "body", widget: "markdown" }
+      - { label: "Product Title (产品英文名称)", name: "title", widget: "string" }
+      # 👈 核心升级：新增设备分类下拉菜单，涵盖干粉砂浆及重型建机
+      - { 
+          label: "Category (设备大类)", 
+          name: "category", 
+          widget: "select", 
+          options: [
+            "Dry Mix Mortar Plant", 
+            "Tile Adhesive Production Line", 
+            "Wall Putty Making Machine", 
+            "Concrete Equipment", 
+            "Block & Brick Making Machine", 
+            "Crushing & Screening Plant", 
+            "Packing & Auxiliary Equipment"
+          ] 
+        }
+      - { label: "Model Code / Capacity (型号/产能，如 10-20 t/h 或 350L)", name: "capacity", widget: "string", required: false }
+      - { 
+          label: "Power / Control Type (动力/控制方式)", 
+          name: "power_type", 
+          widget: "select", 
+          options: ["Automatic PLC System", "Electric Engine", "Diesel Engine", "Semi-Automatic"],
+          required: false
+        }
+      - { label: "Product Image (产品主图)", name: "image", widget: "image" }
+      - { label: "Short Summary (简短介绍/摘要)", name: "summary", widget: "text", required: false }
+      - { label: "Technical Specifications & Details (详细参数与说明)", name: "body", widget: "markdown" }
 
-  # 3. 发货与成功案例管理
+  # 3. 发货与工程成功案例
   - name: "cases"
-    label: "Shipping & Cases (发货案例)"
+    label: "Shipment & Cases (发货与工程案例)"
     folder: "content/cases"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Title (标题/描述)", name: "title", widget: "string" }
+      - { label: "Title (案例/发货标题)", name: "title", widget: "string" }
       - { label: "Destination Country (目的国/地区)", name: "country", widget: "string" }
-      - { label: "Photo (现场/发货照片)", name: "image", widget: "image" }
+      - { label: "Equipment Shipped (出口设备名称)", name: "equipment", widget: "string", required: false }
+      - { label: "Photo (现场/打包发货照片)", name: "image", widget: "image" }
       - { label: "Publish Date (日期)", name: "date", widget: "date" }
+      - { label: "Project Brief (项目简述)", name: "body", widget: "markdown", required: false }
 
-  # 4. 视频展厅管理 (YouTube / TikTok 视频)
+  # 4. 视频展厅管理 (YouTube / TikTok / B2B短视频)
   - name: "videos"
     label: "Video Showroom (视频展厅)"
     folder: "content/videos"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Video Title (视频名称)", name: "title", widget: "string" }
-      - { label: "Platform (平台)", name: "platform", widget: "select", options: ["YouTube", "TikTok"] }
-      - { label: "Video Embed / Watch URL (视频链接)", name: "video_url", widget: "string" }
+      - { label: "Video Title (视频名称/设备作业展示)", name: "title", widget: "string" }
+      - { label: "Platform (视频平台)", name: "platform", widget: "select", options: ["YouTube", "TikTok"] }
+      - { label: "Video Embed / Watch URL (视频播放/嵌入链接)", name: "video_url", widget: "string" }
       - { label: "Cover Image / Thumbnail (视频封面图)", name: "image", widget: "image" }
