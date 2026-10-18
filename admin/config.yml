@@ -2,6 +2,8 @@ backend:
   name: github
   repo: aizgz/aizgz-concrete-mixer
   branch: main
+  base_url: https://aizgz-mixer.vercel.app
+  auth_endpoint: /api/auth
 
 media_folder: "uploads"
 public_folder: "/uploads"
