@@ -3,596 +3,678 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title id="site-title">Industrial Equipment Supplier | AIZGZ Machinery</title>
-  <meta
-    name="description"
-    content="Explore concrete mixers, bag palletizing machines, and mortar equipment. Contact AIZGZ for product specifications and quotations."
-  > 
-  
-  <!-- Tailwind CSS & FontAwesome Icons & Marked.js -->
+  <title>Industrial Equipment Supplier | AIZGZ Machinery</title>
+  <meta name="description" content="Explore concrete mixers, bag palletizing machines, and mortar equipment. Contact AIZGZ for product specifications and quotations.">
+  <meta name="theme-color" content="#0f172a">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans relative">
-
-  <!-- Header / Navigation -->
-  <header class="bg-slate-900 text-white shadow-md sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-3">
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+      <a href="#" class="flex items-center gap-3" aria-label="AIZGZ Machinery home">
         <span id="brand-name" class="text-2xl font-bold tracking-wide text-amber-500">AIZGZ</span>
-        <span id="brand-tagline" class="text-xs bg-amber-500 text-slate-900 px-2 py-0.5 rounded font-semibold">MACHINERY</span>
-      </div>
-      <nav class="space-x-6 text-sm font-medium hidden md:flex items-center">
-        <a href="#products" class="hover:text-amber-400 transition" data-i18n="nav_products">Products</a>
-        <a href="#videos" class="hover:text-amber-400 transition" data-i18n="nav_videos">Videos</a>
-        <a href="#cases" class="hover:text-amber-400 transition" data-i18n="nav_cases">Shipping & Cases</a>
-        <a href="#why-us" class="hover:text-amber-400 transition" data-i18n="nav_why">Why Us</a>
-        <a href="#faq" class="hover:text-amber-400 transition" data-i18n="nav_faq">FAQ</a>
-        <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-lg font-bold transition" data-i18n="nav_inquiry">Inquiry</a>
-        
-        <!-- Language Switcher -->
-        <select id="lang-switcher" onchange="changeLanguage(this.value)" class="bg-slate-800 text-amber-400 text-xs font-bold border border-slate-700 rounded px-2 py-1 focus:outline-none">
-          <option value="en">English</option>
-          <option value="es">Español</option>
-          <option value="ar">العربية</option>
-          <option value="ru">Русский</option>
+        <span id="brand-tagline" class="rounded bg-amber-500 px-2 py-0.5 text-xs font-semibold text-slate-900">MACHINERY</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium md:flex">
+        <a href="#products" class="hover:text-amber-400" data-i18n="nav_products">Products</a>
+        <a href="#videos" class="hover:text-amber-400" data-i18n="nav_videos">Videos</a>
+        <a href="#cases" class="hover:text-amber-400" data-i18n="nav_cases">Shipping & Cases</a>
+        <a href="#why-us" class="hover:text-amber-400" data-i18n="nav_why">Why Us</a>
+        <a href="#faq" class="hover:text-amber-400" data-i18n="nav_faq">FAQ</a>
+        <a href="#contact" class="rounded-lg bg-amber-500 px-4 py-2 font-bold text-slate-900 hover:bg-amber-600" data-i18n="nav_inquiry">Inquiry</a>
+        <select id="lang-switcher" onchange="changeLanguage(this.value)" class="rounded border border-slate-700 bg-slate-800 px-2 py-1 text-xs font-bold text-amber-400" aria-label="Language">
+          <option value="en">English</option><option value="es">Español</option><option value="ar">العربية</option><option value="ru">Русский</option>
         </select>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-slate-800 text-white py-20 px-4 border-b-4 border-amber-500">
-    <div class="max-w-7xl mx-auto text-center">
-      <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Heavy Duty Concrete Mixers B2B Supplier</h1>
-      <p id="hero-subtitle" class="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto mb-8">Factory direct supply of professional electric, diesel, and gasoline concrete mixers built for international construction projects.</p>
-      <div class="flex justify-center space-x-4">
-        <a href="#products" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-lg shadow-lg transition" data-i18n="btn_browse">Browse Products</a>
-        <a href="#contact" onclick="fillInquiryModel('2026 E-Brochure Request')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-3 rounded-lg shadow-lg transition" data-i18n="btn_catalog">Get Product Catalog (PDF)</a>
+  <main>
+    <section class="border-b-4 border-amber-500 bg-slate-800 px-4 py-20 text-white">
+      <div class="mx-auto max-w-5xl text-center">
+        <p class="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-amber-400">AIZGZ Machinery</p>
+        <h1 id="hero-title" class="mb-5 text-4xl font-extrabold leading-tight md:text-6xl">Industrial Equipment for Construction & Material Handling</h1>
+        <p id="hero-subtitle" class="mx-auto mb-8 max-w-3xl text-lg text-slate-300 md:text-xl">Explore concrete mixers, bag palletizing machines, and mortar equipment. Contact us for product specifications, availability, and quotations.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#products" class="rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 shadow-lg hover:bg-amber-600" data-i18n="btn_browse">Browse Products</a>
+          <a href="#contact" onclick="fillInquiryModel('Product Catalog Request')" class="rounded-lg bg-slate-700 px-6 py-3 font-bold text-white shadow-lg hover:bg-slate-600" data-i18n="btn_catalog">Request Product Catalog</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Product Catalog -->
-  <section id="products" class="max-w-7xl mx-auto px-4 py-16">
-    <div class="flex justify-between items-center mb-10">
-      <div>
-        <h2 class="text-3xl font-bold text-slate-900" data-i18n="prod_title">Featured Machinery</h2>
-        <p class="text-slate-500 text-sm mt-1" data-i18n="prod_sub">High-performance mixers engineered for reliability</p>
-      </div>
-      <span id="product-count" class="text-sm font-semibold text-slate-500">Loading products...</span>
-    </div>
-    
-    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="bg-white rounded-xl shadow p-6 animate-pulse">
-        <div class="h-48 bg-slate-200 rounded-lg mb-4"></div>
-        <div class="h-6 bg-slate-200 rounded w-3/4 mb-2"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Showroom Section -->
-  <section id="videos" class="bg-slate-900 text-white py-16 px-4">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+    <section id="products" class="mx-auto max-w-7xl px-4 py-16">
+      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
         <div>
-          <h2 class="text-3xl font-bold text-amber-500 mb-2" data-i18n="video_title">Factory Video Showroom</h2>
-          <p class="text-slate-400 text-sm" data-i18n="video_sub">Watch our concrete mixers in action and production line highlights</p>
+          <h2 class="text-3xl font-bold text-slate-900" data-i18n="prod_title">Industrial Equipment</h2>
+          <p class="mt-2 text-sm text-slate-500" data-i18n="prod_sub">Browse equipment by product category and request details or a quotation.</p>
         </div>
-        <div class="flex space-x-4 mt-4 md:mt-0">
-          <a id="youtube-btn" href="#" target="_blank" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-bold text-sm flex items-center space-x-2 transition">
-            <i class="fa-brands fa-youtube text-lg"></i> <span>YouTube Channel</span>
-          </a>
-          <a id="tiktok-btn" href="#" target="_blank" class="bg-black hover:bg-slate-800 border border-slate-700 text-white px-4 py-2 rounded-lg font-bold text-sm flex items-center space-x-2 transition">
-            <i class="fa-brands fa-tiktok text-lg"></i> <span>TikTok Profile</span>
-          </a>
-        </div>
+        <span id="product-count" class="text-sm font-semibold text-slate-500" aria-live="polite">Loading products…</span>
       </div>
+      <div id="product-filters" class="mb-8 flex flex-wrap gap-3">
+        <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white">All Equipment</button>
+        <button type="button" data-category="concrete-mixers" onclick="filterProducts('concrete-mixers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Concrete Mixers</button>
+        <button type="button" data-category="palletizers" onclick="filterProducts('palletizers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Bag Palletizing</button>
+        <button type="button" data-category="mortar-equipment" onclick="filterProducts('mortar-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Mortar Equipment</button>
+      </div>
+      <div id="product-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="animate-pulse rounded-xl bg-white p-6 shadow"><div class="mb-4 h-48 rounded-lg bg-slate-200"></div><div class="mb-2 h-6 w-3/4 rounded bg-slate-200"></div></div>
+      </div>
+    </section>
 
-      <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center text-slate-500 col-span-full py-8">Videos will be updated via CMS.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Shipping & Success Cases Section -->
-  <section id="cases" class="bg-white py-16 px-4 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-slate-900 mb-2" data-i18n="cases_title">Global Shipping & Success Cases</h2>
-        <p class="text-slate-500 text-sm" data-i18n="cases_sub">Real container loading and project delivery photos across the world</p>
-      </div>
-      <div id="cases-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center text-slate-400 col-span-full py-6">Loading shipping gallery...</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust Signals / Why Choose Us -->
-  <section id="why-us" class="bg-slate-100 py-16 px-4 border-y border-slate-200">
-    <div class="max-w-7xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-slate-900 mb-2" data-i18n="why_title">Why Partner With AIZGZ?</h2>
-      <p class="text-slate-500 text-sm mb-12" data-i18n="why_sub">Your reliable industrial equipment manufacturing partner</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
-          <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-industry"></i></div>
-          <h3 class="font-bold text-slate-800 text-lg mb-2" data-i18n="w1_title">Factory Direct Supply</h3>
-          <p class="text-xs text-slate-500" data-i18n="w1_desc">Competitive wholesale pricing directly from the manufacturing line.</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
-          <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-certificate"></i></div>
-          <h3 class="font-bold text-slate-800 text-lg mb-2" data-i18n="w2_title">Strict Quality Control</h3>
-          <p class="text-xs text-slate-500" data-i18n="w2_desc">100% operational testing conforming to international standards.</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
-          <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-truck-fast"></i></div>
-          <h3 class="font-bold text-slate-800 text-lg mb-2" data-i18n="w3_title">Global Shipping</h3>
-          <p class="text-xs text-slate-500" data-i18n="w3_desc">Fast container dispatch to major international ports.</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
-          <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-gears"></i></div>
-          <h3 class="font-bold text-slate-800 text-lg mb-2" data-i18n="w4_title">Spare Parts & Support</h3>
-          <p class="text-xs text-slate-500" data-i18n="w4_desc">Long-term supply of quick-wear parts and technical assistance.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Us Section -->
-  <section id="about" class="bg-white py-16 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4" data-i18n="about_title">About AIZGZ Machinery</h2>
-      <p id="about-text" class="text-slate-600 leading-relaxed text-sm md:text-base">
-        We specialize in manufacturing and exporting heavy-duty concrete mixers and construction equipment worldwide.
-      </p>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="bg-slate-50 py-16 px-4 border-t border-slate-200">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-center text-slate-900 mb-8" data-i18n="faq_title">Frequently Asked Questions (FAQ)</h2>
-      <div class="space-y-4">
-        <details class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 group">
-          <summary class="font-bold text-slate-800 cursor-pointer flex justify-between items-center" data-i18n="faq1_q">What is your Minimum Order Quantity (MOQ)?</summary>
-          <p class="text-xs text-slate-500 mt-3 leading-relaxed" data-i18n="faq1_a">Our MOQ is 1 unit. We support sample orders for quality testing.</p>
-        </details>
-        <details class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 group">
-          <summary class="font-bold text-slate-800 cursor-pointer flex justify-between items-center" data-i18n="faq2_q">What is the standard delivery / lead time?</summary>
-          <p class="text-xs text-slate-500 mt-3 leading-relaxed" data-i18n="faq2_a">Standard models are usually dispatched within 7–12 working days.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="bg-slate-900 text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-amber-500 mb-2" data-i18n="contact_title">Inquiry & Contact</h2>
-        <p class="text-slate-300 text-sm" data-i18n="contact_sub">Tell us your requirements and our sales engineers will get back to you within 12 hours.</p>
-      </div>
-      
-      <form id="inquiry-form" onsubmit="submitFormspree(event)" class="bg-slate-800 p-8 rounded-xl shadow-xl space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-semibold text-slate-300 mb-2" data-i18n="form_name">Your Name *</label>
-            <input type="text" name="name" required placeholder="John Doe" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-slate-300 mb-2" data-i18n="form_email">Your Email *</label>
-            <input type="email" name="email" required placeholder="sales@yourcompany.com" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+    <section id="videos" class="bg-slate-900 px-4 py-16 text-white">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-center">
+          <div><h2 class="mb-2 text-3xl font-bold text-amber-500" data-i18n="video_title">Equipment Video Showroom</h2><p class="text-sm text-slate-400" data-i18n="video_sub">Product demonstrations, equipment details, and production highlights.</p></div>
+          <div class="flex flex-wrap gap-3">
+            <a id="youtube-btn" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-bold hover:bg-red-700"><i class="fa-brands fa-youtube text-lg"></i><span>YouTube Channel</span></a>
+            <a id="tiktok-btn" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><i class="fa-brands fa-tiktok text-lg"></i><span>TikTok Profile</span></a>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-semibold text-slate-300 mb-2" data-i18n="form_phone">Phone / WhatsApp</label>
-            <input type="text" name="phone" placeholder="+123456789" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-slate-300 mb-2" data-i18n="form_model">Interested Model</label>
-            <input type="text" name="product_model" id="inquiry-model" placeholder="e.g. CM-500 Diesel Mixer" class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
-          </div>
-        </div>
-        <div>
-          <label class="block text-sm font-semibold text-slate-300 mb-2" data-i18n="form_msg">Message / Requirements *</label>
-          <textarea name="message" rows="4" required placeholder="Please state required quantity, target port, power supply requirements, etc." class="w-full bg-slate-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
-        </div>
-        <button type="submit" id="submit-btn" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-4 rounded-lg shadow-lg text-lg transition" data-i18n="form_submit">Send Inquiry</button>
-        <p id="form-status" class="text-center text-sm mt-2 hidden"></p>
-      </form>
-    </div>
-  </section>
+        <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-8 text-center text-slate-500">Videos will be updated via CMS.</div></div>
+      </div>
+    </section>
 
-  <!-- Product Modal -->
-  <div id="product-modal" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
-      <div id="modal-content"></div>
+    <section id="cases" class="border-t border-slate-200 bg-white px-4 py-16">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-12 text-center"><h2 class="mb-2 text-3xl font-bold text-slate-900" data-i18n="cases_title">Shipping & Project Cases</h2><p class="text-sm text-slate-500" data-i18n="cases_sub">Project and shipment photos, where available.</p></div>
+        <div id="cases-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-6 text-center text-slate-400">Loading gallery…</div></div>
+      </div>
+    </section>
+
+    <section id="why-us" class="border-y border-slate-200 bg-slate-100 px-4 py-16">
+      <div class="mx-auto max-w-7xl text-center">
+        <h2 class="mb-2 text-3xl font-bold text-slate-900" data-i18n="why_title">Why Work With AIZGZ?</h2>
+        <p class="mb-12 text-sm text-slate-500" data-i18n="why_sub">Product information and quotation support for international buyers.</p>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><i class="fa-solid fa-industry"></i></div><h3 class="mb-2 text-lg font-bold" data-i18n="w1_title">Equipment Sourcing</h3><p class="text-xs text-slate-500" data-i18n="w1_desc">Discuss available equipment and supplier arrangements for your project.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><i class="fa-solid fa-clipboard-check"></i></div><h3 class="mb-2 text-lg font-bold" data-i18n="w2_title">Specification Review</h3><p class="text-xs text-slate-500" data-i18n="w2_desc">Confirm technical specifications and configuration before ordering.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><i class="fa-solid fa-ship"></i></div><h3 class="mb-2 text-lg font-bold" data-i18n="w3_title">Export Coordination</h3><p class="text-xs text-slate-500" data-i18n="w3_desc">Discuss packaging, shipping options, and destination requirements.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><i class="fa-solid fa-gears"></i></div><h3 class="mb-2 text-lg font-bold" data-i18n="w4_title">Parts & Support</h3><p class="text-xs text-slate-500" data-i18n="w4_desc">Ask about spare parts, documentation, and technical support availability.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-white px-4 py-16">
+      <div class="mx-auto max-w-4xl text-center"><h2 class="mb-4 text-3xl font-bold text-slate-900" data-i18n="about_title">About AIZGZ Machinery</h2><p id="about-text" class="text-sm leading-relaxed text-slate-600 md:text-base">We help international buyers explore industrial equipment, review product information, and request quotations for their project requirements.</p></div>
+    </section>
+
+    <section id="faq" class="border-t border-slate-200 bg-slate-50 px-4 py-16">
+      <div class="mx-auto max-w-4xl">
+        <h2 class="mb-8 text-center text-3xl font-bold text-slate-900" data-i18n="faq_title">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800" data-i18n="faq1_q">What is the minimum order quantity?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500" data-i18n="faq1_a">Minimum order quantity depends on the product. Please contact us with the model and quantity you need.</p></details>
+          <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800" data-i18n="faq2_q">What is the lead time?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500" data-i18n="faq2_a">Lead time depends on the model, configuration, availability, and order quantity. We will confirm it in the quotation.</p></details>
+          <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800">Can you arrange international shipping?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500">Shipping options and costs depend on the equipment, destination, packing requirements, and current freight rates. Please provide your destination port or address.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-slate-900 px-4 py-16 text-white">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-10 text-center"><h2 class="mb-2 text-3xl font-bold text-amber-500" data-i18n="contact_title">Product Inquiry & Contact</h2><p class="text-sm text-slate-300" data-i18n="contact_sub">Share your requirements so we can help confirm suitable equipment and quotation details.</p></div>
+        <form id="inquiry-form" class="space-y-6 rounded-xl bg-slate-800 p-8 shadow-xl" onsubmit="submitFormspree(event)">
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div><label for="inquiry-name" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_name">Your Name *</label><input id="inquiry-name" type="text" name="name" required autocomplete="name" placeholder="Your name" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-email" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_email">Your Email *</label><input id="inquiry-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+          </div>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div><label for="inquiry-phone" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_phone">Phone / WhatsApp</label><input id="inquiry-phone" type="text" name="phone" autocomplete="tel" placeholder="+ country code" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-model" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_model">Interested Product / Model</label><input id="inquiry-model" type="text" name="product_model" placeholder="Product name or model" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+          </div>
+          <div><label for="inquiry-message" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_msg">Message / Requirements *</label><textarea id="inquiry-message" name="message" rows="4" required placeholder="Product, quantity, application, destination, power requirements…" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea></div>
+          <button type="submit" id="submit-btn" class="w-full rounded-lg bg-amber-500 py-4 text-lg font-bold text-slate-900 shadow-lg transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60" data-i18n="form_submit">Send Inquiry</button>
+          <p id="form-status" class="hidden text-center text-sm" role="status" aria-live="polite"></p>
+          <p class="text-center text-xs text-slate-400">Please do not include passwords, payment card details, or other sensitive information.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="if(event.target===this) closeModal()">
+    <div class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-6 shadow-2xl">
+      <button type="button" onclick="closeModal()" class="absolute right-4 top-4 text-2xl font-bold text-slate-400 hover:text-slate-700" aria-label="Close details">&times;</button>
+      <div id="modal-content" class="pt-5"></div>
     </div>
   </div>
 
-  <!-- Policy Modals Container -->
-  <div id="policy-modal" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-white text-slate-800 rounded-xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-8 relative shadow-2xl">
-      <button onclick="closePolicyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
-      <h3 id="policy-title" class="text-2xl font-bold text-slate-900 mb-4 border-b pb-2">Policy</h3>
-      <div id="policy-body" class="text-sm text-slate-600 space-y-4 leading-relaxed"></div>
+  <div id="policy-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="policy-title" onclick="if(event.target===this) closePolicyModal()">
+    <div class="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-8 text-slate-800 shadow-2xl">
+      <button type="button" onclick="closePolicyModal()" class="absolute right-4 top-4 text-2xl font-bold text-slate-400 hover:text-slate-700" aria-label="Close policy">&times;</button>
+      <h3 id="policy-title" class="mb-4 border-b pb-2 text-2xl font-bold text-slate-900">Policy</h3><div id="policy-body" class="space-y-4 text-sm leading-relaxed text-slate-600"></div>
     </div>
   </div>
 
-  <!-- WhatsApp Floating Button -->
-  <a id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl z-50 flex items-center space-x-2 group transition duration-300">
-    <i class="fa-brands fa-whatsapp text-3xl"></i>
-    <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-bold text-sm pr-1">Chat on WhatsApp</span>
+  <a id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="group fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-emerald-500 p-4 text-white shadow-2xl transition hover:bg-emerald-600" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp text-3xl"></i><span class="hidden font-bold text-sm sm:inline">Chat on WhatsApp</span>
   </a>
 
-  <!-- Footer with Professional B2B Policies Links -->
-  <footer class="bg-slate-950 text-slate-400 py-10 px-4 border-t border-slate-800 text-center">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-      <p class="text-sm">&copy; 2026 AIZGZ Concrete Machinery Co., Ltd. All rights reserved.</p>
-      <div class="flex flex-wrap justify-center space-x-6 text-xs font-medium">
-        <a href="javascript:void(0)" onclick="openPolicy('privacy')" class="hover:text-amber-400 transition">Privacy Policy</a>
-        <a href="javascript:void(0)" onclick="openPolicy('shipping')" class="hover:text-amber-400 transition">Shipping & Delivery</a>
-        <a href="javascript:void(0)" onclick="openPolicy('warranty')" class="hover:text-amber-400 transition">Warranty & Returns</a>
-        <a href="javascript:void(0)" onclick="openPolicy('terms')" class="hover:text-amber-400 transition">Terms of Service</a>
+  <footer class="border-t border-slate-800 bg-slate-950 px-4 py-10 text-center text-slate-400">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 md:flex-row">
+      <p id="footer-copyright" class="text-sm">© 2026 AIZGZ Machinery. All rights reserved.</p>
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs font-medium">
+        <button type="button" onclick="openPolicy('privacy')" class="hover:text-amber-400">Privacy Policy</button>
+        <button type="button" onclick="openPolicy('shipping')" class="hover:text-amber-400">Shipping Information</button>
+        <button type="button" onclick="openPolicy('warranty')" class="hover:text-amber-400">Warranty Information</button>
+        <button type="button" onclick="openPolicy('terms')" class="hover:text-amber-400">Terms of Service</button>
       </div>
     </div>
   </footer>
 
   <script>
+    'use strict';
+
     const REPO_OWNER = 'aizgz';
     const REPO_NAME = 'aizgz-concrete-mixer';
+    const REPO_BRANCH = 'main';
+    const PLACEHOLDER_IMAGE = 'https://placehold.co/800x500?text=AIZGZ+Machinery';
     let globalSettings = {};
+    let allProducts = [];
+    let activeProductCategory = 'all';
 
-    // Optimized International B2B Trade Policies (No Return, Heavy Logistics & Staged Payment)
     const policiesContent = {
       privacy: {
-        title: "Privacy Policy",
-        body: `<p>At AIZGZ Machinery, we protect your personal and business data. Any information collected via inquiry forms is used strictly for quotation, manufacturing, and logistics arrangement. We never sell your data.</p>`
+        title: 'Privacy Policy',
+        body: '<p>Information submitted through this website is used to respond to inquiries and, where applicable, prepare quotations or coordinate orders. Do not submit passwords or payment-card information. Please confirm the applicable privacy arrangements before submitting sensitive business information.</p>'
       },
       shipping: {
-        title: "Shipping & Delivery Policy",
-        body: `<p><strong>1. Heavy Machinery Logistics:</strong> Due to the heavy weight and volumetric size of concrete mixers, international transport is arranged via Ocean Freight (FCL or LCL containers) from main Chinese ports (Qingdao/Shanghai).</p>
-               <p><strong>2. High Shipping Costs & Risk:</strong> International shipping costs are subject to real-time market fluctuations. Buyers are advised to confirm sea freight estimates prior to final dispatch. All equipment is securely packed in reinforced iron frames to ensure transit safety.</p>`
+        title: 'Shipping Information',
+        body: '<p>Shipping methods, packing, costs, export arrangements, and delivery estimates depend on the product, destination, order size, and current logistics conditions. Details should be confirmed in writing before an order is placed.</p>'
       },
       warranty: {
-        title: "Warranty & Return Policy (Strict No-Return Rule)",
-        body: `<p><strong>1. Strict No-Return Policy:</strong> Due to extremely high international freight costs, custom export clearance, and heavy logistics complexities, <strong>AIZGZ Machinery does not accept any unreasoned returns or exchanges</strong> once the machinery is dispatched from our factory.</p>
-               <p><strong>2. Quality Assurance & 12-Month Warranty:</strong> To ensure your peace of mind without needing returns, every machine undergoes 100% rigorous testing before leaving the factory (video testing provided). We offer a 12-month quality warranty on core components, accompanied by free replacement or express delivery of quick-wear parts.</p>`
+        title: 'Warranty Information',
+        body: '<p>Warranty coverage, exclusions, spare parts, and any return or replacement arrangements must be confirmed in the written quotation or sales contract for the specific product. Please request these terms before placing an order.</p>'
       },
       terms: {
-        title: "Terms of Service & Staged Payment",
-        body: `<p><strong>1. Staged Payment Terms:</strong> To balance production safety and buyer trust, we operate on a structured international payment milestone (e.g., 40% T/T deposit in advance to initiate production, 60% balance paid prior to shipment / against B/L copy).</p>
-               <p><strong>2. Order Confirmation:</strong> Quotations are valid for 15 days. Minimum Order Quantity (MOQ) is 1 set for sample testing.</p>`
+        title: 'Terms of Service',
+        body: '<p>Product specifications, price validity, minimum order quantity, payment milestones, delivery schedule, and other transaction terms are subject to written confirmation. A quotation or inquiry does not itself constitute an order confirmation.</p>'
       }
     };
-
-    function openPolicy(type) {
-      const p = policiesContent[type];
-      if (!p) return;
-      document.getElementById('policy-title').textContent = p.title;
-      document.getElementById('policy-body').innerHTML = p.body;
-      document.getElementById('policy-modal').classList.remove('hidden');
-    }
-
-    function closePolicyModal() {
-      document.getElementById('policy-modal').classList.add('hidden');
-    }
 
     const i18nText = {
       en: {
-        nav_products: "Products", nav_videos: "Videos", nav_cases: "Shipping & Cases", nav_why: "Why Us", nav_faq: "FAQ", nav_inquiry: "Inquiry",
-        btn_browse: "Browse Products", btn_catalog: "Get Product Catalog (PDF)",
-        prod_title: "Featured Machinery", prod_sub: "High-performance mixers engineered for reliability",
-        video_title: "Factory Video Showroom", video_sub: "Watch our concrete mixers in action and production line highlights",
-        cases_title: "Global Shipping & Success Cases", cases_sub: "Real container loading and project delivery photos across the world",
-        why_title: "Why Partner With AIZGZ?", why_sub: "Your reliable industrial equipment manufacturing partner",
-        w1_title: "Factory Direct Supply", w1_desc: "Competitive wholesale pricing directly from the manufacturing line.",
-        w2_title: "Strict Quality Control", w2_desc: "100% operational testing conforming to international standards.",
-        w3_title: "Global Shipping", w3_desc: "Fast container dispatch to major international ports.",
-        w4_title: "Spare Parts & Support", w4_desc: "Long-term supply of quick-wear parts and technical assistance.",
-        about_title: "About AIZGZ Machinery",
-        faq_title: "Frequently Asked Questions (FAQ)",
-        faq1_q: "What is your Minimum Order Quantity (MOQ)?", faq1_a: "Our MOQ is 1 unit. We support sample orders for quality testing.",
-        faq2_q: "What is the standard delivery / lead time?", faq2_a: "Standard models are usually dispatched within 7–12 working days.",
-        contact_title: "Inquiry & Contact", contact_sub: "Tell us your requirements and our sales engineers will get back to you within 12 hours.",
-        form_name: "Your Name *", form_email: "Your Email *", form_phone: "Phone / WhatsApp", form_model: "Interested Model",
-        form_msg: "Message / Requirements *", form_submit: "Send Inquiry"
+        nav_products: 'Products', nav_videos: 'Videos', nav_cases: 'Shipping & Cases', nav_why: 'Why Us', nav_faq: 'FAQ', nav_inquiry: 'Inquiry',
+        btn_browse: 'Browse Products', btn_catalog: 'Request Product Catalog',
+        prod_title: 'Industrial Equipment', prod_sub: 'Browse equipment by product category and request details or a quotation.',
+        video_title: 'Equipment Video Showroom', video_sub: 'Product demonstrations, equipment details, and production highlights.',
+        cases_title: 'Shipping & Project Cases', cases_sub: 'Project and shipment photos, where available.',
+        why_title: 'Why Work With AIZGZ?', why_sub: 'Product information and quotation support for international buyers.',
+        w1_title: 'Equipment Sourcing', w1_desc: 'Discuss available equipment and supplier arrangements for your project.',
+        w2_title: 'Specification Review', w2_desc: 'Confirm technical specifications and configuration before ordering.',
+        w3_title: 'Export Coordination', w3_desc: 'Discuss packaging, shipping options, and destination requirements.',
+        w4_title: 'Parts & Support', w4_desc: 'Ask about spare parts, documentation, and technical support availability.',
+        about_title: 'About AIZGZ Machinery', faq_title: 'Frequently Asked Questions',
+        faq1_q: 'What is the minimum order quantity?', faq1_a: 'Minimum order quantity depends on the product. Please contact us with the model and quantity you need.',
+        faq2_q: 'What is the lead time?', faq2_a: 'Lead time depends on the model, configuration, availability, and order quantity. We will confirm it in the quotation.',
+        contact_title: 'Product Inquiry & Contact', contact_sub: 'Share your requirements so we can help confirm suitable equipment and quotation details.',
+        form_name: 'Your Name *', form_email: 'Your Email *', form_phone: 'Phone / WhatsApp', form_model: 'Interested Product / Model',
+        form_msg: 'Message / Requirements *', form_submit: 'Send Inquiry'
       },
       es: {
-        nav_products: "Productos", nav_videos: "Videos", nav_cases: "Envíos y Casos", nav_why: "Por qué Nosotros", nav_faq: "Preguntas", nav_inquiry: "Cotización",
-        btn_browse: "Ver Productos", btn_catalog: "Obtener Catálogo (PDF)",
-        prod_title: "Maquinaria Destacada", prod_sub: "Mezcladoras de alto rendimiento diseñadas para durar",
-        video_title: "Sala de Exhibición en Video", video_sub: "Vea nuestras mezcladoras de concreto en acción",
-        cases_title: "Envíos Globales y Casos de Éxito", cases_sub: "Fotos reales de carga de contenedores en todo el mundo",
-        why_title: "¿Por qué elegir AIZGZ?", why_sub: "Su socio de fabricación de equipos industriales confiable",
-        w1_title: "Suministro Directo", w1_desc: "Precios mayoristas competitivos directamente desde fábrica.",
-        w2_title: "Control de Calidad", w2_desc: "Pruebas operativas al 100% bajo estándares internacionales.",
-        w3_title: "Envío Global", w3_desc: "Despacho rápido de contenedores a los principales puertos.",
-        w4_title: "Repuestos y Soporte", w4_desc: "Suministro a largo plazo de piezas y asistencia técnica.",
-        about_title: "Acerca de AIZGZ Machinery",
-        faq_title: "Preguntas Frecuentes (FAQ)",
-        faq1_q: "¿Cuál es su Cantidad Mínima de Pedido (MOQ)?", faq1_a: "Nuestro MOQ es 1 unidad. Apoyamos pedidos de muestra.",
-        faq2_q: "¿Cuál es el tiempo de entrega estándar?", faq2_a: "Los modelos estándar se envían en 7-12 días hábiles.",
-        contact_title: "Consulta y Contacto", contact_sub: "Cuéntenos sus requerimientos y le responderemos en 12 horas.",
-        form_name: "Su Nombre *", form_email: "Su Correo *", form_phone: "Телефон / WhatsApp", form_model: "Modelo de Interés",
-        form_msg: "Mensaje / Requerimientos *", form_submit: "Enviar Consulta"
+        nav_products: 'Productos', nav_videos: 'Vídeos', nav_cases: 'Envíos y casos', nav_why: 'Por qué nosotros', nav_faq: 'Preguntas', nav_inquiry: 'Consulta',
+        btn_browse: 'Ver productos', btn_catalog: 'Solicitar catálogo',
+        prod_title: 'Equipos industriales', prod_sub: 'Explore los equipos por categoría y solicite información o una cotización.',
+        video_title: 'Galería de vídeos', video_sub: 'Demostraciones de productos, detalles técnicos y producción.',
+        cases_title: 'Envíos y proyectos', cases_sub: 'Fotos de proyectos y envíos, cuando estén disponibles.',
+        why_title: '¿Por qué trabajar con AIZGZ?', why_sub: 'Información de productos y asistencia para cotizaciones.',
+        w1_title: 'Búsqueda de equipos', w1_desc: 'Consulte equipos disponibles para su proyecto.',
+        w2_title: 'Revisión técnica', w2_desc: 'Confirme las especificaciones antes de realizar el pedido.',
+        w3_title: 'Coordinación de exportación', w3_desc: 'Consulte embalaje, envío y requisitos de destino.',
+        w4_title: 'Repuestos y soporte', w4_desc: 'Pregunte por repuestos, documentación y asistencia técnica.',
+        about_title: 'Acerca de AIZGZ Machinery', faq_title: 'Preguntas frecuentes',
+        faq1_q: '¿Cuál es la cantidad mínima?', faq1_a: 'La cantidad mínima depende del producto. Indique el modelo y la cantidad que necesita.',
+        faq2_q: '¿Cuál es el plazo de entrega?', faq2_a: 'Depende del modelo, la configuración, la disponibilidad y la cantidad. Se confirmará en la cotización.',
+        contact_title: 'Consulta de productos', contact_sub: 'Comparta sus requisitos para confirmar el equipo y la cotización.',
+        form_name: 'Su nombre *', form_email: 'Su correo electrónico *', form_phone: 'Teléfono / WhatsApp', form_model: 'Producto / modelo',
+        form_msg: 'Mensaje / requisitos *', form_submit: 'Enviar consulta'
       },
       ar: {
-        nav_products: "المنتجات", nav_videos: "الفيديوهات", nav_cases: "الشحن والحالات", nav_why: "لماذا نحن", nav_faq: "الأسئلة", nav_inquiry: "استفسار",
-        btn_browse: "تصفح المنتجات", btn_catalog: "طلب الكتالوج (PDF)",
-        prod_title: "الآلات المميزة", prod_sub: "خلاطات عالية الأداء مصممة للموثوقية",
-        video_title: "معرض فيديو المصنع", video_sub: "شاهد خلاطات الخرسانة الخاصة بنا أثناء العمل",
-        cases_title: "الشحن العالمي وحالات النجاح", cases_sub: "صور حقيقية لتحميل الحاويات وتسليم المشاريع حول العالم",
-        why_title: "لماذا تتشارك معنا AIZGZ؟", why_sub: "شريكك الموثوق في تصنيع المعدات الصناعية",
-        w1_title: "توريد مباشر من المصنع", w1_desc: "أسعار الجملة التنافسية مباشرة من خط الإنتاج.",
-        w2_title: "رقابة صارمة على الجودة", w2_desc: "اختبار تشغيلي 100% مطابق للمعايير الدولية.",
-        w3_title: "شحن عالمي", w3_desc: "إرسال سريع للحاويات إلى الموانئ الرئيسية.",
-        w4_title: "قطع الغيار والدعم", w4_desc: "توريد طويل الأجل لقطع الغيار والمساعدة الفنية.",
-        about_title: "عن شركة AIZGZ للآلات",
-        faq_title: "الأسئلة الشائعة",
-        faq1_q: "ما هي كمية الطلب المينيموم (MOQ)؟", faq1_a: "الحد الأدنى للطلب هو وحدة واحدة. ندعم طلبات العينات.",
-        faq2_q: "ما هو وقت التسليم القياسي؟", faq2_a: "عادة يتم شحن النماذج القياسية خلال 7-12 يوم عمل.",
-        contact_title: "استفسار واتصال", contact_sub: "أخبرنا بمتطلباتك وسيقوم مهندسو المبيعات بالرد خلال 12 ساعة.",
-        form_name: "اسمك *", form_email: "بريدك الإلكتروني *", form_phone: "الهاتف / واتساب", form_model: "النموذج المهتم به",
-        form_msg: "الرسالة / المتطلبات *", form_submit: "إرسال الاستفسار"
+        nav_products: 'المنتجات', nav_videos: 'الفيديوهات', nav_cases: 'الشحن والمشاريع', nav_why: 'لماذا نحن', nav_faq: 'الأسئلة', nav_inquiry: 'استفسار',
+        btn_browse: 'تصفح المنتجات', btn_catalog: 'طلب كتالوج المنتجات',
+        prod_title: 'المعدات الصناعية', prod_sub: 'تصفح المعدات حسب الفئة واطلب التفاصيل أو عرض السعر.',
+        video_title: 'معرض فيديو المعدات', video_sub: 'عروض المنتجات والتفاصيل الفنية ومشاهد الإنتاج.',
+        cases_title: 'الشحن والمشاريع', cases_sub: 'صور المشاريع والشحن عند توفرها.',
+        why_title: 'لماذا تتعامل مع AIZGZ؟', why_sub: 'معلومات المنتجات ودعم طلبات عروض الأسعار.',
+        w1_title: 'توفير المعدات', w1_desc: 'ناقش المعدات المتاحة لمشروعك.',
+        w2_title: 'مراجعة المواصفات', w2_desc: 'أكد المواصفات الفنية قبل الطلب.',
+        w3_title: 'تنسيق التصدير', w3_desc: 'ناقش التعبئة والشحن ومتطلبات الوجهة.',
+        w4_title: 'قطع الغيار والدعم', w4_desc: 'استفسر عن قطع الغيار والوثائق والدعم الفني.',
+        about_title: 'عن AIZGZ Machinery', faq_title: 'الأسئلة الشائعة',
+        faq1_q: 'ما الحد الأدنى للطلب؟', faq1_a: 'يختلف الحد الأدنى حسب المنتج. يرجى إرسال الطراز والكمية المطلوبة.',
+        faq2_q: 'ما مدة التسليم؟', faq2_a: 'تعتمد المدة على الطراز والتكوين والتوفر والكمية، وسيتم تأكيدها في عرض السعر.',
+        contact_title: 'استفسار عن المنتجات', contact_sub: 'أرسل متطلباتك لمساعدتك في تأكيد المعدات وتفاصيل عرض السعر.',
+        form_name: 'الاسم *', form_email: 'البريد الإلكتروني *', form_phone: 'الهاتف / واتساب', form_model: 'المنتج / الطراز',
+        form_msg: 'الرسالة / المتطلبات *', form_submit: 'إرسال الاستفسار'
       },
       ru: {
-        nav_products: "Продукция", nav_videos: "Видео", nav_cases: "Доставка и Кейсы", nav_why: "Почему мы", nav_faq: "FAQ", nav_inquiry: "Запрос",
-        btn_browse: "Каталог продукции", btn_catalog: "Скачать каталог (PDF)",
-        prod_title: "Наше Оборудование", prod_sub: "Высокопроизводительные бетономешалки для надежной работы",
-        video_title: "Видеогалерея завода", video_sub: "Смотрите наши бетономешалки в работе",
-        cases_title: "Глобальная Доставка и Проекты", cases_sub: "Реальные фото погрузки контейнеров и доставки по всему миру",
-        why_title: "Почему выбирают AIZGZ?", why_sub: "Ваш надежный партнер по производству промышленного оборудования",
-        w1_title: "Прямые поставки с завода", w1_desc: "Конкурентные оптовые цены напрямую с производственной линии.",
-        w2_title: "Контроль качества", w2_desc: "100% рабочие испытания в соответствии с международными стандартами.",
-        w3_title: "Мировая доставка", w3_desc: "Быстрая отправка контейнеров в основные порты мира.",
-        w4_title: "Запчасти и поддержка", w4_desc: "Долгосрочные поставки расходных материалов и техподдержка.",
-        about_title: "About AIZGZ Machinery",
-        faq_title: "Часто задаваемые вопросы (FAQ)",
-        faq1_q: "Каков ваш минимальный объем заказа (MOQ)?", faq1_a: "Минимальный заказ — 1 единица. Возможны образцы для тестирования.",
-        faq2_q: "Каковы стандартные сроки доставки?", faq2_a: "Стандартные модели отгружаются в течение 7–12 рабочих дней.",
-        contact_title: "Запрос и Контакты", contact_sub: "Сообщите свои требования, и наши инженеры ответят в течение 12 часов.",
-        form_name: "Ваше Имя *", form_email: "Ваш Email *", form_phone: "Телефон / WhatsApp", form_model: "Интересующая модель",
-        form_msg: "Сообщение / Требования *", form_submit: "Отправить запрос"
+        nav_products: 'Продукция', nav_videos: 'Видео', nav_cases: 'Доставка и проекты', nav_why: 'Почему мы', nav_faq: 'Вопросы', nav_inquiry: 'Запрос',
+        btn_browse: 'Смотреть продукцию', btn_catalog: 'Запросить каталог',
+        prod_title: 'Промышленное оборудование', prod_sub: 'Выберите категорию оборудования и запросите сведения или цену.',
+        video_title: 'Видео оборудования', video_sub: 'Демонстрации продукции, технические детали и производство.',
+        cases_title: 'Доставка и проекты', cases_sub: 'Фотографии проектов и отгрузок при наличии.',
+        why_title: 'Почему AIZGZ?', why_sub: 'Информация об оборудовании и помощь с запросом цены.',
+        w1_title: 'Подбор оборудования', w1_desc: 'Обсудите доступное оборудование для вашего проекта.',
+        w2_title: 'Проверка спецификаций', w2_desc: 'Уточните технические характеристики перед заказом.',
+        w3_title: 'Экспортная координация', w3_desc: 'Обсудите упаковку, доставку и требования к месту назначения.',
+        w4_title: 'Запчасти и поддержка', w4_desc: 'Уточните наличие запчастей, документации и технической поддержки.',
+        about_title: 'О AIZGZ Machinery', faq_title: 'Часто задаваемые вопросы',
+        faq1_q: 'Каков минимальный заказ?', faq1_a: 'Минимальный заказ зависит от продукта. Укажите модель и количество.',
+        faq2_q: 'Каковы сроки поставки?', faq2_a: 'Срок зависит от модели, комплектации, наличия и количества и подтверждается в предложении.',
+        contact_title: 'Запрос по оборудованию', contact_sub: 'Опишите требования, чтобы уточнить оборудование и условия предложения.',
+        form_name: 'Ваше имя *', form_email: 'Ваш Email *', form_phone: 'Телефон / WhatsApp', form_model: 'Продукт / модель',
+        form_msg: 'Сообщение / требования *', form_submit: 'Отправить запрос'
       }
     };
 
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el && value !== undefined && value !== null && String(value).trim() !== '') el.textContent = String(value);
+    }
+
     function changeLanguage(lang) {
-      const texts = i18nText[lang] || i18nText.en;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
+      const language = i18nText[lang] ? lang : 'en';
+      const texts = i18nText[language];
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
         const key = el.getAttribute('data-i18n');
         if (texts[key]) el.textContent = texts[key];
       });
-      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      document.documentElement.lang = language;
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     }
 
     async function loadSiteData() {
       try {
-        const res = await fetch(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/content/settings/general.json`);
-        if (res.ok) {
-          globalSettings = await res.json();
-          if (globalSettings.brand_name) document.getElementById('brand-name').textContent = globalSettings.brand_name;
-          if (globalSettings.brand_tagline) document.getElementById('brand-tagline').textContent = globalSettings.brand_tagline;
-          if (globalSettings.hero_title) document.getElementById('hero-title').textContent = globalSettings.hero_title;
-          if (globalSettings.hero_subtitle) document.getElementById('hero-subtitle').textContent = globalSettings.hero_subtitle;
-          if (globalSettings.about_text) document.getElementById('about-text').textContent = globalSettings.about_text;
-          
-          if (globalSettings.whatsapp_number) {
-            document.getElementById('whatsapp-link').href = `https://wa.me/${globalSettings.whatsapp_number}?text=Hello%2C%20I%20am%20interested%20in%20your%20Concrete%20Mixers.`;
-          }
-          if (globalSettings.youtube_url) {
-            document.getElementById('youtube-btn').href = globalSettings.youtube_url;
-          }
-          if (globalSettings.tiktok_url) {
-            document.getElementById('tiktok-btn').href = globalSettings.tiktok_url;
-          }
-          if (globalSettings.ga_id) {
-            const gaScript1 = document.createElement('script');
-            gaScript1.async = true;
-            gaScript1.src = `https://www.googletagmanager.com/gtag/js?id=${globalSettings.ga_id}`;
-            document.head.appendChild(gaScript1);
-            const gaScript2 = document.createElement('script');
-            gaScript2.textContent = `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${globalSettings.ga_id}');`;
-            document.head.appendChild(gaScript2);
+        const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/content/settings/general.json`;
+        const response = await fetch(url);
+        if (!response.ok) return;
+        globalSettings = await response.json();
+        setText('brand-name', globalSettings.brand_name);
+        setText('brand-tagline', globalSettings.brand_tagline);
+        setText('hero-title', globalSettings.hero_title);
+        setText('hero-subtitle', globalSettings.hero_subtitle);
+        setText('about-text', globalSettings.about_text);
+        if (globalSettings.whatsapp_number) {
+          const number = String(globalSettings.whatsapp_number).replace(/[^\d]/g, '');
+          if (number) {
+            const link = document.getElementById('whatsapp-link');
+            link.href = `https://wa.me/${number}?text=${encodeURIComponent('Hello, I am interested in your industrial equipment.')}`;
           }
         }
-      } catch (err) {}
+        if (isSafeHttpUrl(globalSettings.youtube_url)) document.getElementById('youtube-btn').href = globalSettings.youtube_url;
+        if (isSafeHttpUrl(globalSettings.tiktok_url)) document.getElementById('tiktok-btn').href = globalSettings.tiktok_url;
+        if (globalSettings.ga_id && /^[Gg]-[A-Z0-9]+$/.test(globalSettings.ga_id)) {
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(globalSettings.ga_id)}`;
+          document.head.appendChild(script);
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){ window.dataLayer.push(arguments); };
+          window.gtag('js', new Date());
+          window.gtag('config', globalSettings.ga_id);
+        }
+        if (globalSettings.company_display_name) setText('footer-copyright', `© ${new Date().getFullYear()} ${globalSettings.company_display_name}. All rights reserved.`);
+      } catch (error) {
+        console.error('Could not load site settings:', error);
+      }
+    }
+
+    function isSafeHttpUrl(value) {
+      try {
+        const url = new URL(value);
+        return url.protocol === 'https:' || url.protocol === 'http:';
+      } catch {
+        return false;
+      }
+    }
+
+    function parseFrontMatter(text) {
+      const match = String(text).match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n([\s\S]*))?$/);
+      if (!match) return { meta: {}, body: String(text) };
+      const meta = {};
+      match[1].split(/\r?\n/).forEach((line) => {
+        const colon = line.indexOf(':');
+        if (colon < 1) return;
+        const key = line.slice(0, colon).trim();
+        const value = line.slice(colon + 1).trim().replace(/^(['"])(.*)\1$/, '$2');
+        if (key) meta[key] = value;
+      });
+      return { meta, body: match[2] || '' };
+    }
+
+    function getProductCategory(meta = {}) {
+      const explicit = String(meta.category || '').trim().toLowerCase();
+      if (['concrete-mixers', 'palletizers', 'mortar-equipment'].includes(explicit)) return explicit;
+      const text = `${meta.title || ''} ${meta.model || ''} ${meta.category || ''}`.toLowerCase();
+      if (/palletiz|码垛/.test(text)) return 'palletizers';
+      if (/mortar|砂浆/.test(text)) return 'mortar-equipment';
+      if (/concrete|cement mixer|混凝土/.test(text)) return 'concrete-mixers';
+      return 'other';
+    }
+
+    function filterProducts(category) {
+      activeProductCategory = category;
+      document.querySelectorAll('.filter-btn').forEach((button) => {
+        const selected = button.dataset.category === category;
+        button.className = selected
+          ? 'filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white'
+          : 'filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold hover:border-slate-400';
+      });
+      renderFilteredProducts();
     }
 
     async function fetchProducts() {
       const grid = document.getElementById('product-grid');
-      const countEl = document.getElementById('product-count');
+      const count = document.getElementById('product-count');
+      grid.setAttribute('aria-busy', 'true');
       try {
-        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/products`);
-        if (!response.ok) throw new Error();
+        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/products?ref=${REPO_BRANCH}`);
+        if (!response.ok) throw new Error(`GitHub API HTTP ${response.status}`);
         const files = await response.json();
-        const mdFiles = files.filter(f => f.name.endsWith('.md'));
-        if (mdFiles.length === 0) {
-          grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">No products published yet.</div>`;
-          countEl.textContent = '0 Products';
-          return;
-        }
-        grid.innerHTML = '';
-        countEl.textContent = `${mdFiles.length} Products Available`;
-        for (const file of mdFiles) {
+        const markdownFiles = files.filter((file) => file.type === 'file' && file.name.toLowerCase().endsWith('.md'));
+        const loaded = await Promise.allSettled(markdownFiles.map(async (file) => {
           const res = await fetch(file.download_url);
-          const rawText = await res.text();
-          const { meta, body } = parseFrontMatter(rawText);
-          renderProductCard(meta, body);
+          if (!res.ok) throw new Error(`Could not fetch ${file.name}`);
+          const parsed = parseFrontMatter(await res.text());
+          return { meta: parsed.meta, body: parsed.body, fileName: file.name };
+        }));
+        allProducts = loaded.filter((result) => result.status === 'fulfilled').map((result) => result.value);
+        loaded.filter((result) => result.status === 'rejected').forEach((result) => console.error('Product failed to load:', result.reason));
+        renderFilteredProducts();
+        if (!allProducts.length) {
+          grid.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500">No products are available right now. Please contact us for assistance.</div>';
+          count.textContent = '0 Products';
         }
-      } catch (err) {
-        grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">Welcome to AIZGZ Concrete Mixers. Contact us below.</div>`;
+      } catch (error) {
+        console.error('Failed to load products:', error);
+        grid.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500">The product catalog is temporarily unavailable. Please contact us for assistance.</div>';
+        count.textContent = 'Catalog unavailable';
+      } finally {
+        grid.setAttribute('aria-busy', 'false');
       }
     }
 
-    async function fetchCases() {
-      const grid = document.getElementById('cases-grid');
-      try {
-        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/cases`);
-        if (!response.ok) throw new Error();
-        const files = await response.json();
-        const mdFiles = files.filter(f => f.name.endsWith('.md'));
-        if (mdFiles.length === 0) {
-          grid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-400">Shipping cases will be updated soon via CMS.</div>`;
-          return;
-        }
-        grid.innerHTML = '';
-        for (const file of mdFiles) {
-          const res = await fetch(file.download_url);
-          const rawText = await res.text();
-          const { meta } = parseFrontMatter(rawText);
-          const card = document.createElement('div');
-          card.className = 'bg-slate-50 rounded-xl overflow-hidden shadow border border-slate-200';
-          card.innerHTML = `
-            <div class="h-56 bg-slate-200 overflow-hidden">
-              <img src="${meta.image || 'https://via.placeholder.com/600x400'}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-            </div>
-            <div class="p-5">
-              <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">${meta.country || 'Global Destination'}</span>
-              <h3 class="font-bold text-slate-800 text-base mt-1">${meta.title || 'Project Delivery'}</h3>
-              <p class="text-xs text-slate-400 mt-2">${meta.date || ''}</p>
-            </div>
-          `;
-          grid.appendChild(card);
-        }
-      } catch (err) {}
-    }
-
-    async function fetchVideos() {
-      const grid = document.getElementById('videos-grid');
-      try {
-        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/videos`);
-        if (!response.ok) throw new Error();
-        const files = await response.json();
-        const mdFiles = files.filter(f => f.name.endsWith('.md'));
-        if (mdFiles.length === 0) return;
-        grid.innerHTML = '';
-        for (const file of mdFiles) {
-          const res = await fetch(file.download_url);
-          const rawText = await res.text();
-          const { meta } = parseFrontMatter(rawText);
-          const card = document.createElement('div');
-          card.className = 'bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow';
-          card.innerHTML = `
-            <div class="h-48 bg-slate-900 relative overflow-hidden flex items-center justify-center">
-              <img src="${meta.image || 'https://via.placeholder.com/600x400'}" class="w-full h-full object-cover opacity-80">
-              <a href="${meta.video_url || '#'}" target="_blank" class="absolute bg-amber-500 hover:bg-amber-600 text-slate-900 w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition">
-                <i class="fa-solid fa-play ml-0.5"></i>
-              </a>
-              <span class="absolute top-3 left-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded font-bold">${meta.platform || 'Video'}</span>
-            </div>
-            <div class="p-5">
-              <h3 class="font-bold text-white text-base">${meta.title || 'Factory Show'}</h3>
-              <a href="${meta.video_url || '#'}" target="_blank" class="text-xs text-amber-400 hover:underline mt-2 inline-block">Watch on ${meta.platform || 'Platform'} &rarr;</a>
-            </div>
-          `;
-          grid.appendChild(card);
-        }
-      } catch (err) {}
-    }
-
-    function parseFrontMatter(text) {
-      const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-      if (!match) return { meta: {}, body: text };
-      const yaml = match[1], body = match[2], meta = {};
-      yaml.split('\n').forEach(line => {
-        const [key, ...val] = line.split(':');
-        if (key && val.length) meta[key.trim()] = val.join(':').trim().replace(/^['"]|['"]$/g, '');
-      });
-      return { meta, body };
-    }
-
-    function renderProductCard(meta, body) {
+    function renderFilteredProducts() {
       const grid = document.getElementById('product-grid');
-      const card = document.createElement('div');
-      card.className = 'bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col justify-between';
-      card.innerHTML = `
-        <div>
-          <div class="h-48 bg-slate-100 overflow-hidden relative">
-            <img src="${meta.image || 'https://via.placeholder.com/600x400'}" class="w-full h-full object-cover">
-            ${meta.power_type ? `<span class="absolute top-3 right-3 bg-amber-500 text-slate-900 font-bold text-xs px-2.5 py-1 rounded shadow">${meta.power_type}</span>` : ''}
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-slate-800">${meta.title || 'Untitled'}</h3>
-            <p class="text-xs text-slate-400 mt-1 font-mono">${meta.model ? 'Model: ' + meta.model : ''}</p>
-            ${meta.capacity ? `<p class="text-sm text-slate-600 mt-2"><strong>Capacity:</strong> ${meta.capacity}</p>` : ''}
-          </div>
-        </div>
-        <div class="p-6 pt-0 border-t border-slate-50 mt-4 flex justify-between items-center space-x-2">
-          <button onclick="openModal('${encodeURIComponent(JSON.stringify(meta))}', '${encodeURIComponent(body)}')" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded transition">Details</button>
-          <a href="#contact" onclick="fillInquiryModel('${meta.title || ''}')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-bold px-4 py-2 rounded transition">Inquire Now &rarr;</a>
-        </div>
-      `;
+      const count = document.getElementById('product-count');
+      if (!grid || !count) return;
+      const filtered = activeProductCategory === 'all'
+        ? allProducts
+        : allProducts.filter((product) => getProductCategory(product.meta) === activeProductCategory);
+      grid.replaceChildren();
+      if (!filtered.length) {
+        const empty = document.createElement('div');
+        empty.className = 'col-span-full py-12 text-center text-slate-500';
+        empty.textContent = activeProductCategory === 'all'
+          ? 'No products are available right now. Please contact us for assistance.'
+          : 'No products are currently listed in this category. Please contact us for availability.';
+        grid.appendChild(empty);
+      } else {
+        filtered.forEach((product) => renderProductCard(product.meta, product.body));
+      }
+      count.textContent = `${filtered.length} ${filtered.length === 1 ? 'Product' : 'Products'}`;
+    }
+
+    function createImage(src, alt, className) {
+      const img = document.createElement('img');
+      img.src = isSafeHttpUrl(src) || (typeof src === 'string' && src.startsWith('/uploads/')) ? src : PLACEHOLDER_IMAGE;
+      img.alt = alt || 'Industrial equipment';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.className = className;
+      img.onerror = () => { img.onerror = null; img.src = PLACEHOLDER_IMAGE; };
+      return img;
+    }
+
+    function renderProductCard(meta = {}, body = '') {
+      const grid = document.getElementById('product-grid');
+      const card = document.createElement('article');
+      card.className = 'flex flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl';
+      const upper = document.createElement('div');
+      const imageWrap = document.createElement('div');
+      imageWrap.className = 'relative h-48 overflow-hidden bg-slate-100';
+      imageWrap.appendChild(createImage(meta.image, meta.title || 'Industrial equipment', 'h-full w-full object-cover'));
+      if (meta.power_type) {
+        const badge = document.createElement('span');
+        badge.className = 'absolute right-3 top-3 rounded bg-amber-500 px-2.5 py-1 text-xs font-bold text-slate-900 shadow';
+        badge.textContent = meta.power_type;
+        imageWrap.appendChild(badge);
+      }
+      upper.appendChild(imageWrap);
+      const content = document.createElement('div');
+      content.className = 'p-6';
+      const title = document.createElement('h3');
+      title.className = 'text-xl font-bold text-slate-800';
+      title.textContent = meta.title || 'Industrial Equipment';
+      content.appendChild(title);
+      if (meta.model) {
+        const model = document.createElement('p');
+        model.className = 'mt-1 font-mono text-xs text-slate-400';
+        model.textContent = `Model: ${meta.model}`;
+        content.appendChild(model);
+      }
+      if (meta.capacity) {
+        const capacity = document.createElement('p');
+        capacity.className = 'mt-2 text-sm text-slate-600';
+        const label = document.createElement('strong');
+        label.textContent = 'Capacity: ';
+        capacity.append(label, document.createTextNode(meta.capacity));
+        content.appendChild(capacity);
+      }
+      upper.appendChild(content);
+      card.appendChild(upper);
+      const actions = document.createElement('div');
+      actions.className = 'mt-4 flex items-center justify-between gap-2 border-t border-slate-100 p-6 pt-4';
+      const details = document.createElement('button');
+      details.type = 'button';
+      details.className = 'rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900';
+      details.textContent = 'Details';
+      details.addEventListener('click', () => openModal(meta, body));
+      const inquiry = document.createElement('a');
+      inquiry.href = '#contact';
+      inquiry.className = 'rounded bg-amber-500 px-4 py-2 text-xs font-bold text-slate-900 hover:bg-amber-600';
+      inquiry.textContent = 'Inquire Now →';
+      inquiry.addEventListener('click', () => fillInquiryModel(meta.title || meta.model || 'Product Inquiry'));
+      actions.append(details, inquiry);
+      card.appendChild(actions);
       grid.appendChild(card);
     }
 
     function fillInquiryModel(title) {
-      if (title) document.getElementById('inquiry-model').value = title;
+      const input = document.getElementById('inquiry-model');
+      if (input && title) input.value = title;
     }
 
-    function openModal(metaStr, bodyStr) {
-      const meta = JSON.parse(decodeURIComponent(metaStr)), body = decodeURIComponent(bodyStr);
+    function openModal(meta, body) {
+      const content = document.getElementById('modal-content');
+      content.replaceChildren();
+      content.appendChild(createImage(meta.image, meta.title || 'Equipment details', 'mb-4 h-64 w-full rounded-lg object-cover'));
+      const title = document.createElement('h2');
+      title.id = 'modal-title';
+      title.className = 'mb-1 text-2xl font-bold text-slate-900';
+      title.textContent = meta.title || 'Equipment Details';
+      content.appendChild(title);
+      if (meta.model) {
+        const model = document.createElement('p');
+        model.className = 'mb-4 font-mono text-sm text-amber-600';
+        model.textContent = `Model: ${meta.model}`;
+        content.appendChild(model);
+      }
+      const specs = document.createElement('div');
+      specs.className = 'mb-6 grid grid-cols-1 gap-3 rounded-lg bg-slate-50 p-4 text-sm sm:grid-cols-2';
+      [['Capacity', meta.capacity], ['Power Type', meta.power_type], ['Category', getProductCategory(meta)]].forEach(([label, value]) => {
+        if (!value) return;
+        const item = document.createElement('div');
+        const strong = document.createElement('strong');
+        strong.textContent = `${label}: `;
+        item.append(strong, document.createTextNode(String(value)));
+        specs.appendChild(item);
+      });
+      content.appendChild(specs);
+      const description = document.createElement('div');
+      description.className = 'prose mb-6 max-w-none text-sm text-slate-700';
+      if (window.marked && typeof window.marked.parse === 'function') {
+        description.innerHTML = window.marked.parse(String(body || ''));
+      } else {
+        description.textContent = String(body || '');
+      }
+      content.appendChild(description);
+      const link = document.createElement('a');
+      link.href = '#contact';
+      link.className = 'block w-full rounded-lg bg-amber-500 py-3 text-center font-bold text-slate-900 hover:bg-amber-600';
+      link.textContent = 'Inquire About This Product';
+      link.addEventListener('click', () => {
+        fillInquiryModel(meta.title || meta.model || 'Product Inquiry');
+        closeModal();
+      });
+      content.appendChild(link);
       const modal = document.getElementById('product-modal');
-      document.getElementById('modal-content').innerHTML = `
-        <img src="${meta.image || 'https://via.placeholder.com/600x400'}" class="w-full h-64 object-cover rounded-lg mb-4">
-        <h2 class="text-2xl font-bold text-slate-900 mb-1">${meta.title || 'Details'}</h2>
-        <p class="text-sm font-mono text-amber-600 mb-4">${meta.model ? 'Model: ' + meta.model : ''}</p>
-        <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-lg text-sm mb-6">
-          <div><strong>Capacity:</strong> ${meta.capacity || 'N/A'}</div>
-          <div><strong>Power Type:</strong> ${meta.power_type || 'N/A'}</div>
-        </div>
-        <div class="prose max-w-none text-slate-700 text-sm mb-6">${marked.parse(body || '')}</div>
-        <a href="#contact" onclick="closeModal(); fillInquiryModel('${meta.title || ''}')" class="block text-center w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 rounded-lg transition">Inquire About This Model</a>
-      `;
       modal.classList.remove('hidden');
+      modal.classList.add('flex');
     }
 
     function closeModal() {
-      document.getElementById('product-modal').classList.add('hidden');
+      const modal = document.getElementById('product-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
     }
 
-    async function submitFormspree(e) {
-      e.preventDefault();
-      const status = document.getElementById('form-status');
-      const btn = document.getElementById('submit-btn');
-      const form = e.target;
-      if (!globalSettings.formspree_id) {
-        alert("Formspree ID is not configured yet. Please configure it in CMS Site Settings.");
-        return;
-      }
-      btn.disabled = true;
-      btn.textContent = "Sending...";
+    function openPolicy(type) {
+      const policy = policiesContent[type];
+      if (!policy) return;
+      setText('policy-title', policy.title);
+      document.getElementById('policy-body').innerHTML = policy.body;
+      const modal = document.getElementById('policy-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePolicyModal() {
+      const modal = document.getElementById('policy-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    async function fetchContentCollection(collection, gridId, kind) {
+      const grid = document.getElementById(gridId);
       try {
-        const response = await fetch(`https://formspree.io/f/${globalSettings.formspree_id}`, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/${collection}?ref=${REPO_BRANCH}`);
+        if (!response.ok) throw new Error(`GitHub API HTTP ${response.status}`);
+        const files = (await response.json()).filter((file) => file.type === 'file' && file.name.toLowerCase().endsWith('.md'));
+        const results = await Promise.allSettled(files.map(async (file) => {
+          const res = await fetch(file.download_url);
+          if (!res.ok) throw new Error(`Could not fetch ${file.name}`);
+          return parseFrontMatter(await res.text()).meta;
+        }));
+        const items = results.filter((result) => result.status === 'fulfilled').map((result) => result.value);
+        grid.replaceChildren();
+        if (!items.length) {
+          const empty = document.createElement('div');
+          empty.className = 'col-span-full py-8 text-center text-slate-400';
+          empty.textContent = kind === 'case' ? 'Project and shipping cases will be added when available.' : 'Videos will be added when available.';
+          grid.appendChild(empty);
+          return;
+        }
+        items.forEach((meta) => {
+          const card = document.createElement('article');
+          card.className = kind === 'case'
+            ? 'overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow'
+            : 'overflow-hidden rounded-xl border border-slate-700 bg-slate-800 shadow';
+          const imageWrap = document.createElement('div');
+          imageWrap.className = `relative h-48 overflow-hidden ${kind === 'case' ? 'bg-slate-200' : 'bg-slate-900'}`;
+          imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover'));
+          if (kind === 'video') {
+            const videoLink = document.createElement('a');
+            videoLink.href = isSafeHttpUrl(meta.video_url) ? meta.video_url : '#';
+            videoLink.target = '_blank';
+            videoLink.rel = 'noopener noreferrer';
+            videoLink.className = 'absolute inset-0 flex items-center justify-center';
+            videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
+            const icon = document.createElement('span');
+            icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
+            icon.innerHTML = '<i class="fa-solid fa-play"></i>';
+            videoLink.appendChild(icon);
+            imageWrap.appendChild(videoLink);
+          }
+          card.appendChild(imageWrap);
+          const bodyEl = document.createElement('div');
+          bodyEl.className = 'p-5';
+          const title = document.createElement('h3');
+          title.className = `text-base font-bold ${kind === 'case' ? 'text-slate-800' : 'text-white'}`;
+          title.textContent = meta.title || (kind === 'case' ? 'Project Case' : 'Equipment Video');
+          bodyEl.appendChild(title);
+          const detail = kind === 'case' ? [meta.country, meta.date].filter(Boolean).join(' · ') : (meta.platform || 'Video');
+          if (detail) {
+            const p = document.createElement('p');
+            p.className = `mt-2 text-xs ${kind === 'case' ? 'text-slate-400' : 'text-slate-400'}`;
+            p.textContent = detail;
+            bodyEl.appendChild(p);
+          }
+          if (kind === 'video' && isSafeHttpUrl(meta.video_url)) {
+            const watch = document.createElement('a');
+            watch.href = meta.video_url;
+            watch.target = '_blank';
+            watch.rel = 'noopener noreferrer';
+            watch.className = 'mt-3 inline-block text-xs text-amber-400 hover:underline';
+            watch.textContent = `Watch on ${meta.platform || 'video platform'} →`;
+            bodyEl.appendChild(watch);
+          }
+          card.appendChild(bodyEl);
+          grid.appendChild(card);
         });
-        if (response.ok) {
-          status.className = "text-center text-sm mt-2 text-emerald-400 font-bold";
-          status.textContent = "Thank you! Your inquiry has been sent successfully. We will contact you shortly.";
-          status.classList.remove('hidden');
-          form.reset();
-        } else { throw new Error(); }
-      } catch (err) {
-        status.className = "text-center text-sm mt-2 text-rose-400 font-bold";
-        status.textContent = "Oops! Something went wrong. Please try again or chat via WhatsApp.";
-        status.classList.remove('hidden');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = "Send Inquiry";
+      } catch (error) {
+        console.error(`Failed to load ${collection}:`, error);
+        grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400">${kind === 'case' ? 'Project cases are temporarily unavailable.' : 'Videos are temporarily unavailable.'}</div>`;
       }
     }
+
+    async function submitFormspree(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const status = document.getElementById('form-status');
+      const button = document.getElementById('submit-btn');
+      if (!globalSettings.formspree_id) {
+        status.className = 'text-center text-sm text-amber-300';
+        status.textContent = 'The inquiry form is not configured yet. Please contact us via WhatsApp or configure Formspree in CMS Site Settings.';
+        status.classList.remove('hidden');
+        return;
+      }
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      status.classList.add('hidden');
+      try {
+        const response = await fetch(`https://formspree.io/f/${encodeURIComponent(globalSettings.formspree_id)}`, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+        status.className = 'text-center text-sm font-bold text-emerald-400';
+        status.textContent = 'Thank you. Your inquiry has been sent successfully.';
+        status.classList.remove('hidden');
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        status.className = 'text-center text-sm font-bold text-rose-400';
+        status.textContent = 'Your inquiry could not be sent. Please try again or contact us via WhatsApp.';
+        status.classList.remove('hidden');
+      } finally {
+        button.disabled = false;
+        button.textContent = (i18nText[document.documentElement.lang] || i18nText.en).form_submit;
+      }
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+        closePolicyModal();
+      }
+    });
 
     loadSiteData();
     fetchProducts();
-    fetchCases();
-    fetchVideos();
+    fetchContentCollection('cases', 'cases-grid', 'case');
+    fetchContentCollection('videos', 'videos-grid', 'video');
   </script>
 </body>
 </html>
