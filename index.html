@@ -489,7 +489,14 @@
     function openModal(meta, body) {
       const content = document.getElementById('modal-content');
       content.replaceChildren();
-      content.appendChild(createImage(meta.image, meta.title || 'Equipment details', 'mb-4 h-64 w-full rounded-lg object-cover'));
+      const detailImage = createImage(
+        meta.image,
+        meta.title || 'Equipment details',
+        'mb-4 block w-full h-auto max-h-[70vh] rounded-lg object-contain object-center'
+      );
+      
+      detailImage.style.backgroundColor = '#f8fafc'; 
+      content.appendChild(detailImage);
       const title = document.createElement('h2');
       title.id = 'modal-title';
       title.className = 'mb-1 text-2xl font-bold text-slate-900';
