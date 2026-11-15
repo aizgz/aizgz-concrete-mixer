@@ -164,10 +164,10 @@
     <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 md:flex-row">
       <p id="footer-copyright" class="text-sm">© 2026 AIZGZ Machinery. All rights reserved.</p>
       <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs font-medium">
-        <button type="button" onclick="openPolicy('privacy')" class="hover:text-amber-400">Privacy Policy</button>
-        <button type="button" onclick="openPolicy('shipping')" class="hover:text-amber-400">Shipping Information</button>
-        <button type="button" onclick="openPolicy('warranty')" class="hover:text-amber-400">Warranty Information</button>
-        <button type="button" onclick="openPolicy('terms')" class="hover:text-amber-400">Terms of Service</button>
+        <button type="button" onclick="openPolicy('privacy')" class="hover:text-amber-400" data-i18n="privacy_policy">Privacy Policy</button>
+        <button type="button" onclick="openPolicy('shipping')" class="hover:text-amber-400" data-i18n="shipping_policy">Shipping Information</button>
+        <button type="button" onclick="openPolicy('warranty')" class="hover:text-amber-400" data-i18n="warranty_policy">Warranty Information</button>
+        <button type="button" onclick="openPolicy('terms')" class="hover:text-amber-400" data-i18n="terms_policy">Terms of Service</button>
         <button type="button" onclick="openPolicy('cookies')" class="hover:text-amber-400">Cookie Notice</button>
         <button type="button" onclick="openCookieSettings()" class="hover:text-amber-400" data-i18n="cookie_settings">Cookie Settings</button>
         <button type="button" onclick="openPolicy('returns')" class="hover:text-amber-400" data-i18n="returns_policy">Returns & Refunds</button>
@@ -187,6 +187,7 @@
     let activeProductCategory = 'all';
     let activeAnalyticsConsent = null;
     let currentPolicyType = null;
+    let currentProductModal = null;
 
     const policiesContent = {
       privacy: { title:'Privacy Policy', body:'<p><strong>Website operator.</strong> AIZGZ Machinery is the trading name displayed on this website. The legal entity name and registered address must be confirmed and added before this policy is treated as final.</p><p><strong>Information collected.</strong> Inquiry submissions may include your name, email, phone or WhatsApp number, product/model of interest, and message. Hosting and security providers may process technical request information such as IP address, browser/device type, and access time. Do not submit passwords, payment-card details, identity numbers, or other sensitive information.</p><p><strong>Use of information.</strong> We use inquiry details to respond, prepare quotations, discuss equipment requirements, coordinate potential orders, provide support, and protect the website. Optional analytics is used only after consent where required.</p><p><strong>Service providers.</strong> Vercel provides hosting, Formspree processes inquiry forms, Google Analytics is used only after consent, and WhatsApp is used if you choose to contact us there. These providers may process data under their own terms. We do not sell personal information. Disclosures may occur where required by law or necessary to protect rights and services.</p><p><strong>International processing and retention.</strong> Information may be processed in countries where our service providers operate. We retain inquiry information only as long as reasonably needed for the inquiry, business relationship, legal obligations, and dispute resolution, then delete or anonymize it where appropriate.</p><p><strong>Your choices.</strong> Depending on applicable law, you may request access, correction, deletion, restriction, or object to certain processing, and withdraw consent. Contact us using the email displayed on this website. You can reject optional analytics using the cookie controls.</p><p><strong>Completion required before launch:</strong> insert the responsible legal entity name, registered address, and verified privacy contact, and check this notice against the actual service-provider settings.</p>' },
@@ -320,6 +321,7 @@
       try { localStorage.setItem('aizgz_analytics_consent', accepted ? 'accepted' : 'rejected'); } catch (_) {}
       document.getElementById('cookie-banner')?.classList.add('hidden');
       if (accepted) {
+        if (globalSettings.ga_id) window['ga-disable-' + globalSettings.ga_id] = false;
         loadAnalytics();
       } else if (globalSettings.ga_id) {
         window['ga-disable-' + globalSettings.ga_id] = true;
@@ -388,6 +390,7 @@
       });
       if (persist) { try { localStorage.setItem('aizgz_language', language); } catch (_) {} }
       if (allProducts.length) renderFilteredProducts();
+      if (currentProductModal) openModal(currentProductModal.meta, currentProductModal.body);
       if (currentPolicyType) openPolicy(currentPolicyType);
     }
 
@@ -546,6 +549,10 @@
       count.textContent = filtered.length + ' ' + (filtered.length === 1 ? currentTexts().count_product : currentTexts().count_products);
     }
 
+    function isDisplayableCatalogValue(value) {
+      return value !== undefined && value !== null && String(value).trim() !== '' && !/[\u3400-\u9fff]/.test(String(value));
+    }
+
     function createImage(src, alt, className) {
       const img = document.createElement('img');
       img.src = isSafeHttpUrl(src) || (typeof src === 'string' && src.startsWith('/uploads/')) ? src : PLACEHOLDER_IMAGE;
@@ -578,13 +585,13 @@
       title.className = 'text-xl font-bold text-slate-800';
       title.textContent = meta.title || 'Industrial Equipment';
       content.appendChild(title);
-      if (meta.model && !/[\u3400-\u9fff]/.test(String(meta.model))) {
+      if (isDisplayableCatalogValue(meta.model)) {
         const model = document.createElement('p');
         model.className = 'mt-1 font-mono text-xs text-slate-400';
         model.textContent = currentTexts().label_model + ': ' + meta.model;
         content.appendChild(model);
       }
-      if (meta.capacity) {
+      if (isDisplayableCatalogValue(meta.capacity)) {
         const capacity = document.createElement('p');
         capacity.className = 'mt-2 text-sm text-slate-600';
         const label = document.createElement('strong');
@@ -592,7 +599,7 @@
         capacity.append(label, document.createTextNode(meta.capacity));
         content.appendChild(capacity);
       }
-      if (meta.internal_capacity) {
+      if (isDisplayableCatalogValue(meta.internal_capacity)) {
         const internalCapacity = document.createElement('p');
         internalCapacity.className = 'mt-2 text-sm text-slate-600';
         const label = document.createElement('strong');
@@ -635,6 +642,7 @@
     }
 
     function openModal(meta, body) {
+      currentProductModal = { meta: meta, body: body };
       const content = document.getElementById('modal-content');
       content.replaceChildren();
       const detailImage = createImage(
@@ -650,7 +658,7 @@
       title.className = 'mb-1 text-2xl font-bold text-slate-900';
       title.textContent = meta.title || 'Equipment Details';
       content.appendChild(title);
-      if (meta.model && !/[\u3400-\u9fff]/.test(String(meta.model))) {
+      if (isDisplayableCatalogValue(meta.model)) {
         const model = document.createElement('p');
         model.className = 'mb-4 font-mono text-sm text-amber-600';
         model.textContent = currentTexts().label_model + ': ' + meta.model;
@@ -659,7 +667,7 @@
       const specs = document.createElement('div');
       specs.className = 'mb-6 grid grid-cols-1 gap-3 rounded-lg bg-slate-50 p-4 text-sm sm:grid-cols-2';
       [[currentTexts().label_capacity, meta.capacity], [currentTexts().label_internal_capacity, meta.internal_capacity], ['Voltage', meta.voltage], ['Frequency', meta.frequency], ['Motor Power', meta.motor_power], ['Packaging Range', meta.packaging_range], ['Mixing Volume', meta.mixing_volume], ['Mixing Time', meta.mixing_time], ['Application', meta.application], ['Optional Components', meta.optional_components], ['Supply Status', meta.supply_status], ['Manufacturer', meta.manufacturer], ['Supply Relationship', meta.supply_relationship], ['Power Type', meta.power_type], [currentTexts().label_category, getProductCategory(meta)]].forEach(([label, value]) => {
-        if (!value) return;
+        if (!isDisplayableCatalogValue(value)) return;
         const item = document.createElement('div');
         const strong = document.createElement('strong');
         strong.textContent = translateSpecLabel(label) + ': ';
@@ -696,6 +704,7 @@
     }
 
     function closeModal() {
+      currentProductModal = null;
       const modal = document.getElementById('product-modal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
