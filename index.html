@@ -9,7 +9,9 @@
   <meta name="theme-color" content="#0f172a">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
   <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-md">
@@ -55,9 +57,12 @@
       </div>
       <div id="product-filters" class="mb-8 flex flex-wrap gap-3">
         <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white">All Equipment</button>
-        <button type="button" data-category="concrete-mixers" onclick="filterProducts('concrete-mixers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Concrete Mixers</button>
+        <button type="button" data-category="concrete-mixers" onclick="filterProducts('concrete-mixers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Concrete Equipment</button>
+        <button type="button" data-category="mortar-equipment" onclick="filterProducts('mortar-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Dry Mix & Mortar</button>
         <button type="button" data-category="palletizers" onclick="filterProducts('palletizers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Bag Palletizing</button>
-        <button type="button" data-category="mortar-equipment" onclick="filterProducts('mortar-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Mortar Equipment</button>
+        <button type="button" data-category="block-brick" onclick="filterProducts('block-brick')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Block & Brick</button>
+        <button type="button" data-category="crushing-screening" onclick="filterProducts('crushing-screening')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Crushing & Screening</button>
+        <button type="button" data-category="packing-auxiliary" onclick="filterProducts('packing-auxiliary')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Packing & Auxiliary</button>
       </div>
       <div id="product-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <div class="animate-pulse rounded-xl bg-white p-6 shadow"><div class="mb-4 h-48 rounded-lg bg-slate-200"></div><div class="mb-2 h-6 w-3/4 rounded bg-slate-200"></div></div>
@@ -330,26 +335,58 @@
     }
 
     function parseFrontMatter(text) {
-      const match = String(text).match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n([\s\S]*))?$/);
-      if (!match) return { meta: {}, body: String(text) };
-      const meta = {};
-      match[1].split(/\r?\n/).forEach((line) => {
-        const colon = line.indexOf(':');
-        if (colon < 1) return;
-        const key = line.slice(0, colon).trim();
-        const value = line.slice(colon + 1).trim().replace(/^(['"])(.*)\1$/, '$2');
-        if (key) meta[key] = value;
-      });
-      return { meta, body: match[2] || '' };
+      const source = String(text);
+      const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n([\s\S]*))?$/);
+      if (!match) return { meta: {}, body: source };
+      let meta = {};
+      if (window.jsyaml && typeof window.jsyaml.load === 'function') {
+        const parsed = window.jsyaml.load(match[1], { schema: window.jsyaml.JSON_SCHEMA });
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) meta = parsed;
+      } else {
+        // Graceful fallback for simple scalar front matter, including indented continuation lines.
+        let currentKey = '';
+        match[1].split(/\r?\n/).forEach((line) => {
+          if (/^\s+/.test(line) && currentKey) {
+            meta[currentKey] = (String(meta[currentKey] || '') + ' ' + line.trim()).trim();
+            return;
+          }
+          const colon = line.indexOf(':');
+          if (colon < 1) return;
+          currentKey = line.slice(0, colon).trim();
+          meta[currentKey] = line.slice(colon + 1).trim().replace(/^(['"])(.*)\1$/, '$2');
+        });
+      }
+      return { meta: meta, body: match[2] || '' };
     }
 
     function getProductCategory(meta = {}) {
       const explicit = String(meta.category || '').trim().toLowerCase();
-      if (['concrete-mixers', 'palletizers', 'mortar-equipment'].includes(explicit)) return explicit;
-      const text = `${meta.title || ''} ${meta.model || ''} ${meta.category || ''}`.toLowerCase();
-      if (/palletiz|码垛/.test(text)) return 'palletizers';
-      if (/mortar|砂浆/.test(text)) return 'mortar-equipment';
-      if (/concrete|cement mixer|混凝土/.test(text)) return 'concrete-mixers';
+      const categoryAliases = {
+        'concrete-mixers': 'concrete-mixers',
+        'concrete equipment': 'concrete-mixers',
+        'concrete-equipment': 'concrete-mixers',
+        'mortar-equipment': 'mortar-equipment',
+        'dry mix mortar plant': 'mortar-equipment',
+        'dry-mix-mortar': 'mortar-equipment',
+        'tile adhesive production line': 'mortar-equipment',
+        'wall putty making machine': 'mortar-equipment',
+        'palletizers': 'palletizers',
+        'block & brick making machine': 'block-brick',
+        'block-brick': 'block-brick',
+        'crushing & screening plant': 'crushing-screening',
+        'crushing-screening': 'crushing-screening',
+        'packing & auxiliary equipment': 'packing-auxiliary',
+        'packing-auxiliary': 'packing-auxiliary'
+      };
+      if (categoryAliases[explicit]) return categoryAliases[explicit];
+      const text = String(meta.title || '') + ' ' + String(meta.model || '') + ' ' + String(meta.category || '');
+      const normalizedText = text.toLowerCase();
+      if (/palletiz|码垛/.test(normalizedText)) return 'palletizers';
+      if (/mortar|砂浆|tile adhesive|putty/.test(normalizedText)) return 'mortar-equipment';
+      if (/block|brick|砌块|制砖/.test(normalizedText)) return 'block-brick';
+      if (/crushing|screening|破碎|筛分/.test(normalizedText)) return 'crushing-screening';
+      if (/packing|packaging|bagging|包装|装袋/.test(normalizedText)) return 'packing-auxiliary';
+      if (/concrete|cement mixer|混凝土/.test(normalizedText)) return 'concrete-mixers';
       return 'other';
     }
 
@@ -521,9 +558,15 @@
       content.appendChild(specs);
       const description = document.createElement('div');
       description.className = 'prose mb-6 max-w-none text-sm text-slate-700';
-      if (window.marked && typeof window.marked.parse === 'function') {
-        description.innerHTML = window.marked.parse(String(body || ''));
+      if (window.marked && typeof window.marked.parse === 'function' && window.DOMPurify) {
+        const renderedMarkdown = window.marked.parse(String(body || ''));
+        description.innerHTML = window.DOMPurify.sanitize(renderedMarkdown, {
+          USE_PROFILES: { html: true },
+          FORBID_TAGS: ['style', 'iframe', 'object', 'embed'],
+          FORBID_ATTR: ['style']
+        });
       } else {
+        // Never inject unsanitized Markdown HTML if a CDN dependency is unavailable.
         description.textContent = String(body || '');
       }
       content.appendChild(description);
