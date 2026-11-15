@@ -354,6 +354,11 @@
         if (response.ok) {
           const runtime = await response.json();
           if (runtime.branch && /^[A-Za-z0-9._/-]+$/.test(runtime.branch)) REPO_BRANCH = runtime.branch;
+          if (runtime.environment !== 'production' || runtime.branch !== 'main') {
+            let robots = document.querySelector('meta[name="robots"]');
+            if (!robots) { robots = document.createElement('meta'); robots.name = 'robots'; document.head.appendChild(robots); }
+            robots.content = 'noindex, nofollow';
+          }
           if (!storedLanguage) {
             try { storedLanguage = localStorage.getItem('aizgz_language') || ''; } catch (_) {}
             if (!storedLanguage) {
