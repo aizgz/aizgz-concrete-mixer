@@ -510,13 +510,13 @@
         loaded.filter((result) => result.status === 'rejected').forEach((result) => console.error('Product failed to load:', result.reason));
         renderFilteredProducts();
         if (!allProducts.length) {
-          grid.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500">No products are available right now. Please contact us for assistance.</div>';
-          count.textContent = '0 Products';
+          grid.textContent = currentTexts().empty_products;
+          count.textContent = '0 ' + currentTexts().count_products;
         }
       } catch (error) {
         console.error('Failed to load products:', error);
-        grid.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500">The product catalog is temporarily unavailable. Please contact us for assistance.</div>';
-        count.textContent = 'Catalog unavailable';
+        grid.textContent = currentTexts().catalog_error;
+        count.textContent = currentTexts().catalog_unavailable;
       } finally {
         grid.setAttribute('aria-busy', 'false');
       }
@@ -533,14 +533,12 @@
       if (!filtered.length) {
         const empty = document.createElement('div');
         empty.className = 'col-span-full py-12 text-center text-slate-500';
-        empty.textContent = activeProductCategory === 'all'
-          ? 'No products are available right now. Please contact us for assistance.'
-          : 'No products are currently listed in this category. Please contact us for availability.';
+        empty.textContent = activeProductCategory === 'all' ? currentTexts().empty_products : currentTexts().empty_category;
         grid.appendChild(empty);
       } else {
         filtered.forEach((product) => renderProductCard(product.meta, product.body));
       }
-      count.textContent = `${filtered.length} ${filtered.length === 1 ? 'Product' : 'Products'}`;
+      count.textContent = filtered.length + ' ' + (filtered.length === 1 ? currentTexts().count_product : currentTexts().count_products);
     }
 
     function createImage(src, alt, className) {
@@ -578,14 +576,14 @@
       if (meta.model) {
         const model = document.createElement('p');
         model.className = 'mt-1 font-mono text-xs text-slate-400';
-        model.textContent = `Model: ${meta.model}`;
+        model.textContent = currentTexts().label_model + ': ' + meta.model;
         content.appendChild(model);
       }
       if (meta.capacity) {
         const capacity = document.createElement('p');
         capacity.className = 'mt-2 text-sm text-slate-600';
         const label = document.createElement('strong');
-        label.textContent = 'Capacity: ';
+        label.textContent = currentTexts().label_capacity + ': ';
         capacity.append(label, document.createTextNode(meta.capacity));
         content.appendChild(capacity);
       }
@@ -593,7 +591,7 @@
         const internalCapacity = document.createElement('p');
         internalCapacity.className = 'mt-2 text-sm text-slate-600';
         const label = document.createElement('strong');
-        label.textContent = 'Internal Capacity: ';
+        label.textContent = currentTexts().label_internal_capacity + ': ';
         internalCapacity.append(label, document.createTextNode(meta.internal_capacity));
         content.appendChild(internalCapacity);
       }
@@ -604,12 +602,12 @@
       const details = document.createElement('button');
       details.type = 'button';
       details.className = 'rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900';
-      details.textContent = 'Details';
+      details.textContent = currentTexts().btn_details;
       details.addEventListener('click', () => openModal(meta, body));
       const inquiry = document.createElement('a');
       inquiry.href = '#contact';
       inquiry.className = 'rounded bg-amber-500 px-4 py-2 text-xs font-bold text-slate-900 hover:bg-amber-600';
-      inquiry.textContent = 'Inquire Now →';
+      inquiry.textContent = currentTexts().btn_inquire + ' →';
       inquiry.addEventListener('click', () => fillInquiryModel(meta.title || meta.model || 'Product Inquiry'));
       actions.append(details, inquiry);
       card.appendChild(actions);
@@ -640,7 +638,7 @@
       if (meta.model) {
         const model = document.createElement('p');
         model.className = 'mb-4 font-mono text-sm text-amber-600';
-        model.textContent = `Model: ${meta.model}`;
+        model.textContent = currentTexts().label_model + ': ' + meta.model;
         content.appendChild(model);
       }
       const specs = document.createElement('div');
@@ -671,7 +669,7 @@
       const link = document.createElement('a');
       link.href = '#contact';
       link.className = 'block w-full rounded-lg bg-amber-500 py-3 text-center font-bold text-slate-900 hover:bg-amber-600';
-      link.textContent = 'Inquire About This Product';
+      link.textContent = currentTexts().btn_inquire_product;
       link.addEventListener('click', () => {
         fillInquiryModel(meta.title || meta.model || 'Product Inquiry');
         closeModal();
@@ -784,12 +782,12 @@
       const button = document.getElementById('submit-btn');
       if (!globalSettings.formspree_id) {
         status.className = 'text-center text-sm text-amber-300';
-        status.textContent = 'The inquiry form is not configured yet. Please contact us via WhatsApp or configure Formspree in CMS Site Settings.';
+        status.textContent = currentTexts().not_configured;
         status.classList.remove('hidden');
         return;
       }
       button.disabled = true;
-      button.textContent = 'Sending…';
+      button.textContent = currentTexts().sending;
       status.classList.add('hidden');
       try {
         const response = await fetch(`https://formspree.io/f/${encodeURIComponent(globalSettings.formspree_id)}`, {
@@ -799,13 +797,13 @@
         });
         if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
         status.className = 'text-center text-sm font-bold text-emerald-400';
-        status.textContent = 'Thank you. Your inquiry has been sent successfully.';
+        status.textContent = currentTexts().sent;
         status.classList.remove('hidden');
         form.reset();
       } catch (error) {
         console.error(error);
         status.className = 'text-center text-sm font-bold text-rose-400';
-        status.textContent = 'Your inquiry could not be sent. Please try again or contact us via WhatsApp.';
+        status.textContent = currentTexts().send_error;
         status.classList.remove('hidden');
       } finally {
         button.disabled = false;
