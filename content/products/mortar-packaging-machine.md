@@ -1,5 +1,6 @@
 ---
-title: Dry-Mortar Packaging Machinecategory: Packing & Auxiliary Equipment
+title: Dry-Mortar Packaging Machine
+category: Packing & Auxiliary Equipment
 supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/6.jpeg
