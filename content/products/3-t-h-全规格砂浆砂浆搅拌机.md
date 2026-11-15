@@ -1,5 +1,6 @@
 ---
-title: Twin-Shaft Paddle Mixer for Dry-Mix Mortar Productioncategory: Dry Mix Mortar Plant
+title: Twin-Shaft Paddle Mixer for Dry-Mix Mortar Production
+category: Dry Mix Mortar Plant
 supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/无标题1.jpeg
