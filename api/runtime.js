@@ -5,10 +5,12 @@ export default function handler(req, res) {
   }
   const country = String(req.headers['x-vercel-ip-country'] || '').toUpperCase();
   const branch = String(process.env.VERCEL_GIT_COMMIT_REF || 'main');
+  const environment = String(process.env.VERCEL_ENV || 'unknown');
   res.setHeader('Cache-Control', 'no-store, max-age=0');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   return res.status(200).json({
     country: /^[A-Z]{2}$/.test(country) ? country : '',
-    branch: /^[A-Za-z0-9._/-]+$/.test(branch) ? branch : 'main'
+    branch: /^[A-Za-z0-9._/-]+$/.test(branch) ? branch : 'main',
+    environment: ['production', 'preview', 'development'].includes(environment) ? environment : 'unknown'
   });
 }
