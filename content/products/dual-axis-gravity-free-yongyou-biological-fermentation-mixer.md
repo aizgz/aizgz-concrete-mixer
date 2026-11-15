@@ -1,6 +1,5 @@
 ---
-title: Dual axis gravity free Yongyou biological fermentation mixer
-category: Mixing & Blending Equipment
+title: Dual-Shaft Gravity-Free Mixer for Powder and Feed Materialscategory: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/7.jpeg
