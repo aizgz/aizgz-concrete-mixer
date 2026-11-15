@@ -1,6 +1,7 @@
 ---
 title: Powder mixer, screw conveyor, powder feeder
-category: Dry Mix Mortar Plant
+category: Mixing & Blending Equipment
+supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/8.jpeg
 ---
