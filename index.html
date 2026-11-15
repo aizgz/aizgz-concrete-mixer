@@ -619,6 +619,16 @@
       if (input && title) input.value = title;
     }
 
+    const specLabelTranslations = {
+      es: {'Voltage':'Voltaje','Frequency':'Frecuencia','Motor Power':'Potencia del motor','Packaging Range':'Rango de envasado','Mixing Volume':'Volumen de mezcla','Mixing Time':'Tiempo de mezcla','Application':'Aplicación','Optional Components':'Componentes opcionales','Supply Status':'Estado de suministro','Manufacturer':'Fabricante','Supply Relationship':'Relación de suministro','Power Type':'Tipo de alimentación'},
+      ar: {'Voltage':'الجهد الكهربائي','Frequency':'التردد','Motor Power':'قدرة المحرك','Packaging Range':'نطاق التعبئة','Mixing Volume':'حجم الخلط','Mixing Time':'وقت الخلط','Application':'الاستخدام','Optional Components':'المكونات الاختيارية','Supply Status':'حالة التوريد','Manufacturer':'الشركة المصنعة','Supply Relationship':'علاقة التوريد','Power Type':'نوع الطاقة'},
+      ru: {'Voltage':'Напряжение','Frequency':'Частота','Motor Power':'Мощность двигателя','Packaging Range':'Диапазон фасовки','Mixing Volume':'Объём смешивания','Mixing Time':'Время смешивания','Application':'Применение','Optional Components':'Дополнительные компоненты','Supply Status':'Статус поставки','Manufacturer':'Производитель','Supply Relationship':'Тип поставки','Power Type':'Тип привода'}
+    };
+    function translateSpecLabel(label) {
+      const language = document.documentElement.lang || 'en';
+      return (specLabelTranslations[language] && specLabelTranslations[language][label]) || label;
+    }
+
     function openModal(meta, body) {
       const content = document.getElementById('modal-content');
       content.replaceChildren();
@@ -647,7 +657,7 @@
         if (!value) return;
         const item = document.createElement('div');
         const strong = document.createElement('strong');
-        strong.textContent = `${label}: `;
+        strong.textContent = translateSpecLabel(label) + ': ';
         item.append(strong, document.createTextNode(String(value)));
         specs.appendChild(item);
       });
@@ -689,14 +699,18 @@
     function openPolicy(type) {
       const policy = policiesContent[type];
       if (!policy) return;
-      setText('policy-title', policy.title);
-      document.getElementById('policy-body').innerHTML = policy.body;
+      currentPolicyType = type;
+      const titleKeys = { privacy:'privacy_policy', shipping:'shipping_policy', warranty:'warranty_policy', terms:'terms_policy', cookies:'cookie_policy', returns:'returns_title' };
+      setText('policy-title', currentTexts()[titleKeys[type]] || policy.title);
+      const languageNotice = document.documentElement.lang === 'en' ? '' : '<p class="rounded bg-slate-50 p-3 text-xs text-slate-500">' + currentTexts().policy_english + '</p>';
+      document.getElementById('policy-body').innerHTML = policy.body + languageNotice;
       const modal = document.getElementById('policy-modal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
     }
 
     function closePolicyModal() {
+      currentPolicyType = null;
       const modal = document.getElementById('policy-modal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
