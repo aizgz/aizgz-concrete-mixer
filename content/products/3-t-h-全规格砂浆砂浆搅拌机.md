@@ -2,7 +2,6 @@
 title: Twin-Shaft Paddle Mixer for Dry-Mix Mortar Production
 category: Dry Mix Mortar Plant
 supply_status: Available for Supply
-power_type: Electric Engine
 image: /uploads/无标题1.jpeg
 summary: The twin-shaft paddle weightless mixer is primarily used for
   high-homogeneity dry-mix mortars—such as anti-crack mortar, thermal insulation
