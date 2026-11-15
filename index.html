@@ -609,12 +609,6 @@
       const imageWrap = document.createElement('div');
       imageWrap.className = 'relative h-48 overflow-hidden bg-slate-100';
       imageWrap.appendChild(createImage(meta.image, meta.title || 'Industrial equipment', 'h-full w-full object-cover'));
-      if (meta.power_type) {
-        const badge = document.createElement('span');
-        badge.className = 'absolute right-3 top-3 rounded bg-amber-500 px-2.5 py-1 text-xs font-bold text-slate-900 shadow';
-        badge.textContent = meta.power_type;
-        imageWrap.appendChild(badge);
-      }
       upper.appendChild(imageWrap);
       const content = document.createElement('div');
       content.className = 'p-6';
@@ -703,7 +697,7 @@
       }
       const specs = document.createElement('div');
       specs.className = 'mb-6 grid grid-cols-1 gap-3 rounded-lg bg-slate-50 p-4 text-sm sm:grid-cols-2';
-      [[currentTexts().label_capacity, meta.capacity], [currentTexts().label_internal_capacity, meta.internal_capacity], ['Voltage', meta.voltage], ['Frequency', meta.frequency], ['Motor Power', meta.motor_power], ['Packaging Range', meta.packaging_range], ['Mixing Volume', meta.mixing_volume], ['Mixing Time', meta.mixing_time], ['Application', meta.application], ['Optional Components', meta.optional_components], ['Supply Status', meta.supply_status], ['Manufacturer', meta.manufacturer], ['Supply Relationship', meta.supply_relationship], ['Power Type', meta.power_type], [currentTexts().label_category, getProductCategory(meta)]].forEach(([label, value]) => {
+      [[currentTexts().label_capacity, meta.capacity], [currentTexts().label_internal_capacity, meta.internal_capacity], ['Voltage', meta.voltage], ['Frequency', meta.frequency], ['Motor Power', meta.motor_power], ['Packaging Range', meta.packaging_range], ['Mixing Volume', meta.mixing_volume], ['Mixing Time', meta.mixing_time], ['Application', meta.application], ['Optional Components', meta.optional_components], ['Supply Status', meta.supply_status], ['Manufacturer', meta.manufacturer], ['Supply Relationship', meta.supply_relationship], [currentTexts().label_category, getProductCategory(meta)]].forEach(([label, value]) => {
         if (!isDisplayableCatalogValue(value)) return;
         const item = document.createElement('div');
         const strong = document.createElement('strong');
