@@ -41,6 +41,7 @@ collections:
     fields:
       - { label: "Product Title (产品英文名称)", name: "title", widget: "string" }
       - { label: "Model (型号)", name: "model", widget: "string", required: false }
+      - { label: "Internal Material Capacity (设备内部物料容量)", name: "internal_capacity", widget: "string", required: false }
       # 👈 核心升级：新增设备分类下拉菜单，涵盖干粉砂浆及重型建机
       - { 
           label: "Category (设备大类)", 
