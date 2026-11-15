@@ -40,6 +40,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Product Title (产品英文名称)", name: "title", widget: "string" }
+      - { label: "Model (型号)", name: "model", widget: "string", required: false }
       # 👈 核心升级：新增设备分类下拉菜单，涵盖干粉砂浆及重型建机
       - { 
           label: "Category (设备大类)", 
@@ -55,7 +56,7 @@ collections:
             "Packing & Auxiliary Equipment"
           ] 
         }
-      - { label: "Model Code / Capacity (型号/产能，如 10-20 t/h 或 350L)", name: "capacity", widget: "string", required: false }
+      - { label: "Capacity / Throughput (产能，如 10-20 t/h 或 350L)", name: "capacity", widget: "string", required: false }
       - { 
           label: "Power / Control Type (动力/控制方式)", 
           name: "power_type", 
