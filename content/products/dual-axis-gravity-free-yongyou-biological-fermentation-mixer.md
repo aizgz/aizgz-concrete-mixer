@@ -1,6 +1,7 @@
 ---
 title: Dual axis gravity free Yongyou biological fermentation mixer
-category: Crushing & Screening Plant
+category: Mixing & Blending Equipment
+supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/7.jpeg
 ---
