@@ -1,6 +1,5 @@
 ---
-title: Production line fertilizer granule mixer fully automatic
-category: Mixing & Blending Equipment
+title: Automatic Fertilizer Granule Mixercategory: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/9.jpeg
