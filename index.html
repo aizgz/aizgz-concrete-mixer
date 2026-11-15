@@ -170,7 +170,7 @@
         <button type="button" onclick="openPolicy('shipping')" class="hover:text-amber-400" data-i18n="shipping_policy">Shipping Information</button>
         <button type="button" onclick="openPolicy('warranty')" class="hover:text-amber-400" data-i18n="warranty_policy">Warranty Information</button>
         <button type="button" onclick="openPolicy('terms')" class="hover:text-amber-400" data-i18n="terms_policy">Terms of Service</button>
-        <button type="button" onclick="openPolicy('cookies')" class="hover:text-amber-400">Cookie Notice</button>
+        <button type="button" onclick="openPolicy('cookies')" class="hover:text-amber-400" data-i18n="cookie_policy">Cookie Notice</button>
         <button type="button" onclick="openCookieSettings()" class="hover:text-amber-400" data-i18n="cookie_settings">Cookie Settings</button>
         <button type="button" onclick="openPolicy('returns')" class="hover:text-amber-400" data-i18n="returns_policy">Returns & Refunds</button>
       </div>
@@ -326,6 +326,7 @@
       document.getElementById('cookie-banner')?.classList.add('hidden');
       if (accepted) {
         if (globalSettings.ga_id) window['ga-disable-' + globalSettings.ga_id] = false;
+        if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'granted' });
         loadAnalytics();
       } else if (globalSettings.ga_id) {
         window['ga-disable-' + globalSettings.ga_id] = true;
@@ -393,6 +394,11 @@
         if (selector) selector.value = language;
       });
       if (persist) { try { localStorage.setItem('aizgz_language', language); } catch (_) {} }
+      if (language === 'en' && globalSettings.hero_title) {
+        setText('hero-title', globalSettings.hero_title);
+        setText('hero-subtitle', globalSettings.hero_subtitle);
+        setText('about-text', globalSettings.about_text);
+      }
       if (allProducts.length) renderFilteredProducts();
       if (currentProductModal) openModal(currentProductModal.meta, currentProductModal.body);
       if (currentPolicyType) openPolicy(currentPolicyType);
