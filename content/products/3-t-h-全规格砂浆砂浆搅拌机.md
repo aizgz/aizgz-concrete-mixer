@@ -1,10 +1,8 @@
 ---
 title: Gypsum Putty Powder Simple Mixing Machine Production Line Dry Mortar
   Mixer Dual-Axis Gravity-Free Automatic Mixing Station
-model: 全规格
 category: Dry Mix Mortar Plant
 supply_status: Available for Supply
-capacity: Customizable
 power_type: Electric Engine
 image: /uploads/无标题1.jpeg
 summary: The twin-shaft paddle weightless mixer is primarily used for
