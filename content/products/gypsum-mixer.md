@@ -1,6 +1,7 @@
 ---
 title: Gypsum mixer
-category: Dry Mix Mortar Plant
+category: Mixing & Blending Equipment
+supply_status: Available for Supply
 capacity: Customized model, lightweight gypsum mixer
 power_type: Electric Engine
 image: /uploads/10.jpeg
