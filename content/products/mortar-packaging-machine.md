@@ -1,7 +1,7 @@
 ---
 title: Mortar packaging machine
 category: Dry Mix Mortar Plant
-capacity: " DN"
+supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/6.jpeg
 summary: ""
