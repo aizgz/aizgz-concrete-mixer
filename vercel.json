@@ -5,5 +5,10 @@
       "source": "/admin",
       "destination": "/admin/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/content.js": {
+      "includeFiles": "content/**"
+    }
+  }
 }
