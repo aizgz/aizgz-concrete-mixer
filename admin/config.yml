@@ -22,15 +22,15 @@ collections:
         fields:
           - { label: "Brand Name (品牌名称)", name: "brand_name", widget: "string", default: "AIZGZ" }
           - { label: "Brand Tagline (品牌标语)", name: "brand_tagline", widget: "string", default: "HEAVY MACHINERY" }
-          - { label: "WhatsApp Number (带国家代码, 如 8613800138000)", name: "whatsapp_number", widget: "string", default: "8612345678900" }
-          - { label: "Contact Email (联系邮箱)", name: "contact_email", widget: "string", default: "sales@aizgz.com" }
+          - { label: "WhatsApp Number (带国家代码, 如 8613800138000)", name: "whatsapp_number", widget: "string", default: "8615037113544" }
+          - { label: "Contact Email (联系邮箱)", name: "contact_email", widget: "string", default: "aimr@qq.com" }
           - { label: "Formspree Form ID (询盘表单ID)", name: "formspree_id", widget: "string", default: "" }
           - { label: "Google Analytics ID (谷歌统计ID)", name: "ga_id", widget: "string", default: "" }
-          - { label: "YouTube Channel / Video URL (YouTube主页)", name: "youtube_url", widget: "string", default: "https://www.youtube.com" }
-          - { label: "TikTok Profile URL (TikTok主页)", name: "tiktok_url", widget: "string", default: "https://www.tiktok.com" }
-          - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Global Supplier of Heavy Machinery & Dry Mortar Equipment" }
-          - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "Factory direct supply of dry mix mortar plants, tile adhesive lines, concrete equipment, and industrial machinery for international projects." }
-          - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "AIZGZ Machinery specializes in manufacturing and exporting high-performance construction machinery, dry mortar production lines, and industrial mixing equipment worldwide." }
+          - { label: "YouTube Channel / Video URL (YouTube主页)", name: "youtube_url", widget: "string", default: "" }
+          - { label: "TikTok Profile URL (TikTok主页)", name: "tiktok_url", widget: "string", default: "" }
+          - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Industrial Equipment for Construction & Material Handling" }
+          - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "AIZGZ Machinery connects international buyers with equipment suppliers and helps review specifications, availability, quotations, and shipping requirements." }
+          - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "AIZGZ Machinery connects international buyers with equipment suppliers for construction, dry-mix materials, mixing, packaging, and material handling." }
 
   # 2. 产品管理（广泛/通用型设备）
   - name: "products"
@@ -48,7 +48,8 @@ collections:
           name: "category", 
           widget: "select", 
           options: [
-            "Dry Mix Mortar Plant", 
+            "Dry Mix Mortar Plant",
+            "Mixing & Blending Equipment", 
             "Tile Adhesive Production Line", 
             "Wall Putty Making Machine", 
             "Concrete Equipment", 
