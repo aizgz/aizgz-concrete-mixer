@@ -1,5 +1,6 @@
 ---
-title: Automatic Fertilizer Granule Mixercategory: Mixing & Blending Equipment
+title: Automatic Fertilizer Granule Mixer
+category: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/9.jpeg
