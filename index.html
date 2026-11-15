@@ -7,6 +7,7 @@
   <meta name="description" content="AIZGZ Machinery supplies concrete mixers, bagged material palletizers, and mortar equipment from China. Contact us for product specifications, customization, and shipping inquiries.">
   <link rel="canonical" href="https://aizgz.vercel.app/">
   <meta name="theme-color" content="#0f172a">
+  <style>html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .text-left{text-align:right}html[dir="rtl"] .text-right{text-align:left}html[dir="rtl"] #whatsapp-link{right:auto;left:1.5rem}html[dir="rtl"] #policy-modal button.absolute,html[dir="rtl"] #product-modal button.absolute{right:auto;left:1rem}</style>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
@@ -20,6 +21,7 @@
         <span id="brand-name" class="text-2xl font-bold tracking-wide text-amber-500">AIZGZ</span>
         <span id="brand-tagline" class="rounded bg-amber-500 px-2 py-0.5 text-xs font-semibold text-slate-900">MACHINERY</span>
       </a>
+      <select id="lang-switcher-mobile" onchange="changeLanguage(this.value)" class="md:hidden rounded border border-slate-700 bg-slate-800 px-2 py-1 text-xs font-bold text-amber-400" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ar">العربية</option><option value="ru">Русский</option></select>
       <nav class="hidden items-center gap-5 text-sm font-medium md:flex">
         <a href="#products" class="hover:text-amber-400" data-i18n="nav_products">Products</a>
         <a href="#videos" class="hover:text-amber-400" data-i18n="nav_videos">Videos</a>
@@ -38,8 +40,8 @@
     <section class="border-b-4 border-amber-500 bg-slate-800 px-4 py-20 text-white">
       <div class="mx-auto max-w-5xl text-center">
         <p class="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-amber-400">AIZGZ Machinery</p>
-        <h1 id="hero-title" class="mb-5 text-4xl font-extrabold leading-tight md:text-6xl">Industrial Equipment for Construction & Material Handling</h1>
-        <p id="hero-subtitle" class="mx-auto mb-8 max-w-3xl text-lg text-slate-300 md:text-xl">Explore concrete mixers, bag palletizing machines, and mortar equipment. Contact us for product specifications, availability, and quotations.</p>
+        <h1 id="hero-title" data-i18n="hero_title" class="mb-5 text-4xl font-extrabold leading-tight md:text-6xl">Industrial Equipment for Construction & Material Handling</h1>
+        <p id="hero-subtitle" data-i18n="hero_subtitle" class="mx-auto mb-8 max-w-3xl text-lg text-slate-300 md:text-xl">Explore concrete mixers, bag palletizing machines, and mortar equipment. Contact us for product specifications, availability, and quotations.</p>
         <div class="flex flex-wrap justify-center gap-4">
           <a href="#products" class="rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 shadow-lg hover:bg-amber-600" data-i18n="btn_browse">Browse Products</a>
           <a href="#contact" onclick="fillInquiryModel('Product Catalog Request')" class="rounded-lg bg-slate-700 px-6 py-3 font-bold text-white shadow-lg hover:bg-slate-600" data-i18n="btn_catalog">Request Product Catalog</a>
@@ -56,13 +58,13 @@
         <span id="product-count" class="text-sm font-semibold text-slate-500" aria-live="polite">Loading products…</span>
       </div>
       <div id="product-filters" class="mb-8 flex flex-wrap gap-3">
-        <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white">All Equipment</button>
-        <button type="button" data-category="concrete-mixers" onclick="filterProducts('concrete-mixers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Concrete Equipment</button>
-        <button type="button" data-category="mortar-equipment" onclick="filterProducts('mortar-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Dry Mix & Mortar</button>
-        <button type="button" data-category="palletizers" onclick="filterProducts('palletizers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Bag Palletizing</button>
-        <button type="button" data-category="block-brick" onclick="filterProducts('block-brick')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Block & Brick</button>
-        <button type="button" data-category="crushing-screening" onclick="filterProducts('crushing-screening')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Crushing & Screening</button>
-        <button type="button" data-category="packing-auxiliary" onclick="filterProducts('packing-auxiliary')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Packing & Auxiliary</button>
+        <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white" data-i18n="filter_all">All Equipment</button>
+        <button type="button" data-category="concrete-mixers" onclick="filterProducts('concrete-mixers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_concrete">Concrete Equipment</button>
+        <button type="button" data-category="mortar-equipment" onclick="filterProducts('mortar-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_mortar">Dry Mix & Mortar</button>
+        <button type="button" data-category="palletizers" onclick="filterProducts('palletizers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_pallet">Bag Palletizing</button>
+        <button type="button" data-category="block-brick" onclick="filterProducts('block-brick')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_block">Block & Brick</button>
+        <button type="button" data-category="crushing-screening" onclick="filterProducts('crushing-screening')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_crushing">Crushing & Screening</button>
+        <button type="button" data-category="packing-auxiliary" onclick="filterProducts('packing-auxiliary')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_packing">Packing & Auxiliary</button>
       </div>
       <div id="product-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <div class="animate-pulse rounded-xl bg-white p-6 shadow"><div class="mb-4 h-48 rounded-lg bg-slate-200"></div><div class="mb-2 h-6 w-3/4 rounded bg-slate-200"></div></div>
@@ -103,7 +105,7 @@
     </section>
 
     <section id="about" class="bg-white px-4 py-16">
-      <div class="mx-auto max-w-4xl text-center"><h2 class="mb-4 text-3xl font-bold text-slate-900" data-i18n="about_title">About AIZGZ Machinery</h2><p id="about-text" class="text-sm leading-relaxed text-slate-600 md:text-base">We help international buyers explore industrial equipment, review product information, and request quotations for their project requirements.</p></div>
+      <div class="mx-auto max-w-4xl text-center"><h2 class="mb-4 text-3xl font-bold text-slate-900" data-i18n="about_title">About AIZGZ Machinery</h2><p id="about-text" data-i18n="about_text" class="text-sm leading-relaxed text-slate-600 md:text-base">We help international buyers explore industrial equipment, review product information, and request quotations for their project requirements.</p></div>
     </section>
 
     <section id="faq" class="border-t border-slate-200 bg-slate-50 px-4 py-16">
@@ -112,7 +114,7 @@
         <div class="space-y-4">
           <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800" data-i18n="faq1_q">What is the minimum order quantity?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500" data-i18n="faq1_a">Minimum order quantity depends on the product. Please contact us with the model and quantity you need.</p></details>
           <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800" data-i18n="faq2_q">What is the lead time?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500" data-i18n="faq2_a">Lead time depends on the model, configuration, availability, and order quantity. We will confirm it in the quotation.</p></details>
-          <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800">Can you arrange international shipping?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500">Shipping options and costs depend on the equipment, destination, packing requirements, and current freight rates. Please provide your destination port or address.</p></details>
+          <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800" data-i18n="faq3_q">Can you arrange international shipping?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500" data-i18n="faq3_a">Shipping options and costs depend on the equipment, destination, packing requirements, and current freight rates. Please provide your destination port or address.</p></details>
         </div>
       </div>
     </section>
@@ -122,14 +124,14 @@
         <div class="mb-10 text-center"><h2 class="mb-2 text-3xl font-bold text-amber-500" data-i18n="contact_title">Product Inquiry & Contact</h2><p class="text-sm text-slate-300" data-i18n="contact_sub">Share your requirements so we can help confirm suitable equipment and quotation details.</p></div>
         <form id="inquiry-form" class="space-y-6 rounded-xl bg-slate-800 p-8 shadow-xl" onsubmit="submitFormspree(event)">
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div><label for="inquiry-name" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_name">Your Name *</label><input id="inquiry-name" type="text" name="name" required autocomplete="name" placeholder="Your name" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
-            <div><label for="inquiry-email" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_email">Your Email *</label><input id="inquiry-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-name" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_name">Your Name *</label><input id="inquiry-name" type="text" name="name" required autocomplete="name" placeholder="Your name" data-i18n-placeholder="placeholder_name" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-email" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_email">Your Email *</label><input id="inquiry-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com" data-i18n-placeholder="placeholder_email" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
           </div>
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div><label for="inquiry-phone" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_phone">Phone / WhatsApp</label><input id="inquiry-phone" type="text" name="phone" autocomplete="tel" placeholder="+ country code" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
-            <div><label for="inquiry-model" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_model">Interested Product / Model</label><input id="inquiry-model" type="text" name="product_model" placeholder="Product name or model" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-phone" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_phone">Phone / WhatsApp</label><input id="inquiry-phone" type="text" name="phone" autocomplete="tel" placeholder="+ country code" data-i18n-placeholder="placeholder_phone" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-model" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_model">Interested Product / Model</label><input id="inquiry-model" type="text" name="product_model" placeholder="Product name or model" data-i18n-placeholder="placeholder_model" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
           </div>
-          <div><label for="inquiry-message" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_msg">Message / Requirements *</label><textarea id="inquiry-message" name="message" rows="4" required placeholder="Product, quantity, application, destination, power requirements…" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea></div>
+          <div><label for="inquiry-message" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_msg">Message / Requirements *</label><textarea id="inquiry-message" name="message" rows="4" required placeholder="Product, quantity, application, destination, power requirements…" data-i18n-placeholder="placeholder_message" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea></div>
           <button type="submit" id="submit-btn" class="w-full rounded-lg bg-amber-500 py-4 text-lg font-bold text-slate-900 shadow-lg transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60" data-i18n="form_submit">Send Inquiry</button>
           <p id="form-status" class="hidden text-center text-sm" role="status" aria-live="polite"></p>
           <p class="text-center text-xs text-slate-400">Please do not include passwords, payment card details, or other sensitive information.</p>
@@ -156,6 +158,8 @@
     <i class="fa-brands fa-whatsapp text-3xl"></i><span class="hidden font-bold text-sm sm:inline">Chat on WhatsApp</span>
   </a>
 
+  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[60] hidden border-t border-slate-300 bg-white p-4 text-slate-800 shadow-2xl" role="dialog" aria-live="polite" aria-label="Cookie preferences"><div class="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-center md:justify-between"><p class="text-sm" data-i18n="cookie_message">We use optional Google Analytics to understand site usage. You can accept or reject analytics cookies.</p><div class="flex flex-wrap gap-2"><button type="button" onclick="saveAnalyticsConsent(true)" class="rounded bg-amber-500 px-4 py-2 text-sm font-bold text-slate-900" data-i18n="cookie_accept">Accept analytics</button><button type="button" onclick="saveAnalyticsConsent(false)" class="rounded border border-slate-300 px-4 py-2 text-sm font-semibold" data-i18n="cookie_reject">Reject analytics</button><button type="button" onclick="openPolicy('cookies')" class="px-3 py-2 text-sm underline" data-i18n="cookie_learn">Learn more</button></div></div></div>
+
   <footer class="border-t border-slate-800 bg-slate-950 px-4 py-10 text-center text-slate-400">
     <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 md:flex-row">
       <p id="footer-copyright" class="text-sm">© 2026 AIZGZ Machinery. All rights reserved.</p>
@@ -164,6 +168,9 @@
         <button type="button" onclick="openPolicy('shipping')" class="hover:text-amber-400">Shipping Information</button>
         <button type="button" onclick="openPolicy('warranty')" class="hover:text-amber-400">Warranty Information</button>
         <button type="button" onclick="openPolicy('terms')" class="hover:text-amber-400">Terms of Service</button>
+        <button type="button" onclick="openPolicy('cookies')" class="hover:text-amber-400">Cookie Notice</button>
+        <button type="button" onclick="openCookieSettings()" class="hover:text-amber-400" data-i18n="cookie_settings">Cookie Settings</button>
+        <button type="button" onclick="openPolicy('returns')" class="hover:text-amber-400" data-i18n="returns_policy">Returns & Refunds</button>
       </div>
     </div>
   </footer>
