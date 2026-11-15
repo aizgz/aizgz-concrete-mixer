@@ -1,6 +1,5 @@
 ---
-title: Powder mixer, screw conveyor, powder feeder
-category: Mixing & Blending Equipment
+title: Powder Mixer, Screw Conveyor and Feedercategory: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/8.jpeg
