@@ -19,7 +19,7 @@
         const response = await fetch('/api/runtime', { cache: 'no-store' });
         if (!response.ok) throw new Error('Runtime environment unavailable');
         const runtime = await response.json();
-        if (runtime.branch !== 'main') {
+        if (runtime.environment !== 'production' || runtime.branch !== 'main') {
           status.textContent = 'The content manager is disabled on Preview deployments to protect the production content branch. Use the production website content manager after release.';
           return;
         }
