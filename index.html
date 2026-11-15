@@ -78,8 +78,8 @@
         <div class="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-center">
           <div><h2 class="mb-2 text-3xl font-bold text-amber-500" data-i18n="video_title">Equipment Video Showroom</h2><p class="text-sm text-slate-400" data-i18n="video_sub">Product demonstrations, equipment details, and production highlights.</p></div>
           <div class="flex flex-wrap gap-3">
-            <a id="youtube-btn" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-bold hover:bg-red-700"><i class="fa-brands fa-youtube text-lg"></i><span data-i18n="youtube_channel">YouTube Channel</span></a>
-            <a id="tiktok-btn" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><i class="fa-brands fa-tiktok text-lg"></i><span data-i18n="tiktok_profile">TikTok Profile</span></a>
+            <a id="youtube-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-bold hover:bg-red-700"><i class="fa-brands fa-youtube text-lg"></i><span data-i18n="youtube_channel">YouTube Channel</span></a>
+            <a id="tiktok-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><i class="fa-brands fa-tiktok text-lg"></i><span data-i18n="tiktok_profile">TikTok Profile</span></a>
           </div>
         </div>
         <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-8 text-center text-slate-500" data-i18n="video_empty">Videos will be added when available.</div></div>
@@ -435,8 +435,12 @@
             link.href = `https://wa.me/${number}?text=${encodeURIComponent('Hello, I am interested in your industrial equipment.')}`;
           }
         }
-        if (isSafeHttpUrl(globalSettings.youtube_url)) document.getElementById('youtube-btn').href = globalSettings.youtube_url;
-        if (isSafeHttpUrl(globalSettings.tiktok_url)) document.getElementById('tiktok-btn').href = globalSettings.tiktok_url;
+        const youtubeButton = document.getElementById('youtube-btn');
+        const tiktokButton = document.getElementById('tiktok-btn');
+        if (isSafeHttpUrl(globalSettings.youtube_url)) { youtubeButton.href = globalSettings.youtube_url; youtubeButton.hidden = false; }
+        else youtubeButton.hidden = true;
+        if (isSafeHttpUrl(globalSettings.tiktok_url)) { tiktokButton.href = globalSettings.tiktok_url; tiktokButton.hidden = false; }
+        else tiktokButton.hidden = true;
         if (activeAnalyticsConsent === true) loadAnalytics();
         if (globalSettings.company_display_name) setText('footer-copyright', `© ${new Date().getFullYear()} ${globalSettings.company_display_name}. All rights reserved.`);
       } catch (error) {
@@ -759,7 +763,7 @@
         const payload = await response.json();
         const files = Array.isArray(payload.files) ? payload.files : [];
         const results = await Promise.allSettled(files.map(async (file) => parseFrontMatter(file.content || '').meta));
-        const items = results.filter((result) => result.status === 'fulfilled').map((result) => result.value);
+        const items = results.filter((result) => result.status === 'fulfilled').map((result) => result.value).filter((meta) => kind !== 'video' || (isSafeHttpUrl(meta.video_url) && !String(meta.video_url).includes('YOUR_VIDEO_ID')));
         grid.replaceChildren();
         if (!items.length) {
           const empty = document.createElement('div');
