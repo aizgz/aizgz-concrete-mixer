@@ -65,6 +65,7 @@
         <button type="button" data-category="block-brick" onclick="filterProducts('block-brick')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_block">Block & Brick</button>
         <button type="button" data-category="crushing-screening" onclick="filterProducts('crushing-screening')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_crushing">Crushing & Screening</button>
         <button type="button" data-category="packing-auxiliary" onclick="filterProducts('packing-auxiliary')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_packing">Packing & Auxiliary</button>
+        <button type="button" data-category="mixing-blending" onclick="filterProducts('mixing-blending')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_mixing">Mixing & Blending</button>
       </div>
       <p class="mb-5 text-xs text-slate-500" data-i18n="catalog_note">Product names and technical details are shown as supplied and may remain in English; interface controls are translated.</p>
       <div id="product-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -279,7 +280,7 @@
     Object.keys(extraTranslations).forEach((language) => Object.assign(i18nText[language], extraTranslations[language]));
     const supplementalTranslations = {"en":{"catalog_note":"Product names and technical details are shown as supplied and may remain in English; interface controls are translated.","form_security_note":"Please do not include passwords, payment card details, or other sensitive information.","contact_email_label":"Email","whatsapp_label":"Chat on WhatsApp","case_empty":"Project and shipping cases will be added when available.","video_empty":"Videos will be added when available.","case_error":"Project cases are temporarily unavailable.","video_error":"Videos are temporarily unavailable.","watch_on":"Watch on"},"es":{"catalog_note":"Los nombres de los productos y los datos técnicos se muestran según la información recibida y pueden permanecer en inglés; los controles de la interfaz están traducidos.","form_security_note":"No incluya contraseñas, datos de tarjetas de pago ni otra información sensible.","contact_email_label":"Correo electrónico","whatsapp_label":"Chatear por WhatsApp","case_empty":"Los proyectos y envíos se añadirán cuando estén disponibles.","video_empty":"Los vídeos se añadirán cuando estén disponibles.","case_error":"Los casos de proyectos no están disponibles temporalmente.","video_error":"Los vídeos no están disponibles temporalmente.","watch_on":"Ver en"},"ar":{"catalog_note":"تُعرض أسماء المنتجات والتفاصيل الفنية كما وردت وقد تبقى باللغة الإنجليزية؛ تمت ترجمة عناصر واجهة الموقع.","form_security_note":"يرجى عدم إدخال كلمات المرور أو بيانات بطاقات الدفع أو أي معلومات حساسة أخرى.","contact_email_label":"البريد الإلكتروني","whatsapp_label":"تواصل عبر واتساب","case_empty":"ستضاف المشاريع والشحنات عند توفرها.","video_empty":"ستضاف مقاطع الفيديو عند توفرها.","case_error":"حالات المشاريع غير متاحة مؤقتاً.","video_error":"مقاطع الفيديو غير متاحة مؤقتاً.","watch_on":"شاهد على"},"ru":{"catalog_note":"Названия товаров и технические данные отображаются в исходном виде и могут оставаться на английском языке; элементы интерфейса переведены.","form_security_note":"Не указывайте пароли, данные банковских карт и другую конфиденциальную информацию.","contact_email_label":"Электронная почта","whatsapp_label":"Написать в WhatsApp","case_empty":"Информация о проектах и отгрузках появится при наличии.","video_empty":"Видео будут добавлены по мере готовности.","case_error":"Информация о проектах временно недоступна.","video_error":"Видео временно недоступны.","watch_on":"Смотреть на"}};
     Object.keys(supplementalTranslations).forEach((language) => Object.assign(i18nText[language], supplementalTranslations[language]));
-    const finalUiTranslations = {"en":{"loading_products":"Loading products…","loading_gallery":"Loading gallery…","youtube_channel":"YouTube Channel","tiktok_profile":"TikTok Profile"},"es":{"loading_products":"Cargando productos…","loading_gallery":"Cargando galería…","youtube_channel":"Canal de YouTube","tiktok_profile":"Perfil de TikTok"},"ar":{"loading_products":"جارٍ تحميل المنتجات…","loading_gallery":"جارٍ تحميل المعرض…","youtube_channel":"قناة يوتيوب","tiktok_profile":"حساب تيك توك"},"ru":{"loading_products":"Загрузка товаров…","loading_gallery":"Загрузка галереи…","youtube_channel":"Канал YouTube","tiktok_profile":"Профиль TikTok"}};
+    const finalUiTranslations = {"en":{"loading_products":"Loading products…","loading_gallery":"Loading gallery…","youtube_channel":"YouTube Channel","tiktok_profile":"TikTok Profile","filter_mixing":"Mixing & Blending"},"es":{"loading_products":"Cargando productos…","loading_gallery":"Cargando galería…","youtube_channel":"Canal de YouTube","tiktok_profile":"Perfil de TikTok","filter_mixing":"Mezcla y agitación"},"ar":{"loading_products":"جارٍ تحميل المنتجات…","loading_gallery":"جارٍ تحميل المعرض…","youtube_channel":"قناة يوتيوب","tiktok_profile":"ملف TikTok","filter_mixing":"الخلط والمزج"},"ru":{"loading_products":"Загрузка товаров…","loading_gallery":"Загрузка галереи…","youtube_channel":"Канал YouTube","tiktok_profile":"Профиль TikTok","filter_mixing":"Смешивание и перемешивание"}};
     Object.keys(finalUiTranslations).forEach((language) => Object.assign(i18nText[language], finalUiTranslations[language]));
     function currentTexts() { return i18nText[document.documentElement.lang] || i18nText.en; }
 
@@ -411,10 +412,11 @@
 
     async function loadSiteData() {
       try {
-        const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/content/settings/general.json`;
+        const url = '/api/content?collection=settings';
         const response = await fetch(url);
         if (!response.ok) return;
-        globalSettings = await response.json();
+        const payload = await response.json();
+        globalSettings = payload.settings && typeof payload.settings === 'object' ? payload.settings : {};
         setText('brand-name', globalSettings.brand_name);
         setText('brand-tagline', globalSettings.brand_tagline);
         if (document.documentElement.lang === 'en') {
@@ -493,6 +495,7 @@
         'crushing & screening plant': 'crushing-screening',
         'crushing-screening': 'crushing-screening',
         'packing & auxiliary equipment': 'packing-auxiliary',
+        'mixing & blending equipment': 'mixing-blending',
         'packing-auxiliary': 'packing-auxiliary'
       };
       if (categoryAliases[explicit]) return categoryAliases[explicit];
@@ -523,14 +526,13 @@
       const count = document.getElementById('product-count');
       grid.setAttribute('aria-busy', 'true');
       try {
-        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/products?ref=${REPO_BRANCH}`);
-        if (!response.ok) throw new Error(`GitHub API HTTP ${response.status}`);
-        const files = await response.json();
-        const markdownFiles = files.filter((file) => file.type === 'file' && file.name.toLowerCase().endsWith('.md'));
+        const response = await fetch('/api/content?collection=products', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Product service HTTP ${response.status}`);
+        const payload = await response.json();
+        const markdownFiles = Array.isArray(payload.files) ? payload.files : [];
         const loaded = await Promise.allSettled(markdownFiles.map(async (file) => {
-          const res = await fetch(file.download_url);
-          if (!res.ok) throw new Error(`Could not fetch ${file.name}`);
-          const parsed = parseFrontMatter(await res.text());
+          const parsed = parseFrontMatter(file.content || '');
+          if (!parsed.meta || !parsed.meta.title) throw new Error(`Invalid product content: ${file.name}`);
           return { meta: parsed.meta, body: parsed.body, fileName: file.name };
         }));
         allProducts = loaded.filter((result) => result.status === 'fulfilled').map((result) => result.value);
@@ -752,14 +754,11 @@
     async function fetchContentCollection(collection, gridId, kind) {
       const grid = document.getElementById(gridId);
       try {
-        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/${collection}?ref=${REPO_BRANCH}`);
-        if (!response.ok) throw new Error(`GitHub API HTTP ${response.status}`);
-        const files = (await response.json()).filter((file) => file.type === 'file' && file.name.toLowerCase().endsWith('.md'));
-        const results = await Promise.allSettled(files.map(async (file) => {
-          const res = await fetch(file.download_url);
-          if (!res.ok) throw new Error(`Could not fetch ${file.name}`);
-          return parseFrontMatter(await res.text()).meta;
-        }));
+        const response = await fetch(`/api/content?collection=${encodeURIComponent(collection)}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Content service HTTP ${response.status}`);
+        const payload = await response.json();
+        const files = Array.isArray(payload.files) ? payload.files : [];
+        const results = await Promise.allSettled(files.map(async (file) => parseFrontMatter(file.content || '').meta));
         const items = results.filter((result) => result.status === 'fulfilled').map((result) => result.value);
         grid.replaceChildren();
         if (!items.length) {
