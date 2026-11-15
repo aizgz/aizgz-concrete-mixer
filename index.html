@@ -185,6 +185,8 @@
     let globalSettings = {};
     let allProducts = [];
     let activeProductCategory = 'all';
+    let activeAnalyticsConsent = null;
+    let currentPolicyType = null;
 
     const policiesContent = {
       privacy: { title:'Privacy Policy', body:'<p><strong>Website operator.</strong> AIZGZ Machinery is the trading name displayed on this website. The legal entity name and registered address must be confirmed and added before this policy is treated as final.</p><p><strong>Information collected.</strong> Inquiry submissions may include your name, email, phone or WhatsApp number, product/model of interest, and message. Hosting and security providers may process technical request information such as IP address, browser/device type, and access time. Do not submit passwords, payment-card details, identity numbers, or other sensitive information.</p><p><strong>Use of information.</strong> We use inquiry details to respond, prepare quotations, discuss equipment requirements, coordinate potential orders, provide support, and protect the website. Optional analytics is used only after consent where required.</p><p><strong>Service providers.</strong> Vercel provides hosting, Formspree processes inquiry forms, Google Analytics is used only after consent, and WhatsApp is used if you choose to contact us there. These providers may process data under their own terms. We do not sell personal information. Disclosures may occur where required by law or necessary to protect rights and services.</p><p><strong>International processing and retention.</strong> Information may be processed in countries where our service providers operate. We retain inquiry information only as long as reasonably needed for the inquiry, business relationship, legal obligations, and dispute resolution, then delete or anonymize it where appropriate.</p><p><strong>Your choices.</strong> Depending on applicable law, you may request access, correction, deletion, restriction, or object to certain processing, and withdraw consent. Contact us using the email displayed on this website. You can reject optional analytics using the cookie controls.</p><p><strong>Completion required before launch:</strong> insert the responsible legal entity name, registered address, and verified privacy contact, and check this notice against the actual service-provider settings.</p>' },
@@ -273,6 +275,89 @@
     const extraTranslations = {"en":{"hero_title":"Industrial Equipment for Construction & Material Handling","hero_subtitle":"Explore concrete mixers, bagged material palletizers, and mortar equipment. Contact us for product specifications, availability, and quotations.","about_text":"AIZGZ Machinery connects international buyers with machinery for construction and material handling. Contact us to discuss product specifications, customization options, and shipping arrangements.","faq3_q":"Can you arrange international shipping?","faq3_a":"Shipping options and costs depend on the equipment, destination, packing requirements, and current freight rates. Please provide your destination port or address.","filter_all":"All Equipment","filter_concrete":"Concrete Equipment","filter_mortar":"Dry Mix & Mortar","filter_pallet":"Bag Palletizing","filter_block":"Block & Brick","filter_crushing":"Crushing & Screening","filter_packing":"Packing & Auxiliary","label_model":"Model","label_capacity":"Capacity / Throughput","label_internal_capacity":"Internal Material Capacity","btn_details":"Details","btn_inquire":"Inquire Now","btn_inquire_product":"Inquire About This Product","label_category":"Category","count_product":"Product","count_products":"Products","empty_products":"No products are available right now. Please contact us for assistance.","empty_category":"No products are currently listed in this category. Please contact us for availability.","catalog_error":"The product catalog is temporarily unavailable. Please contact us for assistance.","catalog_unavailable":"Catalog unavailable","sending":"Sending…","sent":"Thank you. Your inquiry has been sent successfully.","send_error":"Your inquiry could not be sent. Please try again or contact us via WhatsApp.","not_configured":"The inquiry form is not configured yet. Please contact us via WhatsApp or configure Formspree in CMS Site Settings.","placeholder_name":"Your name","placeholder_email":"you@company.com","placeholder_phone":"+ country code","placeholder_model":"Product name or model","placeholder_message":"Product, quantity, application, destination, power requirements…","cookie_settings":"Cookie Settings","returns_policy":"Returns & Refunds","cookie_message":"We use optional Google Analytics to understand site usage. You can accept or reject analytics cookies.","cookie_accept":"Accept analytics","cookie_reject":"Reject analytics","cookie_learn":"Learn more","policy_english":"This policy is currently provided in English. A translated version will be added after the legal text is reviewed.","privacy_policy":"Privacy Policy","shipping_policy":"Shipping Information","warranty_policy":"Warranty Information","terms_policy":"Terms of Service","cookie_policy":"Cookie & Analytics Notice","returns_title":"Returns, Cancellation & Refunds"},"es":{"hero_title":"Equipos industriales para construcción y manipulación de materiales","hero_subtitle":"Explore mezcladoras de hormigón, paletizadores de sacos y equipos para mortero. Contáctenos para consultar especificaciones, disponibilidad y precios.","about_text":"AIZGZ Machinery conecta a compradores internacionales con maquinaria para construcción y manipulación de materiales. Contáctenos para consultar especificaciones, opciones de personalización y envíos.","faq3_q":"¿Pueden organizar envíos internacionales?","faq3_a":"Las opciones y los costes de envío dependen del equipo, el destino, el embalaje y las tarifas vigentes. Indique el puerto o la dirección de destino.","filter_all":"Todos los equipos","filter_concrete":"Equipos de hormigón","filter_mortar":"Mezclas secas y mortero","filter_pallet":"Paletizado de sacos","filter_block":"Bloques y ladrillos","filter_crushing":"Trituración y cribado","filter_packing":"Embalaje y auxiliares","label_model":"Modelo","label_capacity":"Capacidad / rendimiento","label_internal_capacity":"Capacidad interna de material","btn_details":"Detalles","btn_inquire":"Consultar","btn_inquire_product":"Consultar sobre este producto","label_category":"Categoría","count_product":"producto","count_products":"productos","empty_products":"No hay productos disponibles. Contáctenos para obtener ayuda.","empty_category":"No hay productos en esta categoría. Contáctenos para consultar disponibilidad.","catalog_error":"El catálogo no está disponible temporalmente. Contáctenos para obtener ayuda.","catalog_unavailable":"Catálogo no disponible","sending":"Enviando…","sent":"Gracias. Su consulta se ha enviado correctamente.","send_error":"No se pudo enviar la consulta. Inténtelo de nuevo o contáctenos por WhatsApp.","not_configured":"El formulario aún no está configurado. Contáctenos por WhatsApp o configure Formspree en CMS.","placeholder_name":"Su nombre","placeholder_email":"usted@empresa.com","placeholder_phone":"+ código de país","placeholder_model":"Nombre o modelo del producto","placeholder_message":"Producto, cantidad, aplicación, destino y requisitos eléctricos…","cookie_settings":"Configuración de cookies","returns_policy":"Devoluciones y reembolsos","cookie_message":"Usamos Google Analytics opcional para comprender el uso del sitio. Puede aceptar o rechazar estas cookies.","cookie_accept":"Aceptar analítica","cookie_reject":"Rechazar analítica","cookie_learn":"Más información","policy_english":"Este documento está disponible actualmente en inglés. Añadiremos una traducción después de revisar el texto legal.","privacy_policy":"Política de privacidad","shipping_policy":"Información de envío","warranty_policy":"Garantía","terms_policy":"Condiciones del servicio","cookie_policy":"Aviso de cookies y analítica","returns_title":"Devoluciones, cancelaciones y reembolsos"},"ar":{"hero_title":"معدات صناعية للبناء ومناولة المواد","hero_subtitle":"اكتشف خلاطات الخرسانة وآلات رص الأكياس ومعدات الملاط. تواصل معنا لمعرفة المواصفات والتوفر وطلب عرض سعر.","about_text":"تربط AIZGZ Machinery المشترين الدوليين بمعدات البناء ومناولة المواد. تواصل معنا لمناقشة المواصفات وخيارات التخصيص والشحن.","faq3_q":"هل يمكنكم ترتيب الشحن الدولي؟","faq3_a":"تعتمد خيارات الشحن وتكاليفه على المعدات والوجهة والتعبئة وأسعار النقل الحالية. يرجى تزويدنا بالميناء أو العنوان المقصود.","filter_all":"جميع المعدات","filter_concrete":"معدات الخرسانة","filter_mortar":"المخاليط الجافة والملاط","filter_pallet":"ترصيف الأكياس","filter_block":"البلوك والطوب","filter_crushing":"التكسير والغربلة","filter_packing":"التعبئة والمعدات المساعدة","label_model":"الطراز","label_capacity":"السعة / الإنتاجية","label_internal_capacity":"السعة الداخلية للمواد","btn_details":"التفاصيل","btn_inquire":"استفسر الآن","btn_inquire_product":"استفسر عن هذا المنتج","label_category":"الفئة","count_product":"منتج","count_products":"منتجات","empty_products":"لا توجد منتجات متاحة حالياً. يرجى التواصل معنا للمساعدة.","empty_category":"لا توجد منتجات مدرجة في هذه الفئة حالياً. يرجى التواصل للاستفسار عن التوفر.","catalog_error":"كتالوج المنتجات غير متاح مؤقتاً. يرجى التواصل معنا.","catalog_unavailable":"الكتالوج غير متاح","sending":"جارٍ الإرسال…","sent":"شكراً لك. تم إرسال استفسارك بنجاح.","send_error":"تعذر إرسال استفسارك. حاول مرة أخرى أو تواصل معنا عبر واتساب.","not_configured":"نموذج الاستفسار غير مُعد بعد. تواصل معنا عبر واتساب أو اضبط Formspree في إعدادات الموقع.","placeholder_name":"اسمك","placeholder_email":"you@company.com","placeholder_phone":"+ رمز الدولة","placeholder_model":"اسم المنتج أو الطراز","placeholder_message":"المنتج والكمية والاستخدام والوجهة ومتطلبات الطاقة…","cookie_settings":"إعدادات ملفات تعريف الارتباط","returns_policy":"الإرجاع واسترداد الأموال","cookie_message":"نستخدم Google Analytics الاختياري لفهم استخدام الموقع. يمكنك قبول ملفات التحليلات أو رفضها.","cookie_accept":"قبول التحليلات","cookie_reject":"رفض التحليلات","cookie_learn":"معرفة المزيد","policy_english":"هذه السياسة متاحة حالياً باللغة الإنجليزية. ستضاف ترجمة بعد مراجعة النص القانوني.","privacy_policy":"سياسة الخصوصية","shipping_policy":"معلومات الشحن","warranty_policy":"معلومات الضمان","terms_policy":"شروط الخدمة","cookie_policy":"إشعار ملفات تعريف الارتباط والتحليلات","returns_title":"الإرجاع والإلغاء واسترداد الأموال"},"ru":{"hero_title":"Промышленное оборудование для строительства и обработки материалов","hero_subtitle":"Ознакомьтесь с бетоносмесителями, паллетайзерами для мешков и оборудованием для растворов. Свяжитесь с нами, чтобы уточнить характеристики, наличие и цену.","about_text":"AIZGZ Machinery помогает международным покупателям подбирать оборудование для строительства и обработки материалов. Свяжитесь с нами, чтобы обсудить характеристики, индивидуальную комплектацию и доставку.","faq3_q":"Можете ли вы организовать международную доставку?","faq3_a":"Варианты и стоимость доставки зависят от оборудования, пункта назначения, упаковки и текущих тарифов. Укажите порт или адрес доставки.","filter_all":"Всё оборудование","filter_concrete":"Бетонное оборудование","filter_mortar":"Сухие смеси и растворы","filter_pallet":"Паллетирование мешков","filter_block":"Блоки и кирпич","filter_crushing":"Дробление и сортировка","filter_packing":"Упаковка и вспомогательное оборудование","label_model":"Модель","label_capacity":"Производительность","label_internal_capacity":"Внутренняя вместимость материала","btn_details":"Подробнее","btn_inquire":"Запросить","btn_inquire_product":"Запросить информацию об оборудовании","label_category":"Категория","count_product":"товар","count_products":"товаров","empty_products":"Сейчас нет доступных товаров. Свяжитесь с нами для получения информации.","empty_category":"В этой категории пока нет опубликованных товаров. Уточните наличие у нас.","catalog_error":"Каталог временно недоступен. Свяжитесь с нами для получения помощи.","catalog_unavailable":"Каталог недоступен","sending":"Отправка…","sent":"Спасибо. Ваш запрос успешно отправлен.","send_error":"Не удалось отправить запрос. Попробуйте ещё раз или свяжитесь с нами через WhatsApp.","not_configured":"Форма запроса ещё не настроена. Свяжитесь с нами через WhatsApp или настройте Formspree в CMS.","placeholder_name":"Ваше имя","placeholder_email":"you@company.com","placeholder_phone":"+ код страны","placeholder_model":"Название или модель оборудования","placeholder_message":"Оборудование, количество, назначение, пункт доставки и требования к питанию…","cookie_settings":"Настройки файлов cookie","returns_policy":"Возврат и возмещение","cookie_message":"Мы используем необязательную Google Analytics для анализа посещаемости. Вы можете разрешить или отклонить аналитику.","cookie_accept":"Разрешить аналитику","cookie_reject":"Отклонить аналитику","cookie_learn":"Подробнее","policy_english":"Этот документ пока доступен на английском языке. Перевод будет добавлен после проверки юридического текста.","privacy_policy":"Политика конфиденциальности","shipping_policy":"Информация о доставке","warranty_policy":"Гарантийная информация","terms_policy":"Условия использования","cookie_policy":"Уведомление о cookie и аналитике","returns_title":"Возврат, отмена и возмещение"}};
     Object.keys(extraTranslations).forEach((language) => Object.assign(i18nText[language], extraTranslations[language]));
     function currentTexts() { return extraTranslations[document.documentElement.lang] || extraTranslations.en; }
+
+
+    function browserLanguageChoice() {
+      const candidates = Array.isArray(navigator.languages) ? navigator.languages : [navigator.language || 'en'];
+      for (const candidate of candidates) {
+        const code = String(candidate).toLowerCase().split(/[-_]/)[0];
+        if (['es', 'ar', 'ru'].includes(code)) return code;
+      }
+      return 'en';
+    }
+
+    function countryLanguageChoice(country) {
+      const code = String(country || '').toUpperCase();
+      const spanish = ['ES','MX','AR','BO','CL','CO','CR','CU','DO','EC','GT','HN','NI','PA','PE','PY','SV','UY','VE','GQ'];
+      const arabic = ['SA','AE','QA','KW','BH','OM','YE','IQ','JO','LB','SY','PS','EG','SD','LY','TN','DZ','MA','MR','SO','DJ','KM'];
+      const russian = ['RU','BY','KZ','KG'];
+      if (spanish.includes(code)) return 'es';
+      if (arabic.includes(code)) return 'ar';
+      if (russian.includes(code)) return 'ru';
+      return 'en';
+    }
+
+    function loadAnalytics() {
+      if (window.__aizgzAnalyticsLoaded || !globalSettings.ga_id || !/^[Gg]-[A-Z0-9]+$/.test(globalSettings.ga_id)) return;
+      window.__aizgzAnalyticsLoaded = true;
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(globalSettings.ga_id);
+      document.head.appendChild(script);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', globalSettings.ga_id);
+    }
+
+    function showCookieBanner() {
+      const banner = document.getElementById('cookie-banner');
+      if (banner && activeAnalyticsConsent === null) banner.classList.remove('hidden');
+    }
+
+    function saveAnalyticsConsent(accepted) {
+      activeAnalyticsConsent = Boolean(accepted);
+      try { localStorage.setItem('aizgz_analytics_consent', accepted ? 'accepted' : 'rejected'); } catch (_) {}
+      document.getElementById('cookie-banner')?.classList.add('hidden');
+      if (accepted) loadAnalytics();
+    }
+
+    function openCookieSettings() {
+      document.getElementById('cookie-banner')?.classList.remove('hidden');
+    }
+
+    async function initializeSite() {
+      let storedLanguage = '';
+      let savedConsent = '';
+      try {
+        storedLanguage = localStorage.getItem('aizgz_language') || '';
+        savedConsent = localStorage.getItem('aizgz_analytics_consent') || '';
+      } catch (_) {}
+      activeAnalyticsConsent = savedConsent === 'accepted' ? true : savedConsent === 'rejected' ? false : null;
+      try {
+        const response = await fetch('/api/runtime', { cache: 'no-store' });
+        if (response.ok) {
+          const runtime = await response.json();
+          if (runtime.branch && /^[A-Za-z0-9._/-]+$/.test(runtime.branch)) REPO_BRANCH = runtime.branch;
+          if (!storedLanguage) {
+            const browserChoice = browserLanguageChoice();
+            changeLanguage(browserChoice !== 'en' ? browserChoice : countryLanguageChoice(runtime.country), false);
+          }
+        } else if (!storedLanguage) {
+          changeLanguage(browserLanguageChoice(), false);
+        }
+      } catch (error) {
+        console.warn('Regional language detection unavailable; using browser language.', error);
+        if (!storedLanguage) changeLanguage(browserLanguageChoice(), false);
+      }
+      if (storedLanguage && i18nText[storedLanguage]) changeLanguage(storedLanguage, false);
+      if (activeAnalyticsConsent === true) loadAnalytics();
+      if (activeAnalyticsConsent === null) showCookieBanner();
+      loadSiteData();
+      fetchProducts();
+      fetchContentCollection('cases', 'cases-grid', 'case');
+      fetchContentCollection('videos', 'videos-grid', 'video');
+    }
 
     function setText(id, value) {
       const el = document.getElementById(id);
