@@ -1,11 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Content Manager - AIZGZ Machinery</title>
+  <style>body{font-family:system-ui,sans-serif;max-width:42rem;margin:12vh auto;padding:0 1.25rem;color:#1f2937;line-height:1.6}h1{font-size:1.5rem}p{color:#4b5563}</style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <main>
+    <h1>AIZGZ Machinery Content Manager</h1>
+    <p id="cms-status" role="status" aria-live="polite">Checking deployment environment…</p>
+  </main>
+  <script>
+    (async function () {
+      const status = document.getElementById('cms-status');
+      try {
+        const response = await fetch('/api/runtime', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Runtime environment unavailable');
+        const runtime = await response.json();
+        if (runtime.branch !== 'main') {
+          status.textContent = 'The content manager is disabled on Preview deployments to protect the production content branch. Use the production website content manager after release.';
+          return;
+        }
+        status.textContent = 'Loading content manager…';
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js';
+        script.async = true;
+        script.onerror = function () { status.textContent = 'The content manager could not be loaded. Please try again later.'; };
+        document.body.appendChild(script);
+      } catch (error) {
+        status.textContent = 'The content manager is unavailable because the deployment environment could not be verified.';
+      }
+    })();
+  </script>
 </body>
 </html>
