@@ -394,9 +394,11 @@
         globalSettings = await response.json();
         setText('brand-name', globalSettings.brand_name);
         setText('brand-tagline', globalSettings.brand_tagline);
-        setText('hero-title', globalSettings.hero_title);
-        setText('hero-subtitle', globalSettings.hero_subtitle);
-        setText('about-text', globalSettings.about_text);
+        if (document.documentElement.lang === 'en') {
+          setText('hero-title', globalSettings.hero_title);
+          setText('hero-subtitle', globalSettings.hero_subtitle);
+          setText('about-text', globalSettings.about_text);
+        }
         if (globalSettings.whatsapp_number) {
           const number = String(globalSettings.whatsapp_number).replace(/[^\d]/g, '');
           if (number) {
@@ -406,16 +408,7 @@
         }
         if (isSafeHttpUrl(globalSettings.youtube_url)) document.getElementById('youtube-btn').href = globalSettings.youtube_url;
         if (isSafeHttpUrl(globalSettings.tiktok_url)) document.getElementById('tiktok-btn').href = globalSettings.tiktok_url;
-        if (globalSettings.ga_id && /^[Gg]-[A-Z0-9]+$/.test(globalSettings.ga_id)) {
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(globalSettings.ga_id)}`;
-          document.head.appendChild(script);
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = function(){ window.dataLayer.push(arguments); };
-          window.gtag('js', new Date());
-          window.gtag('config', globalSettings.ga_id);
-        }
+        if (activeAnalyticsConsent === true) loadAnalytics();
         if (globalSettings.company_display_name) setText('footer-copyright', `© ${new Date().getFullYear()} ${globalSettings.company_display_name}. All rights reserved.`);
       } catch (error) {
         console.error('Could not load site settings:', error);
@@ -827,10 +820,7 @@
       }
     });
 
-    loadSiteData();
-    fetchProducts();
-    fetchContentCollection('cases', 'cases-grid', 'case');
-    fetchContentCollection('videos', 'videos-grid', 'video');
+    initializeSite();
   </script>
 </body>
 </html>
