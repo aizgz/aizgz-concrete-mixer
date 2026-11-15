@@ -349,9 +349,28 @@
         savedConsent = localStorage.getItem('aizgz_analytics_consent') || '';
       } catch (_) {}
       activeAnalyticsConsent = savedConsent === 'accepted' ? true : savedConsent === 'rejected' ? false : null;
-      try {
-        const response = await fetch('/api/runtime', { cache: 'no-store' });
-        if (response.ok) {
+
+      // Render the interface and start content requests immediately. Regional
+      // runtime detection is optional and must never block the catalogue.
+      const hasStoredLanguage = Boolean(storedLanguage && i18nText[storedLanguage]);
+      const initialLanguage = hasStoredLanguage ? storedLanguage : browserLanguageChoice();
+      changeLanguage(initialLanguage, false);
+      if (activeAnalyticsConsent === true) loadAnalytics();
+      if (activeAnalyticsConsent === null) showCookieBanner();
+
+      loadSiteData();
+      fetchProducts();
+      fetchContentCollection('cases', 'cases-grid', 'case');
+      fetchContentCollection('videos', 'videos-grid', 'video');
+
+      // Apply country-based language only after the runtime endpoint responds.
+      // A timeout prevents a slow or unavailable function from blocking startup.
+      (async () => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        try {
+          const response = await fetch('/api/runtime', { cache: 'no-store', signal: controller.signal });
+          if (!response.ok) throw new Error(`Runtime service HTTP ${response.status}`);
           const runtime = await response.json();
           if (runtime.branch && /^[A-Za-z0-9._/-]+$/.test(runtime.branch)) REPO_BRANCH = runtime.branch;
           if (runtime.environment !== 'production' || runtime.branch !== 'main') {
@@ -359,27 +378,15 @@
             if (!robots) { robots = document.createElement('meta'); robots.name = 'robots'; document.head.appendChild(robots); }
             robots.content = 'noindex, nofollow';
           }
-          if (!storedLanguage) {
-            try { storedLanguage = localStorage.getItem('aizgz_language') || ''; } catch (_) {}
-            if (!storedLanguage) {
-              const browserChoice = browserLanguageChoice();
-              changeLanguage(browserChoice !== 'en' ? browserChoice : countryLanguageChoice(runtime.country), false);
-            }
+          if (!hasStoredLanguage && initialLanguage === 'en') {
+            changeLanguage(countryLanguageChoice(runtime.country), false);
           }
-        } else if (!storedLanguage) {
-          changeLanguage(browserLanguageChoice(), false);
+        } catch (error) {
+          console.warn('Regional language detection unavailable; continuing with the current language.', error);
+        } finally {
+          clearTimeout(timeoutId);
         }
-      } catch (error) {
-        console.warn('Regional language detection unavailable; using browser language.', error);
-        if (!storedLanguage) changeLanguage(browserLanguageChoice(), false);
-      }
-      if (storedLanguage && i18nText[storedLanguage]) changeLanguage(storedLanguage, false);
-      if (activeAnalyticsConsent === true) loadAnalytics();
-      if (activeAnalyticsConsent === null) showCookieBanner();
-      loadSiteData();
-      fetchProducts();
-      fetchContentCollection('cases', 'cases-grid', 'case');
-      fetchContentCollection('videos', 'videos-grid', 'video');
+      })();
     }
 
     function setText(id, value) {
