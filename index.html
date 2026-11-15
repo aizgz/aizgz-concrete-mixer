@@ -279,15 +279,26 @@
       if (el && value !== undefined && value !== null && String(value).trim() !== '') el.textContent = String(value);
     }
 
-    function changeLanguage(lang) {
+    function changeLanguage(lang, persist = true) {
       const language = i18nText[lang] ? lang : 'en';
       const texts = i18nText[language];
       document.querySelectorAll('[data-i18n]').forEach((el) => {
         const key = el.getAttribute('data-i18n');
         if (texts[key]) el.textContent = texts[key];
       });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (texts[key]) el.setAttribute('placeholder', texts[key]);
+      });
       document.documentElement.lang = language;
       document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+      ['lang-switcher', 'lang-switcher-mobile'].forEach((id) => {
+        const selector = document.getElementById(id);
+        if (selector) selector.value = language;
+      });
+      if (persist) { try { localStorage.setItem('aizgz_language', language); } catch (_) {} }
+      if (allProducts.length) renderFilteredProducts();
+      if (currentPolicyType) openPolicy(currentPolicyType);
     }
 
     async function loadSiteData() {
