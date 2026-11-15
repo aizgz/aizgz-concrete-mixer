@@ -1,6 +1,5 @@
 ---
-title: Horizontal screw belt mixer, mortar mixer without dead corners
-category: Dry Mix Mortar Plant
+title: Horizontal Screw-Belt Mixer for Dry Mortar and Putty Powdercategory: Dry Mix Mortar Plant
 supply_status: Available for Supply
 capacity: 1-ton putty powder equipment, 2-ton putty powder equipment, 3-ton
   putty powder equipment, 5-ton putty powder equipment, customized
