@@ -1,7 +1,7 @@
 ---
 title: Production line fertilizer granule mixer fully automatic
-category: Dry Mix Mortar Plant
-capacity: 100000 ton pre mixed mortar production line, customized models
+category: Mixing & Blending Equipment
+supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/9.jpeg
 ---
