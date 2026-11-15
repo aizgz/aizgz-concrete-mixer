@@ -575,7 +575,7 @@
     }
 
     function isDisplayableCatalogValue(value) {
-      return value !== undefined && value !== null && String(value).trim() !== '' && !/[\u3400-\u9fff]/.test(String(value));
+      return value !== undefined && value !== null && String(value).trim() !== '' && !/^(["']{2}|null|undefined|n\/a)$/i.test(String(value).trim()) && !/[\u3400-\u9fff]/.test(String(value));
     }
 
     function createImage(src, alt, className) {
