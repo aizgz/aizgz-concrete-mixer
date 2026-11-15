@@ -319,7 +319,12 @@
       activeAnalyticsConsent = Boolean(accepted);
       try { localStorage.setItem('aizgz_analytics_consent', accepted ? 'accepted' : 'rejected'); } catch (_) {}
       document.getElementById('cookie-banner')?.classList.add('hidden');
-      if (accepted) loadAnalytics();
+      if (accepted) {
+        loadAnalytics();
+      } else if (globalSettings.ga_id) {
+        window['ga-disable-' + globalSettings.ga_id] = true;
+        if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'denied' });
+      }
     }
 
     function openCookieSettings() {
