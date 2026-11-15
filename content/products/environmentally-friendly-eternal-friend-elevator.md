@@ -1,5 +1,6 @@
 ---
-title: Plate-Chain Bucket Elevator for Material Handlingcategory: Packing & Auxiliary Equipment
+title: Plate-Chain Bucket Elevator for Material Handling
+category: Packing & Auxiliary Equipment
 supply_status: Available for Supply
 power_type: Electric Engine
 image: /uploads/11.jpeg
