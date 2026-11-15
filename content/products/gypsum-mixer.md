@@ -1,6 +1,5 @@
 ---
-title: Gypsum mixer
-category: Mixing & Blending Equipment
+title: Gypsum Powder Mixercategory: Mixing & Blending Equipment
 supply_status: Available for Supply
 capacity: Customized model, lightweight gypsum mixer
 power_type: Electric Engine
