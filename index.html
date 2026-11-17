@@ -354,6 +354,22 @@
       if (banner && activeAnalyticsConsent === null) banner.classList.remove('hidden');
     }
 
+    function clearAnalyticsCookies() {
+      // Remove Google Analytics cookies previously created before consent was withdrawn.
+      const names = document.cookie.split(';')
+        .map(cookie => cookie.trim().split('=')[0])
+        .filter(name => /^_ga($|_)/.test(name) || /^_gid$/.test(name) || /^_gat($|_)/.test(name));
+      const domains = [null, window.location.hostname];
+      const hostParts = window.location.hostname.split('.');
+      if (hostParts.length > 2) domains.push('.' + hostParts.slice(-2).join('.'));
+      for (const name of names) {
+        for (const domain of domains) {
+          const domainPart = domain ? '; domain=' + domain : '';
+          document.cookie = name + '=; Max-Age=0; path=/; SameSite=Lax' + domainPart;
+        }
+      }
+    }
+
     function saveAnalyticsConsent(accepted) {
       activeAnalyticsConsent = Boolean(accepted);
       try { localStorage.setItem('aizgz_analytics_consent', accepted ? 'accepted' : 'rejected'); } catch (_) {}
@@ -362,9 +378,10 @@
         if (globalSettings.ga_id) window['ga-disable-' + globalSettings.ga_id] = false;
         if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'granted' });
         loadAnalytics();
-      } else if (globalSettings.ga_id) {
-        window['ga-disable-' + globalSettings.ga_id] = true;
+      } else {
+        if (globalSettings.ga_id) window['ga-disable-' + globalSettings.ga_id] = true;
         if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'denied' });
+        clearAnalyticsCookies();
       }
     }
 
