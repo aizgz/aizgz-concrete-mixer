@@ -83,7 +83,10 @@ collections:
         }
       - { label: "Product Image (产品主图)", name: "image", widget: "image" }
       - { label: "Short Summary (简短介绍/摘要)", name: "summary", widget: "text", required: false }
-      - { label: "Technical Specifications & Details (详细参数与说明)", name: "body", widget: "markdown" }
+      - { label: "Technical Specifications & Details - English (英文技术参数与说明)", name: "body", widget: "markdown" }
+      - { label: "Technical Details - Spanish (西班牙语详细说明)", name: "body_es", widget: "markdown", required: false }
+      - { label: "Technical Details - Arabic (阿拉伯语详细说明)", name: "body_ar", widget: "markdown", required: false }
+      - { label: "Technical Details - Russian (俄语详细说明)", name: "body_ru", widget: "markdown", required: false }
 
   # 3. 发货与工程成功案例
   - name: "cases"
