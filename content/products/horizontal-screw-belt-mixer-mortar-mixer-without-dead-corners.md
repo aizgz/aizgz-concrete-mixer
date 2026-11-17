@@ -1,5 +1,8 @@
 ---
 title: Horizontal Screw-Belt Mixer for Dry Mortar and Putty Powder
+title_es: "Mezcladora horizontal de tornillo y cinta para mortero seco y masilla en polvo"
+title_ar: "خلاط أفقي لولبي شريطي للمونة الجافة ومسحوق المعجون"
+title_ru: "Горизонтальный шнеково-ленточный смеситель для сухих растворов и шпатлёвочного порошка"
 category: Dry Mix Mortar Plant
 supply_status: Available for Supply
 power_type: Electric Motor
