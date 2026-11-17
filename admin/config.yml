@@ -55,7 +55,8 @@ collections:
             "Concrete Equipment", 
             "Block & Brick Making Machine", 
             "Crushing & Screening Plant", 
-            "Packing & Auxiliary Equipment"
+            "Packing & Auxiliary Equipment",
+            "Palletizers"
           ] 
         }
       - { label: "Capacity / Throughput (产能)", name: "capacity", widget: "string", required: false }
@@ -74,7 +75,7 @@ collections:
           label: "Power / Control Type (动力/控制方式)", 
           name: "power_type", 
           widget: "select", 
-          options: ["Automatic PLC System", "Electric Engine", "Diesel Engine", "Semi-Automatic"],
+          options: ["Electric Motor", "Automatic PLC System", "Electric Engine", "Diesel Engine", "Semi-Automatic"],
           required: false
         }
       - { label: "Product Image (产品主图)", name: "image", widget: "image" }
