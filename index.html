@@ -591,6 +591,7 @@
         'crushing-screening': 'crushing-screening',
         'packing & auxiliary equipment': 'packing-auxiliary',
         'mixing & blending equipment': 'mixing-blending',
+        'mixing-blending': 'mixing-blending',
         'packing-auxiliary': 'packing-auxiliary'
       };
       if (categoryAliases[explicit]) return categoryAliases[explicit];
@@ -790,19 +791,30 @@
       const language = document.documentElement.lang || 'en';
       const normalized = String(value ?? '').trim().toLowerCase();
       const valueTranslations = {
+        en: {
+          'mortar-equipment': 'Dry Mix & Mortar',
+          'mixing-blending': 'Mixing & Blending Equipment',
+          'packing-auxiliary': 'Packing & Auxiliary Equipment'
+        },
         es: {
           'available for supply': 'Disponible para suministro',
           'electric motor': 'Motor eléctrico',
+          'mortar-equipment': 'Mezclas secas y mortero',
+          'mixing-blending': 'Equipos de mezcla y homogeneización',
           'packing-auxiliary': 'Equipos de envasado y auxiliares'
         },
         ar: {
           'available for supply': 'متاح للتوريد',
           'electric motor': 'محرك كهربائي',
+          'mortar-equipment': 'الخلطات الجافة والملاط',
+          'mixing-blending': 'معدات الخلط والمزج',
           'packing-auxiliary': 'معدات التعبئة والمعدات المساعدة'
         },
         ru: {
           'available for supply': 'Доступно для поставки',
           'electric motor': 'Электродвигатель',
+          'mortar-equipment': 'Сухие смеси и растворы',
+          'mixing-blending': 'Оборудование для смешивания и перемешивания',
           'packing-auxiliary': 'Упаковочное и вспомогательное оборудование'
         }
       };
