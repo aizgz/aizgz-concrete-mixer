@@ -706,6 +706,29 @@
       return (specLabelTranslations[language] && specLabelTranslations[language][label]) || label;
     }
 
+    function translateSpecValue(label, value) {
+      const language = document.documentElement.lang || 'en';
+      const normalized = String(value ?? '').trim().toLowerCase();
+      const valueTranslations = {
+        es: {
+          'available for supply': 'Disponible para suministro',
+          'electric motor': 'Motor eléctrico',
+          'packing-auxiliary': 'Equipos de envasado y auxiliares'
+        },
+        ar: {
+          'available for supply': 'متاح للتوريد',
+          'electric motor': 'محرك كهربائي',
+          'packing-auxiliary': 'معدات التعبئة والمعدات المساعدة'
+        },
+        ru: {
+          'available for supply': 'Доступно для поставки',
+          'electric motor': 'Электродвигатель',
+          'packing-auxiliary': 'Упаковочное и вспомогательное оборудование'
+        }
+      };
+      return (valueTranslations[language] && valueTranslations[language][normalized]) || value;
+    }
+
     function openModal(meta, body) {
       currentProductModal = { meta: meta, body: body };
       const content = document.getElementById('modal-content');
@@ -744,7 +767,7 @@
         const item = document.createElement('div');
         const strong = document.createElement('strong');
         strong.textContent = translateSpecLabel(label) + ': ';
-        item.append(strong, document.createTextNode(String(value)));
+        item.append(strong, document.createTextNode(String(translateSpecValue(label, value))));
         specs.appendChild(item);
       });
       content.appendChild(specs);
