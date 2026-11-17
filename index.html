@@ -477,7 +477,7 @@
 
     function parseFrontMatter(text) {
       const source = String(text);
-      const match = source.match(/^---\\r?\\n([\\s\\S]*?)\\r?\\n---(?:\\r?\\n([\\s\\S]*))?$/);
+      const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n([\s\S]*))?$/);
       if (!match) return { meta: {}, body: source };
       let meta = {};
       if (window.jsyaml && typeof window.jsyaml.load === 'function') {
@@ -486,25 +486,25 @@
       } else {
         // Fallback parser supports ordinary scalars and YAML literal/folded
         // blocks so optional multilingual Markdown fields still work offline.
-        const lines = match[1].split(/\\r?\\n/);
+        const lines = match[1].split(/\r?\n/);
         let currentKey = '';
         let blockStyle = '';
         let blockLines = [];
         const flushBlock = () => {
           if (!blockStyle || !currentKey) return;
-          meta[currentKey] = blockLines.join(blockStyle === '>' ? ' ' : '\\n').replace(/\\s+$/, '');
+          meta[currentKey] = blockLines.join(blockStyle === '>' ? ' ' : '\n').replace(/\s+$/, '');
           blockStyle = '';
           blockLines = [];
         };
         lines.forEach((line) => {
           if (blockStyle) {
-            if (line === '' || /^\\s+/.test(line)) {
+            if (line === '' || /^\s+/.test(line)) {
               blockLines.push(line.replace(/^ {2}/, ''));
               return;
             }
             flushBlock();
           }
-          if (/^\\s+/.test(line) && currentKey) {
+          if (/^\s+/.test(line) && currentKey) {
             meta[currentKey] = (String(meta[currentKey] || '') + ' ' + line.trim()).trim();
             return;
           }
@@ -517,7 +517,7 @@
             blockLines = [];
             meta[currentKey] = '';
           } else {
-            meta[currentKey] = rawValue.replace(/^(['"])(.*)\\1$/, '$2');
+            meta[currentKey] = rawValue.replace(/^(['"])(.*)\1$/, '$2');
           }
         });
         flushBlock();
