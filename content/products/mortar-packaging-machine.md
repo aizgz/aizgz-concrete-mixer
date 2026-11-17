@@ -9,4 +9,4 @@ power_type: Electric Motor
 image: /uploads/6.jpeg
 summary: ""
 ---
-Spot dry powder mortar packaging machine ingredient instrument parameter adjustment remote guidance putty powder packaging machine
+Dry mortar packaging machine for bagging dry powder materials such as putty powder, tile adhesive, and cement-based mortar. Contact us for product selection, ingredient and parameter adjustment, and remote technical guidance.
