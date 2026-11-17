@@ -577,6 +577,19 @@
       const grid = document.getElementById('product-grid');
       const count = document.getElementById('product-count');
       if (!grid || !count) return;
+
+      // Only show category filters that currently have matching catalogue items.
+      // This avoids empty category pages while allowing new categories (including
+      // palletizers) to appear automatically when their product records are added.
+      document.querySelectorAll('.filter-btn[data-category]').forEach((button) => {
+        const category = button.dataset.category;
+        const hasProducts = category === 'all' || allProducts.some(
+          (product) => getProductCategory(product.meta) === category
+        );
+        button.hidden = !hasProducts;
+        if (!hasProducts && activeProductCategory === category) activeProductCategory = 'all';
+      });
+
       const filtered = activeProductCategory === 'all'
         ? allProducts
         : allProducts.filter((product) => getProductCategory(product.meta) === activeProductCategory);
