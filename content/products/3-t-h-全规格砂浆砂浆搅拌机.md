@@ -1,5 +1,8 @@
 ---
 title: Twin-Shaft Paddle Mixer for Dry-Mix Mortar Production
+title_es: "Mezcladora de paletas de doble eje para mortero seco"
+title_ar: "خلاط مجدافي مزدوج المحور لإنتاج الملاط الجاف"
+title_ru: "Двухвальный лопастной смеситель для сухих строительных смесей"
 category: Dry Mix Mortar Plant
 supply_status: Available for Supply
 power_type: Electric Motor
