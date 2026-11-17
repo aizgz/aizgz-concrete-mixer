@@ -627,6 +627,13 @@
       return localized || meta.title || 'Industrial Equipment';
     }
 
+    function getLocalizedProductBody(meta = {}, englishBody = '', language = 'en') {
+      const fieldByLanguage = { es: 'body_es', ar: 'body_ar', ru: 'body_ru' };
+      const field = fieldByLanguage[language];
+      const localized = field ? String(meta[field] || '').trim() : '';
+      return localized || String(englishBody || '');
+    }
+
     function renderProductCard(meta = {}, body = '') {
       const grid = document.getElementById('product-grid');
       const card = document.createElement('article');
@@ -774,7 +781,8 @@
       const description = document.createElement('div');
       description.className = 'prose mb-6 max-w-none text-sm text-slate-700';
       if (window.marked && typeof window.marked.parse === 'function' && window.DOMPurify) {
-        const renderedMarkdown = window.marked.parse(String(body || ''));
+        const productBody = getLocalizedProductBody(meta, body, productLanguage);
+        const renderedMarkdown = window.marked.parse(productBody);
         description.innerHTML = window.DOMPurify.sanitize(renderedMarkdown, {
           USE_PROFILES: { html: true },
           FORBID_TAGS: ['style', 'iframe', 'object', 'embed'],
@@ -782,7 +790,7 @@
         });
       } else {
         // Never inject unsanitized Markdown HTML if a CDN dependency is unavailable.
-        description.textContent = String(body || '');
+        description.textContent = getLocalizedProductBody(meta, body, productLanguage);
       }
       content.appendChild(description);
       const link = document.createElement('a');
