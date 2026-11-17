@@ -620,6 +620,13 @@
       return img;
     }
 
+    function getLocalizedProductTitle(meta = {}, language = 'en') {
+      const fieldByLanguage = { es: 'title_es', ar: 'title_ar', ru: 'title_ru' };
+      const field = fieldByLanguage[language];
+      const localized = field ? String(meta[field] || '').trim() : '';
+      return localized || meta.title || 'Industrial Equipment';
+    }
+
     function renderProductCard(meta = {}, body = '') {
       const grid = document.getElementById('product-grid');
       const card = document.createElement('article');
@@ -633,8 +640,16 @@
       content.className = 'p-6';
       const title = document.createElement('h3');
       title.className = 'text-xl font-bold text-slate-800';
-      title.textContent = meta.title || 'Industrial Equipment';
+      const productLanguage = document.documentElement.lang || 'en';
+      const localizedTitle = getLocalizedProductTitle(meta, productLanguage);
+      title.textContent = localizedTitle;
       content.appendChild(title);
+      if (productLanguage !== 'en' && localizedTitle !== (meta.title || '') && meta.title) {
+        const originalTitle = document.createElement('p');
+        originalTitle.className = 'mt-1 text-xs text-slate-500';
+        originalTitle.textContent = meta.title;
+        content.appendChild(originalTitle);
+      }
       if (isDisplayableCatalogValue(meta.model)) {
         const model = document.createElement('p');
         model.className = 'mt-1 font-mono text-xs text-slate-400';
@@ -706,8 +721,16 @@
       const title = document.createElement('h2');
       title.id = 'modal-title';
       title.className = 'mb-1 text-2xl font-bold text-slate-900';
-      title.textContent = meta.title || 'Equipment Details';
+      const productLanguage = document.documentElement.lang || 'en';
+      const localizedTitle = getLocalizedProductTitle(meta, productLanguage);
+      title.textContent = localizedTitle;
       content.appendChild(title);
+      if (productLanguage !== 'en' && localizedTitle !== (meta.title || '') && meta.title) {
+        const originalTitle = document.createElement('p');
+        originalTitle.className = 'mb-4 text-sm text-slate-500';
+        originalTitle.textContent = meta.title;
+        content.appendChild(originalTitle);
+      }
       if (isDisplayableCatalogValue(meta.model)) {
         const model = document.createElement('p');
         model.className = 'mb-4 font-mono text-sm text-amber-600';
