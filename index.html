@@ -397,6 +397,7 @@
         savedConsent = localStorage.getItem('aizgz_analytics_consent') || '';
       } catch (_) {}
       activeAnalyticsConsent = savedConsent === 'accepted' ? true : savedConsent === 'rejected' ? false : null;
+      if (activeAnalyticsConsent === false) clearAnalyticsCookies();
 
       // Render the interface and start content requests immediately. Regional
       // runtime detection is optional and must never block the catalogue.
