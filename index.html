@@ -21,7 +21,13 @@
         <span id="brand-name" class="text-2xl font-bold tracking-wide text-amber-500">AIZGZ</span>
         <span id="brand-tagline" class="rounded bg-amber-500 px-2 py-0.5 text-xs font-semibold text-slate-900">MACHINERY</span>
       </a>
-      <select id="lang-switcher-mobile" onchange="changeLanguage(this.value)" class="md:hidden rounded border border-slate-700 bg-slate-800 px-2 py-1 text-xs font-bold text-amber-400" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ar">العربية</option><option value="ru">Русский</option></select>
+      <div class="flex items-center gap-2 md:hidden">
+        <select id="lang-switcher-mobile" onchange="changeLanguage(this.value)" class="rounded border border-slate-700 bg-slate-800 px-2 py-1 text-xs font-bold text-amber-400" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ar">العربية</option><option value="ru">Русский</option></select>
+        <button id="mobile-menu-toggle" type="button" onclick="toggleMobileMenu()" class="inline-flex items-center gap-1 rounded border border-slate-600 px-2 py-2 text-xs font-bold text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-400" aria-controls="mobile-nav-menu" aria-expanded="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span data-i18n="mobile_menu">Menu</span>
+        </button>
+      </div>
       <nav class="hidden items-center gap-5 text-sm font-medium md:flex">
         <a href="#products" class="hover:text-amber-400" data-i18n="nav_products">Products</a>
         <a href="#videos" class="hover:text-amber-400" data-i18n="nav_videos">Videos</a>
@@ -34,6 +40,14 @@
         </select>
       </nav>
     </div>
+    <nav id="mobile-nav-menu" class="hidden border-t border-slate-700 bg-slate-900 px-4 py-2 md:hidden" aria-label="Mobile navigation">
+      <a href="#products" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_products">Products</a>
+      <a href="#videos" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_videos">Videos</a>
+      <a href="#cases" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_cases">Shipping & Cases</a>
+      <a href="#why-us" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_why">Why Us</a>
+      <a href="#faq" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_faq">FAQ</a>
+      <a href="#contact" onclick="closeMobileMenu()" class="mt-1 block rounded bg-amber-500 px-3 py-3 text-sm font-bold text-slate-900 hover:bg-amber-600" data-i18n="nav_inquiry">Inquiry</a>
+    </nav>
   </header>
 
   <main>
@@ -204,7 +218,7 @@
 
     const i18nText = {
       en: {
-        nav_products: 'Products', nav_videos: 'Videos', nav_cases: 'Shipping & Cases', nav_why: 'Why Us', nav_faq: 'FAQ', nav_inquiry: 'Inquiry',
+        nav_products: 'Products', nav_videos: 'Videos', nav_cases: 'Shipping & Cases', nav_why: 'Why Us', nav_faq: 'FAQ', nav_inquiry: 'Inquiry', mobile_menu: 'Menu',
         btn_browse: 'Browse Products', btn_catalog: 'Request Product Catalog',
         prod_title: 'Industrial Equipment', prod_sub: 'Browse equipment by product category and request details or a quotation.',
         video_title: 'Equipment Video Showroom', video_sub: 'Product demonstrations, equipment details, and production highlights.',
@@ -222,7 +236,7 @@
         form_msg: 'Message / Requirements *', form_submit: 'Send Inquiry'
       },
       es: {
-        nav_products: 'Productos', nav_videos: 'Vídeos', nav_cases: 'Envíos y casos', nav_why: 'Por qué nosotros', nav_faq: 'Preguntas', nav_inquiry: 'Consulta',
+        nav_products: 'Productos', nav_videos: 'Vídeos', nav_cases: 'Envíos y casos', nav_why: 'Por qué nosotros', nav_faq: 'Preguntas', nav_inquiry: 'Consulta', mobile_menu: 'Menú',
         btn_browse: 'Ver productos', btn_catalog: 'Solicitar catálogo',
         prod_title: 'Equipos industriales', prod_sub: 'Explore los equipos por categoría y solicite información o una cotización.',
         video_title: 'Galería de vídeos', video_sub: 'Demostraciones de productos, detalles técnicos y producción.',
@@ -240,7 +254,7 @@
         form_msg: 'Mensaje / requisitos *', form_submit: 'Enviar consulta'
       },
       ar: {
-        nav_products: 'المنتجات', nav_videos: 'الفيديوهات', nav_cases: 'الشحن والمشاريع', nav_why: 'لماذا نحن', nav_faq: 'الأسئلة', nav_inquiry: 'استفسار',
+        nav_products: 'المنتجات', nav_videos: 'الفيديوهات', nav_cases: 'الشحن والمشاريع', nav_why: 'لماذا نحن', nav_faq: 'الأسئلة', nav_inquiry: 'استفسار', mobile_menu: 'القائمة',
         btn_browse: 'تصفح المنتجات', btn_catalog: 'طلب كتالوج المنتجات',
         prod_title: 'المعدات الصناعية', prod_sub: 'تصفح المعدات حسب الفئة واطلب التفاصيل أو عرض السعر.',
         video_title: 'معرض فيديو المعدات', video_sub: 'عروض المنتجات والتفاصيل الفنية ومشاهد الإنتاج.',
@@ -258,7 +272,7 @@
         form_msg: 'الرسالة / المتطلبات *', form_submit: 'إرسال الاستفسار'
       },
       ru: {
-        nav_products: 'Продукция', nav_videos: 'Видео', nav_cases: 'Доставка и проекты', nav_why: 'Почему мы', nav_faq: 'Вопросы', nav_inquiry: 'Запрос',
+        nav_products: 'Продукция', nav_videos: 'Видео', nav_cases: 'Доставка и проекты', nav_why: 'Почему мы', nav_faq: 'Вопросы', nav_inquiry: 'Запрос', mobile_menu: 'Меню',
         btn_browse: 'Смотреть продукцию', btn_catalog: 'Запросить каталог',
         prod_title: 'Промышленное оборудование', prod_sub: 'Выберите категорию оборудования и запросите сведения или цену.',
         video_title: 'Видео оборудования', video_sub: 'Демонстрации продукции, технические детали и производство.',
@@ -284,6 +298,22 @@
     const finalUiTranslations = {"en":{"loading_products":"Loading products…","loading_gallery":"Loading gallery…","youtube_channel":"YouTube Channel","tiktok_profile":"TikTok Profile","filter_mixing":"Mixing & Blending"},"es":{"loading_products":"Cargando productos…","loading_gallery":"Cargando galería…","youtube_channel":"Canal de YouTube","tiktok_profile":"Perfil de TikTok","filter_mixing":"Mezcla y agitación"},"ar":{"loading_products":"جارٍ تحميل المنتجات…","loading_gallery":"جارٍ تحميل المعرض…","youtube_channel":"قناة يوتيوب","tiktok_profile":"ملف TikTok","filter_mixing":"الخلط والمزج"},"ru":{"loading_products":"Загрузка товаров…","loading_gallery":"Загрузка галереи…","youtube_channel":"Канал YouTube","tiktok_profile":"Профиль TikTok","filter_mixing":"Смешивание и перемешивание"}};
     Object.keys(finalUiTranslations).forEach((language) => Object.assign(i18nText[language], finalUiTranslations[language]));
     function currentTexts() { return i18nText[document.documentElement.lang] || i18nText.en; }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-nav-menu');
+      const button = document.getElementById('mobile-menu-toggle');
+      if (!menu || !button) return;
+      const isOpening = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', !isOpening);
+      button.setAttribute('aria-expanded', String(isOpening));
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-nav-menu');
+      const button = document.getElementById('mobile-menu-toggle');
+      if (menu) menu.classList.add('hidden');
+      if (button) button.setAttribute('aria-expanded', 'false');
+    }
 
 
     function browserLanguageChoice() {
