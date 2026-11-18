@@ -99,7 +99,7 @@
           <h2 class="text-3xl font-bold text-slate-900" data-i18n="prod_title">Industrial Equipment</h2>
           <p class="mt-2 text-sm text-slate-500" data-i18n="prod_sub">Browse equipment by product category and request details or a quotation.</p>
         </div>
-        <span id="product-count" class="text-sm font-semibold text-slate-500" aria-live="polite" data-i18n="loading_products">Loading products…</span>
+        <span id="product-count" class="w-40 shrink-0 whitespace-nowrap text-right text-sm font-semibold text-slate-500" aria-live="polite" data-i18n="loading_products">Loading products…</span>
       </div>
       <div id="product-filters" class="mb-8 flex flex-wrap gap-3">
         <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white" data-i18n="filter_all">All Equipment</button>
@@ -112,9 +112,170 @@
         <button type="button" data-category="mixing-blending" onclick="filterProducts('mixing-blending')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_mixing">Mixing & Blending</button>
       </div>
       <p class="mb-5 text-xs text-slate-500" data-i18n="catalog_note">Product names are shown in the selected language alongside their original English names. Technical specifications are kept as supplied.</p>
-      <div id="product-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <div class="animate-pulse rounded-xl bg-white p-6 shadow"><div class="mb-4 h-48 rounded-lg bg-slate-200"></div><div class="mb-2 h-6 w-3/4 rounded bg-slate-200"></div></div>
-      </div>
+      <div id="product-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3" aria-busy="true">
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="mt-4 border-t border-slate-100 p-6 pt-4">
+                    <div class="h-8 w-2/3 rounded bg-slate-200"></div>
+                  </div>
+                </article>
+        <article aria-hidden="true" class="animate-pulse flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md">
+                  <div>
+                    <div class="h-48 bg-slate-100"></div>
+                    <div class="space-y-3 p-6">
+                      <div class="h-6 w-4/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-2/5 rounded bg-slate-200"></div>
+                      <div class="h-4 w-full rounded bg-slate-100"></div>
+                      <div class="h-4 w-3/4 rounded bg-slate-100"></div>
+                    </div>
     </section>
 
     <section id="videos" class="bg-slate-900 px-4 py-16 text-white">
@@ -733,15 +894,19 @@
       const count = document.getElementById('product-count');
       if (!grid || !count) return;
 
-      // Only show category filters that currently have matching catalogue items.
-      // This avoids empty category pages while allowing new categories (including
-      // palletizers) to appear automatically when their product records are added.
+      // Keep every filter in the layout to prevent the toolbar from reflowing
+      // when the catalogue request completes. Disable categories with no products
+      // instead of hiding their buttons.
       document.querySelectorAll('.filter-btn[data-category]').forEach((button) => {
         const category = button.dataset.category;
         const hasProducts = category === 'all' || allProducts.some(
           (product) => getProductCategory(product.meta) === category
         );
-        button.hidden = !hasProducts;
+        button.hidden = false;
+        button.disabled = !hasProducts;
+        button.setAttribute('aria-disabled', String(!hasProducts));
+        button.classList.toggle('opacity-50', !hasProducts);
+        button.classList.toggle('cursor-not-allowed', !hasProducts);
         if (!hasProducts && activeProductCategory === category) activeProductCategory = 'all';
       });
 
@@ -826,7 +991,7 @@
     function renderProductCard(meta = {}, body = '') {
       const grid = document.getElementById('product-grid');
       const card = document.createElement('article');
-      card.className = 'flex flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl';
+      card.className = 'flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl';
       const upper = document.createElement('div');
       const imageWrap = document.createElement('div');
       imageWrap.className = 'relative h-48 overflow-hidden bg-slate-100';
