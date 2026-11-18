@@ -287,21 +287,21 @@
             <a id="tiktok-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M19.6 7.2a6.7 6.7 0 0 1-4.1-1.4v8.1a6.2 6.2 0 1 1-5.3-6.1v3.4a2.9 2.9 0 1 0 2 2.8V2h3.3c.2 2.1 1.8 3.8 4.1 4.1v1.1Z"/></svg><span data-i18n="tiktok_profile">TikTok Profile</span></a>
           </div>
         </div>
-        <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-8 text-center text-slate-500" data-i18n="video_empty">Videos will be added when available.</div></div>
+        <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-8 text-center text-slate-300" data-i18n="video_empty">Videos will be added when available.</div></div>
       </div>
     </section>
 
     <section id="cases" class="border-t border-slate-200 bg-white px-4 py-16">
       <div class="mx-auto max-w-7xl">
         <div class="mb-12 text-center"><h2 class="mb-2 text-3xl font-bold text-slate-900" data-i18n="cases_title">Shipping & Project Cases</h2><p class="text-sm text-slate-500" data-i18n="cases_sub">Project and shipment photos, where available.</p></div>
-        <div id="cases-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-6 text-center text-slate-400" data-i18n="loading_gallery">Loading gallery…</div></div>
+        <div id="cases-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-6 text-center text-slate-600" data-i18n="loading_gallery">Loading gallery…</div></div>
       </div>
     </section>
 
     <section id="why-us" class="border-y border-slate-200 bg-slate-100 px-4 py-16">
       <div class="mx-auto max-w-7xl text-center">
         <h2 class="mb-2 text-3xl font-bold text-slate-900" data-i18n="why_title">Why Work With AIZGZ?</h2>
-        <p class="mb-12 text-sm text-slate-500" data-i18n="why_sub">Product information and quotation support for international buyers.</p>
+        <p class="mb-12 text-sm text-slate-600" data-i18n="why_sub">Product information and quotation support for international buyers.</p>
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6 3V9l6 3V5h4v16H3Z"/><path d="M16 5V3h3v2M7 17h2m3 0h2m3 0h2"/></svg></div><h3 class="mb-2 text-lg font-bold" data-i18n="w1_title">Equipment Sourcing</h3><p class="text-xs text-slate-500" data-i18n="w1_desc">Discuss available equipment and supplier arrangements for your project.</p></div>
           <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5v17h14V4h-4M9 3h6v4H9z"/><path d="m8 14 2.2 2.2L16 10.5"/></svg></div><h3 class="mb-2 text-lg font-bold" data-i18n="w2_title">Specification Review</h3><p class="text-xs text-slate-500" data-i18n="w2_desc">Confirm technical specifications and configuration before ordering.</p></div>
@@ -720,7 +720,7 @@
 
     async function loadSiteData() {
       try {
-        const url = '/api/content?collection=settings';
+        const url = '/api/content/?collection=settings';
         const response = await fetch(url);
         if (!response.ok) return;
         const payload = await response.json();
@@ -864,7 +864,7 @@
       const count = document.getElementById('product-count');
       grid.setAttribute('aria-busy', 'true');
       try {
-        const response = await fetch('/api/content?collection=products', { cache: 'no-store' });
+        const response = await fetch('/api/content/?collection=products', { cache: 'no-store' });
         if (!response.ok) throw new Error(`Product service HTTP ${response.status}`);
         const payload = await response.json();
         const markdownFiles = Array.isArray(payload.files) ? payload.files : [];
@@ -913,15 +913,51 @@
       const filtered = activeProductCategory === 'all'
         ? allProducts
         : allProducts.filter((product) => getProductCategory(product.meta) === activeProductCategory);
-      grid.replaceChildren();
+      const fragment = document.createDocumentFragment();
       if (!filtered.length) {
         const empty = document.createElement('div');
         empty.className = 'col-span-full py-12 text-center text-slate-500';
         empty.textContent = activeProductCategory === 'all' ? currentTexts().empty_products : currentTexts().empty_category;
-        grid.appendChild(empty);
+        fragment.appendChild(empty);
       } else {
-        filtered.forEach((product) => renderProductCard(product.meta, product.body));
+        const cards = filtered.map((product) => renderProductCard(product.meta, product.body));
+        const skeletons = [...grid.querySelectorAll(':scope > article[aria-hidden="true"]')];
+
+        // Match each initial skeleton to the final card's actual grid-row height.
+        // This keeps the product section from growing when cards with wrapped or
+        // localized content replace the loading placeholders.
+        if (skeletons.length === cards.length) {
+          const measureGrid = document.createElement('div');
+          measureGrid.className = grid.className;
+          measureGrid.setAttribute('aria-hidden', 'true');
+          Object.assign(measureGrid.style, {
+            position: 'fixed',
+            left: '-100000px',
+            top: '0',
+            width: grid.getBoundingClientRect().width + 'px',
+            visibility: 'hidden',
+            pointerEvents: 'none'
+          });
+
+          try {
+            cards.forEach((card) => measureGrid.appendChild(card));
+            document.body.appendChild(measureGrid);
+            const cardHeights = [...measureGrid.children].map(
+              (card) => Math.ceil(card.getBoundingClientRect().height)
+            );
+            skeletons.forEach((skeleton, index) => {
+              skeleton.style.height = cardHeights[index] + 'px';
+            });
+          } catch (error) {
+            console.warn('Could not measure product placeholder heights:', error);
+          } finally {
+            measureGrid.remove();
+          }
+        }
+
+        cards.forEach((card) => fragment.appendChild(card));
       }
+      grid.replaceChildren(fragment);
       count.textContent = filtered.length + ' ' + (filtered.length === 1 ? currentTexts().count_product : currentTexts().count_products);
     }
 
@@ -989,7 +1025,6 @@
     }
 
     function renderProductCard(meta = {}, body = '') {
-      const grid = document.getElementById('product-grid');
       const card = document.createElement('article');
       card.className = 'flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl';
       const upper = document.createElement('div');
@@ -1013,7 +1048,7 @@
       }
       if (isDisplayableCatalogValue(meta.model)) {
         const model = document.createElement('p');
-        model.className = 'mt-1 font-mono text-xs text-slate-400';
+        model.className = 'mt-1 font-mono text-xs text-slate-600';
         model.textContent = currentTexts().label_model + ': ' + meta.model;
         content.appendChild(model);
       }
@@ -1049,7 +1084,7 @@
       inquiry.addEventListener('click', () => fillInquiryModel(meta.title || meta.model || 'Product Inquiry'));
       actions.append(details, inquiry);
       card.appendChild(actions);
-      grid.appendChild(card);
+      return card;
     }
 
     function fillInquiryModel(title) {
@@ -1238,74 +1273,111 @@
       modal.classList.remove('flex');
     }
 
+    const contentCollectionCache = new Map();
+    const contentCollectionRequests = new Map();
+
     async function fetchContentCollection(collection, gridId, kind) {
       const grid = document.getElementById(gridId);
-      try {
-        const response = await fetch(`/api/content?collection=${encodeURIComponent(collection)}`, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`Content service HTTP ${response.status}`);
-        const payload = await response.json();
-        const files = Array.isArray(payload.files) ? payload.files : [];
-        const results = await Promise.allSettled(files.map(async (file) => parseFrontMatter(file.content || '').meta));
-        const items = results.filter((result) => result.status === 'fulfilled').map((result) => result.value).filter((meta) => kind !== 'video' || (isSafeHttpUrl(meta.video_url) && !String(meta.video_url).includes('YOUR_VIDEO_ID')));
-        grid.replaceChildren();
-        if (!items.length) {
-          const empty = document.createElement('div');
-          empty.className = 'col-span-full py-8 text-center text-slate-400';
-          empty.textContent = kind === 'case' ? currentTexts().case_empty : currentTexts().video_empty;
-          grid.appendChild(empty);
+      if (!grid) return;
+
+      let items = contentCollectionCache.get(collection);
+      if (!items) {
+        const pendingRequest = contentCollectionRequests.get(collection);
+        if (pendingRequest) {
+          // An initial request is already loading. Its completion renders using
+          // the current language, so a language change does not need another fetch.
+          await pendingRequest;
           return;
         }
-        items.forEach((meta) => {
-          const card = document.createElement('article');
-          card.className = kind === 'case'
-            ? 'overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow'
-            : 'overflow-hidden rounded-xl border border-slate-700 bg-slate-800 shadow';
-          const imageWrap = document.createElement('div');
-          imageWrap.className = `relative h-48 overflow-hidden ${kind === 'case' ? 'bg-slate-200' : 'bg-slate-900'}`;
-          imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover', 'card'));
-          if (kind === 'video') {
-            const videoLink = document.createElement('a');
-            videoLink.href = isSafeHttpUrl(meta.video_url) ? meta.video_url : '#';
-            videoLink.target = '_blank';
-            videoLink.rel = 'noopener noreferrer';
-            videoLink.className = 'absolute inset-0 flex items-center justify-center';
-            videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
-            const icon = document.createElement('span');
-            icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
-            icon.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
-            videoLink.appendChild(icon);
-            imageWrap.appendChild(videoLink);
+
+        const request = (async () => {
+          const response = await fetch(`/api/content/?collection=${encodeURIComponent(collection)}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`Content service HTTP ${response.status}`);
+          const payload = await response.json();
+          const files = Array.isArray(payload.files) ? payload.files : [];
+          const results = await Promise.allSettled(files.map(async (file) => parseFrontMatter(file.content || '').meta));
+          const parsedItems = results
+            .filter((result) => result.status === 'fulfilled')
+            .map((result) => result.value)
+            .filter((meta) => kind !== 'video' || (isSafeHttpUrl(meta.video_url) && !String(meta.video_url).includes('YOUR_VIDEO_ID')));
+          contentCollectionCache.set(collection, parsedItems);
+        })();
+
+        contentCollectionRequests.set(collection, request);
+        try {
+          await request;
+        } catch (error) {
+          console.error(`Failed to load ${collection}:`, error);
+          grid.textContent = kind === 'case' ? currentTexts().case_error : currentTexts().video_error;
+          return;
+        } finally {
+          if (contentCollectionRequests.get(collection) === request) {
+            contentCollectionRequests.delete(collection);
           }
-          card.appendChild(imageWrap);
-          const bodyEl = document.createElement('div');
-          bodyEl.className = 'p-5';
-          const title = document.createElement('h3');
-          title.className = `text-base font-bold ${kind === 'case' ? 'text-slate-800' : 'text-white'}`;
-          title.textContent = meta.title || (kind === 'case' ? 'Project Case' : 'Equipment Video');
-          bodyEl.appendChild(title);
-          const detail = kind === 'case' ? [meta.country, meta.date].filter(Boolean).join(' · ') : (meta.platform || 'Video');
-          if (detail) {
-            const p = document.createElement('p');
-            p.className = `mt-2 text-xs ${kind === 'case' ? 'text-slate-400' : 'text-slate-400'}`;
-            p.textContent = detail;
-            bodyEl.appendChild(p);
-          }
-          if (kind === 'video' && isSafeHttpUrl(meta.video_url)) {
-            const watch = document.createElement('a');
-            watch.href = meta.video_url;
-            watch.target = '_blank';
-            watch.rel = 'noopener noreferrer';
-            watch.className = 'mt-3 inline-block text-xs text-amber-400 hover:underline';
-            watch.textContent = currentTexts().watch_on + ' ' + (meta.platform || 'video platform') + ' →';
-            bodyEl.appendChild(watch);
-          }
-          card.appendChild(bodyEl);
-          grid.appendChild(card);
-        });
-      } catch (error) {
-        console.error(`Failed to load ${collection}:`, error);
-        grid.textContent = kind === 'case' ? currentTexts().case_error : currentTexts().video_error;
+        }
+        items = contentCollectionCache.get(collection) || [];
       }
+
+      // Reuse parsed data on language changes; only rebuild the visible cards
+      // so translated empty-state and watch labels stay current.
+      grid.replaceChildren();
+      if (!items.length) {
+        const empty = document.createElement('div');
+        empty.className = `col-span-full py-8 text-center ${kind === 'case' ? 'text-slate-600' : 'text-slate-300'}`;
+        empty.textContent = kind === 'case' ? currentTexts().case_empty : currentTexts().video_empty;
+        grid.appendChild(empty);
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      items.forEach((meta) => {
+        const card = document.createElement('article');
+        card.className = kind === 'case'
+          ? 'overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow'
+          : 'overflow-hidden rounded-xl border border-slate-700 bg-slate-800 shadow';
+        const imageWrap = document.createElement('div');
+        imageWrap.className = `relative h-48 overflow-hidden ${kind === 'case' ? 'bg-slate-200' : 'bg-slate-900'}`;
+        imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover', 'card'));
+        if (kind === 'video') {
+          const videoLink = document.createElement('a');
+          videoLink.href = isSafeHttpUrl(meta.video_url) ? meta.video_url : '#';
+          videoLink.target = '_blank';
+          videoLink.rel = 'noopener noreferrer';
+          videoLink.className = 'absolute inset-0 flex items-center justify-center';
+          videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
+          const icon = document.createElement('span');
+          icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
+          icon.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
+          videoLink.appendChild(icon);
+          imageWrap.appendChild(videoLink);
+        }
+        card.appendChild(imageWrap);
+        const bodyEl = document.createElement('div');
+        bodyEl.className = 'p-5';
+        const title = document.createElement('h3');
+        title.className = `text-base font-bold ${kind === 'case' ? 'text-slate-800' : 'text-white'}`;
+        title.textContent = meta.title || (kind === 'case' ? 'Project Case' : 'Equipment Video');
+        bodyEl.appendChild(title);
+        const detail = kind === 'case' ? [meta.country, meta.date].filter(Boolean).join(' · ') : (meta.platform || 'Video');
+        if (detail) {
+          const p = document.createElement('p');
+          p.className = `mt-2 text-xs ${kind === 'case' ? 'text-slate-600' : 'text-slate-300'}`;
+          p.textContent = detail;
+          bodyEl.appendChild(p);
+        }
+        if (kind === 'video' && isSafeHttpUrl(meta.video_url)) {
+          const watch = document.createElement('a');
+          watch.href = meta.video_url;
+          watch.target = '_blank';
+          watch.rel = 'noopener noreferrer';
+          watch.className = 'mt-3 inline-block text-xs text-amber-400 hover:underline';
+          watch.textContent = currentTexts().watch_on + ' ' + (meta.platform || 'video platform') + ' →';
+          bodyEl.appendChild(watch);
+        }
+        card.appendChild(bodyEl);
+        fragment.appendChild(card);
+      });
+      grid.replaceChildren(fragment);
     }
 
     async function submitFormspree(event) {

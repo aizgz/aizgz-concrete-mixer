@@ -28,7 +28,7 @@ class ResponsiveWebPTests(unittest.TestCase):
         with Image.open(path) as image:
             return image.size
 
-    def test_generates_400_800_and_full_size_without_upscaling(self):
+    def test_generates_proportional_card_variants_and_full_size(self):
         source = self.make_image("machine.jpg", (1200, 600))
         generated = convert_image(source)
         self.assertEqual(len(generated), 3)
@@ -37,11 +37,11 @@ class ResponsiveWebPTests(unittest.TestCase):
         self.assertEqual(self.dimensions(Path(str(source) + ".webp")), (1200, 600))
         self.assertTrue(source.exists())
 
-    def test_small_source_is_never_upscaled(self):
-        source = self.make_image("small.png", (320, 160))
+    def test_small_source_is_not_upscaled(self):
+        source = self.make_image("small.png", (320, 320))
         convert_image(source)
-        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (320, 160))
-        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (320, 160))
+        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (320, 320))
+        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (320, 320))
 
     def test_same_filename_replacement_refreshes_variants(self):
         source = self.make_image("replace.jpg", (1200, 600))
@@ -57,7 +57,9 @@ class ResponsiveWebPTests(unittest.TestCase):
         convert_image(source)
         with Image.open(Path(str(source) + ".400.webp")) as image:
             self.assertEqual(image.mode, "RGBA")
-            self.assertLess(image.getpixel((0, 0))[3], 255)
+            self.assertEqual(image.size, (400, 200))
+            self.assertEqual(image.getpixel((0, 0))[3], 80)
+            self.assertEqual(image.getpixel((200, 100))[3], 80)
 
     def test_orphan_cleanup_keeps_referenced_images(self):
         source = self.uploads / "removed.jpg"

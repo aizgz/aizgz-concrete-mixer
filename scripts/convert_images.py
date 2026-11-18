@@ -2,12 +2,14 @@
 """Create responsive WebP copies for CMS-uploaded JPEG and PNG images.
 
 Original uploads are never modified. For each source image, generate:
-  <source>.400.webp  - up to 400px wide
-  <source>.800.webp  - up to 800px wide
-  <source>.webp      - full source dimensions
+  <source>.400.webp  - up to 400px wide, preserving the source aspect ratio
+  <source>.800.webp  - up to 800px wide, preserving the source aspect ratio
+  <source>.webp      - full source dimensions for product detail views
 
-Small images are never upscaled. Re-running always refreshes variants, so
-replacing an upload with the same filename cannot leave stale optimized files.
+Card variants are proportionally resized without cropping, padding, or
+stretching. Smaller sources are never upscaled. Re-running always refreshes
+variants, so replacing an upload with the same filename cannot leave stale
+optimized files.
 """
 from pathlib import Path
 from PIL import Image, ImageOps
@@ -16,7 +18,7 @@ ROOT_DIR = Path(".")
 UPLOADS_DIR = ROOT_DIR / "uploads"
 SUPPORTED_SUFFIXES = {".jpg", ".jpeg", ".png"}
 VARIANT_WIDTHS = (400, 800)
-WEBP_QUALITY = 82
+WEBP_QUALITY = 72
 WEBP_METHOD = 6
 
 
