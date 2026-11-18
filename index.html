@@ -769,12 +769,36 @@
 
     function createImage(src, alt, className) {
       const img = document.createElement('img');
-      img.src = isSafeHttpUrl(src) || (typeof src === 'string' && src.startsWith('/uploads/')) ? src : PLACEHOLDER_IMAGE;
+      const safeSrc = isSafeHttpUrl(src) || (typeof src === 'string' && src.startsWith('/uploads/')) ? src : PLACEHOLDER_IMAGE;
+      const useGeneratedWebp = typeof safeSrc === 'string'
+        && safeSrc.startsWith('/uploads/')
+        && /\.(?:jpe?g|png)$/i.test(safeSrc);
+
       img.alt = alt || 'Industrial equipment';
       img.loading = 'lazy';
       img.decoding = 'async';
       img.className = className;
-      img.onerror = () => { img.onerror = null; img.src = PLACEHOLDER_IMAGE; };
+
+      if (useGeneratedWebp) {
+        // CMS keeps the original upload; GitHub Actions creates a sibling .webp file.
+        // Fall back to the original if conversion has not completed or the WebP is unavailable.
+        img.dataset.originalSrc = safeSrc;
+        img.dataset.webpFallback = 'pending';
+        img.src = safeSrc + '.webp';
+        img.onerror = () => {
+          if (img.dataset.webpFallback === 'pending') {
+            img.dataset.webpFallback = 'original';
+            img.src = img.dataset.originalSrc;
+            return;
+          }
+          img.onerror = null;
+          img.src = PLACEHOLDER_IMAGE;
+        };
+      } else {
+        img.src = safeSrc;
+        img.onerror = () => { img.onerror = null; img.src = PLACEHOLDER_IMAGE; };
+      }
+
       return img;
     }
 
