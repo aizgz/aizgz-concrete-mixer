@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - tailwind-static-css
+      - fix-product-grid-layout-shift
     paths:
       - "index.html"
       - "tailwind.config.js"
