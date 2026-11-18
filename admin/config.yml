@@ -22,15 +22,15 @@ collections:
         fields:
           - { label: "Brand Name (品牌名称)", name: "brand_name", widget: "string", default: "AIZGZ" }
           - { label: "Brand Tagline (品牌标语)", name: "brand_tagline", widget: "string", default: "HEAVY MACHINERY" }
-          - { label: "WhatsApp Number (带国家代码, 如 8613800138000)", name: "whatsapp_number", widget: "string", default: "8612345678900" }
-          - { label: "Contact Email (联系邮箱)", name: "contact_email", widget: "string", default: "sales@aizgz.com" }
+          - { label: "WhatsApp Number (带国家代码, 如 8613800138000)", name: "whatsapp_number", widget: "string", default: "8615037113544" }
+          - { label: "Contact Email (联系邮箱)", name: "contact_email", widget: "string", default: "aimr@qq.com" }
           - { label: "Formspree Form ID (询盘表单ID)", name: "formspree_id", widget: "string", default: "" }
           - { label: "Google Analytics ID (谷歌统计ID)", name: "ga_id", widget: "string", default: "" }
-          - { label: "YouTube Channel / Video URL (YouTube主页)", name: "youtube_url", widget: "string", default: "https://www.youtube.com" }
-          - { label: "TikTok Profile URL (TikTok主页)", name: "tiktok_url", widget: "string", default: "https://www.tiktok.com" }
-          - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Global Supplier of Heavy Machinery & Dry Mortar Equipment" }
-          - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "Factory direct supply of dry mix mortar plants, tile adhesive lines, concrete equipment, and industrial machinery for international projects." }
-          - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "AIZGZ Machinery specializes in manufacturing and exporting high-performance construction machinery, dry mortar production lines, and industrial mixing equipment worldwide." }
+          - { label: "YouTube Channel / Video URL (YouTube主页)", name: "youtube_url", widget: "string", default: "" }
+          - { label: "TikTok Profile URL (TikTok主页)", name: "tiktok_url", widget: "string", default: "" }
+          - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Industrial Equipment for Construction & Material Handling" }
+          - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "AIZGZ Machinery connects international buyers with equipment suppliers and helps review specifications, availability, quotations, and shipping requirements." }
+          - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "AIZGZ Machinery connects international buyers with equipment suppliers for construction, dry-mix materials, mixing, packaging, and material handling." }
 
   # 2. 产品管理（广泛/通用型设备）
   - name: "products"
@@ -39,33 +39,54 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Product Title (产品英文名称)", name: "title", widget: "string" }
+      - { label: "Product Title - English (产品英文名称)", name: "title", widget: "string" }
+      - { label: "Product Title - Spanish (西班牙语名称)", name: "title_es", widget: "string", required: false }
+      - { label: "Product Title - Arabic (阿拉伯语名称)", name: "title_ar", widget: "string", required: false }
+      - { label: "Product Title - Russian (俄语名称)", name: "title_ru", widget: "string", required: false }
+      - { label: "Model (型号)", name: "model", widget: "string", required: false }
+      - { label: "Internal Material Capacity (设备内部物料容量)", name: "internal_capacity", widget: "string", required: false }
       # 👈 核心升级：新增设备分类下拉菜单，涵盖干粉砂浆及重型建机
       - { 
           label: "Category (设备大类)", 
           name: "category", 
           widget: "select", 
           options: [
-            "Dry Mix Mortar Plant", 
+            "Dry Mix Mortar Plant",
+            "Mixing & Blending Equipment", 
             "Tile Adhesive Production Line", 
             "Wall Putty Making Machine", 
             "Concrete Equipment", 
             "Block & Brick Making Machine", 
             "Crushing & Screening Plant", 
-            "Packing & Auxiliary Equipment"
+            "Packing & Auxiliary Equipment",
+            "Palletizers"
           ] 
         }
-      - { label: "Model Code / Capacity (型号/产能，如 10-20 t/h 或 350L)", name: "capacity", widget: "string", required: false }
+      - { label: "Capacity / Throughput (产能)", name: "capacity", widget: "string", required: false }
+      - { label: "Voltage (电压)", name: "voltage", widget: "string", required: false }
+      - { label: "Frequency (频率)", name: "frequency", widget: "string", required: false }
+      - { label: "Motor Power (电机功率)", name: "motor_power", widget: "string", required: false }
+      - { label: "Packaging Range (包装重量范围)", name: "packaging_range", widget: "string", required: false }
+      - { label: "Mixing Volume (搅拌容积/批次容量)", name: "mixing_volume", widget: "string", required: false }
+      - { label: "Mixing Time (搅拌时间)", name: "mixing_time", widget: "string", required: false }
+      - { label: "Application (适用物料/用途)", name: "application", widget: "text", required: false }
+      - { label: "Optional Components (可选配置)", name: "optional_components", widget: "text", required: false }
+      - { label: "Supply Status (供货状态)", name: "supply_status", widget: "select", options: ["Available for Supply", "Sourcing on Request", "Temporarily Unavailable"], required: false }
+      - { label: "Manufacturer (制造商)", name: "manufacturer", widget: "string", required: false }
+      - { label: "Supply Relationship (供应关系)", name: "supply_relationship", widget: "select", options: ["Manufacturer", "Factory Partner", "Authorized Distributor", "Non-exclusive Distributor", "Sourcing Partner", "To Be Confirmed"], required: false }
       - { 
           label: "Power / Control Type (动力/控制方式)", 
           name: "power_type", 
           widget: "select", 
-          options: ["Automatic PLC System", "Electric Engine", "Diesel Engine", "Semi-Automatic"],
+          options: ["Electric Motor", "Automatic PLC System", "Electric Engine", "Diesel Engine", "Semi-Automatic"],
           required: false
         }
       - { label: "Product Image (产品主图)", name: "image", widget: "image" }
       - { label: "Short Summary (简短介绍/摘要)", name: "summary", widget: "text", required: false }
-      - { label: "Technical Specifications & Details (详细参数与说明)", name: "body", widget: "markdown" }
+      - { label: "Technical Specifications & Details - English (英文技术参数与说明)", name: "body", widget: "markdown" }
+      - { label: "Technical Details - Spanish (西班牙语详细说明)", name: "body_es", widget: "markdown", required: false }
+      - { label: "Technical Details - Arabic (阿拉伯语详细说明)", name: "body_ar", widget: "markdown", required: false }
+      - { label: "Technical Details - Russian (俄语详细说明)", name: "body_ru", widget: "markdown", required: false }
 
   # 3. 发货与工程成功案例
   - name: "cases"

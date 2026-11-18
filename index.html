@@ -7,9 +7,12 @@
   <meta name="description" content="AIZGZ Machinery supplies concrete mixers, bagged material palletizers, and mortar equipment from China. Contact us for product specifications, customization, and shipping inquiries.">
   <link rel="canonical" href="https://aizgz.vercel.app/">
   <meta name="theme-color" content="#0f172a">
+  <style>html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .text-left{text-align:right}html[dir="rtl"] .text-right{text-align:left}html[dir="rtl"] #whatsapp-link{right:auto;left:1.5rem}html[dir="rtl"] #policy-modal button.absolute,html[dir="rtl"] #product-modal button.absolute{right:auto;left:1rem}</style>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
   <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-md">
@@ -18,6 +21,13 @@
         <span id="brand-name" class="text-2xl font-bold tracking-wide text-amber-500">AIZGZ</span>
         <span id="brand-tagline" class="rounded bg-amber-500 px-2 py-0.5 text-xs font-semibold text-slate-900">MACHINERY</span>
       </a>
+      <div class="flex items-center gap-2 md:hidden">
+        <select id="lang-switcher-mobile" onchange="changeLanguage(this.value)" class="rounded border border-slate-700 bg-slate-800 px-2 py-1 text-xs font-bold text-amber-400" aria-label="Language"><option value="en">English</option><option value="es">Español</option><option value="ar">العربية</option><option value="ru">Русский</option></select>
+        <button id="mobile-menu-toggle" type="button" onclick="toggleMobileMenu()" class="inline-flex items-center gap-1 rounded border border-slate-600 px-2 py-2 text-xs font-bold text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-400" aria-controls="mobile-nav-menu" aria-expanded="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span data-i18n="mobile_menu">Menu</span>
+        </button>
+      </div>
       <nav class="hidden items-center gap-5 text-sm font-medium md:flex">
         <a href="#products" class="hover:text-amber-400" data-i18n="nav_products">Products</a>
         <a href="#videos" class="hover:text-amber-400" data-i18n="nav_videos">Videos</a>
@@ -30,14 +40,22 @@
         </select>
       </nav>
     </div>
+    <nav id="mobile-nav-menu" class="hidden border-t border-slate-700 bg-slate-900 px-4 py-2 md:hidden" aria-label="Mobile navigation">
+      <a href="#products" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_products">Products</a>
+      <a href="#videos" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_videos">Videos</a>
+      <a href="#cases" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_cases">Shipping & Cases</a>
+      <a href="#why-us" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_why">Why Us</a>
+      <a href="#faq" onclick="closeMobileMenu()" class="block rounded px-3 py-3 text-sm font-medium hover:bg-slate-800" data-i18n="nav_faq">FAQ</a>
+      <a href="#contact" onclick="closeMobileMenu()" class="mt-1 block rounded bg-amber-500 px-3 py-3 text-sm font-bold text-slate-900 hover:bg-amber-600" data-i18n="nav_inquiry">Inquiry</a>
+    </nav>
   </header>
 
   <main>
     <section class="border-b-4 border-amber-500 bg-slate-800 px-4 py-20 text-white">
       <div class="mx-auto max-w-5xl text-center">
         <p class="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-amber-400">AIZGZ Machinery</p>
-        <h1 id="hero-title" class="mb-5 text-4xl font-extrabold leading-tight md:text-6xl">Industrial Equipment for Construction & Material Handling</h1>
-        <p id="hero-subtitle" class="mx-auto mb-8 max-w-3xl text-lg text-slate-300 md:text-xl">Explore concrete mixers, bag palletizing machines, and mortar equipment. Contact us for product specifications, availability, and quotations.</p>
+        <h1 id="hero-title" data-i18n="hero_title" class="mb-5 text-4xl font-extrabold leading-tight md:text-6xl">Industrial Equipment for Construction & Material Handling</h1>
+        <p id="hero-subtitle" data-i18n="hero_subtitle" class="mx-auto mb-8 max-w-3xl text-lg text-slate-300 md:text-xl">Explore concrete mixers, bag palletizing machines, and mortar equipment. Contact us for product specifications, availability, and quotations.</p>
         <div class="flex flex-wrap justify-center gap-4">
           <a href="#products" class="rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 shadow-lg hover:bg-amber-600" data-i18n="btn_browse">Browse Products</a>
           <a href="#contact" onclick="fillInquiryModel('Product Catalog Request')" class="rounded-lg bg-slate-700 px-6 py-3 font-bold text-white shadow-lg hover:bg-slate-600" data-i18n="btn_catalog">Request Product Catalog</a>
@@ -51,14 +69,19 @@
           <h2 class="text-3xl font-bold text-slate-900" data-i18n="prod_title">Industrial Equipment</h2>
           <p class="mt-2 text-sm text-slate-500" data-i18n="prod_sub">Browse equipment by product category and request details or a quotation.</p>
         </div>
-        <span id="product-count" class="text-sm font-semibold text-slate-500" aria-live="polite">Loading products…</span>
+        <span id="product-count" class="text-sm font-semibold text-slate-500" aria-live="polite" data-i18n="loading_products">Loading products…</span>
       </div>
       <div id="product-filters" class="mb-8 flex flex-wrap gap-3">
-        <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white">All Equipment</button>
-        <button type="button" data-category="concrete-mixers" onclick="filterProducts('concrete-mixers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Concrete Mixers</button>
-        <button type="button" data-category="palletizers" onclick="filterProducts('palletizers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Bag Palletizing</button>
-        <button type="button" data-category="mortar-equipment" onclick="filterProducts('mortar-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Mortar Equipment</button>
+        <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white" data-i18n="filter_all">All Equipment</button>
+        <button type="button" data-category="concrete-mixers" onclick="filterProducts('concrete-mixers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_concrete">Concrete Equipment</button>
+        <button type="button" data-category="mortar-equipment" onclick="filterProducts('mortar-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_mortar">Dry Mix & Mortar</button>
+        <button type="button" data-category="palletizers" onclick="filterProducts('palletizers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_pallet">Bag Palletizing</button>
+        <button type="button" data-category="block-brick" onclick="filterProducts('block-brick')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_block">Block & Brick</button>
+        <button type="button" data-category="crushing-screening" onclick="filterProducts('crushing-screening')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_crushing">Crushing & Screening</button>
+        <button type="button" data-category="packing-auxiliary" onclick="filterProducts('packing-auxiliary')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_packing">Packing & Auxiliary</button>
+        <button type="button" data-category="mixing-blending" onclick="filterProducts('mixing-blending')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_mixing">Mixing & Blending</button>
       </div>
+      <p class="mb-5 text-xs text-slate-500" data-i18n="catalog_note">Product names are shown in the selected language alongside their original English names. Technical specifications are kept as supplied.</p>
       <div id="product-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <div class="animate-pulse rounded-xl bg-white p-6 shadow"><div class="mb-4 h-48 rounded-lg bg-slate-200"></div><div class="mb-2 h-6 w-3/4 rounded bg-slate-200"></div></div>
       </div>
@@ -69,18 +92,18 @@
         <div class="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-center">
           <div><h2 class="mb-2 text-3xl font-bold text-amber-500" data-i18n="video_title">Equipment Video Showroom</h2><p class="text-sm text-slate-400" data-i18n="video_sub">Product demonstrations, equipment details, and production highlights.</p></div>
           <div class="flex flex-wrap gap-3">
-            <a id="youtube-btn" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-bold hover:bg-red-700"><i class="fa-brands fa-youtube text-lg"></i><span>YouTube Channel</span></a>
-            <a id="tiktok-btn" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><i class="fa-brands fa-tiktok text-lg"></i><span>TikTok Profile</span></a>
+            <a id="youtube-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-bold hover:bg-red-700"><i class="fa-brands fa-youtube text-lg"></i><span data-i18n="youtube_channel">YouTube Channel</span></a>
+            <a id="tiktok-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><i class="fa-brands fa-tiktok text-lg"></i><span data-i18n="tiktok_profile">TikTok Profile</span></a>
           </div>
         </div>
-        <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-8 text-center text-slate-500">Videos will be updated via CMS.</div></div>
+        <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-8 text-center text-slate-500" data-i18n="video_empty">Videos will be added when available.</div></div>
       </div>
     </section>
 
     <section id="cases" class="border-t border-slate-200 bg-white px-4 py-16">
       <div class="mx-auto max-w-7xl">
         <div class="mb-12 text-center"><h2 class="mb-2 text-3xl font-bold text-slate-900" data-i18n="cases_title">Shipping & Project Cases</h2><p class="text-sm text-slate-500" data-i18n="cases_sub">Project and shipment photos, where available.</p></div>
-        <div id="cases-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-6 text-center text-slate-400">Loading gallery…</div></div>
+        <div id="cases-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-6 text-center text-slate-400" data-i18n="loading_gallery">Loading gallery…</div></div>
       </div>
     </section>
 
@@ -97,8 +120,25 @@
       </div>
     </section>
 
+    <section id="customization" class="border-b border-slate-200 bg-white px-4 py-16">
+      <div class="mx-auto max-w-7xl">
+        <div class="mx-auto mb-10 max-w-3xl text-center">
+          <h2 class="mb-3 text-3xl font-bold text-slate-900" data-i18n="custom_title">Customized Design & Manufacturing</h2>
+          <p class="text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_intro">All equipment can be customized to the buyer's requirements. We develop equipment drawings and proposed configurations around your project needs.</p>
+        </div>
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step1_title">1. Understand Requirements</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step1_desc">Discuss materials, intended application, target capacity, site conditions and other project needs.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step2_title">2. Prepare Drawings</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step2_desc">Prepare equipment drawings and a proposed configuration based on the buyer's requirements.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><i class="fa-solid fa-file-circle-check" aria-hidden="true"></i></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step3_title">3. Review & Confirm</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step3_desc">Review the drawings, configuration and technical details with the buyer before production.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><i class="fa-solid fa-gears" aria-hidden="true"></i></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step4_title">4. Start Manufacturing</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step4_desc">After the design and specifications are confirmed, manufacturing proceeds according to the approved requirements.</p></div>
+        </div>
+        <p class="mt-6 text-center text-xs leading-relaxed text-slate-500" data-i18n="custom_note">Final equipment configuration, dimensions, capacity and specifications are determined by the confirmed project design.</p>
+        <div class="mt-6 text-center"><a href="#contact" class="inline-flex rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 hover:bg-amber-600" data-i18n="custom_cta">Discuss Your Custom Requirements</a></div>
+      </div>
+    </section>
+
     <section id="about" class="bg-white px-4 py-16">
-      <div class="mx-auto max-w-4xl text-center"><h2 class="mb-4 text-3xl font-bold text-slate-900" data-i18n="about_title">About AIZGZ Machinery</h2><p id="about-text" class="text-sm leading-relaxed text-slate-600 md:text-base">We help international buyers explore industrial equipment, review product information, and request quotations for their project requirements.</p></div>
+      <div class="mx-auto max-w-4xl text-center"><h2 class="mb-4 text-3xl font-bold text-slate-900" data-i18n="about_title">About AIZGZ Machinery</h2><p id="about-text" data-i18n="about_text" class="text-sm leading-relaxed text-slate-600 md:text-base">We help international buyers explore industrial equipment, review product information, and request quotations for their project requirements.</p></div>
     </section>
 
     <section id="faq" class="border-t border-slate-200 bg-slate-50 px-4 py-16">
@@ -107,7 +147,7 @@
         <div class="space-y-4">
           <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800" data-i18n="faq1_q">What is the minimum order quantity?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500" data-i18n="faq1_a">Minimum order quantity depends on the product. Please contact us with the model and quantity you need.</p></details>
           <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800" data-i18n="faq2_q">What is the lead time?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500" data-i18n="faq2_a">Lead time depends on the model, configuration, availability, and order quantity. We will confirm it in the quotation.</p></details>
-          <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800">Can you arrange international shipping?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500">Shipping options and costs depend on the equipment, destination, packing requirements, and current freight rates. Please provide your destination port or address.</p></details>
+          <details class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><summary class="cursor-pointer font-bold text-slate-800" data-i18n="faq3_q">Can you arrange international shipping?</summary><p class="mt-3 text-xs leading-relaxed text-slate-500" data-i18n="faq3_a">Shipping options and costs depend on the equipment, destination, packing requirements, and current freight rates. Please provide your destination port or address.</p></details>
         </div>
       </div>
     </section>
@@ -117,17 +157,18 @@
         <div class="mb-10 text-center"><h2 class="mb-2 text-3xl font-bold text-amber-500" data-i18n="contact_title">Product Inquiry & Contact</h2><p class="text-sm text-slate-300" data-i18n="contact_sub">Share your requirements so we can help confirm suitable equipment and quotation details.</p></div>
         <form id="inquiry-form" class="space-y-6 rounded-xl bg-slate-800 p-8 shadow-xl" onsubmit="submitFormspree(event)">
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div><label for="inquiry-name" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_name">Your Name *</label><input id="inquiry-name" type="text" name="name" required autocomplete="name" placeholder="Your name" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
-            <div><label for="inquiry-email" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_email">Your Email *</label><input id="inquiry-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-name" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_name">Your Name *</label><input id="inquiry-name" type="text" name="name" required autocomplete="name" placeholder="Your name" data-i18n-placeholder="placeholder_name" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-email" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_email">Your Email *</label><input id="inquiry-email" type="email" name="email" required autocomplete="email" placeholder="you@company.com" data-i18n-placeholder="placeholder_email" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
           </div>
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div><label for="inquiry-phone" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_phone">Phone / WhatsApp</label><input id="inquiry-phone" type="text" name="phone" autocomplete="tel" placeholder="+ country code" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
-            <div><label for="inquiry-model" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_model">Interested Product / Model</label><input id="inquiry-model" type="text" name="product_model" placeholder="Product name or model" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-phone" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_phone">Phone / WhatsApp</label><input id="inquiry-phone" type="text" name="phone" autocomplete="tel" placeholder="+ country code" data-i18n-placeholder="placeholder_phone" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
+            <div><label for="inquiry-model" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_model">Interested Product / Model</label><input id="inquiry-model" type="text" name="product_model" placeholder="Product name or model" data-i18n-placeholder="placeholder_model" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></div>
           </div>
-          <div><label for="inquiry-message" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_msg">Message / Requirements *</label><textarea id="inquiry-message" name="message" rows="4" required placeholder="Product, quantity, application, destination, power requirements…" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea></div>
+          <div><label for="inquiry-message" class="mb-2 block text-sm font-semibold text-slate-300" data-i18n="form_msg">Message / Requirements *</label><textarea id="inquiry-message" name="message" rows="4" required placeholder="Product, quantity, application, destination, power requirements…" data-i18n-placeholder="placeholder_message" class="w-full rounded-lg bg-slate-700 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea></div>
           <button type="submit" id="submit-btn" class="w-full rounded-lg bg-amber-500 py-4 text-lg font-bold text-slate-900 shadow-lg transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60" data-i18n="form_submit">Send Inquiry</button>
           <p id="form-status" class="hidden text-center text-sm" role="status" aria-live="polite"></p>
-          <p class="text-center text-xs text-slate-400">Please do not include passwords, payment card details, or other sensitive information.</p>
+          <p class="text-center text-xs text-slate-400" data-i18n="form_security_note">Please do not include passwords, payment card details, or other sensitive information.</p>
+          <p class="text-center text-xs text-slate-400"><span data-i18n="contact_email_label">Email</span>: <a id="contact-email" class="text-amber-300 underline" href="mailto:aimr@qq.com">aimr@qq.com</a></p>
         </form>
       </div>
     </section>
@@ -148,17 +189,22 @@
   </div>
 
   <a id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="group fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-emerald-500 p-4 text-white shadow-2xl transition hover:bg-emerald-600" aria-label="Chat on WhatsApp">
-    <i class="fa-brands fa-whatsapp text-3xl"></i><span class="hidden font-bold text-sm sm:inline">Chat on WhatsApp</span>
+    <i class="fa-brands fa-whatsapp text-3xl"></i><span class="hidden font-bold text-sm sm:inline" data-i18n="whatsapp_label">Chat on WhatsApp</span>
   </a>
+
+  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[60] hidden border-t border-slate-300 bg-white p-4 text-slate-800 shadow-2xl" role="dialog" aria-live="polite" aria-label="Cookie preferences"><div class="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-center md:justify-between"><p class="text-sm" data-i18n="cookie_message">We use optional Google Analytics to understand site usage. You can accept or reject analytics cookies.</p><div class="flex flex-wrap gap-2"><button type="button" onclick="saveAnalyticsConsent(true)" class="rounded bg-amber-500 px-4 py-2 text-sm font-bold text-slate-900" data-i18n="cookie_accept">Accept analytics</button><button type="button" onclick="saveAnalyticsConsent(false)" class="rounded border border-slate-300 px-4 py-2 text-sm font-semibold" data-i18n="cookie_reject">Reject analytics</button><button type="button" onclick="openPolicy('cookies')" class="px-3 py-2 text-sm underline" data-i18n="cookie_learn">Learn more</button></div></div></div>
 
   <footer class="border-t border-slate-800 bg-slate-950 px-4 py-10 text-center text-slate-400">
     <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 md:flex-row">
       <p id="footer-copyright" class="text-sm">© 2026 AIZGZ Machinery. All rights reserved.</p>
       <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs font-medium">
-        <button type="button" onclick="openPolicy('privacy')" class="hover:text-amber-400">Privacy Policy</button>
-        <button type="button" onclick="openPolicy('shipping')" class="hover:text-amber-400">Shipping Information</button>
-        <button type="button" onclick="openPolicy('warranty')" class="hover:text-amber-400">Warranty Information</button>
-        <button type="button" onclick="openPolicy('terms')" class="hover:text-amber-400">Terms of Service</button>
+        <button type="button" onclick="openPolicy('privacy')" class="hover:text-amber-400" data-i18n="privacy_policy">Privacy Policy</button>
+        <button type="button" onclick="openPolicy('shipping')" class="hover:text-amber-400" data-i18n="shipping_policy">Shipping Information</button>
+        <button type="button" onclick="openPolicy('warranty')" class="hover:text-amber-400" data-i18n="warranty_policy">Warranty Information</button>
+        <button type="button" onclick="openPolicy('terms')" class="hover:text-amber-400" data-i18n="terms_policy">Terms of Service</button>
+        <button type="button" onclick="openPolicy('cookies')" class="hover:text-amber-400" data-i18n="cookie_policy">Cookie Notice</button>
+        <button type="button" onclick="openCookieSettings()" class="hover:text-amber-400" data-i18n="cookie_settings">Cookie Settings</button>
+        <button type="button" onclick="openPolicy('returns')" class="hover:text-amber-400" data-i18n="returns_policy">Returns & Refunds</button>
       </div>
     </div>
   </footer>
@@ -168,34 +214,55 @@
 
     const REPO_OWNER = 'aizgz';
     const REPO_NAME = 'aizgz-concrete-mixer';
-    const REPO_BRANCH = 'main';
+    let REPO_BRANCH = 'main';
     const PLACEHOLDER_IMAGE = 'https://placehold.co/800x500?text=AIZGZ+Machinery';
     let globalSettings = {};
     let allProducts = [];
     let activeProductCategory = 'all';
+    let activeAnalyticsConsent = null;
+    let currentPolicyType = null;
+    let currentProductModal = null;
+    let contentCollectionsStarted = false;
 
     const policiesContent = {
-      privacy: {
-        title: 'Privacy Policy',
-        body: '<p>Information submitted through this website is used to respond to inquiries and, where applicable, prepare quotations or coordinate orders. Do not submit passwords or payment-card information. Please confirm the applicable privacy arrangements before submitting sensitive business information.</p>'
+      privacy: { title:'Privacy Policy', body:'<p><strong>Website operator and data contact.</strong> This website is operated by 郑州市永友机械设备有限公司 (English rendering: Zhengzhou Yongyou Machinery Equipment Co., Ltd.; AIZGZ Machinery is the trading name displayed on this website). Business address supplied by the operator: 河南省郑州市荥阳市城关乡桃李工业园 (English rendering: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). For privacy requests and questions, contact aimr@qq.com.</p><p><strong>Information collected.</strong> Inquiry submissions may include your name, email, phone or WhatsApp number, product/model of interest, and message. Hosting and security providers may process technical request information such as IP address, browser/device type, and access time. Do not submit passwords, payment-card details, identity numbers, or other sensitive information.</p><p><strong>Use of information.</strong> We use inquiry details to respond, prepare quotations, discuss equipment requirements, coordinate potential orders, provide support, and protect the website. Optional analytics is used only after consent where required. <strong>Regional language selection.</strong> The website may use the country code supplied by the hosting platform from the visitor\'s IP connection to suggest a language. It does not request browser geolocation or precise location.</p><p><strong>Service providers.</strong> Vercel provides hosting, Formspree processes inquiry forms, Google Analytics is used only after consent, and WhatsApp is used if you choose to contact us there. The website also loads code and interface assets from third-party content delivery networks, including jsDelivr and cdnjs. These providers may process technical connection data under their own terms. We do not sell personal information. Disclosures may occur where required by law or necessary to protect rights and services.</p><p><strong>International processing and retention.</strong> Information may be processed in countries where our service providers operate. We retain inquiry information only as long as reasonably needed for the inquiry, business relationship, legal obligations, and dispute resolution, then delete or anonymize it where appropriate.</p><p><strong>Your choices.</strong> Depending on applicable law, you may request access, correction, deletion, restriction, or object to certain processing, and withdraw consent. Contact us using the email displayed on this website. You can reject optional analytics using the cookie controls.</p><p><strong>Important:</strong> The company name and address above are reproduced from the information supplied by the website operator. The Chinese company name and address are shown as supplied by the operator; the English wording is provided as a translation for convenience. This notice should also be checked against the actual service-provider settings and applicable privacy laws.</p>' },
+      cookies: { title:'Cookie & Analytics Notice', body:'<p>This website uses essential browser storage to remember your language choice and analytics-consent choice. Google Analytics is optional and is not loaded until you select “Accept analytics”. If you reject analytics, the site will not intentionally load the Google Analytics tag. You can change your choice using “Cookie Settings” in the footer.</p><p>Hosting and security providers may process technical information needed to deliver and protect the website. Review this notice if advertising, embedded media, or additional tracking tools are added.</p>' },
+      shipping: { title:'Shipping Information', body:'<p>Shipping arrangements are confirmed individually. Transport method, packing, loading, freight cost, export documents, and estimated schedule depend on the equipment, quantity, destination, and current logistics conditions.</p><p>Applicable Incoterms, named place or port, insurance, export/import clearance, duties, taxes, unloading, and inland delivery responsibilities must be stated in the written quotation or sales contract. Do not assume these costs are included unless expressly stated.</p><p>Production and dispatch dates are estimates until confirmed in writing. Buyers should verify destination-country import requirements, permits, electrical standards, and site conditions before ordering.</p>' },
+      warranty: { title:'Warranty & After-Sales Information', body:'<p>Warranty period, coverage, exclusions, start date, spare-parts arrangements, technical support, and any repair, return, or replacement process vary by product and supplier. These terms must be confirmed in the written quotation or sales contract for the specific equipment.</p><p>Request warranty terms, commissioning requirements, maintenance schedules, spare-parts lists, and support scope before ordering. This general notice does not promise a fixed warranty period or service level.</p>' },
+      returns: { title:'Returns, Cancellation & Refunds', body:'<p>Industrial machinery may be configured, procured, or prepared for a specific order. Cancellation, return, replacement, and refund rights depend on the product, fulfillment stage, supplier terms, applicable law, and signed sales contract.</p><p>Before paying a deposit or confirming an order, obtain written terms covering cancellation deadlines, non-recoverable costs, inspection and acceptance, damage or shortage claims, return authorization, transport costs, and refund conditions. Do not ship equipment back without written instructions.</p>' },
+      terms: { title:'Terms of Service', body:'<p>This website is operated by 郑州市永友机械设备有限公司 (English rendering: Zhengzhou Yongyou Machinery Equipment Co., Ltd.), trading as AIZGZ Machinery. The business address supplied for the operator is 河南省郑州市荥阳市城关乡桃李工业园 (Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). This website provides general business and product information and a way to contact AIZGZ Machinery. Product descriptions, photographs, specifications, availability, supplier identity, prices, and delivery estimates are for discussion and may require confirmation.</p><p>An inquiry, website display, or quotation request does not itself create a sales contract or guarantee availability. Binding specifications, configuration, supplier relationship, price validity, currency, taxes, payment milestones, inspection, delivery schedule, Incoterms, warranty, and dispute terms must be agreed in a written quotation or signed contract.</p><p>You must not misuse the website, submit unlawful content, attempt unauthorized access, or interfere with its operation. Nothing here excludes rights that cannot lawfully be excluded. The governing law and dispute forum must be identified in the final sales contract. The Chinese company name and address are shown as supplied by the operator; the English wording is provided as a translation for convenience. Verify formal legal-notice details against the company registration records.</p>' }
+    };
+
+    const localizedPolicyBodies = {
+      es: {
+        privacy: `<p><strong>Responsable del sitio web y contacto sobre datos.</strong> Este sitio web es operado por 郑州市永友机械设备有限公司 (traducción al inglés: Zhengzhou Yongyou Machinery Equipment Co., Ltd.; AIZGZ Machinery es el nombre comercial utilizado en este sitio web). Dirección comercial facilitada por el operador: 河南省郑州市荥阳市城关乡桃李工业园 (traducción: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). Para consultas o solicitudes relacionadas con la privacidad, escriba a aimr@qq.com.</p><p><strong>Información recopilada.</strong> Los formularios de consulta pueden incluir su nombre, correo electrónico, teléfono o número de WhatsApp, producto o modelo de interés y mensaje. Los proveedores de alojamiento y seguridad pueden tratar datos técnicos de las solicitudes, como la dirección IP, el tipo de navegador o dispositivo y la hora de acceso. No envíe contraseñas, datos de tarjetas de pago, números de identificación ni otra información sensible.</p><p><strong>Uso de la información.</strong> Utilizamos los datos de las consultas para responder, preparar cotizaciones, analizar requisitos de equipos, coordinar posibles pedidos, prestar asistencia y proteger el sitio web. Las analíticas opcionales se utilizan únicamente después del consentimiento cuando este sea necesario. <strong>Selección regional del idioma.</strong> El sitio web puede utilizar el código de país proporcionado por la plataforma de alojamiento a partir de la conexión IP del visitante para sugerir un idioma. No solicita la geolocalización del navegador ni la ubicación precisa.</p><p><strong>Proveedores de servicios.</strong> Vercel proporciona el alojamiento, Formspree procesa los formularios de consulta, Google Analytics se utiliza únicamente después del consentimiento y WhatsApp se utiliza si usted decide contactarnos por ese medio. El sitio también carga código y recursos de interfaz desde redes de distribución de contenido de terceros, incluidas jsDelivr y cdnjs. Estos proveedores pueden tratar datos técnicos de conexión conforme a sus propias condiciones. No vendemos información personal. Podemos divulgar información cuando lo exija la ley o sea necesario para proteger derechos y servicios.</p><p><strong>Tratamiento internacional y conservación.</strong> La información puede tratarse en los países donde operan nuestros proveedores de servicios. Conservamos los datos de las consultas solo durante el tiempo razonablemente necesario para atenderlas, mantener la relación comercial, cumplir obligaciones legales y resolver controversias; después, los eliminamos o anonimizamos cuando corresponda.</p><p><strong>Sus opciones.</strong> Según la legislación aplicable, puede solicitar acceso, rectificación, supresión o limitación del tratamiento, oponerse a determinados tratamientos y retirar su consentimiento. Para ello, contacte con nosotros en el correo electrónico indicado en este sitio web. Puede rechazar las analíticas opcionales mediante los controles de cookies.</p><p><strong>Nota importante:</strong> El nombre chino de la empresa y la dirección se muestran tal como los facilitó el operador. La versión en español y la traducción al inglés de la dirección se ofrecen únicamente para facilitar la comprensión. Este aviso también debe contrastarse con la configuración real de los proveedores de servicios y con la legislación de privacidad aplicable.</p>`,
+        cookies: `<p>Este sitio web utiliza almacenamiento esencial del navegador para recordar el idioma elegido y la decisión sobre el consentimiento de analíticas. Google Analytics es opcional y no se carga hasta que usted selecciona «Aceptar analíticas». Si rechaza las analíticas, el sitio no cargará intencionadamente la etiqueta de Google Analytics. Puede cambiar su elección mediante «Configuración de cookies» en el pie de página.</p><p>Los proveedores de alojamiento y seguridad pueden tratar información técnica necesaria para ofrecer y proteger el sitio web. Este aviso deberá revisarse si se añaden publicidad, medios incrustados u otras herramientas de seguimiento.</p>`,
+        shipping: `<p>Las condiciones de envío se acuerdan individualmente. El medio de transporte, embalaje, carga, coste del flete, documentos de exportación y calendario estimado dependen del equipo, la cantidad, el destino y las condiciones logísticas vigentes.</p><p>Los Incoterms aplicables, el lugar o puerto designado, el seguro, los trámites de exportación e importación, los aranceles, impuestos, descarga y responsabilidades de transporte interior deben indicarse en la cotización escrita o en el contrato de compraventa. No se debe suponer que estos costes están incluidos salvo que se indique expresamente.</p><p>Las fechas de producción y expedición son estimaciones hasta que se confirmen por escrito. Antes de realizar el pedido, los compradores deben verificar los requisitos de importación, permisos, normas eléctricas y condiciones de las instalaciones del país de destino.</p>`,
+        warranty: `<p>El período y la cobertura de la garantía, las exclusiones, la fecha de inicio, la disponibilidad de repuestos, la asistencia técnica y cualquier procedimiento de reparación, devolución o sustitución varían según el producto y el proveedor. Estas condiciones deben confirmarse para el equipo concreto en la cotización escrita o en el contrato de compraventa.</p><p>Antes de realizar el pedido, solicite las condiciones de garantía, los requisitos de puesta en marcha, los programas de mantenimiento, las listas de repuestos y el alcance de la asistencia. Este aviso general no promete un período de garantía ni un nivel de servicio fijo.</p>`,
+        returns: `<p>La maquinaria industrial puede configurarse, adquirirse o prepararse para un pedido específico. Los derechos de cancelación, devolución, sustitución y reembolso dependen del producto, la fase de cumplimiento del pedido, las condiciones del proveedor, la legislación aplicable y el contrato de compraventa firmado.</p><p>Antes de pagar un anticipo o confirmar un pedido, obtenga por escrito las condiciones relativas a los plazos de cancelación, los costes no recuperables, la inspección y aceptación, las reclamaciones por daños o faltantes, la autorización de devolución, los costes de transporte y las condiciones de reembolso. No envíe equipos de vuelta sin instrucciones por escrito.</p>`,
+        terms: `<p>Este sitio web es operado por 郑州市永友机械设备有限公司 (traducción al inglés: Zhengzhou Yongyou Machinery Equipment Co., Ltd.), que opera comercialmente como AIZGZ Machinery. La dirección comercial facilitada por el operador es 河南省郑州市荥阳市城关乡桃李工业园 (traducción: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). Este sitio ofrece información general sobre la actividad y los productos, así como un medio para contactar con AIZGZ Machinery. Las descripciones, fotografías, especificaciones, disponibilidad, identidad del proveedor, precios y estimaciones de entrega se facilitan para su consulta y pueden requerir confirmación.</p><p>Una consulta, la información mostrada en el sitio o una solicitud de cotización no constituyen por sí mismas un contrato de compraventa ni garantizan la disponibilidad. Las especificaciones vinculantes, configuración, relación con el proveedor, vigencia del precio, moneda, impuestos, hitos de pago, inspección, calendario de entrega, Incoterms, garantía y condiciones de resolución de controversias deben acordarse en una cotización escrita o en un contrato firmado.</p><p>No debe utilizar indebidamente el sitio web, enviar contenido ilícito, intentar acceder sin autorización ni interferir en su funcionamiento. Nada de lo aquí dispuesto excluye derechos que legalmente no puedan excluirse. La legislación aplicable y el foro para resolver controversias deberán identificarse en el contrato de compraventa definitivo. El nombre chino de la empresa y la dirección se muestran según los datos facilitados por el operador; las traducciones se ofrecen únicamente para facilitar la comprensión. Verifique los datos formales para notificaciones legales con los documentos de registro de la empresa.</p>`
       },
-      shipping: {
-        title: 'Shipping Information',
-        body: '<p>Shipping methods, packing, costs, export arrangements, and delivery estimates depend on the product, destination, order size, and current logistics conditions. Details should be confirmed in writing before an order is placed.</p>'
+      ar: {
+        privacy: `<p><strong>الجهة المشغلة للموقع والتواصل بشأن البيانات.</strong> تدير هذا الموقع شركة 郑州市永友机械设备有限公司 (والصياغة الإنجليزية للاسم: Zhengzhou Yongyou Machinery Equipment Co., Ltd.)، ويُستخدم اسم AIZGZ Machinery كاسم تجاري ظاهر على هذا الموقع. عنوان النشاط الذي زوّدنا به المشغّل هو: 河南省郑州市荥阳市城关乡桃李工业园 (والصياغة الإنجليزية للتوضيح: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). للاستفسارات أو الطلبات المتعلقة بالخصوصية، يرجى التواصل عبر aimr@qq.com.</p><p><strong>المعلومات التي يتم جمعها.</strong> قد تتضمن نماذج الاستفسار اسمك وبريدك الإلكتروني ورقم هاتفك أو واتساب والمنتج أو الطراز الذي تهتم به ورسالتك. وقد يعالج مزودو الاستضافة والأمن بيانات تقنية للطلبات، مثل عنوان IP ونوع المتصفح أو الجهاز ووقت الوصول. يرجى عدم إرسال كلمات المرور أو بيانات بطاقات الدفع أو أرقام الهوية أو أي معلومات حساسة أخرى.</p><p><strong>كيفية استخدام المعلومات.</strong> نستخدم بيانات الاستفسارات للرد عليك وإعداد عروض الأسعار ومناقشة متطلبات المعدات وتنسيق الطلبات المحتملة وتقديم الدعم وحماية الموقع. ولا تُستخدم أدوات التحليل الاختيارية إلا بعد الحصول على الموافقة عندما تكون مطلوبة. <strong>اختيار اللغة حسب المنطقة.</strong> قد يستخدم الموقع رمز الدولة الذي توفره منصة الاستضافة استناداً إلى اتصال IP للزائر لاقتراح لغة مناسبة. ولا يطلب الموقع تحديد الموقع الجغرافي من المتصفح أو الموقع الدقيق.</p><p><strong>مقدمو الخدمات.</strong> توفر Vercel الاستضافة، وتعالج Formspree نماذج الاستفسار، ولا تُستخدم Google Analytics إلا بعد الموافقة، كما يُستخدم WhatsApp إذا اخترت التواصل معنا من خلاله. ويحمّل الموقع أيضاً ملفات الشيفرة وموارد الواجهة من شبكات توصيل محتوى تابعة لجهات خارجية، ومنها jsDelivr وcdnjs. وقد يعالج هؤلاء المزودون بيانات الاتصال التقنية وفقاً لشروطهم الخاصة. نحن لا نبيع المعلومات الشخصية. وقد نفصح عن المعلومات إذا كان ذلك مطلوباً بموجب القانون أو ضرورياً لحماية الحقوق والخدمات.</p><p><strong>المعالجة الدولية والاحتفاظ بالبيانات.</strong> قد تتم معالجة المعلومات في البلدان التي يعمل فيها مقدمو خدماتنا. ونحتفظ ببيانات الاستفسارات للمدة اللازمة بصورة معقولة للرد على الاستفسار وإدارة العلاقة التجارية والوفاء بالالتزامات القانونية وتسوية النزاعات، ثم نحذفها أو نجعلها مجهولة الهوية عند الاقتضاء.</p><p><strong>خياراتك.</strong> وفقاً للقانون المعمول به، يمكنك طلب الوصول إلى بياناتك أو تصحيحها أو حذفها أو تقييد معالجتها، أو الاعتراض على بعض أنواع المعالجة، أو سحب موافقتك. يرجى التواصل معنا عبر البريد الإلكتروني المعروض على هذا الموقع. ويمكنك رفض التحليلات الاختيارية باستخدام إعدادات ملفات تعريف الارتباط.</p><p><strong>ملاحظة مهمة:</strong> يظهر الاسم الصيني للشركة والعنوان كما قدمهما مشغّل الموقع. وتُعرض الصياغة العربية والإنجليزية للتوضيح فقط. وينبغي أيضاً مراجعة هذا الإشعار في ضوء الإعدادات الفعلية لمقدمي الخدمات وقوانين الخصوصية المعمول بها.</p>`,
+        cookies: `<p>يستخدم هذا الموقع مساحة تخزين أساسية في المتصفح لتذكر اللغة التي اخترتها وخيار الموافقة على التحليلات. تُعد Google Analytics خدمة اختيارية ولا يتم تحميلها إلا بعد اختيارك «الموافقة على التحليلات». وإذا رفضت التحليلات، فلن يقوم الموقع عمداً بتحميل علامة Google Analytics. ويمكنك تغيير اختيارك من خلال «إعدادات ملفات تعريف الارتباط» في تذييل الصفحة.</p><p>قد يعالج مزودو الاستضافة والأمن المعلومات التقنية اللازمة لتشغيل الموقع وحمايته. وينبغي مراجعة هذا الإشعار إذا أُضيفت إعلانات أو وسائط مضمّنة أو أدوات تتبع إضافية.</p>`,
+        shipping: `<p>يتم الاتفاق على ترتيبات الشحن لكل طلب على حدة. وتعتمد وسيلة النقل والتعبئة والتحميل وتكلفة الشحن ومستندات التصدير والجدول الزمني التقديري على المعدات والكمية والوجهة والظروف اللوجستية السائدة.</p><p>يجب تحديد قواعد Incoterms المعمول بها والمكان أو الميناء المحدد والتأمين وإجراءات التخليص للتصدير والاستيراد والرسوم والضرائب والتفريغ ومسؤوليات النقل الداخلي في عرض السعر المكتوب أو عقد البيع. ولا ينبغي افتراض أن هذه التكاليف مشمولة ما لم يُنص على ذلك صراحةً.</p><p>تظل تواريخ الإنتاج والإرسال تقديرية إلى أن يتم تأكيدها كتابةً. وينبغي للمشترين التحقق قبل الطلب من متطلبات الاستيراد والتصاريح والمعايير الكهربائية وظروف الموقع في بلد الوجهة.</p>`,
+        warranty: `<p>تختلف مدة الضمان ونطاق التغطية والاستثناءات وتاريخ بدء الضمان وترتيبات قطع الغيار والدعم الفني وإجراءات الإصلاح أو الإرجاع أو الاستبدال بحسب المنتج والمورّد. ويجب تأكيد هذه الشروط للمعدة المحددة في عرض السعر المكتوب أو عقد البيع.</p><p>يرجى طلب شروط الضمان ومتطلبات التشغيل الأولي وجداول الصيانة وقوائم قطع الغيار ونطاق الدعم قبل الطلب. ولا يتضمن هذا الإشعار العام وعداً بمدة ضمان ثابتة أو بمستوى خدمة محدد.</p>`,
+        returns: `<p>قد يتم إعداد المعدات الصناعية أو توريدها أو تجهيزها وفقاً لمتطلبات طلب محدد. وتعتمد حقوق الإلغاء والإرجاع والاستبدال واسترداد الأموال على المنتج ومرحلة تنفيذ الطلب وشروط المورّد والقانون المعمول به وعقد البيع الموقّع.</p><p>قبل دفع العربون أو تأكيد الطلب، احصل على شروط مكتوبة توضح المواعيد النهائية للإلغاء والتكاليف غير القابلة للاسترداد والفحص والقبول والمطالبات المتعلقة بالتلف أو النقص وتصريح الإرجاع وتكاليف النقل وشروط استرداد الأموال. ولا تُرسل المعدات للإرجاع دون تعليمات مكتوبة.</p>`,
+        terms: `<p>تدير هذا الموقع شركة 郑州市永友机械设备有限公司 (والصياغة الإنجليزية للاسم: Zhengzhou Yongyou Machinery Equipment Co., Ltd.)، وتمارس نشاطها بالاسم التجاري AIZGZ Machinery. عنوان النشاط الذي زوّدنا به المشغّل هو 河南省郑州市荥阳市城关乡桃李工业园 (والصياغة الإنجليزية للتوضيح: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). يقدم هذا الموقع معلومات عامة عن النشاط والمنتجات ووسيلة للتواصل مع AIZGZ Machinery. وتُعرض أوصاف المنتجات وصورها ومواصفاتها ومدى توفرها وهوية المورّد والأسعار وتقديرات التسليم لأغراض الاستفسار وقد تحتاج إلى تأكيد.</p><p>لا ينشئ الاستفسار أو المعلومات المعروضة على الموقع أو طلب عرض السعر، بحد ذاته، عقد بيع ولا يضمن توفر المنتج. ويجب الاتفاق على المواصفات الملزمة والتكوين والعلاقة مع المورّد وصلاحية السعر والعملة والضرائب ومراحل الدفع والفحص وجدول التسليم وقواعد Incoterms والضمان وشروط تسوية النزاعات في عرض سعر مكتوب أو عقد موقّع.</p><p>يُحظر إساءة استخدام الموقع أو إرسال محتوى غير قانوني أو محاولة الوصول غير المصرح به أو التدخل في تشغيله. ولا يستبعد أي مما ورد هنا الحقوق التي لا يجوز استبعادها قانوناً. ويجب تحديد القانون الواجب التطبيق والجهة المختصة بالنزاعات في عقد البيع النهائي. ويظهر الاسم الصيني للشركة والعنوان وفقاً للمعلومات التي قدمها المشغّل، أما الترجمات فتُعرض للتوضيح فقط. ويرجى التحقق من بيانات الإخطارات القانونية الرسمية بالرجوع إلى سجلات تسجيل الشركة.</p>`
       },
-      warranty: {
-        title: 'Warranty Information',
-        body: '<p>Warranty coverage, exclusions, spare parts, and any return or replacement arrangements must be confirmed in the written quotation or sales contract for the specific product. Please request these terms before placing an order.</p>'
-      },
-      terms: {
-        title: 'Terms of Service',
-        body: '<p>Product specifications, price validity, minimum order quantity, payment milestones, delivery schedule, and other transaction terms are subject to written confirmation. A quotation or inquiry does not itself constitute an order confirmation.</p>'
+      ru: {
+        privacy: `<p><strong>Оператор сайта и контакт по вопросам данных.</strong> Сайт принадлежит и управляется компанией 郑州市永友机械设备有限公司 (английское написание: Zhengzhou Yongyou Machinery Equipment Co., Ltd.); AIZGZ Machinery — коммерческое наименование, используемое на этом сайте. Адрес деятельности, предоставленный оператором: 河南省郑州市荥阳市城关乡桃李工业园 (перевод на английский для справки: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). По вопросам конфиденциальности и запросам об обработке данных обращайтесь по адресу aimr@qq.com.</p><p><strong>Собираемая информация.</strong> В обращении могут указываться ваше имя, адрес электронной почты, телефон или номер WhatsApp, интересующий продукт или модель и текст сообщения. Поставщики хостинга и средств безопасности могут обрабатывать технические данные запросов, например IP-адрес, тип браузера или устройства и время доступа. Не отправляйте пароли, данные платежных карт, идентификационные номера и другую чувствительную информацию.</p><p><strong>Использование информации.</strong> Мы используем сведения из обращений, чтобы отвечать на запросы, готовить коммерческие предложения, обсуждать требования к оборудованию, координировать возможные заказы, оказывать поддержку и защищать сайт. Необязательная аналитика используется только после получения согласия, когда оно требуется. <strong>Выбор языка по региону.</strong> Сайт может использовать код страны, предоставленный хостинговой платформой на основании IP-подключения посетителя, чтобы предложить язык. Сайт не запрашивает геолокацию браузера или точное местоположение.</p><p><strong>Поставщики услуг.</strong> Vercel предоставляет хостинг, Formspree обрабатывает формы обращений, Google Analytics используется только после согласия, а WhatsApp — если вы решите связаться с нами через этот сервис. Сайт также загружает программный код и элементы интерфейса из сторонних сетей доставки контента, включая jsDelivr и cdnjs. Эти поставщики могут обрабатывать технические данные соединения на условиях собственных документов. Мы не продаём персональную информацию. Раскрытие данных возможно, если этого требует закон или если оно необходимо для защиты прав и работы сервисов.</p><p><strong>Международная обработка и хранение.</strong> Информация может обрабатываться в странах, где работают наши поставщики услуг. Мы храним сведения об обращениях только в течение разумно необходимого срока для ответа, ведения деловых отношений, исполнения юридических обязанностей и разрешения споров, после чего удаляем или обезличиваем их, когда это уместно.</p><p><strong>Ваши возможности.</strong> В соответствии с применимым законодательством вы можете запросить доступ к данным, их исправление, удаление или ограничение обработки, возразить против отдельных видов обработки и отозвать согласие. Для этого свяжитесь с нами по адресу электронной почты, указанному на сайте. Вы можете отказаться от необязательной аналитики через настройки файлов cookie.</p><p><strong>Важное примечание:</strong> Китайское наименование компании и адрес приведены в том виде, в котором их предоставил оператор сайта. Переводы на русский и английский языки даны только для удобства понимания. Настоящее уведомление также следует сверить с фактическими настройками поставщиков услуг и применимым законодательством о конфиденциальности.</p>`,
+        cookies: `<p>Сайт использует необходимое локальное хранилище браузера, чтобы запоминать выбранный язык и решение о согласии на аналитические файлы cookie. Google Analytics является необязательным сервисом и загружается только после выбора пункта «Разрешить аналитику». Если вы отклоните аналитику, сайт не будет намеренно загружать тег Google Analytics. Изменить выбор можно через пункт «Настройки файлов cookie» в нижней части страницы.</p><p>Поставщики хостинга и средств безопасности могут обрабатывать техническую информацию, необходимую для работы и защиты сайта. Это уведомление следует пересмотреть, если будут добавлены реклама, встроенные медиа или дополнительные инструменты отслеживания.</p>`,
+        shipping: `<p>Условия доставки согласовываются отдельно для каждого заказа. Способ перевозки, упаковка, погрузка, стоимость фрахта, экспортные документы и предполагаемые сроки зависят от оборудования, количества, пункта назначения и текущих логистических условий.</p><p>Применимые правила Incoterms, указанное место или порт, страхование, экспортное и импортное таможенное оформление, пошлины, налоги, разгрузка и ответственность за внутреннюю перевозку должны быть указаны в письменном коммерческом предложении или договоре купли-продажи. Не следует считать эти расходы включёнными, если это прямо не указано.</p><p>Даты производства и отправки являются предварительными до их письменного подтверждения. До заказа покупателям следует проверить требования к импорту, разрешения, электротехнические стандарты и условия на площадке в стране назначения.</p>`,
+        warranty: `<p>Срок и объём гарантии, исключения, дата начала её действия, условия поставки запасных частей, техническая поддержка, а также порядок ремонта, возврата или замены зависят от конкретного продукта и поставщика. Эти условия для выбранного оборудования должны быть подтверждены в письменном коммерческом предложении или договоре купли-продажи.</p><p>До заказа запросите условия гарантии, требования к вводу в эксплуатацию, графики технического обслуживания, перечни запасных частей и объём поддержки. Настоящее общее уведомление не обещает фиксированный срок гарантии или определённый уровень обслуживания.</p>`,
+        returns: `<p>Промышленное оборудование может комплектоваться, закупаться или подготавливаться под конкретный заказ. Возможность отмены заказа, возврата, замены и возмещения средств зависит от продукта, стадии исполнения заказа, условий поставщика, применимого законодательства и подписанного договора купли-продажи.</p><p>До внесения аванса или подтверждения заказа получите письменные условия, определяющие сроки отмены, невозмещаемые расходы, порядок осмотра и приёмки, претензии по повреждениям или недостаче, разрешение на возврат, транспортные расходы и условия возврата средств. Не отправляйте оборудование обратно без письменных инструкций.</p>`,
+        terms: `<p>Сайт принадлежит и управляется компанией 郑州市永友机械设备有限公司 (английское написание: Zhengzhou Yongyou Machinery Equipment Co., Ltd.), работающей под коммерческим наименованием AIZGZ Machinery. Адрес деятельности, предоставленный оператором: 河南省郑州市荥阳市城关乡桃李工业园 (перевод на английский для справки: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). Сайт предоставляет общую деловую информацию, сведения о продукции и возможность связаться с AIZGZ Machinery. Описания и фотографии продукции, характеристики, наличие, сведения о поставщиках, цены и предполагаемые сроки доставки приводятся для обсуждения и могут требовать подтверждения.</p><p>Обращение, информация на сайте или запрос коммерческого предложения сами по себе не создают договор купли-продажи и не гарантируют наличие товара. Обязательные характеристики, комплектация, отношения с поставщиком, срок действия цены, валюта, налоги, этапы оплаты, проверка, график поставки, Incoterms, гарантия и условия разрешения споров должны быть согласованы в письменном коммерческом предложении или подписанном договоре.</p><p>Запрещается неправомерно использовать сайт, отправлять незаконные материалы, пытаться получить несанкционированный доступ или нарушать его работу. Ничто в настоящих условиях не исключает права, которые не могут быть исключены по закону. Применимое право и место разрешения споров должны быть определены в окончательном договоре купли-продажи. Китайское наименование компании и адрес приведены по сведениям, предоставленным оператором; переводы даны только для удобства. Официальные реквизиты для юридически значимых уведомлений следует проверять по регистрационным документам компании.</p>`
       }
     };
 
     const i18nText = {
       en: {
-        nav_products: 'Products', nav_videos: 'Videos', nav_cases: 'Shipping & Cases', nav_why: 'Why Us', nav_faq: 'FAQ', nav_inquiry: 'Inquiry',
+        nav_products: 'Products', nav_videos: 'Videos', nav_cases: 'Shipping & Cases', nav_why: 'Why Us', nav_faq: 'FAQ', nav_inquiry: 'Inquiry', mobile_menu: 'Menu',
         btn_browse: 'Browse Products', btn_catalog: 'Request Product Catalog',
         prod_title: 'Industrial Equipment', prod_sub: 'Browse equipment by product category and request details or a quotation.',
         video_title: 'Equipment Video Showroom', video_sub: 'Product demonstrations, equipment details, and production highlights.',
@@ -213,25 +280,25 @@
         form_msg: 'Message / Requirements *', form_submit: 'Send Inquiry'
       },
       es: {
-        nav_products: 'Productos', nav_videos: 'Vídeos', nav_cases: 'Envíos y casos', nav_why: 'Por qué nosotros', nav_faq: 'Preguntas', nav_inquiry: 'Consulta',
+        nav_products: 'Productos', nav_videos: 'Vídeos', nav_cases: 'Envíos y casos', nav_why: 'Por qué nosotros', nav_faq: 'Preguntas', nav_inquiry: 'Consulta', mobile_menu: 'Menú',
         btn_browse: 'Ver productos', btn_catalog: 'Solicitar catálogo',
         prod_title: 'Equipos industriales', prod_sub: 'Explore los equipos por categoría y solicite información o una cotización.',
         video_title: 'Galería de vídeos', video_sub: 'Demostraciones de productos, detalles técnicos y producción.',
         cases_title: 'Envíos y proyectos', cases_sub: 'Fotos de proyectos y envíos, cuando estén disponibles.',
         why_title: '¿Por qué trabajar con AIZGZ?', why_sub: 'Información de productos y asistencia para cotizaciones.',
-        w1_title: 'Búsqueda de equipos', w1_desc: 'Consulte equipos disponibles para su proyecto.',
+        w1_title: 'Suministro de equipos', w1_desc: 'Consulte equipos disponibles para su proyecto.',
         w2_title: 'Revisión técnica', w2_desc: 'Confirme las especificaciones antes de realizar el pedido.',
         w3_title: 'Coordinación de exportación', w3_desc: 'Consulte embalaje, envío y requisitos de destino.',
         w4_title: 'Repuestos y soporte', w4_desc: 'Pregunte por repuestos, documentación y asistencia técnica.',
         about_title: 'Acerca de AIZGZ Machinery', faq_title: 'Preguntas frecuentes',
-        faq1_q: '¿Cuál es la cantidad mínima?', faq1_a: 'La cantidad mínima depende del producto. Indique el modelo y la cantidad que necesita.',
+        faq1_q: '¿Cuál es el pedido mínimo?', faq1_a: 'La cantidad mínima depende del producto. Indique el modelo y la cantidad que necesita.',
         faq2_q: '¿Cuál es el plazo de entrega?', faq2_a: 'Depende del modelo, la configuración, la disponibilidad y la cantidad. Se confirmará en la cotización.',
         contact_title: 'Consulta de productos', contact_sub: 'Comparta sus requisitos para confirmar el equipo y la cotización.',
         form_name: 'Su nombre *', form_email: 'Su correo electrónico *', form_phone: 'Teléfono / WhatsApp', form_model: 'Producto / modelo',
         form_msg: 'Mensaje / requisitos *', form_submit: 'Enviar consulta'
       },
       ar: {
-        nav_products: 'المنتجات', nav_videos: 'الفيديوهات', nav_cases: 'الشحن والمشاريع', nav_why: 'لماذا نحن', nav_faq: 'الأسئلة', nav_inquiry: 'استفسار',
+        nav_products: 'المنتجات', nav_videos: 'الفيديوهات', nav_cases: 'الشحن والمشاريع', nav_why: 'لماذا نحن', nav_faq: 'الأسئلة', nav_inquiry: 'استفسار', mobile_menu: 'القائمة',
         btn_browse: 'تصفح المنتجات', btn_catalog: 'طلب كتالوج المنتجات',
         prod_title: 'المعدات الصناعية', prod_sub: 'تصفح المعدات حسب الفئة واطلب التفاصيل أو عرض السعر.',
         video_title: 'معرض فيديو المعدات', video_sub: 'عروض المنتجات والتفاصيل الفنية ومشاهد الإنتاج.',
@@ -249,52 +316,235 @@
         form_msg: 'الرسالة / المتطلبات *', form_submit: 'إرسال الاستفسار'
       },
       ru: {
-        nav_products: 'Продукция', nav_videos: 'Видео', nav_cases: 'Доставка и проекты', nav_why: 'Почему мы', nav_faq: 'Вопросы', nav_inquiry: 'Запрос',
+        nav_products: 'Продукция', nav_videos: 'Видео', nav_cases: 'Доставка и проекты', nav_why: 'Почему мы', nav_faq: 'Вопросы', nav_inquiry: 'Запрос', mobile_menu: 'Меню',
         btn_browse: 'Смотреть продукцию', btn_catalog: 'Запросить каталог',
         prod_title: 'Промышленное оборудование', prod_sub: 'Выберите категорию оборудования и запросите сведения или цену.',
         video_title: 'Видео оборудования', video_sub: 'Демонстрации продукции, технические детали и производство.',
         cases_title: 'Доставка и проекты', cases_sub: 'Фотографии проектов и отгрузок при наличии.',
         why_title: 'Почему AIZGZ?', why_sub: 'Информация об оборудовании и помощь с запросом цены.',
-        w1_title: 'Подбор оборудования', w1_desc: 'Обсудите доступное оборудование для вашего проекта.',
+        w1_title: 'Поставка оборудования', w1_desc: 'Обсудите доступное оборудование для вашего проекта.',
         w2_title: 'Проверка спецификаций', w2_desc: 'Уточните технические характеристики перед заказом.',
         w3_title: 'Экспортная координация', w3_desc: 'Обсудите упаковку, доставку и требования к месту назначения.',
         w4_title: 'Запчасти и поддержка', w4_desc: 'Уточните наличие запчастей, документации и технической поддержки.',
         about_title: 'О AIZGZ Machinery', faq_title: 'Часто задаваемые вопросы',
-        faq1_q: 'Каков минимальный заказ?', faq1_a: 'Минимальный заказ зависит от продукта. Укажите модель и количество.',
+        faq1_q: 'Какой минимальный объём заказа?', faq1_a: 'Минимальный заказ зависит от продукта. Укажите модель и количество.',
         faq2_q: 'Каковы сроки поставки?', faq2_a: 'Срок зависит от модели, комплектации, наличия и количества и подтверждается в предложении.',
-        contact_title: 'Запрос по оборудованию', contact_sub: 'Опишите требования, чтобы уточнить оборудование и условия предложения.',
-        form_name: 'Ваше имя *', form_email: 'Ваш Email *', form_phone: 'Телефон / WhatsApp', form_model: 'Продукт / модель',
+        contact_title: 'Запрос коммерческого предложения', contact_sub: 'Опишите требования, чтобы уточнить оборудование и условия предложения.',
+        form_name: 'Ваше имя *', form_email: 'Ваш адрес электронной почты *', form_phone: 'Телефон / WhatsApp', form_model: 'Продукт / модель',
         form_msg: 'Сообщение / требования *', form_submit: 'Отправить запрос'
       }
     };
+
+    const extraTranslations = {"en":{"hero_title":"Industrial Equipment for Construction & Material Handling","hero_subtitle":"Explore concrete mixers, bagged material palletizers, and mortar equipment. Contact us for product specifications, availability, and quotations.","about_text":"AIZGZ Machinery connects international buyers with machinery for construction and material handling. Contact us to discuss product specifications, customization options, and shipping arrangements.","faq3_q":"Can you arrange international shipping?","faq3_a":"Shipping options and costs depend on the equipment, destination, packing requirements, and current freight rates. Please provide your destination port or address.","filter_all":"All Equipment","filter_concrete":"Concrete Equipment","filter_mortar":"Dry Mix & Mortar","filter_pallet":"Bag Palletizing","filter_block":"Block & Brick","filter_crushing":"Crushing & Screening","filter_packing":"Packing & Auxiliary","label_model":"Model","label_capacity":"Capacity / Throughput","label_internal_capacity":"Internal Material Capacity","btn_details":"Details","btn_inquire":"Inquire Now","btn_inquire_product":"Inquire About This Product","label_category":"Category","count_product":"Product","count_products":"Products","empty_products":"No products are available right now. Please contact us for assistance.","empty_category":"No products are currently listed in this category. Please contact us for availability.","catalog_error":"The product catalog is temporarily unavailable. Please contact us for assistance.","catalog_unavailable":"Catalog unavailable","sending":"Sending…","sent":"Thank you. Your inquiry has been sent successfully.","send_error":"Your inquiry could not be sent. Please try again or contact us via WhatsApp.","not_configured":"The inquiry form is not configured yet. Please contact us via WhatsApp or configure Formspree in CMS Site Settings.","placeholder_name":"Your name","placeholder_email":"you@company.com","placeholder_phone":"+ country code","placeholder_model":"Product name or model","placeholder_message":"Product, quantity, application, destination, power requirements…","cookie_settings":"Cookie Settings","returns_policy":"Returns & Refunds","cookie_message":"We use optional Google Analytics to understand site usage. You can accept or reject analytics cookies.","cookie_accept":"Accept analytics","cookie_reject":"Reject analytics","cookie_learn":"Learn more","policy_english":"This policy is currently provided in English. A translated version will be added after the legal text is reviewed.","privacy_policy":"Privacy Policy","shipping_policy":"Shipping Information","warranty_policy":"Warranty Information","terms_policy":"Terms of Service","cookie_policy":"Cookie & Analytics Notice","returns_title":"Returns, Cancellation & Refunds"},"es":{"hero_title":"Equipos industriales para construcción y manipulación de materiales","hero_subtitle":"Explore mezcladoras de hormigón, máquinas ensacadoras, paletizadores y equipos para mortero seco. Contáctenos para consultar especificaciones, disponibilidad y precios.","about_text":"AIZGZ Machinery conecta a compradores internacionales con maquinaria para construcción y manipulación de materiales. Contáctenos para consultar especificaciones, opciones de personalización y envíos.","faq3_q":"¿Pueden organizar envíos internacionales?","faq3_a":"Las opciones y los costes de envío dependen del equipo, el destino, el embalaje y las tarifas vigentes. Indique el puerto o la dirección de destino.","filter_all":"Todos los equipos","filter_concrete":"Equipos de hormigón","filter_mortar":"Mezclas secas y mortero","filter_pallet":"Paletizadores","filter_block":"Bloques y ladrillos","filter_crushing":"Trituración y cribado","filter_packing":"Embalaje y auxiliares","label_model":"Modelo","label_capacity":"Capacidad / rendimiento","label_internal_capacity":"Capacidad de material dentro del equipo","btn_details":"Detalles","btn_inquire":"Consultar","btn_inquire_product":"Consultar sobre este producto","label_category":"Categoría","count_product":"producto","count_products":"productos","empty_products":"No hay productos disponibles. Contáctenos para obtener ayuda.","empty_category":"No hay productos en esta categoría. Contáctenos para consultar disponibilidad.","catalog_error":"El catálogo no está disponible temporalmente. Contáctenos para obtener ayuda.","catalog_unavailable":"Catálogo no disponible","sending":"Enviando…","sent":"Gracias. Su consulta se ha enviado correctamente.","send_error":"No se pudo enviar la consulta. Inténtelo de nuevo o contáctenos por WhatsApp.","not_configured":"El formulario aún no está configurado. Contáctenos por WhatsApp o configure Formspree en CMS.","placeholder_name":"Su nombre","placeholder_email":"usted@empresa.com","placeholder_phone":"+ código de país","placeholder_model":"Nombre o modelo del producto","placeholder_message":"Producto, cantidad, aplicación, destino y requisitos eléctricos…","cookie_settings":"Configuración de cookies","returns_policy":"Devoluciones y reembolsos","cookie_message":"Usamos Google Analytics opcional para comprender el uso del sitio. Puede aceptar o rechazar estas cookies.","cookie_accept":"Aceptar analítica","cookie_reject":"Rechazar analítica","cookie_learn":"Más información","policy_english":"Este documento está disponible actualmente en inglés. Añadiremos una traducción después de revisar el texto legal.","privacy_policy":"Política de privacidad","shipping_policy":"Información de envío","warranty_policy":"Garantía","terms_policy":"Condiciones del servicio","cookie_policy":"Aviso de cookies y analítica","returns_title":"Devoluciones, cancelaciones y reembolsos"},"ar":{"hero_title":"معدات صناعية للبناء ومناولة المواد","hero_subtitle":"اكتشف خلاطات الخرسانة ومعدات رصّ الأكياس على المنصات ومعدات الملاط. تواصل معنا لمعرفة المواصفات والتوفر وطلب عرض سعر.","about_text":"تربط AIZGZ Machinery المشترين الدوليين بمعدات البناء ومناولة المواد. تواصل معنا لمناقشة المواصفات وخيارات التخصيص والشحن.","faq3_q":"هل يمكنكم ترتيب الشحن الدولي؟","faq3_a":"تعتمد خيارات الشحن وتكاليفه على المعدات والوجهة والتعبئة وأسعار النقل الحالية. يرجى تزويدنا بالميناء أو العنوان المقصود.","filter_all":"جميع المعدات","filter_concrete":"معدات الخرسانة","filter_mortar":"المخاليط الجافة والملاط","filter_pallet":"معدات رصّ الأكياس على المنصات","filter_block":"البلوك والطوب","filter_crushing":"التكسير والغربلة","filter_packing":"التعبئة والمعدات المساعدة","label_model":"الطراز","label_capacity":"خيارات أحجام المعدات","label_internal_capacity":"السعة الداخلية للمواد","btn_details":"التفاصيل","btn_inquire":"استفسر الآن","btn_inquire_product":"استفسر عن هذا المنتج","label_category":"الفئة","count_product":"منتج","count_products":"منتجًا","empty_products":"لا توجد منتجات متاحة حالياً. يرجى التواصل معنا للمساعدة.","empty_category":"لا توجد منتجات مدرجة في هذه الفئة حالياً. يرجى التواصل للاستفسار عن التوفر.","catalog_error":"كتالوج المنتجات غير متاح مؤقتاً. يرجى التواصل معنا.","catalog_unavailable":"الكتالوج غير متاح","sending":"جارٍ الإرسال…","sent":"شكراً لك. تم إرسال استفسارك بنجاح.","send_error":"تعذر إرسال استفسارك. حاول مرة أخرى أو تواصل معنا عبر واتساب.","not_configured":"نموذج الاستفسار غير مُعد بعد. تواصل معنا عبر واتساب أو اضبط Formspree في إعدادات الموقع.","placeholder_name":"اسمك","placeholder_email":"you@company.com","placeholder_phone":"+ رمز الدولة","placeholder_model":"اسم المنتج أو الطراز","placeholder_message":"المنتج والكمية والاستخدام والوجهة ومتطلبات الطاقة…","cookie_settings":"إعدادات ملفات تعريف الارتباط","returns_policy":"الإرجاع واسترداد الأموال","cookie_message":"نستخدم Google Analytics الاختياري لفهم استخدام الموقع. يمكنك قبول ملفات التحليلات أو رفضها.","cookie_accept":"قبول التحليلات","cookie_reject":"رفض التحليلات","cookie_learn":"معرفة المزيد","policy_english":"هذه السياسة متاحة حالياً باللغة الإنجليزية. ستضاف ترجمة بعد مراجعة النص القانوني.","privacy_policy":"سياسة الخصوصية","shipping_policy":"معلومات الشحن","warranty_policy":"معلومات الضمان","terms_policy":"شروط الخدمة","cookie_policy":"إشعار ملفات تعريف الارتباط والتحليلات","returns_title":"الإرجاع والإلغاء واسترداد الأموال"},"ru":{"hero_title":"Промышленное оборудование для строительства, производства смесей и перемещения материалов","hero_subtitle":"Ознакомьтесь с бетоносмесителями, фасовочно-упаковочными машинами, паллетайзерами и оборудованием для сухих строительных смесей. Свяжитесь с нами, чтобы уточнить характеристики, наличие и цену.","about_text":"AIZGZ Machinery помогает международным покупателям подбирать оборудование для строительства и обработки материалов. Свяжитесь с нами, чтобы обсудить характеристики, индивидуальную комплектацию и доставку.","faq3_q":"Можете ли вы организовать международную доставку?","faq3_a":"Варианты и стоимость доставки зависят от оборудования, пункта назначения, упаковки и текущих тарифов. Укажите порт или адрес доставки.","filter_all":"Всё оборудование","filter_concrete":"Бетонное оборудование","filter_mortar":"Сухие смеси и растворы","filter_pallet":"Паллетайзеры","filter_block":"Блоки и кирпич","filter_crushing":"Дробление и сортировка","filter_packing":"Упаковка и вспомогательное оборудование","label_model":"Модель","label_capacity":"Производительность / варианты исполнения","label_internal_capacity":"Вместимость оборудования по материалу","btn_details":"Подробнее","btn_inquire":"Запросить","btn_inquire_product":"Запросить информацию об оборудовании","label_category":"Категория","count_product":"товар","count_products":"товаров","empty_products":"Сейчас нет доступных товаров. Свяжитесь с нами для получения информации.","empty_category":"В этой категории пока нет опубликованных товаров. Уточните наличие у нас.","catalog_error":"Каталог временно недоступен. Свяжитесь с нами для получения помощи.","catalog_unavailable":"Каталог недоступен","sending":"Отправка…","sent":"Спасибо. Ваш запрос успешно отправлен.","send_error":"Не удалось отправить запрос. Попробуйте ещё раз или свяжитесь с нами через WhatsApp.","not_configured":"Форма запроса ещё не настроена. Свяжитесь с нами через WhatsApp или настройте Formspree в CMS.","placeholder_name":"Ваше имя","placeholder_email":"you@company.com","placeholder_phone":"+ код страны","placeholder_model":"Название или модель оборудования","placeholder_message":"Оборудование, количество, назначение, пункт доставки и требования к питанию…","cookie_settings":"Настройки файлов cookie","returns_policy":"Возврат и возмещение","cookie_message":"Мы используем необязательную Google Analytics для анализа посещаемости. Вы можете разрешить или отклонить аналитику.","cookie_accept":"Разрешить аналитику","cookie_reject":"Отклонить аналитику","cookie_learn":"Подробнее","policy_english":"Этот документ пока доступен на английском языке. Перевод будет добавлен после проверки юридического текста.","privacy_policy":"Политика конфиденциальности","shipping_policy":"Информация о доставке","warranty_policy":"Гарантийная информация","terms_policy":"Условия использования","cookie_policy":"Уведомление о cookie и аналитике","returns_title":"Возврат, отмена и возмещение"}};
+    Object.keys(extraTranslations).forEach((language) => Object.assign(i18nText[language], extraTranslations[language]));
+    const supplementalTranslations = {"en":{"catalog_note":"Product names are shown in the selected language alongside their original English names. Technical specifications are kept as supplied.","form_security_note":"Please do not include passwords, payment card details, or other sensitive information.","contact_email_label":"Email","whatsapp_label":"Chat on WhatsApp","case_empty":"Project and shipping cases will be added when available.","video_empty":"Videos will be added when available.","case_error":"Project cases are temporarily unavailable.","video_error":"Videos are temporarily unavailable.","watch_on":"Watch on"},"es":{"catalog_note":"Los nombres de los productos se muestran en el idioma seleccionado junto con sus nombres originales en inglés. Las especificaciones técnicas se mantienen tal como fueron proporcionadas.","form_security_note":"No incluya contraseñas, datos de tarjetas de pago ni otra información sensible.","contact_email_label":"Correo electrónico","whatsapp_label":"Chatear por WhatsApp","case_empty":"Los proyectos y envíos se añadirán cuando estén disponibles.","video_empty":"Los vídeos se añadirán cuando estén disponibles.","case_error":"Los casos de proyectos no están disponibles temporalmente.","video_error":"Los vídeos no están disponibles temporalmente.","watch_on":"Ver en"},"ar":{"catalog_note":"تُعرض أسماء المنتجات باللغة المحددة مع الاحتفاظ بأسمائها الأصلية باللغة الإنجليزية، بينما تُحافظ المواصفات الفنية على نصها الأصلي.","form_security_note":"يرجى عدم إدخال كلمات المرور أو بيانات بطاقات الدفع أو أي معلومات حساسة أخرى.","contact_email_label":"البريد الإلكتروني","whatsapp_label":"تواصل عبر واتساب","case_empty":"ستضاف المشاريع والشحنات عند توفرها.","video_empty":"ستضاف مقاطع الفيديو عند توفرها.","case_error":"حالات المشاريع غير متاحة مؤقتاً.","video_error":"مقاطع الفيديو غير متاحة مؤقتاً.","watch_on":"شاهد على"},"ru":{"catalog_note":"Названия товаров отображаются на выбранном языке с сохранением оригинальных названий на английском. Технические характеристики приводятся в исходном виде.","form_security_note":"Не указывайте пароли, данные банковских карт и другую конфиденциальную информацию.","contact_email_label":"Электронная почта","whatsapp_label":"Написать в WhatsApp","case_empty":"Информация о проектах и отгрузках появится при наличии.","video_empty":"Видео будут добавлены по мере готовности.","case_error":"Информация о проектах временно недоступна.","video_error":"Видео временно недоступны.","watch_on":"Смотреть на"}};
+    Object.keys(supplementalTranslations).forEach((language) => Object.assign(i18nText[language], supplementalTranslations[language]));
+    const finalUiTranslations = {"en":{"loading_products":"Loading products…","loading_gallery":"Loading gallery…","youtube_channel":"YouTube Channel","tiktok_profile":"TikTok Profile","filter_mixing":"Mixing & Blending"},"es":{"loading_products":"Cargando productos…","loading_gallery":"Cargando galería…","youtube_channel":"Canal de YouTube","tiktok_profile":"Perfil de TikTok","filter_mixing":"Mezcla y agitación"},"ar":{"loading_products":"جارٍ تحميل المنتجات…","loading_gallery":"جارٍ تحميل المعرض…","youtube_channel":"قناة يوتيوب","tiktok_profile":"ملف TikTok","filter_mixing":"الخلط والمزج"},"ru":{"loading_products":"Загрузка товаров…","loading_gallery":"Загрузка галереи…","youtube_channel":"Канал YouTube","tiktok_profile":"Профиль TikTok","filter_mixing":"Смешивание и перемешивание"}};
+    Object.keys(finalUiTranslations).forEach((language) => Object.assign(i18nText[language], finalUiTranslations[language]));
+    const customizationTranslations = {
+      en: {custom_title:'Customized Design & Manufacturing',custom_intro:"All equipment can be customized to the buyer's requirements. We develop equipment drawings and proposed configurations around your project needs.",custom_step1_title:'1. Understand Requirements',custom_step1_desc:'Discuss materials, intended application, target capacity, site conditions and other project needs.',custom_step2_title:'2. Prepare Drawings',custom_step2_desc:"Prepare equipment drawings and a proposed configuration based on the buyer's requirements.",custom_step3_title:'3. Review & Confirm',custom_step3_desc:'Review the drawings, configuration and technical details with the buyer before production.',custom_step4_title:'4. Start Manufacturing',custom_step4_desc:'After the design and specifications are confirmed, manufacturing proceeds according to the approved requirements.',custom_note:'Final equipment configuration, dimensions, capacity and specifications are determined by the confirmed project design.',custom_cta:'Discuss Your Custom Requirements'},
+      es: {custom_title:'Diseño y fabricación a medida',custom_intro:'Todos los equipos pueden personalizarse según los requisitos del comprador. Preparamos planos y configuraciones propuestas de acuerdo con las necesidades del proyecto.',custom_step1_title:'1. Comprender los requisitos',custom_step1_desc:'Analizamos los materiales, la aplicación prevista, la capacidad objetivo, las condiciones del sitio y otras necesidades del proyecto.',custom_step2_title:'2. Preparar los planos',custom_step2_desc:'Preparamos los planos del equipo y una configuración propuesta según los requisitos del comprador.',custom_step3_title:'3. Revisar y confirmar',custom_step3_desc:'Revisamos con el comprador los planos, la configuración y los detalles técnicos antes de iniciar la producción.',custom_step4_title:'4. Iniciar la fabricación',custom_step4_desc:'Una vez confirmados el diseño y las especificaciones, la fabricación se realiza conforme a los requisitos aprobados.',custom_note:'La configuración final, las dimensiones, la capacidad y las especificaciones se determinan según el diseño del proyecto confirmado.',custom_cta:'Consultar requisitos de personalización'},
+      ar: {custom_title:'التصميم والتصنيع حسب الطلب',custom_intro:'يمكن تخصيص جميع المعدات وفقاً لمتطلبات المشتري. نقوم بإعداد رسومات المعدات والتكوينات المقترحة بما يتناسب مع احتياجات المشروع.',custom_step1_title:'1. فهم المتطلبات',custom_step1_desc:'نناقش المواد والاستخدام المقصود والطاقة الإنتاجية المستهدفة وظروف الموقع واحتياجات المشروع الأخرى.',custom_step2_title:'2. إعداد الرسومات',custom_step2_desc:'نُعد رسومات المعدات والتكوين المقترح بناءً على متطلبات المشتري.',custom_step3_title:'3. المراجعة والتأكيد',custom_step3_desc:'نراجع الرسومات والتكوين والتفاصيل الفنية مع المشتري قبل بدء الإنتاج.',custom_step4_title:'4. بدء التصنيع',custom_step4_desc:'بعد تأكيد التصميم والمواصفات، يبدأ التصنيع وفقاً للمتطلبات المعتمدة.',custom_note:'يتم تحديد التكوين النهائي والأبعاد والطاقة الإنتاجية والمواصفات وفقاً لتصميم المشروع المعتمد.',custom_cta:'ناقش متطلباتك الخاصة'},
+      ru: {custom_title:'Индивидуальное проектирование и производство',custom_intro:'Всё оборудование может быть адаптировано под требования покупателя. Мы подготавливаем чертежи оборудования и предлагаем конфигурацию с учётом задач проекта.',custom_step1_title:'1. Уточнение требований',custom_step1_desc:'Обсуждаем материалы, назначение, требуемую производительность, условия площадки и другие задачи проекта.',custom_step2_title:'2. Подготовка чертежей',custom_step2_desc:'Готовим чертежи оборудования и предлагаем конфигурацию на основе требований покупателя.',custom_step3_title:'3. Проверка и согласование',custom_step3_desc:'До начала производства согласовываем с покупателем чертежи, конфигурацию и технические детали.',custom_step4_title:'4. Начало производства',custom_step4_desc:'После согласования проекта и спецификаций производство выполняется в соответствии с утверждёнными требованиями.',custom_note:'Итоговая конфигурация оборудования, размеры, производительность и характеристики определяются согласованным проектом.',custom_cta:'Обсудить индивидуальные требования'}
+    };
+    Object.keys(customizationTranslations).forEach((language) => Object.assign(i18nText[language], customizationTranslations[language]));
+    function currentTexts() { return i18nText[document.documentElement.lang] || i18nText.en; }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-nav-menu');
+      const button = document.getElementById('mobile-menu-toggle');
+      if (!menu || !button) return;
+      const isOpening = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', !isOpening);
+      button.setAttribute('aria-expanded', String(isOpening));
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-nav-menu');
+      const button = document.getElementById('mobile-menu-toggle');
+      if (menu) menu.classList.add('hidden');
+      if (button) button.setAttribute('aria-expanded', 'false');
+    }
+
+
+    function browserLanguageChoice() {
+      const candidates = Array.isArray(navigator.languages) ? navigator.languages : [navigator.language || 'en'];
+      for (const candidate of candidates) {
+        const code = String(candidate).toLowerCase().split(/[-_]/)[0];
+        if (['es', 'ar', 'ru'].includes(code)) return code;
+      }
+      return 'en';
+    }
+
+    function countryLanguageChoice(country) {
+      const code = String(country || '').toUpperCase();
+      const spanish = ['ES','MX','AR','BO','CL','CO','CR','CU','DO','EC','GT','HN','NI','PA','PE','PY','SV','UY','VE','GQ'];
+      const arabic = ['SA','AE','QA','KW','BH','OM','YE','IQ','JO','LB','SY','PS','EG','SD','LY','TN','DZ','MA','MR','SO','DJ','KM'];
+      const russian = ['RU','BY','KZ','KG'];
+      if (spanish.includes(code)) return 'es';
+      if (arabic.includes(code)) return 'ar';
+      if (russian.includes(code)) return 'ru';
+      return 'en';
+    }
+
+    function loadAnalytics() {
+      if (window.__aizgzAnalyticsLoaded || !globalSettings.ga_id || !/^[Gg]-[A-Z0-9]+$/.test(globalSettings.ga_id)) return;
+      window.__aizgzAnalyticsLoaded = true;
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(globalSettings.ga_id);
+      document.head.appendChild(script);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', globalSettings.ga_id);
+    }
+
+    function showCookieBanner() {
+      const banner = document.getElementById('cookie-banner');
+      if (banner && activeAnalyticsConsent === null) banner.classList.remove('hidden');
+    }
+
+    function clearAnalyticsCookies() {
+      // Remove Google Analytics cookies previously created before consent was withdrawn.
+      const names = document.cookie.split(';')
+        .map(cookie => cookie.trim().split('=')[0])
+        .filter(name => /^_ga($|_)/.test(name) || /^_gid$/.test(name) || /^_gat($|_)/.test(name));
+      const domains = [null, window.location.hostname];
+      const hostParts = window.location.hostname.split('.');
+      if (hostParts.length > 2) domains.push('.' + hostParts.slice(-2).join('.'));
+      for (const name of names) {
+        for (const domain of domains) {
+          const domainPart = domain ? '; domain=' + domain : '';
+          document.cookie = name + '=; Max-Age=0; path=/; SameSite=Lax' + domainPart;
+        }
+      }
+    }
+
+    function saveAnalyticsConsent(accepted) {
+      activeAnalyticsConsent = Boolean(accepted);
+      try { localStorage.setItem('aizgz_analytics_consent', accepted ? 'accepted' : 'rejected'); } catch (_) {}
+      document.getElementById('cookie-banner')?.classList.add('hidden');
+      if (accepted) {
+        if (globalSettings.ga_id) window['ga-disable-' + globalSettings.ga_id] = false;
+        if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'granted' });
+        loadAnalytics();
+      } else {
+        if (globalSettings.ga_id) window['ga-disable-' + globalSettings.ga_id] = true;
+        if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'denied' });
+        clearAnalyticsCookies();
+      }
+    }
+
+    function openCookieSettings() {
+      document.getElementById('cookie-banner')?.classList.remove('hidden');
+    }
+
+    async function initializeSite() {
+      let storedLanguage = '';
+      let savedConsent = '';
+      try {
+        storedLanguage = localStorage.getItem('aizgz_language') || '';
+        savedConsent = localStorage.getItem('aizgz_analytics_consent') || '';
+      } catch (_) {}
+      activeAnalyticsConsent = savedConsent === 'accepted' ? true : savedConsent === 'rejected' ? false : null;
+      if (activeAnalyticsConsent === false) clearAnalyticsCookies();
+
+      // Render the interface and start content requests immediately. Regional
+      // runtime detection is optional and must never block the catalogue.
+      const hasStoredLanguage = Boolean(storedLanguage && i18nText[storedLanguage]);
+      const initialLanguage = hasStoredLanguage ? storedLanguage : browserLanguageChoice();
+      changeLanguage(initialLanguage, false);
+      if (activeAnalyticsConsent === true) loadAnalytics();
+      if (activeAnalyticsConsent === null) showCookieBanner();
+
+      loadSiteData();
+      fetchProducts();
+      contentCollectionsStarted = true;
+      fetchContentCollection('cases', 'cases-grid', 'case');
+      fetchContentCollection('videos', 'videos-grid', 'video');
+
+      // Apply country-based language only after the runtime endpoint responds.
+      // A timeout prevents a slow or unavailable function from blocking startup.
+      (async () => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        try {
+          const response = await fetch('/api/runtime', { cache: 'no-store', signal: controller.signal });
+          if (!response.ok) throw new Error(`Runtime service HTTP ${response.status}`);
+          const runtime = await response.json();
+          if (runtime.branch && /^[A-Za-z0-9._/-]+$/.test(runtime.branch)) REPO_BRANCH = runtime.branch;
+          if (runtime.environment !== 'production' || runtime.branch !== 'main') {
+            let robots = document.querySelector('meta[name="robots"]');
+            if (!robots) { robots = document.createElement('meta'); robots.name = 'robots'; document.head.appendChild(robots); }
+            robots.content = 'noindex, nofollow';
+          }
+          if (!hasStoredLanguage && initialLanguage === 'en') {
+            changeLanguage(countryLanguageChoice(runtime.country), false);
+          }
+        } catch (error) {
+          console.warn('Regional language detection unavailable; continuing with the current language.', error);
+        } finally {
+          clearTimeout(timeoutId);
+        }
+      })();
+    }
 
     function setText(id, value) {
       const el = document.getElementById(id);
       if (el && value !== undefined && value !== null && String(value).trim() !== '') el.textContent = String(value);
     }
 
-    function changeLanguage(lang) {
+    function changeLanguage(lang, persist = true) {
       const language = i18nText[lang] ? lang : 'en';
       const texts = i18nText[language];
       document.querySelectorAll('[data-i18n]').forEach((el) => {
         const key = el.getAttribute('data-i18n');
         if (texts[key]) el.textContent = texts[key];
       });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (texts[key]) el.setAttribute('placeholder', texts[key]);
+      });
       document.documentElement.lang = language;
       document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+      ['lang-switcher', 'lang-switcher-mobile'].forEach((id) => {
+        const selector = document.getElementById(id);
+        if (selector) selector.value = language;
+      });
+      if (persist) { try { localStorage.setItem('aizgz_language', language); } catch (_) {} }
+      if (language === 'en' && globalSettings.hero_title) {
+        setText('hero-title', globalSettings.hero_title);
+        setText('hero-subtitle', globalSettings.hero_subtitle);
+        setText('about-text', globalSettings.about_text);
+      }
+      if (allProducts.length) renderFilteredProducts();
+      if (contentCollectionsStarted) {
+        fetchContentCollection('cases', 'cases-grid', 'case');
+        fetchContentCollection('videos', 'videos-grid', 'video');
+      }
+      if (currentProductModal) openModal(currentProductModal.meta, currentProductModal.body);
+      if (currentPolicyType) openPolicy(currentPolicyType);
     }
 
     async function loadSiteData() {
       try {
-        const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/content/settings/general.json`;
+        const url = '/api/content?collection=settings';
         const response = await fetch(url);
         if (!response.ok) return;
-        globalSettings = await response.json();
+        const payload = await response.json();
+        globalSettings = payload.settings && typeof payload.settings === 'object' ? payload.settings : {};
         setText('brand-name', globalSettings.brand_name);
         setText('brand-tagline', globalSettings.brand_tagline);
-        setText('hero-title', globalSettings.hero_title);
-        setText('hero-subtitle', globalSettings.hero_subtitle);
-        setText('about-text', globalSettings.about_text);
+        if (document.documentElement.lang === 'en') {
+          setText('hero-title', globalSettings.hero_title);
+          setText('hero-subtitle', globalSettings.hero_subtitle);
+          setText('about-text', globalSettings.about_text);
+        }
+        if (globalSettings.contact_email) {
+          const emailLink = document.getElementById('contact-email');
+          if (emailLink) { emailLink.href = 'mailto:' + globalSettings.contact_email; emailLink.textContent = globalSettings.contact_email; }
+        }
         if (globalSettings.whatsapp_number) {
           const number = String(globalSettings.whatsapp_number).replace(/[^\d]/g, '');
           if (number) {
@@ -302,18 +552,13 @@
             link.href = `https://wa.me/${number}?text=${encodeURIComponent('Hello, I am interested in your industrial equipment.')}`;
           }
         }
-        if (isSafeHttpUrl(globalSettings.youtube_url)) document.getElementById('youtube-btn').href = globalSettings.youtube_url;
-        if (isSafeHttpUrl(globalSettings.tiktok_url)) document.getElementById('tiktok-btn').href = globalSettings.tiktok_url;
-        if (globalSettings.ga_id && /^[Gg]-[A-Z0-9]+$/.test(globalSettings.ga_id)) {
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(globalSettings.ga_id)}`;
-          document.head.appendChild(script);
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = function(){ window.dataLayer.push(arguments); };
-          window.gtag('js', new Date());
-          window.gtag('config', globalSettings.ga_id);
-        }
+        const youtubeButton = document.getElementById('youtube-btn');
+        const tiktokButton = document.getElementById('tiktok-btn');
+        if (isSafeHttpUrl(globalSettings.youtube_url)) { youtubeButton.href = globalSettings.youtube_url; youtubeButton.hidden = false; }
+        else youtubeButton.hidden = true;
+        if (isSafeHttpUrl(globalSettings.tiktok_url)) { tiktokButton.href = globalSettings.tiktok_url; tiktokButton.hidden = false; }
+        else tiktokButton.hidden = true;
+        if (activeAnalyticsConsent === true) loadAnalytics();
         if (globalSettings.company_display_name) setText('footer-copyright', `© ${new Date().getFullYear()} ${globalSettings.company_display_name}. All rights reserved.`);
       } catch (error) {
         console.error('Could not load site settings:', error);
@@ -330,26 +575,85 @@
     }
 
     function parseFrontMatter(text) {
-      const match = String(text).match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n([\s\S]*))?$/);
-      if (!match) return { meta: {}, body: String(text) };
-      const meta = {};
-      match[1].split(/\r?\n/).forEach((line) => {
-        const colon = line.indexOf(':');
-        if (colon < 1) return;
-        const key = line.slice(0, colon).trim();
-        const value = line.slice(colon + 1).trim().replace(/^(['"])(.*)\1$/, '$2');
-        if (key) meta[key] = value;
-      });
-      return { meta, body: match[2] || '' };
+      const source = String(text);
+      const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n([\s\S]*))?$/);
+      if (!match) return { meta: {}, body: source };
+      let meta = {};
+      if (window.jsyaml && typeof window.jsyaml.load === 'function') {
+        const parsed = window.jsyaml.load(match[1], { schema: window.jsyaml.JSON_SCHEMA });
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) meta = parsed;
+      } else {
+        // Fallback parser supports ordinary scalars and YAML literal/folded
+        // blocks so optional multilingual Markdown fields still work offline.
+        const lines = match[1].split(/\r?\n/);
+        let currentKey = '';
+        let blockStyle = '';
+        let blockLines = [];
+        const flushBlock = () => {
+          if (!blockStyle || !currentKey) return;
+          meta[currentKey] = blockLines.join(blockStyle === '>' ? ' ' : '\n').replace(/\s+$/, '');
+          blockStyle = '';
+          blockLines = [];
+        };
+        lines.forEach((line) => {
+          if (blockStyle) {
+            if (line === '' || /^\s+/.test(line)) {
+              blockLines.push(line.replace(/^ {2}/, ''));
+              return;
+            }
+            flushBlock();
+          }
+          if (/^\s+/.test(line) && currentKey) {
+            meta[currentKey] = (String(meta[currentKey] || '') + ' ' + line.trim()).trim();
+            return;
+          }
+          const colon = line.indexOf(':');
+          if (colon < 1) return;
+          currentKey = line.slice(0, colon).trim();
+          const rawValue = line.slice(colon + 1).trim();
+          if (rawValue === '|' || rawValue === '|-' || rawValue === '>' || rawValue === '>-') {
+            blockStyle = rawValue[0];
+            blockLines = [];
+            meta[currentKey] = '';
+          } else {
+            meta[currentKey] = rawValue.replace(/^(['"])(.*)\1$/, '$2');
+          }
+        });
+        flushBlock();
+      }
+      return { meta: meta, body: match[2] || '' };
     }
 
     function getProductCategory(meta = {}) {
       const explicit = String(meta.category || '').trim().toLowerCase();
-      if (['concrete-mixers', 'palletizers', 'mortar-equipment'].includes(explicit)) return explicit;
-      const text = `${meta.title || ''} ${meta.model || ''} ${meta.category || ''}`.toLowerCase();
-      if (/palletiz|码垛/.test(text)) return 'palletizers';
-      if (/mortar|砂浆/.test(text)) return 'mortar-equipment';
-      if (/concrete|cement mixer|混凝土/.test(text)) return 'concrete-mixers';
+      const categoryAliases = {
+        'concrete-mixers': 'concrete-mixers',
+        'concrete equipment': 'concrete-mixers',
+        'concrete-equipment': 'concrete-mixers',
+        'mortar-equipment': 'mortar-equipment',
+        'dry mix mortar plant': 'mortar-equipment',
+        'dry-mix-mortar': 'mortar-equipment',
+        'tile adhesive production line': 'mortar-equipment',
+        'wall putty making machine': 'mortar-equipment',
+        'palletizers': 'palletizers',
+        'block & brick making machine': 'block-brick',
+        'block-brick': 'block-brick',
+        'crushing & screening plant': 'crushing-screening',
+        'crushing-screening': 'crushing-screening',
+        'packing & auxiliary equipment': 'packing-auxiliary',
+        'mixing & blending equipment': 'mixing-blending',
+        'mixing-blending': 'mixing-blending',
+        'packing-auxiliary': 'packing-auxiliary'
+      };
+      if (categoryAliases[explicit]) return categoryAliases[explicit];
+      const text = String(meta.title || '') + ' ' + String(meta.model || '') + ' ' + String(meta.category || '');
+      const normalizedText = text.toLowerCase();
+      if (/palletiz|码垛/.test(normalizedText)) return 'palletizers';
+      if (/mortar|砂浆|tile adhesive|putty/.test(normalizedText)) return 'mortar-equipment';
+      if (/block|brick|砌块|制砖/.test(normalizedText)) return 'block-brick';
+      if (/crushing|screening|破碎|筛分/.test(normalizedText)) return 'crushing-screening';
+      if (/packing|packaging|bagging|包装|装袋/.test(normalizedText)) return 'packing-auxiliary';
+      if (/concrete|cement mixer|混凝土/.test(normalizedText)) return 'concrete-mixers';
       return 'other';
     }
 
@@ -369,27 +673,26 @@
       const count = document.getElementById('product-count');
       grid.setAttribute('aria-busy', 'true');
       try {
-        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/products?ref=${REPO_BRANCH}`);
-        if (!response.ok) throw new Error(`GitHub API HTTP ${response.status}`);
-        const files = await response.json();
-        const markdownFiles = files.filter((file) => file.type === 'file' && file.name.toLowerCase().endsWith('.md'));
+        const response = await fetch('/api/content?collection=products', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Product service HTTP ${response.status}`);
+        const payload = await response.json();
+        const markdownFiles = Array.isArray(payload.files) ? payload.files : [];
         const loaded = await Promise.allSettled(markdownFiles.map(async (file) => {
-          const res = await fetch(file.download_url);
-          if (!res.ok) throw new Error(`Could not fetch ${file.name}`);
-          const parsed = parseFrontMatter(await res.text());
+          const parsed = parseFrontMatter(file.content || '');
+          if (!parsed.meta || !parsed.meta.title) throw new Error(`Invalid product content: ${file.name}`);
           return { meta: parsed.meta, body: parsed.body, fileName: file.name };
         }));
         allProducts = loaded.filter((result) => result.status === 'fulfilled').map((result) => result.value);
         loaded.filter((result) => result.status === 'rejected').forEach((result) => console.error('Product failed to load:', result.reason));
         renderFilteredProducts();
         if (!allProducts.length) {
-          grid.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500">No products are available right now. Please contact us for assistance.</div>';
-          count.textContent = '0 Products';
+          grid.textContent = currentTexts().empty_products;
+          count.textContent = '0 ' + currentTexts().count_products;
         }
       } catch (error) {
         console.error('Failed to load products:', error);
-        grid.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500">The product catalog is temporarily unavailable. Please contact us for assistance.</div>';
-        count.textContent = 'Catalog unavailable';
+        grid.textContent = currentTexts().catalog_error;
+        count.textContent = currentTexts().catalog_unavailable;
       } finally {
         grid.setAttribute('aria-busy', 'false');
       }
@@ -399,6 +702,19 @@
       const grid = document.getElementById('product-grid');
       const count = document.getElementById('product-count');
       if (!grid || !count) return;
+
+      // Only show category filters that currently have matching catalogue items.
+      // This avoids empty category pages while allowing new categories (including
+      // palletizers) to appear automatically when their product records are added.
+      document.querySelectorAll('.filter-btn[data-category]').forEach((button) => {
+        const category = button.dataset.category;
+        const hasProducts = category === 'all' || allProducts.some(
+          (product) => getProductCategory(product.meta) === category
+        );
+        button.hidden = !hasProducts;
+        if (!hasProducts && activeProductCategory === category) activeProductCategory = 'all';
+      });
+
       const filtered = activeProductCategory === 'all'
         ? allProducts
         : allProducts.filter((product) => getProductCategory(product.meta) === activeProductCategory);
@@ -406,14 +722,16 @@
       if (!filtered.length) {
         const empty = document.createElement('div');
         empty.className = 'col-span-full py-12 text-center text-slate-500';
-        empty.textContent = activeProductCategory === 'all'
-          ? 'No products are available right now. Please contact us for assistance.'
-          : 'No products are currently listed in this category. Please contact us for availability.';
+        empty.textContent = activeProductCategory === 'all' ? currentTexts().empty_products : currentTexts().empty_category;
         grid.appendChild(empty);
       } else {
         filtered.forEach((product) => renderProductCard(product.meta, product.body));
       }
-      count.textContent = `${filtered.length} ${filtered.length === 1 ? 'Product' : 'Products'}`;
+      count.textContent = filtered.length + ' ' + (filtered.length === 1 ? currentTexts().count_product : currentTexts().count_products);
+    }
+
+    function isDisplayableCatalogValue(value) {
+      return value !== undefined && value !== null && String(value).trim() !== '' && !/^(["']{2}|null|undefined|n\/a)$/i.test(String(value).trim()) && !/[\u3400-\u9fff]/.test(String(value));
     }
 
     function createImage(src, alt, className) {
@@ -427,6 +745,20 @@
       return img;
     }
 
+    function getLocalizedProductTitle(meta = {}, language = 'en') {
+      const fieldByLanguage = { es: 'title_es', ar: 'title_ar', ru: 'title_ru' };
+      const field = fieldByLanguage[language];
+      const localized = field ? String(meta[field] || '').trim() : '';
+      return localized || meta.title || 'Industrial Equipment';
+    }
+
+    function getLocalizedProductBody(meta = {}, englishBody = '', language = 'en') {
+      const fieldByLanguage = { es: 'body_es', ar: 'body_ar', ru: 'body_ru' };
+      const field = fieldByLanguage[language];
+      const localized = field ? String(meta[field] || '').trim() : '';
+      return localized || String(englishBody || '');
+    }
+
     function renderProductCard(meta = {}, body = '') {
       const grid = document.getElementById('product-grid');
       const card = document.createElement('article');
@@ -435,32 +767,42 @@
       const imageWrap = document.createElement('div');
       imageWrap.className = 'relative h-48 overflow-hidden bg-slate-100';
       imageWrap.appendChild(createImage(meta.image, meta.title || 'Industrial equipment', 'h-full w-full object-cover'));
-      if (meta.power_type) {
-        const badge = document.createElement('span');
-        badge.className = 'absolute right-3 top-3 rounded bg-amber-500 px-2.5 py-1 text-xs font-bold text-slate-900 shadow';
-        badge.textContent = meta.power_type;
-        imageWrap.appendChild(badge);
-      }
       upper.appendChild(imageWrap);
       const content = document.createElement('div');
       content.className = 'p-6';
       const title = document.createElement('h3');
       title.className = 'text-xl font-bold text-slate-800';
-      title.textContent = meta.title || 'Industrial Equipment';
+      const productLanguage = document.documentElement.lang || 'en';
+      const localizedTitle = getLocalizedProductTitle(meta, productLanguage);
+      title.textContent = localizedTitle;
       content.appendChild(title);
-      if (meta.model) {
+      if (productLanguage !== 'en' && localizedTitle !== (meta.title || '') && meta.title) {
+        const originalTitle = document.createElement('p');
+        originalTitle.className = 'mt-1 text-xs text-slate-500';
+        originalTitle.textContent = meta.title;
+        content.appendChild(originalTitle);
+      }
+      if (isDisplayableCatalogValue(meta.model)) {
         const model = document.createElement('p');
         model.className = 'mt-1 font-mono text-xs text-slate-400';
-        model.textContent = `Model: ${meta.model}`;
+        model.textContent = currentTexts().label_model + ': ' + meta.model;
         content.appendChild(model);
       }
-      if (meta.capacity) {
+      if (isDisplayableCatalogValue(meta.capacity)) {
         const capacity = document.createElement('p');
         capacity.className = 'mt-2 text-sm text-slate-600';
         const label = document.createElement('strong');
-        label.textContent = 'Capacity: ';
+        label.textContent = currentTexts().label_capacity + ': ';
         capacity.append(label, document.createTextNode(meta.capacity));
         content.appendChild(capacity);
+      }
+      if (isDisplayableCatalogValue(meta.internal_capacity)) {
+        const internalCapacity = document.createElement('p');
+        internalCapacity.className = 'mt-2 text-sm text-slate-600';
+        const label = document.createElement('strong');
+        label.textContent = currentTexts().label_internal_capacity + ': ';
+        internalCapacity.append(label, document.createTextNode(meta.internal_capacity));
+        content.appendChild(internalCapacity);
       }
       upper.appendChild(content);
       card.appendChild(upper);
@@ -469,12 +811,12 @@
       const details = document.createElement('button');
       details.type = 'button';
       details.className = 'rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900';
-      details.textContent = 'Details';
+      details.textContent = currentTexts().btn_details;
       details.addEventListener('click', () => openModal(meta, body));
       const inquiry = document.createElement('a');
       inquiry.href = '#contact';
       inquiry.className = 'rounded bg-amber-500 px-4 py-2 text-xs font-bold text-slate-900 hover:bg-amber-600';
-      inquiry.textContent = 'Inquire Now →';
+      inquiry.textContent = currentTexts().btn_inquire + ' →';
       inquiry.addEventListener('click', () => fillInquiryModel(meta.title || meta.model || 'Product Inquiry'));
       actions.append(details, inquiry);
       card.appendChild(actions);
@@ -486,7 +828,52 @@
       if (input && title) input.value = title;
     }
 
+    const specLabelTranslations = {
+      es: {'Voltage':'Voltaje','Frequency':'Frecuencia','Motor Power':'Potencia del motor','Packaging Range':'Rango de envasado','Mixing Volume':'Volumen de mezcla','Mixing Time':'Tiempo de mezcla','Application':'Aplicación','Optional Components':'Componentes opcionales','Supply Status':'Estado de suministro','Manufacturer':'Fabricante','Supply Relationship':'Relación de suministro','Power Type':'Tipo de alimentación'},
+      ar: {'Voltage':'الجهد الكهربائي','Frequency':'التردد','Motor Power':'قدرة المحرك','Packaging Range':'نطاق التعبئة','Mixing Volume':'حجم الخلط','Mixing Time':'وقت الخلط','Application':'الاستخدام','Optional Components':'المكونات الاختيارية','Supply Status':'حالة التوريد','Manufacturer':'الشركة المصنعة','Supply Relationship':'علاقة التوريد','Power Type':'نوع الطاقة'},
+      ru: {'Voltage':'Напряжение','Frequency':'Частота','Motor Power':'Мощность двигателя','Packaging Range':'Диапазон фасовки','Mixing Volume':'Объём смешивания','Mixing Time':'Время смешивания','Application':'Применение','Optional Components':'Дополнительные компоненты','Supply Status':'Статус поставки','Manufacturer':'Производитель','Supply Relationship':'Тип поставки','Power Type':'Тип привода'}
+    };
+    function translateSpecLabel(label) {
+      const language = document.documentElement.lang || 'en';
+      return (specLabelTranslations[language] && specLabelTranslations[language][label]) || label;
+    }
+
+    function translateSpecValue(label, value) {
+      const language = document.documentElement.lang || 'en';
+      const normalized = String(value ?? '').trim().toLowerCase();
+      const valueTranslations = {
+        en: {
+          'mortar-equipment': 'Dry Mix & Mortar',
+          'mixing-blending': 'Mixing & Blending Equipment',
+          'packing-auxiliary': 'Packing & Auxiliary Equipment'
+        },
+        es: {
+          'available for supply': 'Disponible para suministro',
+          'electric motor': 'Motor eléctrico',
+          'mortar-equipment': 'Mezclas secas y mortero',
+          'mixing-blending': 'Equipos de mezcla y homogeneización',
+          'packing-auxiliary': 'Equipos de envasado y auxiliares'
+        },
+        ar: {
+          'available for supply': 'متاح للتوريد',
+          'electric motor': 'محرك كهربائي',
+          'mortar-equipment': 'الخلطات الجافة والملاط',
+          'mixing-blending': 'معدات الخلط والمزج',
+          'packing-auxiliary': 'معدات التعبئة والمعدات المساعدة'
+        },
+        ru: {
+          'available for supply': 'Доступно для поставки',
+          'electric motor': 'Электродвигатель',
+          'mortar-equipment': 'Сухие смеси и растворы',
+          'mixing-blending': 'Оборудование для смешивания и перемешивания',
+          'packing-auxiliary': 'Упаковочное и вспомогательное оборудование'
+        }
+      };
+      return (valueTranslations[language] && valueTranslations[language][normalized]) || value;
+    }
+
     function openModal(meta, body) {
+      currentProductModal = { meta: meta, body: body };
       const content = document.getElementById('modal-content');
       content.replaceChildren();
       const detailImage = createImage(
@@ -500,37 +887,52 @@
       const title = document.createElement('h2');
       title.id = 'modal-title';
       title.className = 'mb-1 text-2xl font-bold text-slate-900';
-      title.textContent = meta.title || 'Equipment Details';
+      const productLanguage = document.documentElement.lang || 'en';
+      const localizedTitle = getLocalizedProductTitle(meta, productLanguage);
+      title.textContent = localizedTitle;
       content.appendChild(title);
-      if (meta.model) {
+      if (productLanguage !== 'en' && localizedTitle !== (meta.title || '') && meta.title) {
+        const originalTitle = document.createElement('p');
+        originalTitle.className = 'mb-4 text-sm text-slate-500';
+        originalTitle.textContent = meta.title;
+        content.appendChild(originalTitle);
+      }
+      if (isDisplayableCatalogValue(meta.model)) {
         const model = document.createElement('p');
         model.className = 'mb-4 font-mono text-sm text-amber-600';
-        model.textContent = `Model: ${meta.model}`;
+        model.textContent = currentTexts().label_model + ': ' + meta.model;
         content.appendChild(model);
       }
       const specs = document.createElement('div');
       specs.className = 'mb-6 grid grid-cols-1 gap-3 rounded-lg bg-slate-50 p-4 text-sm sm:grid-cols-2';
-      [['Capacity', meta.capacity], ['Power Type', meta.power_type], ['Category', getProductCategory(meta)]].forEach(([label, value]) => {
-        if (!value) return;
+      [[currentTexts().label_capacity, meta.capacity], [currentTexts().label_internal_capacity, meta.internal_capacity], ['Voltage', meta.voltage], ['Frequency', meta.frequency], ['Motor Power', meta.motor_power], ['Packaging Range', meta.packaging_range], ['Mixing Volume', meta.mixing_volume], ['Mixing Time', meta.mixing_time], ['Application', meta.application], ['Optional Components', meta.optional_components], ['Supply Status', meta.supply_status], ['Power Type', meta.power_type], ['Manufacturer', meta.manufacturer], ['Supply Relationship', meta.supply_relationship], [currentTexts().label_category, getProductCategory(meta)]].forEach(([label, value]) => {
+        if (!isDisplayableCatalogValue(value)) return;
         const item = document.createElement('div');
         const strong = document.createElement('strong');
-        strong.textContent = `${label}: `;
-        item.append(strong, document.createTextNode(String(value)));
+        strong.textContent = translateSpecLabel(label) + ': ';
+        item.append(strong, document.createTextNode(String(translateSpecValue(label, value))));
         specs.appendChild(item);
       });
       content.appendChild(specs);
       const description = document.createElement('div');
       description.className = 'prose mb-6 max-w-none text-sm text-slate-700';
-      if (window.marked && typeof window.marked.parse === 'function') {
-        description.innerHTML = window.marked.parse(String(body || ''));
+      if (window.marked && typeof window.marked.parse === 'function' && window.DOMPurify) {
+        const productBody = getLocalizedProductBody(meta, body, productLanguage);
+        const renderedMarkdown = window.marked.parse(productBody);
+        description.innerHTML = window.DOMPurify.sanitize(renderedMarkdown, {
+          USE_PROFILES: { html: true },
+          FORBID_TAGS: ['style', 'iframe', 'object', 'embed'],
+          FORBID_ATTR: ['style']
+        });
       } else {
-        description.textContent = String(body || '');
+        // Never inject unsanitized Markdown HTML if a CDN dependency is unavailable.
+        description.textContent = getLocalizedProductBody(meta, body, productLanguage);
       }
       content.appendChild(description);
       const link = document.createElement('a');
       link.href = '#contact';
       link.className = 'block w-full rounded-lg bg-amber-500 py-3 text-center font-bold text-slate-900 hover:bg-amber-600';
-      link.textContent = 'Inquire About This Product';
+      link.textContent = currentTexts().btn_inquire_product;
       link.addEventListener('click', () => {
         fillInquiryModel(meta.title || meta.model || 'Product Inquiry');
         closeModal();
@@ -542,6 +944,7 @@
     }
 
     function closeModal() {
+      currentProductModal = null;
       const modal = document.getElementById('product-modal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
@@ -550,14 +953,25 @@
     function openPolicy(type) {
       const policy = policiesContent[type];
       if (!policy) return;
-      setText('policy-title', policy.title);
-      document.getElementById('policy-body').innerHTML = policy.body;
+      currentPolicyType = type;
+      const titleKeys = { privacy:'privacy_policy', shipping:'shipping_policy', warranty:'warranty_policy', terms:'terms_policy', cookies:'cookie_policy', returns:'returns_title' };
+      setText('policy-title', currentTexts()[titleKeys[type]] || policy.title);
+      const policyLanguage = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+      const translatedBody = localizedPolicyBodies[policyLanguage] && localizedPolicyBodies[policyLanguage][type];
+      const languageNotice = (translatedBody || policyLanguage === 'en') ? '' : '<p class="rounded bg-slate-50 p-3 text-xs text-slate-500">' + currentTexts().policy_english + '</p>';
+      const translationNote = {
+        es: '<p class="mt-4 border-t pt-3 text-xs text-slate-500">Esta versión es una traducción informativa para facilitar la comprensión. Si necesita confirmar cómo se aplica una condición a su operación, solicite aclaración por escrito.</p>',
+        ar: '<p class="mt-4 border-t pt-3 text-xs text-slate-500">هذه ترجمة توضيحية لتسهيل الفهم. إذا كنت بحاجة إلى تأكيد كيفية تطبيق أي شرط على معاملتك، فيرجى طلب توضيح كتابي.</p>',
+        ru: '<p class="mt-4 border-t pt-3 text-xs text-slate-500">Эта версия является информационным переводом для удобства понимания. Чтобы уточнить применение какого-либо условия к вашей сделке, запросите письменное разъяснение.</p>'
+      }[policyLanguage] || '';
+      document.getElementById('policy-body').innerHTML = (translatedBody || policy.body) + languageNotice + translationNote;
       const modal = document.getElementById('policy-modal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
     }
 
     function closePolicyModal() {
+      currentPolicyType = null;
       const modal = document.getElementById('policy-modal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
@@ -566,20 +980,17 @@
     async function fetchContentCollection(collection, gridId, kind) {
       const grid = document.getElementById(gridId);
       try {
-        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/content/${collection}?ref=${REPO_BRANCH}`);
-        if (!response.ok) throw new Error(`GitHub API HTTP ${response.status}`);
-        const files = (await response.json()).filter((file) => file.type === 'file' && file.name.toLowerCase().endsWith('.md'));
-        const results = await Promise.allSettled(files.map(async (file) => {
-          const res = await fetch(file.download_url);
-          if (!res.ok) throw new Error(`Could not fetch ${file.name}`);
-          return parseFrontMatter(await res.text()).meta;
-        }));
-        const items = results.filter((result) => result.status === 'fulfilled').map((result) => result.value);
+        const response = await fetch(`/api/content?collection=${encodeURIComponent(collection)}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Content service HTTP ${response.status}`);
+        const payload = await response.json();
+        const files = Array.isArray(payload.files) ? payload.files : [];
+        const results = await Promise.allSettled(files.map(async (file) => parseFrontMatter(file.content || '').meta));
+        const items = results.filter((result) => result.status === 'fulfilled').map((result) => result.value).filter((meta) => kind !== 'video' || (isSafeHttpUrl(meta.video_url) && !String(meta.video_url).includes('YOUR_VIDEO_ID')));
         grid.replaceChildren();
         if (!items.length) {
           const empty = document.createElement('div');
           empty.className = 'col-span-full py-8 text-center text-slate-400';
-          empty.textContent = kind === 'case' ? 'Project and shipping cases will be added when available.' : 'Videos will be added when available.';
+          empty.textContent = kind === 'case' ? currentTexts().case_empty : currentTexts().video_empty;
           grid.appendChild(empty);
           return;
         }
@@ -624,7 +1035,7 @@
             watch.target = '_blank';
             watch.rel = 'noopener noreferrer';
             watch.className = 'mt-3 inline-block text-xs text-amber-400 hover:underline';
-            watch.textContent = `Watch on ${meta.platform || 'video platform'} →`;
+            watch.textContent = currentTexts().watch_on + ' ' + (meta.platform || 'video platform') + ' →';
             bodyEl.appendChild(watch);
           }
           card.appendChild(bodyEl);
@@ -632,7 +1043,7 @@
         });
       } catch (error) {
         console.error(`Failed to load ${collection}:`, error);
-        grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400">${kind === 'case' ? 'Project cases are temporarily unavailable.' : 'Videos are temporarily unavailable.'}</div>`;
+        grid.textContent = kind === 'case' ? currentTexts().case_error : currentTexts().video_error;
       }
     }
 
@@ -643,13 +1054,15 @@
       const button = document.getElementById('submit-btn');
       if (!globalSettings.formspree_id) {
         status.className = 'text-center text-sm text-amber-300';
-        status.textContent = 'The inquiry form is not configured yet. Please contact us via WhatsApp or configure Formspree in CMS Site Settings.';
+        status.setAttribute('data-i18n', 'not_configured');
+        status.textContent = currentTexts().not_configured;
         status.classList.remove('hidden');
         return;
       }
       button.disabled = true;
-      button.textContent = 'Sending…';
+      button.textContent = currentTexts().sending;
       status.classList.add('hidden');
+      status.removeAttribute('data-i18n');
       try {
         const response = await fetch(`https://formspree.io/f/${encodeURIComponent(globalSettings.formspree_id)}`, {
           method: 'POST',
@@ -658,13 +1071,15 @@
         });
         if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
         status.className = 'text-center text-sm font-bold text-emerald-400';
-        status.textContent = 'Thank you. Your inquiry has been sent successfully.';
+        status.setAttribute('data-i18n', 'sent');
+        status.textContent = currentTexts().sent;
         status.classList.remove('hidden');
         form.reset();
       } catch (error) {
         console.error(error);
         status.className = 'text-center text-sm font-bold text-rose-400';
-        status.textContent = 'Your inquiry could not be sent. Please try again or contact us via WhatsApp.';
+        status.setAttribute('data-i18n', 'send_error');
+        status.textContent = currentTexts().send_error;
         status.classList.remove('hidden');
       } finally {
         button.disabled = false;
@@ -674,15 +1089,13 @@
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
+        closeMobileMenu();
         closeModal();
         closePolicyModal();
       }
     });
 
-    loadSiteData();
-    fetchProducts();
-    fetchContentCollection('cases', 'cases-grid', 'case');
-    fetchContentCollection('videos', 'videos-grid', 'video');
+    initializeSite();
   </script>
 </body>
 </html>
