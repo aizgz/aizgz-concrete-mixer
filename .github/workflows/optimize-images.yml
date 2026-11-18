@@ -10,6 +10,13 @@ on:
       - ".github/workflows/optimize-images.yml"
       - "scripts/convert_images.py"
       - "scripts/test_convert_images.py"
+  pull_request:
+    paths:
+      - "uploads/**"
+      - "content/**"
+      - ".github/workflows/optimize-images.yml"
+      - "scripts/convert_images.py"
+      - "scripts/test_convert_images.py"
   workflow_dispatch:
 
 permissions:
@@ -21,11 +28,13 @@ concurrency:
 
 jobs:
   convert:
-    if: github.actor != 'github-actions[bot]'
+    if: github.actor != 'github-actions[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out source branch
         uses: actions/checkout@v4
+        with:
+          ref: \${{ github.head_ref || github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -42,6 +51,8 @@ jobs:
         run: python scripts/convert_images.py
 
       - name: Commit generated and cleaned image variants
+        env:
+          TARGET_BRANCH: \${{ github.head_ref || github.ref_name }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -51,4 +62,4 @@ jobs:
             exit 0
           fi
           git commit -m "chore: generate responsive WebP image variants"
-          git push
+          git push origin "HEAD:\${TARGET_BRANCH}"
