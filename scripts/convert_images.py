@@ -105,8 +105,8 @@ def cleanup_orphaned_variants(root: Path = ROOT_DIR, uploads_dir: Path = UPLOADS
         source = Path(str(variant)[:-len(suffix)])
         if source.suffix.lower() not in SUPPORTED_SUFFIXES or source.exists():
             continue
-        source_ref = "/" + source.as_posix()
-        relative_ref = source.as_posix()
+        relative_ref = source.relative_to(root).as_posix()
+        source_ref = "/" + relative_ref
         if any(source_ref in text or relative_ref in text for text in contents):
             continue
         variant.unlink()
