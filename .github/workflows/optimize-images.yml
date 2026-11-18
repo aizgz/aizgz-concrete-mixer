@@ -1,0 +1,49 @@
+name: Optimize uploaded images
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "uploads/**"
+      - ".github/workflows/optimize-images.yml"
+      - "scripts/convert_images.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimize-uploaded-images
+  cancel-in-progress: false
+
+jobs:
+  convert:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install image processor
+        run: python -m pip install --upgrade Pillow
+
+      - name: Generate WebP copies
+        run: python scripts/convert_images.py
+
+      - name: Commit generated WebP files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add uploads
+          if git diff --cached --quiet; then
+            echo "No image variants need updating."
+            exit 0
+          fi
+          git commit -m "chore: generate WebP image variants"
+          git push
