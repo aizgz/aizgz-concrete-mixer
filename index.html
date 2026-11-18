@@ -720,7 +720,7 @@
 
     async function loadSiteData() {
       try {
-        const url = '/api/content?collection=settings';
+        const url = '/api/content/?collection=settings';
         const response = await fetch(url);
         if (!response.ok) return;
         const payload = await response.json();
@@ -1238,74 +1238,111 @@
       modal.classList.remove('flex');
     }
 
+    const contentCollectionCache = new Map();
+    const contentCollectionRequests = new Map();
+
     async function fetchContentCollection(collection, gridId, kind) {
       const grid = document.getElementById(gridId);
-      try {
-        const response = await fetch(`/api/content/?collection=${encodeURIComponent(collection)}`, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`Content service HTTP ${response.status}`);
-        const payload = await response.json();
-        const files = Array.isArray(payload.files) ? payload.files : [];
-        const results = await Promise.allSettled(files.map(async (file) => parseFrontMatter(file.content || '').meta));
-        const items = results.filter((result) => result.status === 'fulfilled').map((result) => result.value).filter((meta) => kind !== 'video' || (isSafeHttpUrl(meta.video_url) && !String(meta.video_url).includes('YOUR_VIDEO_ID')));
-        grid.replaceChildren();
-        if (!items.length) {
-          const empty = document.createElement('div');
-          empty.className = 'col-span-full py-8 text-center text-slate-600';
-          empty.textContent = kind === 'case' ? currentTexts().case_empty : currentTexts().video_empty;
-          grid.appendChild(empty);
+      if (!grid) return;
+
+      let items = contentCollectionCache.get(collection);
+      if (!items) {
+        const pendingRequest = contentCollectionRequests.get(collection);
+        if (pendingRequest) {
+          // An initial request is already loading. Its completion renders using
+          // the current language, so a language change does not need another fetch.
+          await pendingRequest;
           return;
         }
-        items.forEach((meta) => {
-          const card = document.createElement('article');
-          card.className = kind === 'case'
-            ? 'overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow'
-            : 'overflow-hidden rounded-xl border border-slate-700 bg-slate-800 shadow';
-          const imageWrap = document.createElement('div');
-          imageWrap.className = `relative h-48 overflow-hidden ${kind === 'case' ? 'bg-slate-200' : 'bg-slate-900'}`;
-          imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover', 'card'));
-          if (kind === 'video') {
-            const videoLink = document.createElement('a');
-            videoLink.href = isSafeHttpUrl(meta.video_url) ? meta.video_url : '#';
-            videoLink.target = '_blank';
-            videoLink.rel = 'noopener noreferrer';
-            videoLink.className = 'absolute inset-0 flex items-center justify-center';
-            videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
-            const icon = document.createElement('span');
-            icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
-            icon.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
-            videoLink.appendChild(icon);
-            imageWrap.appendChild(videoLink);
+
+        const request = (async () => {
+          const response = await fetch(`/api/content/?collection=${encodeURIComponent(collection)}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`Content service HTTP ${response.status}`);
+          const payload = await response.json();
+          const files = Array.isArray(payload.files) ? payload.files : [];
+          const results = await Promise.allSettled(files.map(async (file) => parseFrontMatter(file.content || '').meta));
+          const parsedItems = results
+            .filter((result) => result.status === 'fulfilled')
+            .map((result) => result.value)
+            .filter((meta) => kind !== 'video' || (isSafeHttpUrl(meta.video_url) && !String(meta.video_url).includes('YOUR_VIDEO_ID')));
+          contentCollectionCache.set(collection, parsedItems);
+        })();
+
+        contentCollectionRequests.set(collection, request);
+        try {
+          await request;
+        } catch (error) {
+          console.error(`Failed to load ${collection}:`, error);
+          grid.textContent = kind === 'case' ? currentTexts().case_error : currentTexts().video_error;
+          return;
+        } finally {
+          if (contentCollectionRequests.get(collection) === request) {
+            contentCollectionRequests.delete(collection);
           }
-          card.appendChild(imageWrap);
-          const bodyEl = document.createElement('div');
-          bodyEl.className = 'p-5';
-          const title = document.createElement('h3');
-          title.className = `text-base font-bold ${kind === 'case' ? 'text-slate-800' : 'text-white'}`;
-          title.textContent = meta.title || (kind === 'case' ? 'Project Case' : 'Equipment Video');
-          bodyEl.appendChild(title);
-          const detail = kind === 'case' ? [meta.country, meta.date].filter(Boolean).join(' · ') : (meta.platform || 'Video');
-          if (detail) {
-            const p = document.createElement('p');
-            p.className = `mt-2 text-xs text-slate-600`;
-            p.textContent = detail;
-            bodyEl.appendChild(p);
-          }
-          if (kind === 'video' && isSafeHttpUrl(meta.video_url)) {
-            const watch = document.createElement('a');
-            watch.href = meta.video_url;
-            watch.target = '_blank';
-            watch.rel = 'noopener noreferrer';
-            watch.className = 'mt-3 inline-block text-xs text-amber-400 hover:underline';
-            watch.textContent = currentTexts().watch_on + ' ' + (meta.platform || 'video platform') + ' →';
-            bodyEl.appendChild(watch);
-          }
-          card.appendChild(bodyEl);
-          grid.appendChild(card);
-        });
-      } catch (error) {
-        console.error(`Failed to load ${collection}:`, error);
-        grid.textContent = kind === 'case' ? currentTexts().case_error : currentTexts().video_error;
+        }
+        items = contentCollectionCache.get(collection) || [];
       }
+
+      // Reuse parsed data on language changes; only rebuild the visible cards
+      // so translated empty-state and watch labels stay current.
+      grid.replaceChildren();
+      if (!items.length) {
+        const empty = document.createElement('div');
+        empty.className = 'col-span-full py-8 text-center text-slate-600';
+        empty.textContent = kind === 'case' ? currentTexts().case_empty : currentTexts().video_empty;
+        grid.appendChild(empty);
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      items.forEach((meta) => {
+        const card = document.createElement('article');
+        card.className = kind === 'case'
+          ? 'overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow'
+          : 'overflow-hidden rounded-xl border border-slate-700 bg-slate-800 shadow';
+        const imageWrap = document.createElement('div');
+        imageWrap.className = `relative h-48 overflow-hidden ${kind === 'case' ? 'bg-slate-200' : 'bg-slate-900'}`;
+        imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover', 'card'));
+        if (kind === 'video') {
+          const videoLink = document.createElement('a');
+          videoLink.href = isSafeHttpUrl(meta.video_url) ? meta.video_url : '#';
+          videoLink.target = '_blank';
+          videoLink.rel = 'noopener noreferrer';
+          videoLink.className = 'absolute inset-0 flex items-center justify-center';
+          videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
+          const icon = document.createElement('span');
+          icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
+          icon.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
+          videoLink.appendChild(icon);
+          imageWrap.appendChild(videoLink);
+        }
+        card.appendChild(imageWrap);
+        const bodyEl = document.createElement('div');
+        bodyEl.className = 'p-5';
+        const title = document.createElement('h3');
+        title.className = `text-base font-bold ${kind === 'case' ? 'text-slate-800' : 'text-white'}`;
+        title.textContent = meta.title || (kind === 'case' ? 'Project Case' : 'Equipment Video');
+        bodyEl.appendChild(title);
+        const detail = kind === 'case' ? [meta.country, meta.date].filter(Boolean).join(' · ') : (meta.platform || 'Video');
+        if (detail) {
+          const p = document.createElement('p');
+          p.className = 'mt-2 text-xs text-slate-600';
+          p.textContent = detail;
+          bodyEl.appendChild(p);
+        }
+        if (kind === 'video' && isSafeHttpUrl(meta.video_url)) {
+          const watch = document.createElement('a');
+          watch.href = meta.video_url;
+          watch.target = '_blank';
+          watch.rel = 'noopener noreferrer';
+          watch.className = 'mt-3 inline-block text-xs text-amber-400 hover:underline';
+          watch.textContent = currentTexts().watch_on + ' ' + (meta.platform || 'video platform') + ' →';
+          bodyEl.appendChild(watch);
+        }
+        card.appendChild(bodyEl);
+        fragment.appendChild(card);
+      });
+      grid.replaceChildren(fragment);
     }
 
     async function submitFormspree(event) {
