@@ -2,15 +2,14 @@
 """Create responsive WebP copies for CMS-uploaded JPEG and PNG images.
 
 Original uploads are never modified. For each source image, generate:
-  <source>.400.webp  - complete image fitted on a 400x195 card canvas
-  <source>.800.webp  - complete image fitted on an 800x391 card canvas
+  <source>.400.webp  - up to 400px wide, preserving the source aspect ratio
+  <source>.800.webp  - up to 800px wide, preserving the source aspect ratio
   <source>.webp      - full source dimensions for product detail views
 
-Card variants use a uniform 2.05:1 canvas matching the page's fixed image
-frame. The complete source is proportionally contained and centered; no
-content is cropped or stretched. Smaller sources are never upscaled.
-Re-running always refreshes variants, so replacing an upload with the same
-filename cannot leave stale optimized files.
+Card variants are proportionally resized without cropping, padding, or
+stretching. Smaller sources are never upscaled. Re-running always refreshes
+variants, so replacing an upload with the same filename cannot leave stale
+optimized files.
 """
 from pathlib import Path
 from PIL import Image, ImageOps
@@ -19,8 +18,6 @@ ROOT_DIR = Path(".")
 UPLOADS_DIR = ROOT_DIR / "uploads"
 SUPPORTED_SUFFIXES = {".jpg", ".jpeg", ".png"}
 VARIANT_WIDTHS = (400, 800)
-CARD_ASPECT_RATIO = 393 / 192
-CARD_BACKGROUND = (255, 255, 255)
 WEBP_QUALITY = 72
 WEBP_METHOD = 6
 
@@ -48,26 +45,8 @@ def resized_to_width(image: Image.Image, target_width: int) -> Image.Image:
     return image.resize((target_width, target_height), Image.Resampling.LANCZOS)
 
 
-def card_variant(image: Image.Image, target_width: int) -> Image.Image:
-    """Fit the complete source on a uniform card canvas without cropping."""
-    target_height = round(target_width / CARD_ASPECT_RATIO)
-    contained = ImageOps.contain(
-        image,
-        (target_width, target_height),
-        method=Image.Resampling.LANCZOS,
-    )
-    has_alpha = contained.mode == "RGBA"
-    canvas_mode = "RGBA" if has_alpha else "RGB"
-    background = (0, 0, 0, 0) if has_alpha else CARD_BACKGROUND
-    canvas = Image.new(canvas_mode, (target_width, target_height), background)
-    x = (target_width - contained.width) // 2
-    y = (target_height - contained.height) // 2
-    canvas.paste(contained, (x, y))
-    return canvas
-
-
 def convert_image(source: Path) -> list[Path]:
-    """Generate uncropped card-canvas and full-size WebP variants."""
+    """Generate 400px, 800px and full-size WebP variants for one source."""
     generated = []
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened)
@@ -79,7 +58,7 @@ def convert_image(source: Path) -> list[Path]:
 
         for width in VARIANT_WIDTHS:
             destination = Path(str(source) + f".{width}.webp")
-            save_webp(card_variant(image, width), destination, icc_profile)
+            save_webp(resized_to_width(image, width), destination, icc_profile)
             generated.append(destination)
 
         full_size = Path(str(source) + ".webp")
