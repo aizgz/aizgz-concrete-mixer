@@ -1323,7 +1323,7 @@
       grid.replaceChildren();
       if (!items.length) {
         const empty = document.createElement('div');
-        empty.className = 'col-span-full py-8 text-center text-slate-300';
+        empty.className = `col-span-full py-8 text-center ${kind === 'case' ? 'text-slate-600' : 'text-slate-300'}`;
         empty.textContent = kind === 'case' ? currentTexts().case_empty : currentTexts().video_empty;
         grid.appendChild(empty);
         return;
