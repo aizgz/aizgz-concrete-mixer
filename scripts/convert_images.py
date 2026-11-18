@@ -62,7 +62,7 @@ def card_variant(image: Image.Image, target_width: int) -> Image.Image:
     canvas = Image.new(canvas_mode, (target_width, target_height), background)
     x = (target_width - contained.width) // 2
     y = (target_height - contained.height) // 2
-    canvas.paste(contained, (x, y), contained if has_alpha else None)
+    canvas.paste(contained, (x, y))
     return canvas
 
 
