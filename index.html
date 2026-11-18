@@ -1069,7 +1069,7 @@
             : 'overflow-hidden rounded-xl border border-slate-700 bg-slate-800 shadow';
           const imageWrap = document.createElement('div');
           imageWrap.className = `relative h-48 overflow-hidden ${kind === 'case' ? 'bg-slate-200' : 'bg-slate-900'}`;
-          imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover'));
+          imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover', 'card'));
           if (kind === 'video') {
             const videoLink = document.createElement('a');
             videoLink.href = isSafeHttpUrl(meta.video_url) ? meta.video_url : '#';
