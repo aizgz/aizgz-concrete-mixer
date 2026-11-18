@@ -57,7 +57,8 @@ class ResponsiveWebPTests(unittest.TestCase):
         convert_image(source)
         with Image.open(Path(str(source) + ".400.webp")) as image:
             self.assertEqual(image.mode, "RGBA")
-            self.assertEqual(image.getpixel((0, 0))[3], 0)\n            self.assertEqual(image.getpixel((200, 97))[3], 80)
+            self.assertEqual(image.getpixel((0, 0))[3], 0)
+            self.assertEqual(image.getpixel((200, 97))[3], 80)
 
     def test_orphan_cleanup_keeps_referenced_images(self):
         source = self.uploads / "removed.jpg"
