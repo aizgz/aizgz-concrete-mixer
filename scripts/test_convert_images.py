@@ -28,28 +28,28 @@ class ResponsiveWebPTests(unittest.TestCase):
         with Image.open(path) as image:
             return image.size
 
-    def test_generates_400_800_and_full_size_without_upscaling(self):
+    def test_generates_card_crops_and_full_size_without_upscaling(self):
         source = self.make_image("machine.jpg", (1200, 600))
         generated = convert_image(source)
         self.assertEqual(len(generated), 3)
-        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (400, 200))
-        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (800, 400))
+        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (400, 195))
+        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (800, 390))
         self.assertEqual(self.dimensions(Path(str(source) + ".webp")), (1200, 600))
         self.assertTrue(source.exists())
 
-    def test_small_source_is_never_upscaled(self):
-        source = self.make_image("small.png", (320, 160))
+    def test_small_source_is_cropped_but_never_upscaled(self):
+        source = self.make_image("small.png", (320, 320))
         convert_image(source)
-        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (320, 160))
-        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (320, 160))
+        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (320, 156))
+        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (320, 156))
 
     def test_same_filename_replacement_refreshes_variants(self):
         source = self.make_image("replace.jpg", (1200, 600))
         convert_image(source)
         Image.new("RGB", (640, 320), (180, 80, 20)).save(source)
         convert_image(source)
-        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (400, 200))
-        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (640, 320))
+        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (400, 195))
+        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (640, 312))
         self.assertEqual(self.dimensions(Path(str(source) + ".webp")), (640, 320))
 
     def test_transparency_is_preserved(self):
