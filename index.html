@@ -767,7 +767,7 @@
       return value !== undefined && value !== null && String(value).trim() !== '' && !/^(["']{2}|null|undefined|n\/a)$/i.test(String(value).trim()) && !/[\u3400-\u9fff]/.test(String(value));
     }
 
-    function createImage(src, alt, className) {
+    function createImage(src, alt, className, imageVariant = 'standard') {
       const img = document.createElement('img');
       const safeSrc = isSafeHttpUrl(src) || (typeof src === 'string' && src.startsWith('/uploads/')) ? src : PLACEHOLDER_IMAGE;
       const useGeneratedWebp = typeof safeSrc === 'string'
@@ -780,14 +780,25 @@
       img.className = className;
 
       if (useGeneratedWebp) {
-        // CMS keeps the original upload; GitHub Actions creates a sibling .webp file.
-        // Fall back to the original if conversion has not completed or the WebP is unavailable.
+        // CMS continues to store the original path. GitHub Actions creates
+        // 400px, 800px and full-size WebP siblings automatically.
         img.dataset.originalSrc = safeSrc;
         img.dataset.webpFallback = 'pending';
-        img.src = safeSrc + '.webp';
+
+        if (imageVariant === 'card') {
+          img.src = safeSrc + '.400.webp';
+          img.srcset = safeSrc + '.400.webp 400w, ' + safeSrc + '.800.webp 800w';
+          img.sizes = '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw';
+        } else {
+          // Product detail views retain the full-resolution image.
+          img.src = safeSrc + '.webp';
+        }
+
         img.onerror = () => {
           if (img.dataset.webpFallback === 'pending') {
             img.dataset.webpFallback = 'original';
+            img.removeAttribute('srcset');
+            img.removeAttribute('sizes');
             img.src = img.dataset.originalSrc;
             return;
           }
@@ -801,7 +812,6 @@
 
       return img;
     }
-
     function getLocalizedProductTitle(meta = {}, language = 'en') {
       const fieldByLanguage = { es: 'title_es', ar: 'title_ar', ru: 'title_ru' };
       const field = fieldByLanguage[language];
@@ -823,7 +833,7 @@
       const upper = document.createElement('div');
       const imageWrap = document.createElement('div');
       imageWrap.className = 'relative h-48 overflow-hidden bg-slate-100';
-      imageWrap.appendChild(createImage(meta.image, meta.title || 'Industrial equipment', 'h-full w-full object-cover'));
+      imageWrap.appendChild(createImage(meta.image, meta.title || 'Industrial equipment', 'h-full w-full object-cover', 'card'));
       upper.appendChild(imageWrap);
       const content = document.createElement('div');
       content.className = 'p-6';
@@ -936,7 +946,8 @@
       const detailImage = createImage(
         meta.image,
         meta.title || 'Equipment details',
-        'mb-4 block w-full h-auto max-h-[70vh] rounded-lg object-contain object-center'
+        'mb-4 block w-full h-auto max-h-[70vh] rounded-lg object-contain object-center',
+        'detail'
       );
       
       detailImage.style.backgroundColor = '#f8fafc'; 
