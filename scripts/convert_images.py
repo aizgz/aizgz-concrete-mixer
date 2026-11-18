@@ -16,7 +16,7 @@ ROOT_DIR = Path(".")
 UPLOADS_DIR = ROOT_DIR / "uploads"
 SUPPORTED_SUFFIXES = {".jpg", ".jpeg", ".png"}
 VARIANT_WIDTHS = (400, 800)
-WEBP_QUALITY = 82
+WEBP_QUALITY = 75
 WEBP_METHOD = 6
 
 
