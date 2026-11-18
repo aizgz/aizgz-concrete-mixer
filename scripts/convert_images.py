@@ -2,13 +2,13 @@
 """Create responsive WebP copies for CMS-uploaded JPEG and PNG images.
 
 Original uploads are never modified. For each source image, generate:
-  <source>.400.webp  - centered 2.05:1 card crop, up to 400px wide
-  <source>.800.webp  - centered 2.05:1 card crop, up to 800px wide
+  <source>.400.webp  - complete image fitted on a 400x195 card canvas
+  <source>.800.webp  - complete image fitted on an 800x391 card canvas
   <source>.webp      - full source dimensions for product detail views
 
-Card crops match the page's fixed 192px-tall object-cover image frame at
-approximately 393px wide. Cropping is performed before resizing, never
-upscales the source, and uses the same centered crop as CSS object-fit: cover.
+Card variants use a uniform 2.05:1 canvas matching the page's fixed image
+frame. The complete source is proportionally contained and centered; no
+content is cropped or stretched. Smaller sources are never upscaled.
 Re-running always refreshes variants, so replacing an upload with the same
 filename cannot leave stale optimized files.
 """
@@ -20,6 +20,7 @@ UPLOADS_DIR = ROOT_DIR / "uploads"
 SUPPORTED_SUFFIXES = {".jpg", ".jpeg", ".png"}
 VARIANT_WIDTHS = (400, 800)
 CARD_ASPECT_RATIO = 393 / 192
+CARD_BACKGROUND = (255, 255, 255)
 WEBP_QUALITY = 72
 WEBP_METHOD = 6
 
@@ -47,30 +48,26 @@ def resized_to_width(image: Image.Image, target_width: int) -> Image.Image:
     return image.resize((target_width, target_height), Image.Resampling.LANCZOS)
 
 
-def centered_card_crop(image: Image.Image) -> Image.Image:
-    """Match a centered CSS object-fit: cover crop for the card frame."""
-    width, height = image.size
-    source_ratio = width / height
-    if source_ratio > CARD_ASPECT_RATIO:
-        crop_width = max(1, round(height * CARD_ASPECT_RATIO))
-        left = (width - crop_width) // 2
-        return image.crop((left, 0, left + crop_width, height))
-    crop_height = max(1, round(width / CARD_ASPECT_RATIO))
-    top = (height - crop_height) // 2
-    return image.crop((0, top, width, top + crop_height))
-
-
 def card_variant(image: Image.Image, target_width: int) -> Image.Image:
-    """Create a centered card crop and resize without upscaling."""
-    cropped = centered_card_crop(image)
-    if cropped.width <= target_width:
-        return cropped.copy()
-    target_height = max(1, round(cropped.height * target_width / cropped.width))
-    return cropped.resize((target_width, target_height), Image.Resampling.LANCZOS)
+    """Fit the complete source on a uniform card canvas without cropping."""
+    target_height = round(target_width / CARD_ASPECT_RATIO)
+    contained = ImageOps.contain(
+        image,
+        (target_width, target_height),
+        method=Image.Resampling.LANCZOS,
+    )
+    has_alpha = contained.mode == "RGBA"
+    canvas_mode = "RGBA" if has_alpha else "RGB"
+    background = (0, 0, 0, 0) if has_alpha else CARD_BACKGROUND
+    canvas = Image.new(canvas_mode, (target_width, target_height), background)
+    x = (target_width - contained.width) // 2
+    y = (target_height - contained.height) // 2
+    canvas.paste(contained, (x, y), contained if has_alpha else None)
+    return canvas
 
 
 def convert_image(source: Path) -> list[Path]:
-    """Generate card-cropped 400px/800px and full-size WebP variants."""
+    """Generate uncropped card-canvas and full-size WebP variants."""
     generated = []
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened)
