@@ -12,6 +12,7 @@ on:
       - "scripts/test_convert_images.py"
   pull_request:
     paths:
+      - "index.html"
       - "uploads/**"
       - "content/**"
       - ".github/workflows/optimize-images.yml"
