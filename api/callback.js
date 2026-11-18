@@ -48,9 +48,10 @@ export default async function handler(req, res) {
     return sendError(res, 500, 'OAuth is not configured correctly.');
   }
 
-  const stateMatches = expectedState.length === returnedState.length
-    && expectedState.length > 0
-    && timingSafeEqual(Buffer.from(expectedState), Buffer.from(returnedState));
+  const validStateFormat = /^[a-f0-9]{64}$/.test(expectedState)
+    && /^[a-f0-9]{64}$/.test(returnedState);
+  const stateMatches = validStateFormat
+    && timingSafeEqual(Buffer.from(expectedState, 'hex'), Buffer.from(returnedState, 'hex'));
   if (!stateMatches) return sendError(res, 400, 'Invalid or expired OAuth state. Please close this window and try again.');
   if (!code) return sendError(res, 400, 'GitHub did not return an authorization code.');
   if (!clientId || !clientSecret) return sendError(res, 500, 'OAuth credentials are not configured.');
