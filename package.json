@@ -1,0 +1,10 @@
+{
+  "name": "aizgz-concrete-mixer",
+  "private": true,
+  "scripts": {
+    "build:css": "mkdir -p assets && tailwindcss -i ./styles/tailwind.css -o ./assets/tailwind.min.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
