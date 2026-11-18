@@ -42,10 +42,7 @@
   <meta name="theme-color" content="#0f172a">
   <style>html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .text-left{text-align:right}html[dir="rtl"] .text-right{text-align:left}html[dir="rtl"] #whatsapp-link{right:auto;left:1.5rem}html[dir="rtl"] #policy-modal button.absolute,html[dir="rtl"] #product-modal button.absolute{right:auto;left:1rem}</style>
   <link rel="stylesheet" href="/assets/tailwind.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
   <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-md">
@@ -125,8 +122,8 @@
         <div class="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-center">
           <div><h2 class="mb-2 text-3xl font-bold text-amber-500" data-i18n="video_title">Equipment Video Showroom</h2><p class="text-sm text-slate-400" data-i18n="video_sub">Product demonstrations, equipment details, and production highlights.</p></div>
           <div class="flex flex-wrap gap-3">
-            <a id="youtube-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-bold hover:bg-red-700"><i class="fa-brands fa-youtube text-lg"></i><span data-i18n="youtube_channel">YouTube Channel</span></a>
-            <a id="tiktok-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><i class="fa-brands fa-tiktok text-lg"></i><span data-i18n="tiktok_profile">TikTok Profile</span></a>
+            <a id="youtube-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-bold hover:bg-red-700"><svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.7V8.3l6.3 3.7-6.3 3.7Z"/></svg><span data-i18n="youtube_channel">YouTube Channel</span></a>
+            <a id="tiktok-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M19.6 7.2a6.7 6.7 0 0 1-4.1-1.4v8.1a6.2 6.2 0 1 1-5.3-6.1v3.4a2.9 2.9 0 1 0 2 2.8V2h3.3c.2 2.1 1.8 3.8 4.1 4.1v1.1Z"/></svg><span data-i18n="tiktok_profile">TikTok Profile</span></a>
           </div>
         </div>
         <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-8 text-center text-slate-500" data-i18n="video_empty">Videos will be added when available.</div></div>
@@ -145,10 +142,10 @@
         <h2 class="mb-2 text-3xl font-bold text-slate-900" data-i18n="why_title">Why Work With AIZGZ?</h2>
         <p class="mb-12 text-sm text-slate-500" data-i18n="why_sub">Product information and quotation support for international buyers.</p>
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><i class="fa-solid fa-industry"></i></div><h3 class="mb-2 text-lg font-bold" data-i18n="w1_title">Equipment Sourcing</h3><p class="text-xs text-slate-500" data-i18n="w1_desc">Discuss available equipment and supplier arrangements for your project.</p></div>
-          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><i class="fa-solid fa-clipboard-check"></i></div><h3 class="mb-2 text-lg font-bold" data-i18n="w2_title">Specification Review</h3><p class="text-xs text-slate-500" data-i18n="w2_desc">Confirm technical specifications and configuration before ordering.</p></div>
-          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><i class="fa-solid fa-ship"></i></div><h3 class="mb-2 text-lg font-bold" data-i18n="w3_title">Export Coordination</h3><p class="text-xs text-slate-500" data-i18n="w3_desc">Discuss packaging, shipping options, and destination requirements.</p></div>
-          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><i class="fa-solid fa-gears"></i></div><h3 class="mb-2 text-lg font-bold" data-i18n="w4_title">Parts & Support</h3><p class="text-xs text-slate-500" data-i18n="w4_desc">Ask about spare parts, documentation, and technical support availability.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6 3V9l6 3V5h4v16H3Z"/><path d="M16 5V3h3v2M7 17h2m3 0h2m3 0h2"/></svg></div><h3 class="mb-2 text-lg font-bold" data-i18n="w1_title">Equipment Sourcing</h3><p class="text-xs text-slate-500" data-i18n="w1_desc">Discuss available equipment and supplier arrangements for your project.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5v17h14V4h-4M9 3h6v4H9z"/><path d="m8 14 2.2 2.2L16 10.5"/></svg></div><h3 class="mb-2 text-lg font-bold" data-i18n="w2_title">Specification Review</h3><p class="text-xs text-slate-500" data-i18n="w2_desc">Confirm technical specifications and configuration before ordering.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h18l-2.2 6H5.2L3 13Z"/><path d="M7 13V5h10v8M10 5V3h4v2M3 20c1.5 1 2.5 1 4 0 1.5 1 2.5 1 4 0 1.5 1 2.5 1 4 0 1.5 1 2.5 1 4 0"/></svg></div><h3 class="mb-2 text-lg font-bold" data-i18n="w3_title">Export Coordination</h3><p class="text-xs text-slate-500" data-i18n="w3_desc">Discuss packaging, shipping options, and destination requirements.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm"><div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="10" r="3"/><path d="m9 4 .7 1.4 1.6.5 1.4-.6 1.1 1.1-.6 1.4.5 1.6 1.4.7v1.6l-1.4.7-.5 1.6.6 1.4-1.1 1.1-1.4-.6-1.6.5L9 19H7.4l-.7-1.4-1.6-.5-1.4.6-1.1-1.1.6-1.4-.5-1.6-1.4-.7v-1.6l1.4-.7.5-1.6-.6-1.4 1.1-1.1 1.4.6 1.6-.5L7.4 4H9Z" transform="translate(1 0) scale(.85)"/><circle cx="17" cy="17" r="2"/></svg></div><h3 class="mb-2 text-lg font-bold" data-i18n="w4_title">Parts & Support</h3><p class="text-xs text-slate-500" data-i18n="w4_desc">Ask about spare parts, documentation, and technical support availability.</p></div>
         </div>
       </div>
     </section>
@@ -160,10 +157,10 @@
           <p class="text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_intro">All equipment can be customized to the buyer's requirements. We develop equipment drawings and proposed configurations around your project needs.</p>
         </div>
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step1_title">1. Understand Requirements</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step1_desc">Discuss materials, intended application, target capacity, site conditions and other project needs.</p></div>
-          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step2_title">2. Prepare Drawings</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step2_desc">Prepare equipment drawings and a proposed configuration based on the buyer's requirements.</p></div>
-          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><i class="fa-solid fa-file-circle-check" aria-hidden="true"></i></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step3_title">3. Review & Confirm</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step3_desc">Review the drawings, configuration and technical details with the buyer before production.</p></div>
-          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><i class="fa-solid fa-gears" aria-hidden="true"></i></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step4_title">4. Start Manufacturing</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step4_desc">After the design and specifications are confirmed, manufacturing proceeds according to the approved requirements.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M9 9h6M9 13h6M9 17h4"/></svg></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step1_title">1. Understand Requirements</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step1_desc">Discuss materials, intended application, target capacity, site conditions and other project needs.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v4H3zM7 7v2m4-2v2m4-2v2m4-2v2M3 13h4v8H3zM3 17h2"/></svg></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step2_title">2. Prepare Drawings</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step2_desc">Prepare equipment drawings and a proposed configuration based on the buyer's requirements.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v5M14 3v5h5M6 3v18h6"/><path d="m14 17 2 2 5-5"/></svg></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step3_title">3. Review & Confirm</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step3_desc">Review the drawings, configuration and technical details with the buyer before production.</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><div class="mb-3 text-2xl text-amber-600"><svg class="h-7 w-7" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="10" r="3"/><circle cx="17" cy="17" r="2"/><path d="m9 4 .7 1.4 1.6.5 1.4-.6 1.1 1.1-.6 1.4.5 1.6 1.4.7v1.6l-1.4.7-.5 1.6.6 1.4-1.1 1.1-1.4-.6-1.6.5L9 19H7.4l-.7-1.4-1.6-.5-1.4.6-1.1-1.1.6-1.4-.5-1.6-1.4-.7v-1.6l1.4-.7.5-1.6-.6-1.4 1.1-1.1 1.4.6 1.6-.5L7.4 4H9Z"/></svg></div><h3 class="mb-2 font-bold text-slate-900" data-i18n="custom_step4_title">4. Start Manufacturing</h3><p class="text-sm leading-relaxed text-slate-600" data-i18n="custom_step4_desc">After the design and specifications are confirmed, manufacturing proceeds according to the approved requirements.</p></div>
         </div>
         <p class="mt-6 text-center text-xs leading-relaxed text-slate-500" data-i18n="custom_note">Final equipment configuration, dimensions, capacity and specifications are determined by the confirmed project design.</p>
         <div class="mt-6 text-center"><a href="#contact" class="inline-flex rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 hover:bg-amber-600" data-i18n="custom_cta">Discuss Your Custom Requirements</a></div>
@@ -222,7 +219,7 @@
   </div>
 
   <a id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="group fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-emerald-500 p-4 text-white shadow-2xl transition hover:bg-emerald-600" aria-label="Chat on WhatsApp">
-    <i class="fa-brands fa-whatsapp text-3xl"></i><span class="hidden font-bold text-sm sm:inline" data-i18n="whatsapp_label">Chat on WhatsApp</span>
+    <svg class="h-8 w-8" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.7a8.4 8.4 0 0 1-12.4 7.4L3 20l.9-4.8a8.4 8.4 0 1 1 16.6-3.5Z"/><path d="M8.5 8.3c.3-.6.6-.6 1-.6h.5c.2 0 .4.1.5.4l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4 0 .7.5.8 1.2 1.5 2 2 .3.2.5.2.7 0l.8-.9c.2-.2.4-.3.7-.2l1.7.8c.3.1.4.3.4.5 0 .4-.2 1-.6 1.3-.4.4-1 .6-1.6.6-1 0-2.4-.6-3.9-1.9-1.7-1.5-2.7-3.4-2.7-4.5 0-.6.2-1.1.5-1.4Z"/></svg><span class="hidden font-bold text-sm sm:inline" data-i18n="whatsapp_label">Chat on WhatsApp</span>
   </a>
 
   <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[60] hidden border-t border-slate-300 bg-white p-4 text-slate-800 shadow-2xl" role="dialog" aria-live="polite" aria-label="Cookie preferences"><div class="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-center md:justify-between"><p class="text-sm" data-i18n="cookie_message">We use optional Google Analytics to understand site usage. You can accept or reject analytics cookies.</p><div class="flex flex-wrap gap-2"><button type="button" onclick="saveAnalyticsConsent(true)" class="rounded bg-amber-500 px-4 py-2 text-sm font-bold text-slate-900" data-i18n="cookie_accept">Accept analytics</button><button type="button" onclick="saveAnalyticsConsent(false)" class="rounded border border-slate-300 px-4 py-2 text-sm font-semibold" data-i18n="cookie_reject">Reject analytics</button><button type="button" onclick="openPolicy('cookies')" class="px-3 py-2 text-sm underline" data-i18n="cookie_learn">Learn more</button></div></div></div>
@@ -258,7 +255,7 @@
     let contentCollectionsStarted = false;
 
     const policiesContent = {
-      privacy: { title:'Privacy Policy', body:'<p><strong>Website operator and data contact.</strong> This website is operated by 郑州市永友机械设备有限公司 (English rendering: Zhengzhou Yongyou Machinery Equipment Co., Ltd.; AIZGZ Machinery is the trading name displayed on this website). Business address supplied by the operator: 河南省郑州市荥阳市城关乡桃李工业园 (English rendering: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). For privacy requests and questions, contact aimr@qq.com.</p><p><strong>Information collected.</strong> Inquiry submissions may include your name, email, phone or WhatsApp number, product/model of interest, and message. Hosting and security providers may process technical request information such as IP address, browser/device type, and access time. Do not submit passwords, payment-card details, identity numbers, or other sensitive information.</p><p><strong>Use of information.</strong> We use inquiry details to respond, prepare quotations, discuss equipment requirements, coordinate potential orders, provide support, and protect the website. Optional analytics is used only after consent where required. <strong>Regional language selection.</strong> The website may use the country code supplied by the hosting platform from the visitor\'s IP connection to suggest a language. It does not request browser geolocation or precise location.</p><p><strong>Service providers.</strong> Vercel provides hosting, Formspree processes inquiry forms, Google Analytics is used only after consent, and WhatsApp is used if you choose to contact us there. The website also loads code and interface assets from third-party content delivery networks, including jsDelivr and cdnjs. These providers may process technical connection data under their own terms. We do not sell personal information. Disclosures may occur where required by law or necessary to protect rights and services.</p><p><strong>International processing and retention.</strong> Information may be processed in countries where our service providers operate. We retain inquiry information only as long as reasonably needed for the inquiry, business relationship, legal obligations, and dispute resolution, then delete or anonymize it where appropriate.</p><p><strong>Your choices.</strong> Depending on applicable law, you may request access, correction, deletion, restriction, or object to certain processing, and withdraw consent. Contact us using the email displayed on this website. You can reject optional analytics using the cookie controls.</p><p><strong>Important:</strong> The company name and address above are reproduced from the information supplied by the website operator. The Chinese company name and address are shown as supplied by the operator; the English wording is provided as a translation for convenience. This notice should also be checked against the actual service-provider settings and applicable privacy laws.</p>' },
+      privacy: { title:'Privacy Policy', body:'<p><strong>Website operator and data contact.</strong> This website is operated by 郑州市永友机械设备有限公司 (English rendering: Zhengzhou Yongyou Machinery Equipment Co., Ltd.; AIZGZ Machinery is the trading name displayed on this website). Business address supplied by the operator: 河南省郑州市荥阳市城关乡桃李工业园 (English rendering: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). For privacy requests and questions, contact aimr@qq.com.</p><p><strong>Information collected.</strong> Inquiry submissions may include your name, email, phone or WhatsApp number, product/model of interest, and message. Hosting and security providers may process technical request information such as IP address, browser/device type, and access time. Do not submit passwords, payment-card details, identity numbers, or other sensitive information.</p><p><strong>Use of information.</strong> We use inquiry details to respond, prepare quotations, discuss equipment requirements, coordinate potential orders, provide support, and protect the website. Optional analytics is used only after consent where required. <strong>Regional language selection.</strong> The website may use the country code supplied by the hosting platform from the visitor\'s IP connection to suggest a language. It does not request browser geolocation or precise location.</p><p><strong>Service providers.</strong> Vercel provides hosting, Formspree processes inquiry forms, Google Analytics is used only after consent, and WhatsApp is used if you choose to contact us there. The website also loads selected code libraries from jsDelivr, including a Markdown renderer and YAML parser. These providers may process technical connection data under their own terms. We do not sell personal information. Disclosures may occur where required by law or necessary to protect rights and services.</p><p><strong>International processing and retention.</strong> Information may be processed in countries where our service providers operate. We retain inquiry information only as long as reasonably needed for the inquiry, business relationship, legal obligations, and dispute resolution, then delete or anonymize it where appropriate.</p><p><strong>Your choices.</strong> Depending on applicable law, you may request access, correction, deletion, restriction, or object to certain processing, and withdraw consent. Contact us using the email displayed on this website. You can reject optional analytics using the cookie controls.</p><p><strong>Important:</strong> The company name and address above are reproduced from the information supplied by the website operator. The Chinese company name and address are shown as supplied by the operator; the English wording is provided as a translation for convenience. This notice should also be checked against the actual service-provider settings and applicable privacy laws.</p>' },
       cookies: { title:'Cookie & Analytics Notice', body:'<p>This website uses essential browser storage to remember your language choice and analytics-consent choice. Google Analytics is optional and is not loaded until you select “Accept analytics”. If you reject analytics, the site will not intentionally load the Google Analytics tag. You can change your choice using “Cookie Settings” in the footer.</p><p>Hosting and security providers may process technical information needed to deliver and protect the website. Review this notice if advertising, embedded media, or additional tracking tools are added.</p>' },
       shipping: { title:'Shipping Information', body:'<p>Shipping arrangements are confirmed individually. Transport method, packing, loading, freight cost, export documents, and estimated schedule depend on the equipment, quantity, destination, and current logistics conditions.</p><p>Applicable Incoterms, named place or port, insurance, export/import clearance, duties, taxes, unloading, and inland delivery responsibilities must be stated in the written quotation or sales contract. Do not assume these costs are included unless expressly stated.</p><p>Production and dispatch dates are estimates until confirmed in writing. Buyers should verify destination-country import requirements, permits, electrical standards, and site conditions before ordering.</p>' },
       warranty: { title:'Warranty & After-Sales Information', body:'<p>Warranty period, coverage, exclusions, start date, spare-parts arrangements, technical support, and any repair, return, or replacement process vary by product and supplier. These terms must be confirmed in the written quotation or sales contract for the specific equipment.</p><p>Request warranty terms, commissioning requirements, maintenance schedules, spare-parts lists, and support scope before ordering. This general notice does not promise a fixed warranty period or service level.</p>' },
@@ -939,6 +936,33 @@
       return (valueTranslations[language] && valueTranslations[language][normalized]) || value;
     }
 
+    const productMarkdownScriptPromises = new Map();
+
+    function loadProductMarkdownScript(src, globalName) {
+      if (window[globalName]) return Promise.resolve();
+      if (productMarkdownScriptPromises.has(src)) return productMarkdownScriptPromises.get(src);
+      const promise = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        script.onload = () => window[globalName] ? resolve() : reject(new Error(globalName + ' did not initialize'));
+        script.onerror = () => reject(new Error('Could not load ' + globalName));
+        document.head.appendChild(script);
+      }).catch((error) => {
+        productMarkdownScriptPromises.delete(src);
+        throw error;
+      });
+      productMarkdownScriptPromises.set(src, promise);
+      return promise;
+    }
+
+    function loadProductMarkdownLibraries() {
+      return Promise.all([
+        loadProductMarkdownScript('https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js', 'marked'),
+        loadProductMarkdownScript('https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js', 'DOMPurify')
+      ]);
+    }
+
     function openModal(meta, body) {
       currentProductModal = { meta: meta, body: body };
       const content = document.getElementById('modal-content');
@@ -984,19 +1008,23 @@
       content.appendChild(specs);
       const description = document.createElement('div');
       description.className = 'prose mb-6 max-w-none text-sm text-slate-700';
-      if (window.marked && typeof window.marked.parse === 'function' && window.DOMPurify) {
-        const productBody = getLocalizedProductBody(meta, body, productLanguage);
+      const productBody = getLocalizedProductBody(meta, body, productLanguage);
+      // Render safe plain text immediately; load Markdown tooling only after a
+      // visitor opens a product detail, then upgrade the description if possible.
+      description.textContent = productBody;
+      content.appendChild(description);
+      const modalContext = currentProductModal;
+      loadProductMarkdownLibraries().then(() => {
+        if (currentProductModal !== modalContext) return;
         const renderedMarkdown = window.marked.parse(productBody);
         description.innerHTML = window.DOMPurify.sanitize(renderedMarkdown, {
           USE_PROFILES: { html: true },
           FORBID_TAGS: ['style', 'iframe', 'object', 'embed'],
           FORBID_ATTR: ['style']
         });
-      } else {
-        // Never inject unsanitized Markdown HTML if a CDN dependency is unavailable.
-        description.textContent = getLocalizedProductBody(meta, body, productLanguage);
-      }
-      content.appendChild(description);
+      }).catch((error) => {
+        console.warn('Markdown detail rendering unavailable; keeping safe plain text.', error);
+      });
       const link = document.createElement('a');
       link.href = '#contact';
       link.className = 'block w-full rounded-lg bg-amber-500 py-3 text-center font-bold text-slate-900 hover:bg-amber-600';
@@ -1079,7 +1107,7 @@
             videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
             const icon = document.createElement('span');
             icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
-            icon.innerHTML = '<i class="fa-solid fa-play"></i>';
+            icon.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
             videoLink.appendChild(icon);
             imageWrap.appendChild(videoLink);
           }
@@ -1163,7 +1191,7 @@
       }
     });
 
-    initializeSite();
+    document.addEventListener('DOMContentLoaded', initializeSite, { once: true });
   </script>
 </body>
 </html>
