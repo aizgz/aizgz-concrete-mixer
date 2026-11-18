@@ -920,7 +920,42 @@
         empty.textContent = activeProductCategory === 'all' ? currentTexts().empty_products : currentTexts().empty_category;
         fragment.appendChild(empty);
       } else {
-        filtered.forEach((product) => fragment.appendChild(renderProductCard(product.meta, product.body)));
+        const cards = filtered.map((product) => renderProductCard(product.meta, product.body));
+        const skeletons = [...grid.querySelectorAll(':scope > article[aria-hidden="true"]')];
+
+        // Match each initial skeleton to the final card's actual grid-row height.
+        // This keeps the product section from growing when cards with wrapped or
+        // localized content replace the loading placeholders.
+        if (skeletons.length === cards.length) {
+          const measureGrid = document.createElement('div');
+          measureGrid.className = grid.className;
+          measureGrid.setAttribute('aria-hidden', 'true');
+          Object.assign(measureGrid.style, {
+            position: 'fixed',
+            left: '-100000px',
+            top: '0',
+            width: grid.getBoundingClientRect().width + 'px',
+            visibility: 'hidden',
+            pointerEvents: 'none'
+          });
+
+          try {
+            cards.forEach((card) => measureGrid.appendChild(card));
+            document.body.appendChild(measureGrid);
+            const cardHeights = [...measureGrid.children].map(
+              (card) => Math.ceil(card.getBoundingClientRect().height)
+            );
+            skeletons.forEach((skeleton, index) => {
+              skeleton.style.height = cardHeights[index] + 'px';
+            });
+          } catch (error) {
+            console.warn('Could not measure product placeholder heights:', error);
+          } finally {
+            measureGrid.remove();
+          }
+        }
+
+        cards.forEach((card) => fragment.appendChild(card));
       }
       grid.replaceChildren(fragment);
       count.textContent = filtered.length + ' ' + (filtered.length === 1 ? currentTexts().count_product : currentTexts().count_products);
