@@ -772,7 +772,7 @@
       const safeSrc = isSafeHttpUrl(src) || (typeof src === 'string' && src.startsWith('/uploads/')) ? src : PLACEHOLDER_IMAGE;
       const useGeneratedWebp = typeof safeSrc === 'string'
         && safeSrc.startsWith('/uploads/')
-        && /\\.(?:jpe?g|png)$/i.test(safeSrc);
+        && /\.(?:jpe?g|png)$/i.test(safeSrc);
 
       img.alt = alt || 'Industrial equipment';
       img.loading = 'lazy';
