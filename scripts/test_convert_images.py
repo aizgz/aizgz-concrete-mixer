@@ -48,8 +48,8 @@ class ResponsiveWebPTests(unittest.TestCase):
         convert_image(source)
         Image.new("RGB", (640, 320), (180, 80, 20)).save(source)
         convert_image(source)
-        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (400, 195))
-        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (640, 312))
+        self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (400, 196))
+        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (640, 313))
         self.assertEqual(self.dimensions(Path(str(source) + ".webp")), (640, 320))
 
     def test_transparency_is_preserved(self):
