@@ -788,7 +788,7 @@
         if (imageVariant === 'card') {
           img.src = safeSrc + '.400.webp';
           img.srcset = safeSrc + '.400.webp 400w, ' + safeSrc + '.800.webp 800w';
-          img.sizes = '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw';
+          img.sizes = '(min-width: 1280px) 393px, (min-width: 1024px) calc((100vw - 96px) / 3), (min-width: 768px) calc((100vw - 64px) / 2), calc(100vw - 32px)';
         } else {
           // Product detail views retain the full-resolution image.
           img.src = safeSrc + '.webp';
