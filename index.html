@@ -864,7 +864,7 @@
       const count = document.getElementById('product-count');
       grid.setAttribute('aria-busy', 'true');
       try {
-        const response = await fetch('/api/content?collection=products', { cache: 'no-store' });
+        const response = await fetch('/api/content/?collection=products', { cache: 'no-store' });
         if (!response.ok) throw new Error(`Product service HTTP ${response.status}`);
         const payload = await response.json();
         const markdownFiles = Array.isArray(payload.files) ? payload.files : [];
@@ -913,15 +913,16 @@
       const filtered = activeProductCategory === 'all'
         ? allProducts
         : allProducts.filter((product) => getProductCategory(product.meta) === activeProductCategory);
-      grid.replaceChildren();
+      const fragment = document.createDocumentFragment();
       if (!filtered.length) {
         const empty = document.createElement('div');
         empty.className = 'col-span-full py-12 text-center text-slate-500';
         empty.textContent = activeProductCategory === 'all' ? currentTexts().empty_products : currentTexts().empty_category;
-        grid.appendChild(empty);
+        fragment.appendChild(empty);
       } else {
-        filtered.forEach((product) => renderProductCard(product.meta, product.body));
+        filtered.forEach((product) => fragment.appendChild(renderProductCard(product.meta, product.body)));
       }
+      grid.replaceChildren(fragment);
       count.textContent = filtered.length + ' ' + (filtered.length === 1 ? currentTexts().count_product : currentTexts().count_products);
     }
 
@@ -989,7 +990,6 @@
     }
 
     function renderProductCard(meta = {}, body = '') {
-      const grid = document.getElementById('product-grid');
       const card = document.createElement('article');
       card.className = 'flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl';
       const upper = document.createElement('div');
@@ -1049,7 +1049,7 @@
       inquiry.addEventListener('click', () => fillInquiryModel(meta.title || meta.model || 'Product Inquiry'));
       actions.append(details, inquiry);
       card.appendChild(actions);
-      grid.appendChild(card);
+      return card;
     }
 
     function fillInquiryModel(title) {
@@ -1241,7 +1241,7 @@
     async function fetchContentCollection(collection, gridId, kind) {
       const grid = document.getElementById(gridId);
       try {
-        const response = await fetch(`/api/content?collection=${encodeURIComponent(collection)}`, { cache: 'no-store' });
+        const response = await fetch(`/api/content/?collection=${encodeURIComponent(collection)}`, { cache: 'no-store' });
         if (!response.ok) throw new Error(`Content service HTTP ${response.status}`);
         const payload = await response.json();
         const files = Array.isArray(payload.files) ? payload.files : [];
