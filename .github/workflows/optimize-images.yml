@@ -62,4 +62,4 @@ jobs:
             exit 0
           fi
           git commit -m "chore: generate responsive WebP image variants"
-          git push origin "HEAD:\${TARGET_BRANCH}"
+          git push origin "HEAD:${TARGET_BRANCH}"
