@@ -99,7 +99,7 @@
           <h2 class="text-3xl font-bold text-slate-900" data-i18n="prod_title">Industrial Equipment</h2>
           <p class="mt-2 text-sm text-slate-500" data-i18n="prod_sub">Browse equipment by product category and request details or a quotation.</p>
         </div>
-        <span id="product-count" class="text-sm font-semibold text-slate-500" aria-live="polite" data-i18n="loading_products">Loading products…</span>
+        <span id="product-count" class="w-40 shrink-0 whitespace-nowrap text-right text-sm font-semibold text-slate-500" aria-live="polite" data-i18n="loading_products">Loading products…</span>
       </div>
       <div id="product-filters" class="mb-8 flex flex-wrap gap-3">
         <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white" data-i18n="filter_all">All Equipment</button>
@@ -894,15 +894,19 @@
       const count = document.getElementById('product-count');
       if (!grid || !count) return;
 
-      // Only show category filters that currently have matching catalogue items.
-      // This avoids empty category pages while allowing new categories (including
-      // palletizers) to appear automatically when their product records are added.
+      // Keep every filter in the layout to prevent the toolbar from reflowing
+      // when the catalogue request completes. Disable categories with no products
+      // instead of hiding their buttons.
       document.querySelectorAll('.filter-btn[data-category]').forEach((button) => {
         const category = button.dataset.category;
         const hasProducts = category === 'all' || allProducts.some(
           (product) => getProductCategory(product.meta) === category
         );
-        button.hidden = !hasProducts;
+        button.hidden = false;
+        button.disabled = !hasProducts;
+        button.setAttribute('aria-disabled', String(!hasProducts));
+        button.classList.toggle('opacity-50', !hasProducts);
+        button.classList.toggle('cursor-not-allowed', !hasProducts);
         if (!hasProducts && activeProductCategory === category) activeProductCategory = 'all';
       });
 
