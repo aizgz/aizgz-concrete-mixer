@@ -958,8 +958,13 @@
       setText('policy-title', currentTexts()[titleKeys[type]] || policy.title);
       const policyLanguage = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
       const translatedBody = localizedPolicyBodies[policyLanguage] && localizedPolicyBodies[policyLanguage][type];
-      const languageNotice = translatedBody || policyLanguage === 'en' ? '' : '<p class="rounded bg-slate-50 p-3 text-xs text-slate-500">' + currentTexts().policy_english + '</p>';
-      document.getElementById('policy-body').innerHTML = (translatedBody || policy.body) + languageNotice;
+      const languageNotice = (translatedBody || policyLanguage === 'en') ? '' : '<p class="rounded bg-slate-50 p-3 text-xs text-slate-500">' + currentTexts().policy_english + '</p>';
+      const translationNote = {
+        es: '<p class="mt-4 border-t pt-3 text-xs text-slate-500">Esta versión es una traducción informativa para facilitar la comprensión. Si necesita confirmar cómo se aplica una condición a su operación, solicite aclaración por escrito.</p>',
+        ar: '<p class="mt-4 border-t pt-3 text-xs text-slate-500">هذه ترجمة توضيحية لتسهيل الفهم. إذا كنت بحاجة إلى تأكيد كيفية تطبيق أي شرط على معاملتك، فيرجى طلب توضيح كتابي.</p>',
+        ru: '<p class="mt-4 border-t pt-3 text-xs text-slate-500">Эта версия является информационным переводом для удобства понимания. Чтобы уточнить применение какого-либо условия к вашей сделке, запросите письменное разъяснение.</p>'
+      }[policyLanguage] || '';
+      document.getElementById('policy-body').innerHTML = (translatedBody || policy.body) + languageNotice + translationNote;
       const modal = document.getElementById('policy-modal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
