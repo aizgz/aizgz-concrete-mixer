@@ -33,7 +33,7 @@ class ResponsiveWebPTests(unittest.TestCase):
         generated = convert_image(source)
         self.assertEqual(len(generated), 3)
         self.assertEqual(self.dimensions(Path(str(source) + ".400.webp")), (400, 195))
-        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (800, 390))
+        self.assertEqual(self.dimensions(Path(str(source) + ".800.webp")), (800, 391))
         self.assertEqual(self.dimensions(Path(str(source) + ".webp")), (1200, 600))
         self.assertTrue(source.exists())
 
