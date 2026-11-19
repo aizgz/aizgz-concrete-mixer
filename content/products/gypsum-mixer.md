@@ -1,5 +1,6 @@
 ---
 title: Gypsum Powder Mixer
+url_slug: gypsum-powder-mixer
 title_es: "Mezcladora de yeso en polvo"
 title_ar: "خلاط مسحوق الجبس"
 title_ru: "Смеситель гипсового порошка"
