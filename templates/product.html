@@ -13,7 +13,7 @@
   <meta property="og:title" content="{{OG_TITLE}}">
   <meta property="og:description" content="{{OG_DESCRIPTION}}">
   <meta property="og:url" content="{{OG_URL}}">
-  <meta property="og:locale" content="{{HTML_LANG}}">
+  <meta property="og:locale" content="{{OG_LOCALE}}">
   {{OG_IMAGE}}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{OG_TITLE}}">
@@ -45,16 +45,16 @@
 <body>
   <header class="site-header"><div class="header-inner"><a class="brand" href="{{HOME_URL}}/">AIZGZ <span>MACHINERY</span></a></div></header>
   <main class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{HOME_URL}}/">Home</a> / <a href="{{HOME_URL}}/#products">Products</a> / <span>{{PRODUCT_TITLE}}</span></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{HOME_URL}}/">{{HOME_LABEL}}</a> / <a href="{{HOME_URL}}/#products">{{PRODUCTS_LABEL}}</a> / <span>{{PRODUCT_TITLE}}</span></nav>
     <article class="product">
       <header class="product-head"><h1>{{PRODUCT_TITLE}}</h1>{{SUMMARY}}</header>
       {{PRODUCT_IMAGE}}
       <dl class="specs">{{SPECS}}</dl>
       <div class="content">{{BODY}}</div>
-      <div class="actions"><a class="button" href="{{INQUIRY_URL}}">Request a quotation</a><a class="button secondary" href="{{HOME_URL}}/#products">Back to product catalogue</a></div>
+      <div class="actions"><a class="button" href="{{INQUIRY_URL}}">{{INQUIRY_LABEL}}</a><a class="button secondary" href="{{HOME_URL}}/#products">{{BACK_LABEL}}</a></div>
     </article>
     <nav class="languages" aria-label="Available languages">{{LANGUAGE_LINKS}}</nav>
   </main>
-  <footer><a href="{{HOME_URL}}/" style="color:#fbbf24">AIZGZ Machinery</a> · Product information and configuration are subject to confirmation.</footer>
+  <footer><a href="{{HOME_URL}}/" style="color:#fbbf24">AIZGZ Machinery</a> · {{FOOTER_NOTE}}</footer>
 </body>
 </html>
