@@ -9,6 +9,9 @@ supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/无标题1.jpeg
 summary: A twin-shaft paddle mixer system for dry-mix mortar production. The described configuration includes the main mixer and auxiliary storage, weighing, conveying, dust-collection and packaging equipment. Final equipment selection and specifications are subject to project requirements and supplier confirmation.
+summary_es: "Mezcladora de paletas de doble eje para producir mortero seco, con equipos auxiliares opcionales según los requisitos del proyecto."
+summary_ar: "خلاط مجدافي مزدوج المحور لإنتاج الملاط الجاف، مع معدات مساعدة اختيارية تُحدد وفقًا لمتطلبات المشروع."
+summary_ru: "Двухвальный лопастной смеситель для производства сухих строительных смесей с дополнительным оборудованием по требованиям проекта."
 body_es: |
   ### I. Cuerpo principal de la mezcladora de doble eje sin gravedad
 
