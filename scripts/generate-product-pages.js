@@ -223,11 +223,14 @@ async function main() {
   const homepagePath = path.join(ROOT, 'index.html');
   const homepage = await readFile(homepagePath, 'utf8');
   const productLinks = [
-    '<nav aria-label="Product detail pages"><ul>',
+    '<nav aria-label="Product detail pages" class="mt-8 border-t border-slate-200 pt-6">',
+    '<h3 class="mb-4 text-lg font-semibold text-slate-800">Browse product detail pages</h3>',
+    '<ul class="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">',
     ...products.map(({ meta, slug }) =>
-      `<li><a href="/products/${slug}/">${escapeHtml(meta.title)}</a></li>`
+      `<li><a class="text-slate-600 underline decoration-slate-300 underline-offset-2 hover:text-amber-600" href="/products/${slug}/">${escapeHtml(meta.title)}</a></li>`
     ),
-    '</ul></nav>'
+    '</ul>',
+    '</nav>'
   ].join('\n');
   const marker = '<!-- PRODUCT_DETAIL_LINKS -->';
   if (!homepage.includes(marker)) throw new Error('index.html is missing the PRODUCT_DETAIL_LINKS marker');
