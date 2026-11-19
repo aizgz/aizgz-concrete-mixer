@@ -38,6 +38,7 @@
     .actions{display:flex;flex-wrap:wrap;gap:1rem;padding:0 2rem 2rem}.button{display:inline-block;background:#f59e0b;color:#0f172a;padding:.8rem 1.2rem;border-radius:.55rem;font-weight:700}
     .button.secondary{background:#e2e8f0}.languages{display:flex;gap:.8rem;flex-wrap:wrap;padding:1rem 0;font-size:.875rem}.languages a[aria-current=page]{font-weight:800;color:#0f172a;text-decoration:underline}
     footer{background:#0f172a;color:#cbd5e1;padding:1.5rem 1rem;text-align:center;font-size:.85rem}
+    .inquiry-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(15,23,42,.72)}.inquiry-overlay[hidden]{display:none}.inquiry-dialog{position:relative;width:min(640px,100%);max-height:90vh;overflow-y:auto;border-radius:1rem;background:#fff;padding:1.5rem;box-shadow:0 24px 80px #0005;color:#1e293b}.inquiry-dialog h2{margin:0 2.5rem 1rem 0;color:#0f172a;font-size:1.5rem}.inquiry-close{position:absolute;top:1rem;right:1rem;border:0;background:transparent;color:#64748b;font-size:1.8rem;line-height:1;cursor:pointer}.inquiry-form{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}.inquiry-field{display:flex;flex-direction:column;gap:.3rem}.inquiry-field.full{grid-column:1/-1}.inquiry-field label{font-size:.85rem;font-weight:700;color:#334155}.inquiry-field input,.inquiry-field textarea{width:100%;border:1px solid #cbd5e1;border-radius:.5rem;padding:.7rem .8rem;font:inherit;color:#0f172a;background:#fff}.inquiry-field textarea{min-height:110px;resize:vertical}.inquiry-submit{grid-column:1/-1;border:0;cursor:pointer;font:inherit}.inquiry-submit:disabled{opacity:.6;cursor:wait}.inquiry-status{grid-column:1/-1;margin:0;text-align:center;font-size:.9rem}.inquiry-status.success{color:#047857}.inquiry-status.error{color:#be123c}.inquiry-note{grid-column:1/-1;margin:0;color:#64748b;font-size:.75rem;text-align:center}html[dir=rtl] .inquiry-dialog h2{margin:0 0 1rem 2.5rem}html[dir=rtl] .inquiry-close{right:auto;left:1rem}
     html[dir=rtl] body{text-align:right}
     @media(max-width:640px){.product-head,.content{padding:1.25rem}.specs{padding:0 1.25rem 1.25rem}.actions{padding:0 1.25rem 1.5rem}.product-image{max-height:360px}}
   </style>
@@ -51,10 +52,88 @@
       {{PRODUCT_IMAGE}}
       <dl class="specs">{{SPECS}}</dl>
       <div class="content">{{BODY}}</div>
-      <div class="actions"><a class="button" href="{{INQUIRY_URL}}">{{INQUIRY_LABEL}}</a><a class="button secondary" href="{{HOME_URL}}/#products">{{BACK_LABEL}}</a></div>
+      <div class="actions"><button class="button" type="button" data-product-title="{{PRODUCT_TITLE}}" onclick="openInquiryModal(this)">{{INQUIRY_LABEL}}</button><a class="button secondary" href="{{HOME_URL}}/#products">{{BACK_LABEL}}</a></div>
     </article>
     <nav class="languages" aria-label="Available languages">{{LANGUAGE_LINKS}}</nav>
   </main>
   <footer><a href="{{HOME_URL}}/" style="color:#fbbf24">AIZGZ Machinery</a> · {{FOOTER_NOTE}}</footer>
+  <div id="inquiry-modal" class="inquiry-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="inquiry-title" onclick="if(event.target===this) closeInquiryModal()">
+    <section class="inquiry-dialog">
+      <button class="inquiry-close" type="button" onclick="closeInquiryModal()" aria-label="Close inquiry form">&times;</button>
+      <h2 id="inquiry-title">Request a quotation</h2>
+      <form id="product-inquiry-form" class="inquiry-form">
+        <div class="inquiry-field"><label for="quote-name" data-form-label="name">Your name *</label><input id="quote-name" name="name" required autocomplete="name"></div>
+        <div class="inquiry-field"><label for="quote-email" data-form-label="email">Your email *</label><input id="quote-email" type="email" name="email" required autocomplete="email"></div>
+        <div class="inquiry-field"><label for="quote-company" data-form-label="company">Company</label><input id="quote-company" name="company" autocomplete="organization"></div>
+        <div class="inquiry-field"><label for="quote-country" data-form-label="country">Country</label><input id="quote-country" name="country" autocomplete="country-name"></div>
+        <div class="inquiry-field"><label for="quote-phone" data-form-label="phone">Phone / WhatsApp</label><input id="quote-phone" name="phone" autocomplete="tel"></div>
+        <div class="inquiry-field"><label for="quote-product" data-form-label="product">Product / Model</label><input id="quote-product" name="product_model" readonly></div>
+        <div class="inquiry-field full"><label for="quote-message" data-form-label="message">Requirements *</label><textarea id="quote-message" name="message" required></textarea></div>
+        <button id="quote-submit" class="button inquiry-submit" type="submit" data-form-label="submit">Send inquiry</button>
+        <p id="quote-status" class="inquiry-status" role="status" aria-live="polite" hidden></p>
+        <p class="inquiry-note" data-form-label="note">Please do not include passwords or payment card details.</p>
+      </form>
+    </section>
+  </div>
+  <script>
+    const inquiryTranslations = {
+      en:{title:'Request a quotation',name:'Your name *',email:'Your email *',company:'Company',country:'Country',phone:'Phone / WhatsApp',product:'Product / Model',message:'Requirements *',submit:'Send inquiry',sending:'Sending…',success:'Thank you. Your inquiry has been sent.',error:'We could not send your inquiry. Please try again.',missing:'The inquiry form is not configured yet.',note:'Please do not include passwords or payment card details.',close:'Close inquiry form'},
+      es:{title:'Solicitar presupuesto',name:'Nombre *',email:'Correo electrónico *',company:'Empresa',country:'País',phone:'Teléfono / WhatsApp',product:'Producto / modelo',message:'Requisitos *',submit:'Enviar consulta',sending:'Enviando…',success:'Gracias. Su consulta ha sido enviada.',error:'No se pudo enviar su consulta. Inténtelo de nuevo.',missing:'El formulario de consulta aún no está configurado.',note:'No incluya contraseñas ni datos de tarjetas de pago.',close:'Cerrar formulario'},
+      ar:{title:'طلب عرض سعر',name:'الاسم *',email:'البريد الإلكتروني *',company:'الشركة',country:'الدولة',phone:'الهاتف / واتساب',product:'المنتج / الطراز',message:'المتطلبات *',submit:'إرسال الاستفسار',sending:'جارٍ الإرسال…',success:'شكرًا لك. تم إرسال استفسارك.',error:'تعذر إرسال استفسارك. يرجى المحاولة مرة أخرى.',missing:'لم يتم إعداد نموذج الاستفسار بعد.',note:'يرجى عدم إدخال كلمات المرور أو بيانات بطاقات الدفع.',close:'إغلاق نموذج الاستفسار'},
+      ru:{title:'Запросить предложение',name:'Ваше имя *',email:'Ваш email *',company:'Компания',country:'Страна',phone:'Телефон / WhatsApp',product:'Продукт / модель',message:'Требования *',submit:'Отправить запрос',sending:'Отправка…',success:'Спасибо. Ваш запрос отправлен.',error:'Не удалось отправить запрос. Попробуйте ещё раз.',missing:'Форма запроса ещё не настроена.',note:'Не указывайте пароли и данные банковских карт.',close:'Закрыть форму'}
+    };
+    const inquiryLanguage = (document.documentElement.lang || 'en').slice(0,2).toLowerCase();
+    const inquiryText = inquiryTranslations[inquiryLanguage] || inquiryTranslations.en;
+    document.getElementById('inquiry-title').textContent = inquiryText.title;
+    document.querySelectorAll('[data-form-label]').forEach((el) => { const key=el.getAttribute('data-form-label'); if(inquiryText[key]) el.textContent=inquiryText[key]; });
+    document.querySelector('.inquiry-close').setAttribute('aria-label', inquiryText.close);
+    let inquirySettingsPromise;
+    let inquiryPreviousFocus = null;
+    async function getInquirySettings() {
+      if (!inquirySettingsPromise) inquirySettingsPromise = fetch('/api/content/?collection=settings').then(r => { if(!r.ok) throw new Error('Settings unavailable'); return r.json(); }).then(data => data.settings || {});
+      return inquirySettingsPromise;
+    }
+    function openInquiryModal(button) {
+      inquiryPreviousFocus = button;
+      document.getElementById('quote-product').value = button.getAttribute('data-product-title') || '';
+      document.getElementById('quote-status').hidden = true;
+      const modal = document.getElementById('inquiry-modal');
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('quote-name').focus();
+    }
+    function closeInquiryModal() {
+      document.getElementById('inquiry-modal').hidden = true;
+      document.body.style.overflow = '';
+      if (inquiryPreviousFocus) inquiryPreviousFocus.focus();
+    }
+    document.getElementById('product-inquiry-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const button = document.getElementById('quote-submit');
+      const status = document.getElementById('quote-status');
+      button.disabled = true;
+      button.textContent = inquiryText.sending;
+      status.hidden = true;
+      status.className = 'inquiry-status';
+      try {
+        const settings = await getInquirySettings();
+        if (!settings.formspree_id) throw new Error('not-configured');
+        const response = await fetch('https://formspree.io/f/' + encodeURIComponent(settings.formspree_id), {method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+        if (!response.ok) throw new Error('submission-failed');
+        status.textContent = inquiryText.success;
+        status.classList.add('success');
+        form.reset();
+      } catch (error) {
+        status.textContent = error.message === 'not-configured' ? inquiryText.missing : inquiryText.error;
+        status.classList.add('error');
+      } finally {
+        status.hidden = false;
+        button.disabled = false;
+        button.textContent = inquiryText.submit;
+      }
+    });
+    document.addEventListener('keydown', (event) => { if(event.key === 'Escape' && !document.getElementById('inquiry-modal').hidden) closeInquiryModal(); });
+  </script>
 </body>
 </html>
