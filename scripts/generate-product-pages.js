@@ -7,10 +7,10 @@ const PRODUCTS_DIR = path.join(ROOT, 'content', 'products');
 const TEMPLATE_PATH = path.join(ROOT, 'templates', 'product.html');
 const SITE_URL = 'https://aizgz.vercel.app';
 const LANGUAGES = {
-  en: { htmlLang: 'en', dir: 'ltr', label: 'English', titleKey: 'title', bodyKey: null },
-  es: { htmlLang: 'es', dir: 'ltr', label: 'Español', titleKey: 'title_es', bodyKey: 'body_es' },
-  ar: { htmlLang: 'ar', dir: 'rtl', label: 'العربية', titleKey: 'title_ar', bodyKey: 'body_ar' },
-  ru: { htmlLang: 'ru', dir: 'ltr', label: 'Русский', titleKey: 'title_ru', bodyKey: 'body_ru' }
+  en: { htmlLang: 'en', ogLocale: 'en_US', dir: 'ltr', label: 'English', home: 'Home', products: 'Products', inquiry: 'Request a quotation', back: 'Back to product catalogue', footer: 'Product information and configuration are subject to confirmation.', titleKey: 'title', bodyKey: null },
+  es: { htmlLang: 'es', ogLocale: 'es_ES', dir: 'ltr', label: 'Español', home: 'Inicio', products: 'Productos', inquiry: 'Solicitar presupuesto', back: 'Volver al catálogo de productos', footer: 'La información y configuración del producto están sujetas a confirmación.', titleKey: 'title_es', bodyKey: 'body_es' },
+  ar: { htmlLang: 'ar', ogLocale: 'ar_AR', dir: 'rtl', label: 'العربية', home: 'الرئيسية', products: 'المنتجات', inquiry: 'طلب عرض سعر', back: 'العودة إلى كتالوج المنتجات', footer: 'تخضع معلومات المنتج وتكوينه للتأكيد.', titleKey: 'title_ar', bodyKey: 'body_ar' },
+  ru: { htmlLang: 'ru', ogLocale: 'ru_RU', dir: 'ltr', label: 'Русский', home: 'Главная', products: 'Продукция', inquiry: 'Запросить предложение', back: 'Вернуться в каталог продукции', footer: 'Информация о продукте и его конфигурация подлежат подтверждению.', titleKey: 'title_ru', bodyKey: 'body_ru' }
 };
 const SPEC_FIELDS = [
   ['model', 'Model'], ['category', 'Category'], ['capacity', 'Capacity / Throughput'],
@@ -181,7 +181,7 @@ async function main() {
       });
       alternates.push(`<link rel="alternate" hreflang="x-default" href="${SITE_URL}/products/${slug}/">`);
       const html = fillTemplate(template, {
-        HTML_LANG: config.htmlLang, DIR: config.dir,
+        HTML_LANG: config.htmlLang, OG_LOCALE: config.ogLocale, DIR: config.dir,
         TITLE: escapeHtml(`${title} | AIZGZ Machinery`),
         DESCRIPTION: escapeHtml(description), CANONICAL: canonical,
         ALTERNATES: alternates.join('\n  '), OG_TITLE: escapeHtml(title),
@@ -192,7 +192,7 @@ async function main() {
         SUMMARY: meta.summary ? `<p class="summary">${escapeHtml(meta.summary)}</p>` : '',
         SPECS: renderSpecs(meta), BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
-        HOME_URL: SITE_URL, INQUIRY_URL: `${SITE_URL}/#contact`,
+        HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
         PRODUCT_JSON: JSON.stringify({
           '@context': 'https://schema.org', '@type': 'WebPage', name: title,
           description, url: canonical, inLanguage: config.htmlLang,
