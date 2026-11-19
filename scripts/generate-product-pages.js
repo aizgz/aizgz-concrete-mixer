@@ -229,10 +229,10 @@ async function main() {
         `    <xhtml:link rel="alternate" hreflang="${escapeXml(alternate.hreflang)}" href="${escapeXml(alternate.href)}" />`
       ),
       '  </url>'
-    ].join('\\n')),
+    ].join('\n')),
     '</urlset>',
     ''
-  ].join('\\n');
+  ].join('\n');
   await writeFile(path.join(ROOT, 'sitemap.xml'), sitemapXml, 'utf8');
   console.log(`Generated ${pageCount} product detail pages for ${products.length} products and updated sitemap.xml.`);
 }
