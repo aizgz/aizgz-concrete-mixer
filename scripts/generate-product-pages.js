@@ -136,6 +136,38 @@ function makeDescription(meta, body, language) {
   return source ? (source.length > 160 ? `${source.slice(0, 157).trimEnd()}...` : source)
     : 'Product details, specifications and configuration options from AIZGZ Machinery.';
 }
+
+function isDisplayableHomepageValue(value) {
+  return value !== undefined && value !== null && String(value).trim() !== '' &&
+    !/^(["']{2}|null|undefined|n\/a)$/i.test(String(value).trim()) &&
+    !/[\u3400-\u9fff]/.test(String(value));
+}
+function renderHomepageProductCard(meta, slug) {
+  const title = escapeHtml(meta.title || 'Industrial Equipment');
+  const image = safeImagePath(meta.image);
+  const imageHtml = image
+    ? `<img src="${escapeHtml(image)}" alt="${title}" loading="lazy" decoding="async" class="h-full w-full object-cover">`
+    : '';
+  const model = isDisplayableHomepageValue(meta.model)
+    ? `<p class="mt-1 font-mono text-xs text-slate-600">Model: ${escapeHtml(meta.model)}</p>` : '';
+  const capacity = isDisplayableHomepageValue(meta.capacity)
+    ? `<p class="mt-2 text-sm text-slate-600"><strong>Capacity: </strong>${escapeHtml(meta.capacity)}</p>` : '';
+  const internalCapacity = isDisplayableHomepageValue(meta.internal_capacity)
+    ? `<p class="mt-2 text-sm text-slate-600"><strong>Internal Capacity: </strong>${escapeHtml(meta.internal_capacity)}</p>` : '';
+  return [
+    '<article class="flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl">',
+    '<div>',
+    `<div class="relative h-48 overflow-hidden bg-slate-100">${imageHtml}</div>`,
+    `<div class="p-6"><h3 class="text-xl font-bold text-slate-800">${title}</h3>${model}${capacity}${internalCapacity}</div>`,
+    '</div>',
+    '<div class="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 p-6 pt-4">',
+    `<a href="/products/${slug}/" class="rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900">Details</a>`,
+    '<a href="#contact" class="rounded bg-amber-500 px-4 py-2 text-xs font-bold text-slate-900 hover:bg-amber-600">Inquire →</a>',
+    '</div>',
+    '</article>'
+  ].join('');
+}
+
 function renderSpecs(meta) {
   return SPEC_FIELDS.filter(([key]) => meta[key] !== undefined && meta[key] !== null && String(meta[key]).trim())
     .map(([key, label]) => `<div class="spec"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(meta[key])}</dd></div>`).join('\n');
@@ -222,19 +254,14 @@ async function main() {
   }
   const homepagePath = path.join(ROOT, 'index.html');
   const homepage = await readFile(homepagePath, 'utf8');
-  const productLinks = [
-    '<nav aria-label="Product detail pages" class="mt-8 border-t border-slate-200 pt-6">',
-    '<h3 class="mb-4 text-lg font-semibold text-slate-800">Browse product detail pages</h3>',
-    '<ul class="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">',
-    ...products.map(({ meta, slug }) =>
-      `<li><a class="text-slate-600 underline decoration-slate-300 underline-offset-2 hover:text-amber-600" href="/products/${slug}/">${escapeHtml(meta.title)}</a></li>`
-    ),
-    '</ul>',
-    '</nav>'
-  ].join('\n');
-  const marker = '<!-- PRODUCT_DETAIL_LINKS -->';
-  if (!homepage.includes(marker)) throw new Error('index.html is missing the PRODUCT_DETAIL_LINKS marker');
-  await writeFile(homepagePath, homepage.replace(marker, productLinks), 'utf8');
+  const startMarker = '<!-- PRODUCT_CARDS_START -->';
+  const endMarker = '<!-- PRODUCT_CARDS_END -->';
+  if (!homepage.includes(startMarker) || !homepage.includes(endMarker)) {
+    throw new Error('index.html is missing the PRODUCT_CARDS markers');
+  }
+  const homepageCards = products.map(({ meta, slug }) => renderHomepageProductCard(meta, slug)).join('\\n');
+  const markerPattern = /<!-- PRODUCT_CARDS_START -->[\\s\\S]*?<!-- PRODUCT_CARDS_END -->/;
+  await writeFile(homepagePath, homepage.replace(markerPattern, `${startMarker}\\n${homepageCards}\\n        ${endMarker}`), 'utf8');
 
   const sitemapXml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
