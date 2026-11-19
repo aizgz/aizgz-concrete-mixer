@@ -38,14 +38,14 @@ function parseScalar(value) {
 // CMS product front matter uses scalar values and YAML literal blocks.
 function parseFrontMatter(source, filename) {
   const match = source.replace(/^\uFEFF/, '').match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
-  if (!match) throw new Error(\`\${filename}: missing YAML front matter\`);
+  if (!match) throw new Error(\`${filename}: missing YAML front matter\`);
   const lines = match[1].split(/\r?\n/);
   const data = {};
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i];
     if (!line.trim() || /^\s*#/.test(line)) continue;
     const field = line.match(/^([A-Za-z0-9_-]+):(?:\s*(.*))?$/);
-    if (!field) throw new Error(\`\${filename}:\${i + 1}: unsupported front matter syntax\`);
+    if (!field) throw new Error(\`${filename}:${i + 1}: unsupported front matter syntax\`);
     const key = field[1];
     const raw = field[2] || '';
     if (raw === '|' || raw === '|-' || raw === '>' || raw === '>-') {
@@ -96,11 +96,11 @@ function renderMarkdown(markdown) {
   let paragraph = [];
   let list = [];
   const flushParagraph = () => {
-    if (paragraph.length) output.push(\`<p>\${paragraph.map(renderInline).join('<br>')}</p>\`);
+    if (paragraph.length) output.push(\`<p>${paragraph.map(renderInline).join('<br>')}</p>\`);
     paragraph = [];
   };
   const flushList = () => {
-    if (list.length) output.push(\`<ul>\${list.map((item) => \`<li>\${renderInline(item)}</li>\`).join('')}</ul>\`);
+    if (list.length) output.push(\`<ul>${list.map((item) => \`<li>${renderInline(item)}</li>\`).join('')}</ul>\`);
     list = [];
   };
   for (const line of lines) {
@@ -110,7 +110,7 @@ function renderMarkdown(markdown) {
     if (heading) {
       flushParagraph(); flushList();
       const level = Math.min(heading[1].length + 1, 6);
-      output.push(\`<h\${level}>\${renderInline(heading[2])}</h\${level}>\`);
+      output.push(\`<h${level}>${renderInline(heading[2])}</h${level}>\`);
     } else if (item) {
       flushParagraph(); list.push(item[1]);
     } else {
@@ -127,18 +127,18 @@ function plainText(markdown) {
 }
 function makeDescription(meta, body) {
   const source = meta.summary || plainText(body);
-  return source ? (source.length > 160 ? \`\${source.slice(0, 157).trimEnd()}...\` : source)
+  return source ? (source.length > 160 ? \`${source.slice(0, 157).trimEnd()}...\` : source)
     : 'Product details, specifications and configuration options from AIZGZ Machinery.';
 }
 function renderSpecs(meta) {
   return SPEC_FIELDS.filter(([key]) => meta[key] !== undefined && meta[key] !== null && String(meta[key]).trim())
-    .map(([key, label]) => \`<div class="spec"><dt>\${escapeHtml(label)}</dt><dd>\${escapeHtml(meta[key])}</dd></div>\`).join('\n');
+    .map(([key, label]) => \`<div class="spec"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(meta[key])}</dd></div>\`).join('\n');
 }
 function renderLanguageLinks(slug, available, current) {
   return available.map((language) => {
-    const href = language === 'en' ? \`/products/\${slug}/\` : \`/\${language}/products/\${slug}/\`;
+    const href = language === 'en' ? \`/products/${slug}/\` : \`/${language}/products/${slug}/\`;
     const active = language === current ? ' aria-current="page"' : '';
-    return \`<a href="\${href}"\${active}>\${LANGUAGES[language].label}</a>\`;
+    return \`<a href="${href}"${active}>${LANGUAGES[language].label}</a>\`;
   }).join('\n');
 }
 function fillTemplate(template, values) {
@@ -154,10 +154,10 @@ async function main() {
     const source = await readFile(path.join(PRODUCTS_DIR, filename), 'utf8');
     const { data: meta, body: englishBody } = parseFrontMatter(source, filename);
     const slug = String(meta.url_slug || '').trim();
-    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error(\`\${filename}: invalid or missing url_slug "\${slug}"\`);
-    if (seenSlugs.has(slug)) throw new Error(\`Duplicate product url_slug: \${slug}\`);
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error(\`${filename}: invalid or missing url_slug "${slug}"\`);
+    if (seenSlugs.has(slug)) throw new Error(\`Duplicate product url_slug: ${slug}\`);
     seenSlugs.add(slug);
-    if (!String(meta.title || '').trim() || !englishBody.trim()) throw new Error(\`\${filename}: English title and body are required\`);
+    if (!String(meta.title || '').trim() || !englishBody.trim()) throw new Error(\`${filename}: English title and body are required\`);
     products.push({ meta, slug, englishBody });
   }
 
@@ -171,32 +171,32 @@ async function main() {
       const config = LANGUAGES[language];
       const title = String(meta[config.titleKey] || '').trim();
       const body = language === 'en' ? englishBody : String(meta[config.bodyKey]).trim();
-      const route = language === 'en' ? \`/products/\${slug}/\` : \`/\${language}/products/\${slug}/\`;
-      const canonical = \`\${SITE_URL}\${route}\`;
+      const route = language === 'en' ? \`/products/${slug}/\` : \`/${language}/products/${slug}/\`;
+      const canonical = \`${SITE_URL}${route}\`;
       const description = makeDescription(meta, body);
       const image = safeImagePath(meta.image);
       const alternates = available.map((code) => {
-        const href = code === 'en' ? \`/products/\${slug}/\` : \`/\${code}/products/\${slug}/\`;
-        return \`<link rel="alternate" hreflang="\${LANGUAGES[code].htmlLang}" href="\${SITE_URL}\${href}">\`;
+        const href = code === 'en' ? \`/products/${slug}/\` : \`/${code}/products/${slug}/\`;
+        return \`<link rel="alternate" hreflang="${LANGUAGES[code].htmlLang}" href="${SITE_URL}${href}">\`;
       });
-      alternates.push(\`<link rel="alternate" hreflang="x-default" href="\${SITE_URL}/products/\${slug}/">\`);
+      alternates.push(\`<link rel="alternate" hreflang="x-default" href="${SITE_URL}/products/${slug}/">\`);
       const html = fillTemplate(template, {
         HTML_LANG: config.htmlLang, DIR: config.dir,
-        TITLE: escapeHtml(\`\${title} | AIZGZ Machinery\`),
+        TITLE: escapeHtml(\`${title} | AIZGZ Machinery\`),
         DESCRIPTION: escapeHtml(description), CANONICAL: canonical,
         ALTERNATES: alternates.join('\n  '), OG_TITLE: escapeHtml(title),
         OG_DESCRIPTION: escapeHtml(description), OG_URL: canonical,
-        OG_IMAGE: image ? \`<meta property="og:image" content="\${SITE_URL}\${escapeHtml(image)}">\` : '',
+        OG_IMAGE: image ? \`<meta property="og:image" content="${SITE_URL}${escapeHtml(image)}">\` : '',
         PRODUCT_TITLE: escapeHtml(title),
-        PRODUCT_IMAGE: image ? \`<img class="product-image" src="\${escapeHtml(image)}" alt="\${escapeHtml(title)}" loading="eager" fetchpriority="high">\` : '',
-        SUMMARY: meta.summary ? \`<p class="summary">\${escapeHtml(meta.summary)}</p>\` : '',
+        PRODUCT_IMAGE: image ? \`<img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="eager" fetchpriority="high">\` : '',
+        SUMMARY: meta.summary ? \`<p class="summary">${escapeHtml(meta.summary)}</p>\` : '',
         SPECS: renderSpecs(meta), BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
-        HOME_URL: SITE_URL, INQUIRY_URL: \`\${SITE_URL}/#contact\`,
+        HOME_URL: SITE_URL, INQUIRY_URL: \`${SITE_URL}/#contact\`,
         PRODUCT_JSON: JSON.stringify({
           '@context': 'https://schema.org', '@type': 'WebPage', name: title,
           description, url: canonical, inLanguage: config.htmlLang,
-          isPartOf: { '@type': 'WebSite', name: 'AIZGZ Machinery', url: \`\${SITE_URL}/\` }
+          isPartOf: { '@type': 'WebSite', name: 'AIZGZ Machinery', url: \`${SITE_URL}/\` }
         }).replace(/</g, '\\u003c')
       });
       const outputDir = language === 'en'
@@ -207,6 +207,6 @@ async function main() {
       pageCount += 1;
     }
   }
-  console.log(\`Generated \${pageCount} product detail pages for \${products.length} products.\`);
+  console.log(\`Generated ${pageCount} product detail pages for ${products.length} products.\`);
 }
 main().catch((error) => { console.error(error); process.exitCode = 1; });
