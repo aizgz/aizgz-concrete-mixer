@@ -1040,11 +1040,16 @@
         content.appendChild(internalCapacity);
       }
       upper.appendChild(content);
-      card.appendChild(upper);
+      const productLanguagePath = getProductDetailPath(meta, productLanguage);
+      const productContentLink = document.createElement('a');
+      productContentLink.href = productLanguagePath;
+      productContentLink.className = 'block flex-1 text-inherit no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-slate-700';
+      productContentLink.appendChild(upper);
+      card.appendChild(productContentLink);
       const actions = document.createElement('div');
       actions.className = 'mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 p-6 pt-4';
       const productPage = document.createElement('a');
-      productPage.href = getProductDetailPath(meta, productLanguage);
+      productPage.href = productLanguagePath;
       productPage.className = 'rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900';
       productPage.textContent = currentTexts().btn_details;
       const inquiry = document.createElement('a');
