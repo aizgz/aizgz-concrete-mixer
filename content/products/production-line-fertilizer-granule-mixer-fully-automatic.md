@@ -1,5 +1,6 @@
 ---
 title: Dry Mortar Mixing Plant
+url_slug: dry-mortar-mixing-plant
 title_es: "Planta de mezclado de mortero seco"
 title_ar: "محطة خلط الملاط الجاف"
 title_ru: "Завод по производству сухих строительных смесей"
