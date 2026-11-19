@@ -228,7 +228,7 @@ async function main() {
       `<li><a href="/products/${slug}/">${escapeHtml(meta.title)}</a></li>`
     ),
     '</ul></nav>'
-  ].join('\\n');
+  ].join('\n');
   const marker = '<!-- PRODUCT_DETAIL_LINKS -->';
   if (!homepage.includes(marker)) throw new Error('index.html is missing the PRODUCT_DETAIL_LINKS marker');
   await writeFile(homepagePath, homepage.replace(marker, productLinks), 'utf8');
