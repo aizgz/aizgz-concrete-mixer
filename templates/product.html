@@ -35,7 +35,7 @@
     .specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem;padding:0 2rem 1.5rem}
     .spec{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.6rem;padding:.8rem 1rem}
     .spec dt{font-size:.75rem;color:#64748b;font-weight:700}.spec dd{margin:.15rem 0 0;font-weight:600;overflow-wrap:anywhere}
-    .actions{display:flex;flex-wrap:wrap;gap:1rem;padding:0 2rem 2rem}.button{display:inline-block;background:#f59e0b;color:#0f172a;padding:.8rem 1.2rem;border-radius:.55rem;font-weight:700}
+    .actions{display:flex;flex-wrap:wrap;gap:1rem;padding:0 2rem 2rem}.button{display:inline-block;border:0;cursor:pointer;font:inherit;background:#f59e0b;color:#0f172a;padding:.8rem 1.2rem;border-radius:.55rem;font-weight:700}
     .button.secondary{background:#e2e8f0}.languages{display:flex;gap:.8rem;flex-wrap:wrap;padding:1rem 0;font-size:.875rem}.languages a[aria-current=page]{font-weight:800;color:#0f172a;text-decoration:underline}
     footer{background:#0f172a;color:#cbd5e1;padding:1.5rem 1rem;text-align:center;font-size:.85rem}
     .inquiry-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(15,23,42,.72)}.inquiry-overlay[hidden]{display:none}.inquiry-dialog{position:relative;width:min(640px,100%);max-height:90vh;overflow-y:auto;border-radius:1rem;background:#fff;padding:1.5rem;box-shadow:0 24px 80px #0005;color:#1e293b}.inquiry-dialog h2{margin:0 2.5rem 1rem 0;color:#0f172a;font-size:1.5rem}.inquiry-close{position:absolute;top:1rem;right:1rem;border:0;background:transparent;color:#64748b;font-size:1.8rem;line-height:1;cursor:pointer}.inquiry-form{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}.inquiry-field{display:flex;flex-direction:column;gap:.3rem}.inquiry-field.full{grid-column:1/-1}.inquiry-field label{font-size:.85rem;font-weight:700;color:#334155}.inquiry-field input,.inquiry-field textarea{width:100%;border:1px solid #cbd5e1;border-radius:.5rem;padding:.7rem .8rem;font:inherit;color:#0f172a;background:#fff}.inquiry-field textarea{min-height:110px;resize:vertical}.inquiry-submit{grid-column:1/-1;border:0;cursor:pointer;font:inherit}.inquiry-submit:disabled{opacity:.6;cursor:wait}.inquiry-status{grid-column:1/-1;margin:0;text-align:center;font-size:.9rem}.inquiry-status.success{color:#047857}.inquiry-status.error{color:#be123c}.inquiry-note{grid-column:1/-1;margin:0;color:#64748b;font-size:.75rem;text-align:center}html[dir=rtl] .inquiry-dialog h2{margin:0 0 1rem 2.5rem}html[dir=rtl] .inquiry-close{right:auto;left:1rem}
@@ -90,7 +90,7 @@
     let inquirySettingsPromise;
     let inquiryPreviousFocus = null;
     async function getInquirySettings() {
-      if (!inquirySettingsPromise) inquirySettingsPromise = fetch('/api/content/?collection=settings').then(r => { if(!r.ok) throw new Error('Settings unavailable'); return r.json(); }).then(data => data.settings || {});
+      if (!inquirySettingsPromise) inquirySettingsPromise = fetch('/api/content/?collection=settings').then(r => { if(!r.ok) throw new Error('Settings unavailable'); return r.json(); }).then(data => data.settings || {}).catch(error => { inquirySettingsPromise = null; throw error; });
       return inquirySettingsPromise;
     }
     function openInquiryModal(button) {
