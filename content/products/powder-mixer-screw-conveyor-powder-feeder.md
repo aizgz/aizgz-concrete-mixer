@@ -1,9 +1,9 @@
 ---
 title: Powder Mixer, Screw Conveyor and Feeder
 url_slug: powder-mixer-screw-conveyor-feeder
-title_es: "Mezcladora de polvo, transportador de tornillo y alimentador"
+title_es: "Mezcladora, transportador y alimentador de tornillo"
 title_ar: "خلاط مسحوق وناقل لولبي ومغذٍ"
-title_ru: "Смеситель порошка, шнековый конвейер и питатель"
+title_ru: "Смеситель, шнековый конвейер и питатель"
 category: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Motor

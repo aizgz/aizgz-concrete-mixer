@@ -3,7 +3,7 @@ title: Dry Mortar Mixing Plant
 url_slug: dry-mortar-mixing-plant
 title_es: "Planta de mezclado de mortero seco"
 title_ar: "محطة خلط الملاط الجاف"
-title_ru: "Завод по производству сухих строительных смесей"
+title_ru: "Завод сухих строительных смесей"
 category: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Motor

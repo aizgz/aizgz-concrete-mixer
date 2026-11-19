@@ -1,9 +1,9 @@
 ---
-title: Plate-Chain Bucket Elevator for Material Handling
+title: "Plate-Chain Bucket Elevator"
 url_slug: plate-chain-bucket-elevator
-title_es: "Elevador de cangilones con cadena de placas para manipulación de materiales"
-title_ar: "رافعة دلاء ذات سلسلة صفائحية لمناولة المواد"
-title_ru: "Ковшовый элеватор с пластинчатой цепью для транспортировки материалов"
+title_es: "Elevador de cangilones con cadena de placas"
+title_ar: "رافعة دلاء بسلسلة صفائحية"
+title_ru: "Ковшовый элеватор с пластинчатой цепью"
 category: Packing & Auxiliary Equipment
 supply_status: Available for Supply
 power_type: Electric Motor
