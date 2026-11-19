@@ -3,7 +3,7 @@ title: Dry-Mortar Packaging Machine
 url_slug: dry-mortar-packaging-machine
 title_es: "Máquina envasadora de mortero seco"
 title_ar: "آلة تعبئة الملاط الجاف"
-title_ru: "Упаковочная машина для сухих строительных смесей"
+title_ru: "Упаковочная машина для сухих смесей"
 category: Packing & Auxiliary Equipment
 supply_status: Available for Supply
 power_type: Electric Motor
