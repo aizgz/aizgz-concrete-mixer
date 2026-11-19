@@ -195,7 +195,7 @@ async function main() {
       alternates.push(`<link rel="alternate" hreflang="x-default" href="${SITE_URL}/products/${slug}/">`);
       const html = fillTemplate(template, {
         HTML_LANG: config.htmlLang, OG_LOCALE: config.ogLocale, DIR: config.dir,
-        TITLE: escapeHtml(`${title} | AIZGZ Machinery`),
+        TITLE: escapeHtml(`${title} | AIZGZ`),
         DESCRIPTION: escapeHtml(description), CANONICAL: canonical,
         ALTERNATES: alternates.join('\n  '), OG_TITLE: escapeHtml(title),
         OG_DESCRIPTION: escapeHtml(description), OG_URL: canonical,
