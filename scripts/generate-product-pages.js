@@ -76,6 +76,11 @@ function escapeHtml(value) {
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   })[char]);
 }
+function escapeXml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'
+  })[char]);
+}
 function safeImagePath(value) {
   const image = String(value || '').trim();
   return image.startsWith('/') && !image.startsWith('//') && !image.includes('..') ? image : '';
@@ -162,6 +167,7 @@ async function main() {
   }
 
   let pageCount = 0;
+  const sitemapEntries = [{ loc: `${SITE_URL}/`, alternates: [] }];
   for (const { meta, slug, englishBody } of products) {
     const available = ['en', ...['es', 'ar', 'ru'].filter((language) =>
       String(meta[LANGUAGES[language].titleKey] || '').trim() &&
@@ -173,6 +179,12 @@ async function main() {
       const body = language === 'en' ? englishBody : String(meta[config.bodyKey]).trim();
       const route = language === 'en' ? `/products/${slug}/` : `/${language}/products/${slug}/`;
       const canonical = `${SITE_URL}${route}`;
+      const sitemapAlternates = available.map((code) => ({
+        hreflang: code === 'en' ? 'en' : LANGUAGES[code].htmlLang,
+        href: `${SITE_URL}${code === 'en' ? `/products/${slug}/` : `/${code}/products/${slug}/`}`
+      }));
+      sitemapAlternates.push({ hreflang: 'x-default', href: `${SITE_URL}/products/${slug}/` });
+      sitemapEntries.push({ loc: canonical, alternates: sitemapAlternates });
       const description = makeDescription(meta, body);
       const image = safeImagePath(meta.image);
       const alternates = available.map((code) => {
@@ -207,6 +219,21 @@ async function main() {
       pageCount += 1;
     }
   }
-  console.log(`Generated ${pageCount} product detail pages for ${products.length} products.`);
+  const sitemapXml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ...sitemapEntries.map((entry) => [
+      '  <url>',
+      `    <loc>${escapeXml(entry.loc)}</loc>`,
+      ...entry.alternates.map((alternate) =>
+        `    <xhtml:link rel="alternate" hreflang="${escapeXml(alternate.hreflang)}" href="${escapeXml(alternate.href)}" />`
+      ),
+      '  </url>'
+    ].join('\n')),
+    '</urlset>',
+    ''
+  ].join('\n');
+  await writeFile(path.join(ROOT, 'sitemap.xml'), sitemapXml, 'utf8');
+  console.log(`Generated ${pageCount} product detail pages for ${products.length} products and updated sitemap.xml.`);
 }
 main().catch((error) => { console.error(error); process.exitCode = 1; });

@@ -1024,6 +1024,17 @@
       return localized || String(englishBody || '');
     }
 
+    function getProductDetailPath(meta = {}, language = 'en') {
+      const slug = String(meta.url_slug || '').trim();
+      if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return '';
+      const titleFields = { es: 'title_es', ar: 'title_ar', ru: 'title_ru' };
+      const bodyFields = { es: 'body_es', ar: 'body_ar', ru: 'body_ru' };
+      const hasTranslation = language !== 'en' &&
+        String(meta[titleFields[language]] || '').trim() &&
+        String(meta[bodyFields[language]] || '').trim();
+      return hasTranslation ? `/${language}/products/${slug}/` : `/products/${slug}/`;
+    }
+
     function renderProductCard(meta = {}, body = '') {
       const card = document.createElement('article');
       card.className = 'flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl';
@@ -1071,18 +1082,17 @@
       upper.appendChild(content);
       card.appendChild(upper);
       const actions = document.createElement('div');
-      actions.className = 'mt-4 flex items-center justify-between gap-2 border-t border-slate-100 p-6 pt-4';
-      const details = document.createElement('button');
-      details.type = 'button';
-      details.className = 'rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900';
-      details.textContent = currentTexts().btn_details;
-      details.addEventListener('click', () => openModal(meta, body));
+      actions.className = 'mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 p-6 pt-4';
+      const productPage = document.createElement('a');
+      productPage.href = getProductDetailPath(meta, productLanguage);
+      productPage.className = 'rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900';
+      productPage.textContent = currentTexts().btn_details;
       const inquiry = document.createElement('a');
       inquiry.href = '#contact';
       inquiry.className = 'rounded bg-amber-500 px-4 py-2 text-xs font-bold text-slate-900 hover:bg-amber-600';
       inquiry.textContent = currentTexts().btn_inquire + ' →';
       inquiry.addEventListener('click', () => fillInquiryModel(meta.title || meta.model || 'Product Inquiry'));
-      actions.append(details, inquiry);
+      actions.append(productPage, inquiry);
       card.appendChild(actions);
       return card;
     }
