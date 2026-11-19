@@ -57,13 +57,13 @@ function parseFrontMatter(source, filename) {
       data[key] = block.join(raw.startsWith('>') ? ' ' : '\n').trim();
       continue;
     }
-    if (!raw && i + 1 < lines.length && /^\s+/.test(lines[i + 1])) {
-      const continuation = [];
+    if (i + 1 < lines.length && /^\s+/.test(lines[i + 1])) {
+      const continuation = [raw];
       while (i + 1 < lines.length && /^\s+/.test(lines[i + 1])) {
         i += 1;
         continuation.push(lines[i].trim());
       }
-      data[key] = continuation.join(' ');
+      data[key] = parseScalar(continuation.filter(Boolean).join(' '));
       continue;
     }
     data[key] = parseScalar(raw);
