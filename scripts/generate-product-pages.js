@@ -130,8 +130,9 @@ function plainText(markdown) {
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/[#>*_~-]/g, ' ').replace(/\s+/g, ' ').trim();
 }
-function makeDescription(meta, body) {
-  const source = meta.summary || plainText(body);
+function makeDescription(meta, body, language) {
+  const summaryKey = language === 'en' ? 'summary' : `summary_${language}`;
+  const source = meta[summaryKey] || plainText(body);
   return source ? (source.length > 160 ? `${source.slice(0, 157).trimEnd()}...` : source)
     : 'Product details, specifications and configuration options from AIZGZ Machinery.';
 }
@@ -185,7 +186,7 @@ async function main() {
       }));
       sitemapAlternates.push({ hreflang: 'x-default', href: `${SITE_URL}/products/${slug}/` });
       sitemapEntries.push({ loc: canonical, alternates: sitemapAlternates });
-      const description = makeDescription(meta, body);
+      const description = makeDescription(meta, body, language);
       const image = safeImagePath(meta.image);
       const alternates = available.map((code) => {
         const href = code === 'en' ? `/products/${slug}/` : `/${code}/products/${slug}/`;
