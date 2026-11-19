@@ -220,6 +220,19 @@ async function main() {
       pageCount += 1;
     }
   }
+  const homepagePath = path.join(ROOT, 'index.html');
+  const homepage = await readFile(homepagePath, 'utf8');
+  const productLinks = [
+    '<nav aria-label="Product detail pages"><ul>',
+    ...products.map(({ meta, slug }) =>
+      `<li><a href="/products/${slug}/">${escapeHtml(meta.title)}</a></li>`
+    ),
+    '</ul></nav>'
+  ].join('\n');
+  const marker = '<!-- PRODUCT_DETAIL_LINKS -->';
+  if (!homepage.includes(marker)) throw new Error('index.html is missing the PRODUCT_DETAIL_LINKS marker');
+  await writeFile(homepagePath, homepage.replace(marker, productLinks), 'utf8');
+
   const sitemapXml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
