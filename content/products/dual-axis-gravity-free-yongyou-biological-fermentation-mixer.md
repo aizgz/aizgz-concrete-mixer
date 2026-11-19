@@ -1,9 +1,9 @@
 ---
-title: Dual-Shaft Gravity-Free Mixer for Powder and Feed Materials
+title: "Dual-Shaft Gravity-Free Mixer"
 url_slug: dual-shaft-gravity-free-mixer
-title_es: "Mezcladora de doble eje sin gravedad para materiales en polvo y piensos"
-title_ar: "خلاط مزدوج المحور بدون جاذبية للمواد المسحوقة والأعلاف"
-title_ru: "Двухвальный безгравитационный смеситель для порошковых материалов и кормов"
+title_es: "Mezcladora sin gravedad de doble eje"
+title_ar: "خلاط مزدوج المحور للمساحيق"
+title_ru: "Двухвальный безгравитационный смеситель"
 category: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Motor
