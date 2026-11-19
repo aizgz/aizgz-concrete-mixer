@@ -10,5 +10,6 @@
     "api/content.js": {
       "includeFiles": "content/**"
     }
-  }
+  },
+  "outputDirectory": "."
 }

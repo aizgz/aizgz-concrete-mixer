@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}" dir="{{DIR}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="{{CANONICAL}}">
+  {{ALTERNATES}}
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="AIZGZ Machinery">
+  <meta property="og:title" content="{{OG_TITLE}}">
+  <meta property="og:description" content="{{OG_DESCRIPTION}}">
+  <meta property="og:url" content="{{OG_URL}}">
+  <meta property="og:locale" content="{{OG_LOCALE}}">
+  {{OG_IMAGE}}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{OG_TITLE}}">
+  <meta name="twitter:description" content="{{OG_DESCRIPTION}}">
+  <meta name="theme-color" content="#0f172a">
+  <script type="application/ld+json">{{PRODUCT_JSON}}</script>
+  <style>
+    :root{color-scheme:light;font-family:Arial,Helvetica,sans-serif;color:#1e293b;background:#f8fafc}
+    *{box-sizing:border-box}body{margin:0;line-height:1.65}a{color:#92400e;text-decoration:none}a:hover{text-decoration:underline}
+    .site-header{background:#0f172a;color:#fff;padding:1rem 1.25rem}.header-inner,.container{width:min(1100px,100% - 2rem);margin:auto}
+    .brand{color:#f59e0b;font-weight:800;font-size:1.25rem;letter-spacing:.04em}.brand span{color:#fff;font-size:.7rem;margin-inline-start:.5rem}
+    main{padding:2rem 0 4rem}.breadcrumb{font-size:.875rem;color:#64748b;margin:0 0 1.5rem}
+    .product{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;overflow:hidden;box-shadow:0 8px 30px #0f172a0d}
+    .product-head{padding:2rem 2rem 1rem}.product h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.2;color:#0f172a;margin:0}
+    .summary{font-size:1.05rem;color:#475569;max-width:75ch}.product-image{display:block;width:100%;max-height:520px;object-fit:contain;background:#f1f5f9}
+    .content{padding:1.5rem 2rem 2rem}.content h2,.content h3,.content h4{color:#0f172a;line-height:1.3;margin:1.6em 0 .55em}
+    .content p{margin:.8em 0}.content ul{padding-inline-start:1.5rem}.content li{margin:.35em 0}
+    .content code{background:#f1f5f9;padding:.12em .3em;border-radius:.25rem}.content a{text-decoration:underline}
+    .specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem;padding:0 2rem 1.5rem}
+    .spec{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.6rem;padding:.8rem 1rem}
+    .spec dt{font-size:.75rem;color:#64748b;font-weight:700}.spec dd{margin:.15rem 0 0;font-weight:600;overflow-wrap:anywhere}
+    .actions{display:flex;flex-wrap:wrap;gap:1rem;padding:0 2rem 2rem}.button{display:inline-block;background:#f59e0b;color:#0f172a;padding:.8rem 1.2rem;border-radius:.55rem;font-weight:700}
+    .button.secondary{background:#e2e8f0}.languages{display:flex;gap:.8rem;flex-wrap:wrap;padding:1rem 0;font-size:.875rem}.languages a[aria-current=page]{font-weight:800;color:#0f172a;text-decoration:underline}
+    footer{background:#0f172a;color:#cbd5e1;padding:1.5rem 1rem;text-align:center;font-size:.85rem}
+    html[dir=rtl] body{text-align:right}
+    @media(max-width:640px){.product-head,.content{padding:1.25rem}.specs{padding:0 1.25rem 1.25rem}.actions{padding:0 1.25rem 1.5rem}.product-image{max-height:360px}}
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="{{HOME_URL}}/">AIZGZ <span>MACHINERY</span></a></div></header>
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{HOME_URL}}/">{{HOME_LABEL}}</a> / <a href="{{HOME_URL}}/#products">{{PRODUCTS_LABEL}}</a> / <span>{{PRODUCT_TITLE}}</span></nav>
+    <article class="product">
+      <header class="product-head"><h1>{{PRODUCT_TITLE}}</h1>{{SUMMARY}}</header>
+      {{PRODUCT_IMAGE}}
+      <dl class="specs">{{SPECS}}</dl>
+      <div class="content">{{BODY}}</div>
+      <div class="actions"><a class="button" href="{{INQUIRY_URL}}">{{INQUIRY_LABEL}}</a><a class="button secondary" href="{{HOME_URL}}/#products">{{BACK_LABEL}}</a></div>
+    </article>
+    <nav class="languages" aria-label="Available languages">{{LANGUAGE_LINKS}}</nav>
+  </main>
+  <footer><a href="{{HOME_URL}}/" style="color:#fbbf24">AIZGZ Machinery</a> · {{FOOTER_NOTE}}</footer>
+</body>
+</html>
