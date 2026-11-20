@@ -729,7 +729,7 @@
     function getYouTubeVideoId(value) {
       try {
         const url = new URL(value);
-        const host = url.hostname.toLowerCase().replace(/^www\\./, '');
+        const host = url.hostname.toLowerCase().replace(/^www\./, '');
         if (!['youtube.com', 'm.youtube.com', 'youtube-nocookie.com', 'youtu.be'].includes(host)) return '';
         let videoId = '';
         if (host === 'youtu.be') {
@@ -737,7 +737,7 @@
         } else if (url.pathname === '/watch') {
           videoId = url.searchParams.get('v') || '';
         } else {
-          const match = url.pathname.match(/^\\/(?:embed|shorts|live)\\/([A-Za-z0-9_-]{11})(?:$|\\/)/);
+          const match = url.pathname.match(/^\/(?:embed|shorts|live)\/([A-Za-z0-9_-]{11})(?:$|\/)/);
           videoId = match ? match[1] : '';
         }
         return /^[A-Za-z0-9_-]{11}$/.test(videoId) ? videoId : '';
