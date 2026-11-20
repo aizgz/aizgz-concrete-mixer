@@ -726,6 +726,26 @@
       }
     }
 
+    function getYouTubeVideoId(value) {
+      try {
+        const url = new URL(value);
+        const host = url.hostname.toLowerCase().replace(/^www\\./, '');
+        if (!['youtube.com', 'm.youtube.com', 'youtube-nocookie.com', 'youtu.be'].includes(host)) return '';
+        let videoId = '';
+        if (host === 'youtu.be') {
+          videoId = url.pathname.split('/').filter(Boolean)[0] || '';
+        } else if (url.pathname === '/watch') {
+          videoId = url.searchParams.get('v') || '';
+        } else {
+          const match = url.pathname.match(/^\\/(?:embed|shorts|live)\\/([A-Za-z0-9_-]{11})(?:$|\\/)/);
+          videoId = match ? match[1] : '';
+        }
+        return /^[A-Za-z0-9_-]{11}$/.test(videoId) ? videoId : '';
+      } catch {
+        return '';
+      }
+    }
+
     function parseFrontMatter(text) {
       const source = String(text);
       const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n([\s\S]*))?$/);
@@ -1311,20 +1331,47 @@
           ? 'overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow'
           : 'overflow-hidden rounded-xl border border-slate-700 bg-slate-800 shadow';
         const imageWrap = document.createElement('div');
-        imageWrap.className = `relative h-48 overflow-hidden ${kind === 'case' ? 'bg-slate-200' : 'bg-slate-900'}`;
+        imageWrap.className = `relative overflow-hidden ${kind === 'case' ? 'h-48 bg-slate-200' : 'bg-slate-900'}`;
+        if (kind === 'video') imageWrap.style.aspectRatio = '16 / 9';
         imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover', 'card'));
         if (kind === 'video') {
-          const videoLink = document.createElement('a');
-          videoLink.href = isSafeHttpUrl(meta.video_url) ? meta.video_url : '#';
-          videoLink.target = '_blank';
-          videoLink.rel = 'noopener noreferrer';
-          videoLink.className = 'absolute inset-0 flex items-center justify-center';
-          videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
-          const icon = document.createElement('span');
-          icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
-          icon.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
-          videoLink.appendChild(icon);
-          imageWrap.appendChild(videoLink);
+          const youtubeVideoId = getYouTubeVideoId(meta.video_url);
+          if (youtubeVideoId) {
+            imageWrap.className = 'relative overflow-hidden bg-slate-950';
+            imageWrap.style.aspectRatio = '16 / 9';
+            const playButton = document.createElement('button');
+            playButton.type = 'button';
+            playButton.className = 'absolute inset-0 flex items-center justify-center';
+            playButton.setAttribute('aria-label', `Play ${meta.title || 'video'}`);
+            const icon = document.createElement('span');
+            icon.className = 'flex h-14 w-14 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl transition hover:bg-amber-400';
+            icon.innerHTML = '<svg class="h-6 w-6" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
+            playButton.appendChild(icon);
+            playButton.addEventListener('click', () => {
+              const player = document.createElement('iframe');
+              player.src = `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?autoplay=1&rel=0`;
+              player.title = meta.title || 'YouTube video player';
+              player.loading = 'lazy';
+              player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+              player.referrerPolicy = 'strict-origin-when-cross-origin';
+              player.allowFullscreen = true;
+              player.className = 'absolute inset-0 h-full w-full border-0';
+              imageWrap.replaceChildren(player);
+            }, { once: true });
+            imageWrap.appendChild(playButton);
+          } else if (isSafeHttpUrl(meta.video_url)) {
+            const videoLink = document.createElement('a');
+            videoLink.href = meta.video_url;
+            videoLink.target = '_blank';
+            videoLink.rel = 'noopener noreferrer';
+            videoLink.className = 'absolute inset-0 flex items-center justify-center';
+            videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
+            const icon = document.createElement('span');
+            icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
+            icon.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
+            videoLink.appendChild(icon);
+            imageWrap.appendChild(videoLink);
+          }
         }
         card.appendChild(imageWrap);
         const bodyEl = document.createElement('div');
