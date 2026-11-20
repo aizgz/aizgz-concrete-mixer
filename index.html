@@ -1334,44 +1334,18 @@
         imageWrap.className = `relative overflow-hidden ${kind === 'case' ? 'h-48 bg-slate-200' : 'bg-slate-900'}`;
         if (kind === 'video') imageWrap.style.aspectRatio = '16 / 9';
         imageWrap.appendChild(createImage(meta.image, meta.title || (kind === 'case' ? 'Project case' : 'Equipment video'), 'h-full w-full object-cover', 'card'));
-        if (kind === 'video') {
-          const youtubeVideoId = getYouTubeVideoId(meta.video_url);
-          if (youtubeVideoId) {
-            imageWrap.className = 'relative overflow-hidden bg-slate-950';
-            imageWrap.style.aspectRatio = '16 / 9';
-            const playButton = document.createElement('button');
-            playButton.type = 'button';
-            playButton.className = 'absolute inset-0 flex items-center justify-center';
-            playButton.setAttribute('aria-label', `Play ${meta.title || 'video'}`);
-            const icon = document.createElement('span');
-            icon.className = 'flex h-14 w-14 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl transition hover:bg-amber-400';
-            icon.innerHTML = '<svg class="h-6 w-6" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
-            playButton.appendChild(icon);
-            playButton.addEventListener('click', () => {
-              const player = document.createElement('iframe');
-              player.src = `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?autoplay=1&rel=0`;
-              player.title = meta.title || 'YouTube video player';
-              player.loading = 'lazy';
-              player.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-              player.referrerPolicy = 'strict-origin-when-cross-origin';
-              player.allowFullscreen = true;
-              player.className = 'absolute inset-0 h-full w-full border-0';
-              imageWrap.replaceChildren(player);
-            }, { once: true });
-            imageWrap.appendChild(playButton);
-          } else if (isSafeHttpUrl(meta.video_url)) {
-            const videoLink = document.createElement('a');
-            videoLink.href = meta.video_url;
-            videoLink.target = '_blank';
-            videoLink.rel = 'noopener noreferrer';
-            videoLink.className = 'absolute inset-0 flex items-center justify-center';
-            videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'}`);
-            const icon = document.createElement('span');
-            icon.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl';
-            icon.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
-            videoLink.appendChild(icon);
-            imageWrap.appendChild(videoLink);
-          }
+        if (kind === 'video' && isSafeHttpUrl(meta.video_url)) {
+          const videoLink = document.createElement('a');
+          videoLink.href = meta.video_url;
+          videoLink.target = '_blank';
+          videoLink.rel = 'noopener noreferrer';
+          videoLink.className = 'absolute inset-0 flex items-center justify-center';
+          videoLink.setAttribute('aria-label', `Watch ${meta.title || 'video'} on ${getYouTubeVideoId(meta.video_url) ? 'YouTube' : 'video platform'}`);
+          const icon = document.createElement('span');
+          icon.className = 'flex h-14 w-14 items-center justify-center rounded-full bg-amber-500 text-slate-900 shadow-xl transition hover:bg-amber-400';
+          icon.innerHTML = '<svg class="h-6 w-6" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>';
+          videoLink.appendChild(icon);
+          imageWrap.appendChild(videoLink);
         }
         card.appendChild(imageWrap);
         const bodyEl = document.createElement('div');
@@ -1380,7 +1354,7 @@
         title.className = `text-base font-bold ${kind === 'case' ? 'text-slate-800' : 'text-white'}`;
         title.textContent = meta.title || (kind === 'case' ? 'Project Case' : 'Equipment Video');
         bodyEl.appendChild(title);
-        const detail = kind === 'case' ? [meta.country, meta.date].filter(Boolean).join(' · ') : (meta.platform || 'Video');
+        const detail = kind === 'case' ? [meta.country, meta.date].filter(Boolean).join(' · ') : (getYouTubeVideoId(meta.video_url) ? 'YouTube' : (meta.platform || 'Video'));
         if (detail) {
           const p = document.createElement('p');
           p.className = `mt-2 text-xs ${kind === 'case' ? 'text-slate-600' : 'text-slate-300'}`;
@@ -1393,7 +1367,7 @@
           watch.target = '_blank';
           watch.rel = 'noopener noreferrer';
           watch.className = 'mt-3 inline-block text-xs text-amber-400 hover:underline';
-          watch.textContent = currentTexts().watch_on + ' ' + (meta.platform || 'video platform') + ' →';
+          watch.textContent = currentTexts().watch_on + ' ' + (getYouTubeVideoId(meta.video_url) ? 'YouTube' : (meta.platform || 'video platform')) + ' →';
           bodyEl.appendChild(watch);
         }
         card.appendChild(bodyEl);
