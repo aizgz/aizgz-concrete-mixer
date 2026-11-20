@@ -103,14 +103,24 @@ collections:
       - { label: "Publish Date (日期)", name: "date", widget: "date" }
       - { label: "Project Brief (项目简述)", name: "body", widget: "markdown", required: false }
 
-  # 4. 视频展厅管理 (YouTube / TikTok / B2B短视频)
+  # 4. 视频展厅管理：平台自动识别，YouTube 封面自动获取
   - name: "videos"
     label: "Video Showroom (视频展厅)"
     folder: "content/videos"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Video Title (视频名称/设备作业展示)", name: "title", widget: "string" }
-      - { label: "Platform (视频平台)", name: "platform", widget: "select", options: ["YouTube", "TikTok"] }
-      - { label: "Video Embed / Watch URL (视频播放/嵌入链接)", name: "video_url", widget: "string" }
-      - { label: "Cover Image / Thumbnail (视频封面图)", name: "image", widget: "image" }
+      - label: "Video Title (视频标题)"
+        name: "title"
+        widget: "string"
+        hint: "填写简短的英文标题，例如 Equipment Packing & Shipping。"
+      - label: "Video URL (视频链接)"
+        name: "video_url"
+        widget: "string"
+        hint: "直接粘贴 YouTube 或 TikTok 视频链接。系统会自动识别平台；YouTube 会自动获取封面。"
+      - label: "Custom Cover Image (自定义封面，可选)"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "通常不需要上传。YouTube 自动使用视频封面；只有想替换封面，或 TikTok 无法自动获取封面时，才上传图片。"
+
