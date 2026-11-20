@@ -25,7 +25,7 @@
         }
         status.textContent = 'Loading content manager…';
         const script = document.createElement('script');
-        script.src = 'https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js';
+        script.src = 'https://unpkg.com/decap-cms@3.18.0/dist/decap-cms.js';
         script.async = true;
         script.onerror = function () { status.textContent = 'The content manager could not be loaded. Please try again later.'; };
         document.body.appendChild(script);
