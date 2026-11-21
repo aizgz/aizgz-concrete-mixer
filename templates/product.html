@@ -18,6 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{OG_TITLE}}">
   <meta name="twitter:description" content="{{OG_DESCRIPTION}}">
+  {{TWITTER_IMAGE}}
   <meta name="theme-color" content="#0f172a">
   <script type="application/ld+json">{{PRODUCT_JSON}}</script>
   <style>
@@ -58,7 +59,7 @@
   </main>
   <footer><a href="{{HOME_URL}}/" style="color:#fbbf24">AIZGZ Machinery</a> · {{FOOTER_NOTE}}</footer>
   <div id="inquiry-modal" class="inquiry-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="inquiry-title" onclick="if(event.target===this) closeInquiryModal()">
-    <section class="inquiry-dialog">
+    <section class="inquiry-dialog" tabindex="-1">
       <button class="inquiry-close" type="button" onclick="closeInquiryModal()" aria-label="Close inquiry form">&times;</button>
       <h2 id="inquiry-title">Request a quotation</h2>
       <form id="product-inquiry-form" class="inquiry-form">
@@ -133,7 +134,19 @@
         button.textContent = inquiryText.submit;
       }
     });
-    document.addEventListener('keydown', (event) => { if(event.key === 'Escape' && !document.getElementById('inquiry-modal').hidden) closeInquiryModal(); });
+    document.addEventListener('keydown', (event) => {
+      const modal = document.getElementById('inquiry-modal');
+      if (modal.hidden) return;
+      if (event.key === 'Escape') { closeInquiryModal(); return; }
+      if (event.key !== 'Tab') return;
+      const focusable = [...modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+        .filter((element) => element.getClientRects().length > 0);
+      if (!focusable.length) { event.preventDefault(); modal.querySelector('.inquiry-dialog')?.focus(); return; }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !modal.contains(document.activeElement))) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || !modal.contains(document.activeElement))) { event.preventDefault(); first.focus(); }
+    });
   </script>
 </body>
 </html>
