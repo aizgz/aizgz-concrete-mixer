@@ -18,6 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{OG_TITLE}}">
   <meta name="twitter:description" content="{{OG_DESCRIPTION}}">
+  {{TWITTER_IMAGE}}
   <meta name="theme-color" content="#0f172a">
   <script type="application/ld+json">{{PRODUCT_JSON}}</script>
   <style>
@@ -38,7 +39,7 @@
     .actions{display:flex;flex-wrap:wrap;gap:1rem;padding:0 2rem 2rem}.button{display:inline-block;border:0;cursor:pointer;font:inherit;background:#f59e0b;color:#0f172a;padding:.8rem 1.2rem;border-radius:.55rem;font-weight:700}
     .button.secondary{background:#e2e8f0}.languages{display:flex;gap:.8rem;flex-wrap:wrap;padding:1rem 0;font-size:.875rem}.languages a[aria-current=page]{font-weight:800;color:#0f172a;text-decoration:underline}
     footer{background:#0f172a;color:#cbd5e1;padding:1.5rem 1rem;text-align:center;font-size:.85rem}
-    .inquiry-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(15,23,42,.72)}.inquiry-overlay[hidden]{display:none}.inquiry-dialog{position:relative;width:min(640px,100%);max-height:90vh;overflow-y:auto;border-radius:1rem;background:#fff;padding:1.5rem;box-shadow:0 24px 80px #0005;color:#1e293b}.inquiry-dialog h2{margin:0 2.5rem 1rem 0;color:#0f172a;font-size:1.5rem}.inquiry-close{position:absolute;top:1rem;right:1rem;border:0;background:transparent;color:#64748b;font-size:1.8rem;line-height:1;cursor:pointer}.inquiry-form{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}.inquiry-field{display:flex;flex-direction:column;gap:.3rem}.inquiry-field.full{grid-column:1/-1}.inquiry-field label{font-size:.85rem;font-weight:700;color:#334155}.inquiry-field input,.inquiry-field textarea{width:100%;border:1px solid #cbd5e1;border-radius:.5rem;padding:.7rem .8rem;font:inherit;color:#0f172a;background:#fff}.inquiry-field textarea{min-height:110px;resize:vertical}.inquiry-submit{grid-column:1/-1;border:0;cursor:pointer;font:inherit}.inquiry-submit:disabled{opacity:.6;cursor:wait}.inquiry-status{grid-column:1/-1;margin:0;text-align:center;font-size:.9rem}.inquiry-status.success{color:#047857}.inquiry-status.error{color:#be123c}.inquiry-note{grid-column:1/-1;margin:0;color:#64748b;font-size:.75rem;text-align:center}html[dir=rtl] .inquiry-dialog h2{margin:0 0 1rem 2.5rem}html[dir=rtl] .inquiry-close{right:auto;left:1rem}
+    .inquiry-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(15,23,42,.72)}.inquiry-overlay[hidden]{display:none}.inquiry-dialog{position:relative;width:min(640px,100%);max-height:90vh;overflow-y:auto;border-radius:1rem;background:#fff;padding:1.5rem;box-shadow:0 24px 80px #0005;color:#1e293b}.inquiry-dialog h2{margin:0 2.5rem 1rem 0;color:#0f172a;font-size:1.5rem}.inquiry-close{position:absolute;top:1rem;right:1rem;border:0;background:transparent;color:#64748b;font-size:1.8rem;line-height:1;cursor:pointer}.inquiry-form{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}.inquiry-field{display:flex;flex-direction:column;gap:.3rem}.inquiry-field.full{grid-column:1/-1}.inquiry-field label{font-size:.85rem;font-weight:700;color:#334155}.inquiry-field input,.inquiry-field textarea{width:100%;border:1px solid #cbd5e1;border-radius:.5rem;padding:.7rem .8rem;font:inherit;color:#0f172a;background:#fff}.inquiry-field textarea{min-height:110px;resize:vertical}.inquiry-submit{grid-column:1/-1;border:0;cursor:pointer;font:inherit}.inquiry-submit:disabled{opacity:.6;cursor:wait}.inquiry-status{grid-column:1/-1;margin:0;text-align:center;font-size:.9rem}.inquiry-status.success{color:#047857}.inquiry-status.error{color:#be123c}.inquiry-note{grid-column:1/-1;margin:0;color:#64748b;font-size:.75rem;text-align:center}html[dir=rtl] .inquiry-dialog h2{margin:0 0 1rem 2.5rem}html[dir=rtl] .inquiry-close{right:auto;left:1rem}.inquiry-close:focus-visible{outline:2px solid #f59e0b;outline-offset:2px}
     html[dir=rtl] body{text-align:right}
     @media(max-width:640px){.product-head,.content{padding:1.25rem}.specs{padding:0 1.25rem 1.25rem}.actions{padding:0 1.25rem 1.5rem}.product-image{max-height:360px}}
   </style>
@@ -58,7 +59,7 @@
   </main>
   <footer><a href="{{HOME_URL}}/" style="color:#fbbf24">AIZGZ Machinery</a> · {{FOOTER_NOTE}}</footer>
   <div id="inquiry-modal" class="inquiry-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="inquiry-title" onclick="if(event.target===this) closeInquiryModal()">
-    <section class="inquiry-dialog">
+    <section class="inquiry-dialog" tabindex="-1">
       <button class="inquiry-close" type="button" onclick="closeInquiryModal()" aria-label="Close inquiry form">&times;</button>
       <h2 id="inquiry-title">Request a quotation</h2>
       <form id="product-inquiry-form" class="inquiry-form">
@@ -133,7 +134,19 @@
         button.textContent = inquiryText.submit;
       }
     });
-    document.addEventListener('keydown', (event) => { if(event.key === 'Escape' && !document.getElementById('inquiry-modal').hidden) closeInquiryModal(); });
+    document.addEventListener('keydown', (event) => {
+      const modal = document.getElementById('inquiry-modal');
+      if (modal.hidden) return;
+      if (event.key === 'Escape') { closeInquiryModal(); return; }
+      if (event.key !== 'Tab') return;
+      const focusable = [...modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+        .filter((element) => element.getClientRects().length > 0);
+      if (!focusable.length) { event.preventDefault(); modal.querySelector('.inquiry-dialog')?.focus(); return; }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !modal.contains(document.activeElement))) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || !modal.contains(document.activeElement))) { event.preventDefault(); first.focus(); }
+    });
   </script>
 </body>
 </html>

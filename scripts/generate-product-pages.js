@@ -232,6 +232,7 @@ async function main() {
         ALTERNATES: alternates.join('\n  '), OG_TITLE: escapeHtml(title),
         OG_DESCRIPTION: escapeHtml(description), OG_URL: canonical,
         OG_IMAGE: image ? `<meta property="og:image" content="${SITE_URL}${escapeHtml(image)}">` : '',
+        TWITTER_IMAGE: image ? `<meta name="twitter:image" content="${SITE_URL}${escapeHtml(image)}">` : '',
         PRODUCT_TITLE: escapeHtml(title),
         PRODUCT_IMAGE: image ? `<picture class="product-picture"><source type="image/webp" srcset="${escapeHtml(image)}.webp"><img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="eager" fetchpriority="high" onerror="this.parentElement.querySelector('source').remove();this.onerror=null;"></picture>` : '',
         SUMMARY: language === 'en' && meta.summary ? `<p class="summary">${escapeHtml(meta.summary)}</p>` : '',
@@ -239,9 +240,12 @@ async function main() {
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
         HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
         PRODUCT_JSON: JSON.stringify({
-          '@context': 'https://schema.org', '@type': 'WebPage', name: title,
-          description, url: canonical, inLanguage: config.htmlLang,
-          isPartOf: { '@type': 'WebSite', name: 'AIZGZ Machinery', url: `${SITE_URL}/` }
+          '@context': 'https://schema.org', '@type': 'Product', name: title,
+          description, url: canonical, mainEntityOfPage: canonical,
+          ...(image ? { image: `${SITE_URL}${image}` } : {}),
+          ...(meta.model ? { sku: String(meta.model).trim() } : {}),
+          ...(meta.category ? { category: String(meta.category).trim() } : {}),
+          brand: { '@type': 'Brand', name: 'AIZGZ Machinery' }
         }).replace(/</g, '\\u003c')
       });
       const outputDir = language === 'en'
