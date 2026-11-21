@@ -11,7 +11,7 @@ async function read(relativePath) {
 
 function extractForm(html, id, source) {
   const forms = [...html.matchAll(/<form\b[^>]*>[\s\S]*?<\/form>/gi)];
-  const matches = forms.filter(([form]) => new RegExp('\\bid=["\\']' + id + '["\\']').test(form));
+  const matches = forms.filter(([form]) => new RegExp("\\bid=[\"']" + id + "[\"']").test(form));
   assert.equal(matches.length, 1, source + ': expected exactly one form #' + id);
   return matches[0][0];
 }
@@ -36,7 +36,7 @@ function assertRequiredFields(form, source) {
   for (const name of ['name', 'email', 'message']) {
     const field = [...form.matchAll(/<(?:input|textarea)\b[^>]*>/gi)]
       .map(([element]) => element)
-      .find((element) => new RegExp('\\bname=["\\']' + name + '["\\']').test(element));
+      .find((element) => new RegExp("\\bname=[\"']" + name + "[\"']").test(element));
     assert.ok(field, source + ': missing field ' + name);
     assert.match(field, /\brequired(?:\s|=|>)/i, source + ': field ' + name + ' must remain required');
   }
