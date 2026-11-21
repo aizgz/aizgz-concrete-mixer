@@ -250,14 +250,14 @@
             <a id="tiktok-btn" hidden href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 rounded-lg border border-slate-700 bg-black px-4 py-2 text-sm font-bold hover:bg-slate-800"><svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M19.6 7.2a6.7 6.7 0 0 1-4.1-1.4v8.1a6.2 6.2 0 1 1-5.3-6.1v3.4a2.9 2.9 0 1 0 2 2.8V2h3.3c.2 2.1 1.8 3.8 4.1 4.1v1.1Z"/></svg><span data-i18n="tiktok_profile">TikTok Profile</span></a>
           </div>
         </div>
-        <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-8 text-center text-slate-300" data-i18n="video_empty">Videos will be added when available.</div></div>
+        <div id="videos-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3" aria-live="polite" aria-busy="true"><div class="col-span-full py-8 text-center text-slate-300" data-i18n="loading_videos">Loading videos…</div></div>
       </div>
     </section>
 
     <section id="cases" class="border-t border-slate-200 bg-white px-4 py-16">
       <div class="mx-auto max-w-7xl">
         <div class="mb-12 text-center"><h2 class="mb-2 text-3xl font-bold text-slate-900" data-i18n="cases_title">Shipping & Project Cases</h2><p class="text-sm text-slate-500" data-i18n="cases_sub">Project and shipment photos, where available.</p></div>
-        <div id="cases-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3"><div class="col-span-full py-6 text-center text-slate-600" data-i18n="loading_gallery">Loading gallery…</div></div>
+        <div id="cases-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3" aria-live="polite" aria-busy="true"><div class="col-span-full py-6 text-center text-slate-600" data-i18n="loading_gallery">Loading gallery…</div></div>
       </div>
     </section>
 
@@ -496,7 +496,7 @@
     Object.keys(extraTranslations).forEach((language) => Object.assign(i18nText[language], extraTranslations[language]));
     const supplementalTranslations = {"en":{"catalog_note":"Product names are shown in the selected language alongside their original English names. Technical specifications are kept as supplied.","form_security_note":"Please do not include passwords, payment card details, or other sensitive information.","contact_email_label":"Email","whatsapp_label":"Chat on WhatsApp","case_empty":"Project and shipping cases will be added when available.","video_empty":"Videos will be added when available.","case_error":"Project cases are temporarily unavailable.","video_error":"Videos are temporarily unavailable.","watch_on":"Watch on"},"es":{"catalog_note":"Los nombres de los productos se muestran en el idioma seleccionado junto con sus nombres originales en inglés. Las especificaciones técnicas se mantienen tal como fueron proporcionadas.","form_security_note":"No incluya contraseñas, datos de tarjetas de pago ni otra información sensible.","contact_email_label":"Correo electrónico","whatsapp_label":"Chatear por WhatsApp","case_empty":"Los proyectos y envíos se añadirán cuando estén disponibles.","video_empty":"Los vídeos se añadirán cuando estén disponibles.","case_error":"Los casos de proyectos no están disponibles temporalmente.","video_error":"Los vídeos no están disponibles temporalmente.","watch_on":"Ver en"},"ar":{"catalog_note":"تُعرض أسماء المنتجات باللغة المحددة مع الاحتفاظ بأسمائها الأصلية باللغة الإنجليزية، بينما تُحافظ المواصفات الفنية على نصها الأصلي.","form_security_note":"يرجى عدم إدخال كلمات المرور أو بيانات بطاقات الدفع أو أي معلومات حساسة أخرى.","contact_email_label":"البريد الإلكتروني","whatsapp_label":"تواصل عبر واتساب","case_empty":"ستضاف المشاريع والشحنات عند توفرها.","video_empty":"ستضاف مقاطع الفيديو عند توفرها.","case_error":"حالات المشاريع غير متاحة مؤقتاً.","video_error":"مقاطع الفيديو غير متاحة مؤقتاً.","watch_on":"شاهد على"},"ru":{"catalog_note":"Названия товаров отображаются на выбранном языке с сохранением оригинальных названий на английском. Технические характеристики приводятся в исходном виде.","form_security_note":"Не указывайте пароли, данные банковских карт и другую конфиденциальную информацию.","contact_email_label":"Электронная почта","whatsapp_label":"Написать в WhatsApp","case_empty":"Информация о проектах и отгрузках появится при наличии.","video_empty":"Видео будут добавлены по мере готовности.","case_error":"Информация о проектах временно недоступна.","video_error":"Видео временно недоступны.","watch_on":"Смотреть на"}};
     Object.keys(supplementalTranslations).forEach((language) => Object.assign(i18nText[language], supplementalTranslations[language]));
-    const finalUiTranslations = {"en":{"loading_products":"Loading products…","loading_gallery":"Loading gallery…","youtube_channel":"YouTube Channel","tiktok_profile":"TikTok Profile","filter_mixing":"Mixing & Blending"},"es":{"loading_products":"Cargando productos…","loading_gallery":"Cargando galería…","youtube_channel":"Canal de YouTube","tiktok_profile":"Perfil de TikTok","filter_mixing":"Mezcla y agitación"},"ar":{"loading_products":"جارٍ تحميل المنتجات…","loading_gallery":"جارٍ تحميل المعرض…","youtube_channel":"قناة يوتيوب","tiktok_profile":"ملف TikTok","filter_mixing":"الخلط والمزج"},"ru":{"loading_products":"Загрузка товаров…","loading_gallery":"Загрузка галереи…","youtube_channel":"Канал YouTube","tiktok_profile":"Профиль TikTok","filter_mixing":"Смешивание и перемешивание"}};
+    const finalUiTranslations = {"en":{"loading_products":"Loading products…","loading_gallery":"Loading gallery…","loading_videos":"Loading videos…","youtube_channel":"YouTube Channel","tiktok_profile":"TikTok Profile","filter_mixing":"Mixing & Blending"},"es":{"loading_products":"Cargando productos…","loading_gallery":"Cargando galería…","loading_videos":"Cargando vídeos…","youtube_channel":"Canal de YouTube","tiktok_profile":"Perfil de TikTok","filter_mixing":"Mezcla y agitación"},"ar":{"loading_products":"جارٍ تحميل المنتجات…","loading_gallery":"جارٍ تحميل المعرض…","loading_videos":"جارٍ تحميل مقاطع الفيديو…","youtube_channel":"قناة يوتيوب","tiktok_profile":"ملف TikTok","filter_mixing":"الخلط والمزج"},"ru":{"loading_products":"Загрузка товаров…","loading_gallery":"Загрузка галереи…","loading_videos":"Загрузка видео…","youtube_channel":"Канал YouTube","tiktok_profile":"Профиль TikTok","filter_mixing":"Смешивание и перемешивание"}};
     Object.keys(finalUiTranslations).forEach((language) => Object.assign(i18nText[language], finalUiTranslations[language]));
     const customizationTranslations = {
       en: {custom_title:'Customized Design & Manufacturing',custom_intro:"All equipment can be customized to the buyer's requirements. We develop equipment drawings and proposed configurations around your project needs.",custom_step1_title:'1. Understand Requirements',custom_step1_desc:'Discuss materials, intended application, target capacity, site conditions and other project needs.',custom_step2_title:'2. Prepare Drawings',custom_step2_desc:"Prepare equipment drawings and a proposed configuration based on the buyer's requirements.",custom_step3_title:'3. Review & Confirm',custom_step3_desc:'Review the drawings, configuration and technical details with the buyer before production.',custom_step4_title:'4. Start Manufacturing',custom_step4_desc:'After the design and specifications are confirmed, manufacturing proceeds according to the approved requirements.',custom_note:'Final equipment configuration, dimensions, capacity and specifications are determined by the confirmed project design.',custom_cta:'Discuss Your Custom Requirements'},
@@ -1302,6 +1302,7 @@
     async function fetchContentCollection(collection, gridId, kind) {
       const grid = document.getElementById(gridId);
       if (!grid) return;
+      grid.setAttribute('aria-busy', 'true');
 
       let items = contentCollectionCache.get(collection);
       if (!items) {
@@ -1332,6 +1333,7 @@
         } catch (error) {
           console.error(`Failed to load ${collection}:`, error);
           grid.textContent = kind === 'case' ? currentTexts().case_error : currentTexts().video_error;
+          grid.setAttribute('aria-busy', 'false');
           return;
         } finally {
           if (contentCollectionRequests.get(collection) === request) {
@@ -1349,6 +1351,7 @@
         empty.className = `col-span-full py-8 text-center ${kind === 'case' ? 'text-slate-600' : 'text-slate-300'}`;
         empty.textContent = kind === 'case' ? currentTexts().case_empty : currentTexts().video_empty;
         grid.appendChild(empty);
+        grid.setAttribute('aria-busy', 'false');
         return;
       }
 
@@ -1431,6 +1434,7 @@
         fragment.appendChild(card);
       });
       grid.replaceChildren(fragment);
+      grid.setAttribute('aria-busy', 'false');
     }
 
     async function submitFormspree(event) {
