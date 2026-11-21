@@ -1194,6 +1194,7 @@
       const productLanguage = document.documentElement.lang || 'en';
       const localizedTitle = getLocalizedProductTitle(meta, productLanguage);
       title.textContent = localizedTitle;
+      if (!hasLocalizedProductTitle(meta, productLanguage)) title.lang = 'en';
       content.appendChild(title);
       if (productLanguage !== 'en' && localizedTitle !== (meta.title || '') && meta.title) {
         const originalTitle = document.createElement('p');
