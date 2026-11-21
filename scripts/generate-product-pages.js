@@ -1,6 +1,7 @@
 import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderMarkdown } from './product-markdown.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PRODUCTS_DIR = path.join(ROOT, 'content', 'products');
@@ -84,46 +85,6 @@ function escapeXml(value) {
 function safeImagePath(value) {
   const image = String(value || '').trim();
   return image.startsWith('/') && !image.startsWith('//') && !image.includes('..') ? image : '';
-}
-function renderInline(markdown) {
-  let html = escapeHtml(markdown);
-  html = html.replace(/\x60([^\x60]+)\x60/g, '<code>$1</code>');
-  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
-  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-  return html;
-}
-function renderMarkdown(markdown) {
-  const lines = String(markdown || '').replace(/\r\n/g, '\n').split('\n');
-  const output = [];
-  let paragraph = [];
-  let list = [];
-  const flushParagraph = () => {
-    if (paragraph.length) output.push(`<p>${paragraph.map(renderInline).join('<br>')}</p>`);
-    paragraph = [];
-  };
-  const flushList = () => {
-    if (list.length) output.push(`<ul>${list.map((item) => `<li>${renderInline(item)}</li>`).join('')}</ul>`);
-    list = [];
-  };
-  for (const line of lines) {
-    const heading = line.match(/^(#{1,4})\s+(.+)$/);
-    const item = line.match(/^\s*[-*+]\s+(.+)$/);
-    if (!line.trim()) { flushParagraph(); flushList(); continue; }
-    if (heading) {
-      flushParagraph(); flushList();
-      const level = Math.min(heading[1].length + 1, 6);
-      output.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
-    } else if (item) {
-      flushParagraph(); list.push(item[1]);
-    } else {
-      flushList(); paragraph.push(line.trim());
-    }
-  }
-  flushParagraph(); flushList();
-  return output.join('\n');
 }
 function plainText(markdown) {
   return String(markdown || '').replace(/!\[[^\]]*\]\([^)]+\)/g, '')
