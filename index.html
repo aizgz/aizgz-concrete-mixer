@@ -1462,6 +1462,11 @@
           headers: { Accept: 'application/json' }
         });
         if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+        // Record only a successful lead conversion, and only after analytics consent.
+        // Never include form fields or other personally identifiable information.
+        if (activeAnalyticsConsent === true && typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', { method: 'website_form' });
+        }
         status.className = 'text-center text-sm font-bold text-emerald-400';
         status.setAttribute('data-i18n', 'sent');
         status.textContent = currentTexts().sent;
