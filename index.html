@@ -1002,11 +1002,21 @@
       return localized || meta.title || 'Industrial Equipment';
     }
 
+    function hasLocalizedProductTitle(meta = {}, language = 'en') {
+      const fieldByLanguage = { es: 'title_es', ar: 'title_ar', ru: 'title_ru' };
+      return language === 'en' || Boolean(String(meta[fieldByLanguage[language]] || '').trim());
+    }
+
     function getLocalizedProductBody(meta = {}, englishBody = '', language = 'en') {
       const fieldByLanguage = { es: 'body_es', ar: 'body_ar', ru: 'body_ru' };
       const field = fieldByLanguage[language];
       const localized = field ? String(meta[field] || '').trim() : '';
       return localized || String(englishBody || '');
+    }
+
+    function hasLocalizedProductBody(meta = {}, language = 'en') {
+      const fieldByLanguage = { es: 'body_es', ar: 'body_ar', ru: 'body_ru' };
+      return language === 'en' || Boolean(String(meta[fieldByLanguage[language]] || '').trim());
     }
 
     function getProductDetailPath(meta = {}, language = 'en') {
@@ -1035,10 +1045,12 @@
       const productLanguage = document.documentElement.lang || 'en';
       const localizedTitle = getLocalizedProductTitle(meta, productLanguage);
       title.textContent = localizedTitle;
+      if (!hasLocalizedProductTitle(meta, productLanguage)) title.lang = 'en';
       content.appendChild(title);
       if (productLanguage !== 'en' && localizedTitle !== (meta.title || '') && meta.title) {
         const originalTitle = document.createElement('p');
         originalTitle.className = 'mt-1 text-xs text-slate-500';
+        originalTitle.lang = 'en';
         originalTitle.textContent = meta.title;
         content.appendChild(originalTitle);
       }
@@ -1186,6 +1198,7 @@
       if (productLanguage !== 'en' && localizedTitle !== (meta.title || '') && meta.title) {
         const originalTitle = document.createElement('p');
         originalTitle.className = 'mb-4 text-sm text-slate-500';
+        originalTitle.lang = 'en';
         originalTitle.textContent = meta.title;
         content.appendChild(originalTitle);
       }
@@ -1209,6 +1222,7 @@
       const description = document.createElement('div');
       description.className = 'prose mb-6 max-w-none text-sm text-slate-700';
       const productBody = getLocalizedProductBody(meta, body, productLanguage);
+      if (!hasLocalizedProductBody(meta, productLanguage)) description.lang = 'en';
       // Render safe plain text immediately; load Markdown tooling only after a
       // visitor opens a product detail, then upgrade the description if possible.
       description.textContent = productBody;
