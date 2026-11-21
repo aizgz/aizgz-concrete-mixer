@@ -36,6 +36,9 @@ jobs:
       - name: Run inquiry form regression checks
         run: node scripts/test-inquiry-forms.js
 
+      - name: Run content API regression checks
+        run: node scripts/test-content-api.js
+
       - name: Verify committed Tailwind CSS is up to date
         run: git diff --exit-code -- assets/tailwind.min.css
 
