@@ -40,7 +40,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Product Title - English (产品英文名称)", name: "title", widget: "string" }
-      - { label: "Product URL Slug (稳定产品网址标识)", name: "url_slug", widget: "string", required: true, hint: "Lowercase English letters, numbers and hyphens only. Keep unchanged after publication." }
+      - { label: "Product URL Slug (稳定产品网址标识)", name: "url_slug", widget: "string", required: true, pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Only lowercase English letters, numbers, and single hyphens are allowed."], hint: "Use lowercase English letters, numbers and single hyphens only. Keep unchanged after publication." }
       - { label: "Product Title - Spanish (西班牙语名称)", name: "title_es", widget: "string", required: false }
       - { label: "Product Title - Arabic (阿拉伯语名称)", name: "title_ar", widget: "string", required: false }
       - { label: "Product Title - Russian (俄语名称)", name: "title_ru", widget: "string", required: false }
