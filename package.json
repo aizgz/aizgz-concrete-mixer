@@ -5,7 +5,8 @@
     "build:css": "mkdir -p assets && tailwindcss -c ./tailwind.config.cjs -i ./styles/tailwind.css -o ./assets/tailwind.min.css --minify",
     "build:products": "node scripts/generate-product-pages.js",
     "build": "npm run build:css && npm run build:products",
-    "test:seo": "node scripts/test-seo.js"
+    "test:seo": "node scripts/test-seo.js",
+    "test:markdown": "node scripts/test-product-markdown.js"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
@@ -16,4 +17,4 @@
     "node": ">=22 <25",
     "npm": ">=10"
   }
-}
+}\n
