@@ -42,7 +42,7 @@
   }
   </script>
   <meta name="theme-color" content="#0f172a">
-  <style>html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .text-left{text-align:right}html[dir="rtl"] .text-right{text-align:left}html[dir="rtl"] #whatsapp-link{right:auto;left:1.5rem}html[dir="rtl"] #policy-modal button.absolute,html[dir="rtl"] #product-modal button.absolute{right:auto;left:1rem}</style>
+  <style>html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .text-left{text-align:right}html[dir="rtl"] .text-right{text-align:left}html[dir="rtl"] #whatsapp-link{right:auto;left:1.5rem}html[dir="rtl"] #policy-modal button.absolute,html[dir="rtl"] #product-modal button.absolute{right:auto;left:1rem}.modal-close:focus-visible{outline:2px solid #f59e0b;outline-offset:2px}</style>
   <link rel="stylesheet" href="/assets/tailwind.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 </head>
@@ -330,14 +330,14 @@
 
   <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="if(event.target===this) closeModal()">
     <div tabindex="-1" class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-6 shadow-2xl">
-      <button type="button" onclick="closeModal()" class="absolute right-4 top-4 text-2xl font-bold text-slate-400 hover:text-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500" aria-label="Close details">&times;</button>
+      <button type="button" onclick="closeModal()" class="absolute right-4 top-4 text-2xl font-bold text-slate-400 hover:text-slate-700 modal-close" aria-label="Close details">&times;</button>
       <div id="modal-content" class="pt-5"></div>
     </div>
   </div>
 
   <div id="policy-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="policy-title" onclick="if(event.target===this) closePolicyModal()">
     <div tabindex="-1" class="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-8 text-slate-800 shadow-2xl">
-      <button type="button" onclick="closePolicyModal()" class="absolute right-4 top-4 text-2xl font-bold text-slate-400 hover:text-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500" aria-label="Close policy">&times;</button>
+      <button type="button" onclick="closePolicyModal()" class="absolute right-4 top-4 text-2xl font-bold text-slate-400 hover:text-slate-700 modal-close" aria-label="Close policy">&times;</button>
       <h3 id="policy-title" class="mb-4 border-b pb-2 text-2xl font-bold text-slate-900">Policy</h3><div id="policy-body" class="space-y-4 text-sm leading-relaxed text-slate-600"></div>
     </div>
   </div>
