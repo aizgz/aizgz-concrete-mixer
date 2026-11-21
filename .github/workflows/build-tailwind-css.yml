@@ -8,9 +8,10 @@ on:
       - fix-product-grid-layout-shift
     paths:
       - "index.html"
-      - "tailwind.config.js"
+      - "tailwind.config.cjs"
       - "styles/tailwind.css"
       - "package.json"
+      - "package-lock.json"
       - ".github/workflows/build-tailwind-css.yml"
   workflow_dispatch:
 
@@ -23,15 +24,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
 
       - name: Install Tailwind CSS
-        run: npm install --no-package-lock
+        run: npm ci
 
       - name: Generate minified CSS
         run: npm run build:css

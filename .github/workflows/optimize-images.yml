@@ -10,6 +10,7 @@ on:
       - ".github/workflows/optimize-images.yml"
       - "scripts/convert_images.py"
       - "scripts/test_convert_images.py"
+      - "requirements.txt"
   pull_request:
     paths:
       - "index.html"
@@ -18,6 +19,7 @@ on:
       - ".github/workflows/optimize-images.yml"
       - "scripts/convert_images.py"
       - "scripts/test_convert_images.py"
+      - "requirements.txt"
   workflow_dispatch:
 
 permissions:
@@ -33,17 +35,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
       - name: Install image processor
-        run: python -m pip install --upgrade Pillow
+        run: python -m pip install -r requirements.txt
 
       - name: Test responsive image generation
         run: python -m unittest discover -s scripts -p 'test_*.py' -v
