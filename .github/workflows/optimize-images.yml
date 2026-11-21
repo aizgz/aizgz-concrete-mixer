@@ -10,6 +10,7 @@ on:
       - ".github/workflows/optimize-images.yml"
       - "scripts/convert_images.py"
       - "scripts/test_convert_images.py"
+      - "requirements.txt"
   pull_request:
     paths:
       - "index.html"
@@ -18,6 +19,7 @@ on:
       - ".github/workflows/optimize-images.yml"
       - "scripts/convert_images.py"
       - "scripts/test_convert_images.py"
+      - "requirements.txt"
   workflow_dispatch:
 
 permissions:
@@ -33,17 +35,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
       - name: Install image processor
-        run: python -m pip install --upgrade Pillow
+        run: python -m pip install -r requirements.txt
 
       - name: Test responsive image generation
         run: python -m unittest discover -s scripts -p 'test_*.py' -v
@@ -53,14 +55,4 @@ jobs:
 
       - name: Commit generated and cleaned image variants
         env:
-          TARGET_BRANCH: ${{ github.head_ref || github.ref_name }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A uploads
-          if git diff --cached --quiet; then
-            echo "No image variants need updating."
-            exit 0
-          fi
-          git commit -m "chore: generate responsive WebP image variants"
-          git push origin "HEAD:${TARGET_BRANCH}"
+    ¶»§q«^
