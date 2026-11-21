@@ -146,7 +146,7 @@ function renderHomepageProductCard(meta, slug) {
   const title = escapeHtml(meta.title || 'Industrial Equipment');
   const image = safeImagePath(meta.image);
   const imageHtml = image
-    ? `<img src="${escapeHtml(image)}" alt="${title}" loading="lazy" decoding="async" class="h-full w-full object-cover">`
+    ? `<picture class="block"><source type="image/webp" srcset="${escapeHtml(image)}.400.webp 400w, ${escapeHtml(image)}.800.webp 800w" sizes="(min-width: 1280px) 393px, (min-width: 1024px) calc((100vw - 96px) / 3), (min-width: 768px) calc((100vw - 64px) / 2), calc(100vw - 32px)"><img src="${escapeHtml(image)}" alt="${title}" loading="lazy" decoding="async" class="h-full w-full object-cover" onerror="this.parentElement.querySelector('source').remove();this.onerror=null;"></picture>`
     : '';
   const model = isDisplayableHomepageValue(meta.model)
     ? `<p class="mt-1 font-mono text-xs text-slate-600">Model: ${escapeHtml(meta.model)}</p>` : '';
@@ -155,7 +155,7 @@ function renderHomepageProductCard(meta, slug) {
   const internalCapacity = isDisplayableHomepageValue(meta.internal_capacity)
     ? `<p class="mt-2 text-sm text-slate-600"><strong>Internal Capacity: </strong>${escapeHtml(meta.internal_capacity)}</p>` : '';
   return [
-    '<article class="flex min-h-[30rem] flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl">',
+    '<article class="flex flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl">',
     `<a href="/products/${slug}/" class="block flex-1 text-inherit no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-slate-700">`,
     `<div class="relative h-48 overflow-hidden bg-slate-100">${imageHtml}</div>`,
     `<div class="p-6"><h3 class="text-xl font-bold text-slate-800">${title}</h3>${model}${capacity}${internalCapacity}</div>`,
@@ -233,7 +233,7 @@ async function main() {
         OG_DESCRIPTION: escapeHtml(description), OG_URL: canonical,
         OG_IMAGE: image ? `<meta property="og:image" content="${SITE_URL}${escapeHtml(image)}">` : '',
         PRODUCT_TITLE: escapeHtml(title),
-        PRODUCT_IMAGE: image ? `<img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="eager" fetchpriority="high">` : '',
+        PRODUCT_IMAGE: image ? `<picture class="product-picture"><source type="image/webp" srcset="${escapeHtml(image)}.webp"><img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="eager" fetchpriority="high" onerror="this.parentElement.querySelector('source').remove();this.onerror=null;"></picture>` : '',
         SUMMARY: language === 'en' && meta.summary ? `<p class="summary">${escapeHtml(meta.summary)}</p>` : '',
         SPECS: renderSpecs(meta), BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
