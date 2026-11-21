@@ -4,7 +4,7 @@ AIZGZ Machinery 官网代码仓库。项目由静态 HTML、Vercel Serverless Fu
 
 ## 环境要求
 
-- Node.js 22 或更高版本
+- Node.js 22、23 或 24（不自动升级到下一个主版本）
 - npm 10 或更高版本
 - Python 3.12（用于图片处理与测试）
 
