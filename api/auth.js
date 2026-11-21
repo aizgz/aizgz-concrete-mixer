@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     res.setHeader('Set-Cookie', STATE_COOKIE + '=' + state + '; Path=/api/callback; Max-Age=600; HttpOnly; Secure; SameSite=Lax');
     const authorizeUrl = new URL('https://github.com/login/oauth/authorize');
     authorizeUrl.searchParams.set('client_id', clientId);
-    authorizeUrl.searchParams.set('scope', 'repo,user');
+    authorizeUrl.searchParams.set('scope', 'public_repo read:user');
     authorizeUrl.searchParams.set('redirect_uri', redirectUri);
     authorizeUrl.searchParams.set('state', state);
     return res.redirect(302, authorizeUrl.toString());
