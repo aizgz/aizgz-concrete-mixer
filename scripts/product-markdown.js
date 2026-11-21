@@ -4,45 +4,46 @@ const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => 
 
 function safeUrl(value) {
   const raw = String(value || '').trim();
-  if (!raw || raw.startsWith('//') || /[\\u0000-\\u0020]/.test(raw)) return '';
+  if (!raw || raw.startsWith('//') || /[\u0000-\u0020]/.test(raw)) return '';
   if (/^(https?:|mailto:)/i.test(raw)) return raw;
-  if (/^(\/|#|\\?)/.test(raw) && !raw.startsWith('//')) return raw;
+  if (/^(\/|#|\?)/.test(raw) && !raw.startsWith('//')) return raw;
   return '';
 }
 
 function renderInline(source) {
   let text = escapeHtml(source);
-  const codeToken = String.fromCharCode(96);
-  const codePattern = new RegExp(codeToken + '([^' + codeToken + ']+)' + codeToken, 'g');
+  const tick = String.fromCharCode(96);
+  const codePattern = new RegExp(tick + '([^' + tick + ']+)' + tick, 'g');
   text = text.replace(codePattern, '<code>$1</code>');
-  text = text.replace(/!\\[([^\\]]*)\\]\\(([^)]+)\\)/g, (match, alt, url) => {
+  text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
     const safe = safeUrl(url);
     return safe ? '<img src="' + escapeHtml(safe) + '" alt="' + alt + '" loading="lazy">' : alt;
   });
-  text = text.replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g, (match, label, url) => {
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, label, url) => {
     const safe = safeUrl(url);
     if (!safe) return label;
     const external = /^https?:/i.test(safe);
     return '<a href="' + escapeHtml(safe) + '"' + (external ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + label + '</a>';
   });
-  text = text.replace(/\\*\\*([^*]+)\\*\\*/g, '<strong>$1</strong>');
+  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-  text = text.replace(/\\*([^*]+)\\*/g, '<em>$1</em>');
+  text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   text = text.replace(/_([^_]+)_/g, '<em>$1</em>');
   return text;
 }
 
 function isTableSeparator(line) {
-  return /^\\s*\\|?\\s*:?-{3,}:?\\s*(\\|\\s*:?-{3,}:?\\s*)+\\|?\\s*$/.test(line);
+  return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
 }
 
 export function renderMarkdown(markdown) {
-  const lines = String(markdown || '').replace(/\\r\\n?/g, '\\n').split('\\n');
+  const lines = String(markdown || '').replace(/\r\n?/g, '\n').split('\n');
   const html = [];
   let paragraph = [];
   let listType = '';
   let listItems = [];
   let quote = [];
+  const fence = String.fromCharCode(96).repeat(3);
 
   const flushParagraph = () => {
     if (paragraph.length) html.push('<p>' + paragraph.map(renderInline).join('<br>') + '</p>');
@@ -61,21 +62,21 @@ export function renderMarkdown(markdown) {
 
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
-    const heading = line.match(/^(#{1,5})\\s+(.+)$/);
-    const unordered = line.match(/^\\s*[-*+]\\s+(.+)$/);
-    const ordered = line.match(/^\\s*\\d+[.)]\\s+(.+)$/);
-    const quoteLine = line.match(/^\\s*>\\s?(.*)$/);
+    const heading = line.match(/^(#{1,5})\s+(.+)$/);
+    const unordered = line.match(/^\s*[-*+]\s+(.+)$/);
+    const ordered = line.match(/^\s*\d+[.)]\s+(.+)$/);
+    const quoteLine = line.match(/^\s*>\s?(.*)$/);
 
     if (!line.trim()) { flushBlocks(); continue; }
-    if (/^\\s*```/.test(line)) {
+    if (line.trimStart().startsWith(fence)) {
       flushBlocks();
       const code = [];
       index += 1;
-      while (index < lines.length && !/^\\s*```/.test(lines[index])) {
+      while (index < lines.length && !lines[index].trimStart().startsWith(fence)) {
         code.push(lines[index]);
         index += 1;
       }
-      html.push('<pre><code>' + escapeHtml(code.join('\\n')) + '</code></pre>');
+      html.push('<pre><code>' + escapeHtml(code.join('\n')) + '</code></pre>');
       continue;
     }
     if (heading) {
@@ -99,7 +100,7 @@ export function renderMarkdown(markdown) {
     }
     if (line.includes('|') && index + 1 < lines.length && isTableSeparator(lines[index + 1])) {
       flushBlocks();
-      const cells = (value) => value.trim().replace(/^\\||\\|$/g, '').split('|').map((cell) => cell.trim());
+      const cells = (value) => value.trim().replace(/^\||\|$/g, '').split('|').map((cell) => cell.trim());
       const headers = cells(line);
       index += 2;
       const rows = [];
@@ -113,7 +114,7 @@ export function renderMarkdown(markdown) {
         '</tbody></table>');
       continue;
     }
-    if (/^\\s*(---+|\\*\\*\\*|___)\\s*$/.test(line)) {
+    if (/^\s*(---+|\*\*\*|___)\s*$/.test(line)) {
       flushBlocks();
       html.push('<hr>');
       continue;
@@ -122,5 +123,5 @@ export function renderMarkdown(markdown) {
     paragraph.push(line.trim());
   }
   flushBlocks();
-  return html.join('\\n');
+  return html.join('\n');
 }
