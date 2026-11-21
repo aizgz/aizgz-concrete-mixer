@@ -1150,31 +1150,16 @@
       return (valueTranslations[language] && valueTranslations[language][normalized]) || value;
     }
 
-    const productMarkdownScriptPromises = new Map();
-
-    function loadProductMarkdownScript(src, globalName) {
-      if (window[globalName]) return Promise.resolve();
-      if (productMarkdownScriptPromises.has(src)) return productMarkdownScriptPromises.get(src);
-      const promise = new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-        script.onload = () => window[globalName] ? resolve() : reject(new Error(globalName + ' did not initialize'));
-        script.onerror = () => reject(new Error('Could not load ' + globalName));
-        document.head.appendChild(script);
-      }).catch((error) => {
-        productMarkdownScriptPromises.delete(src);
-        throw error;
-      });
-      productMarkdownScriptPromises.set(src, promise);
-      return promise;
-    }
+    let productMarkdownModulePromise;
 
     function loadProductMarkdownLibraries() {
-      return Promise.all([
-        loadProductMarkdownScript('https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js', 'marked'),
-        loadProductMarkdownScript('https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js', 'DOMPurify')
-      ]);
+      if (!productMarkdownModulePromise) {
+        productMarkdownModulePromise = import('/scripts/product-markdown.js').catch((error) => {
+          productMarkdownModulePromise = null;
+          throw error;
+        });
+      }
+      return productMarkdownModulePromise;
     }
 
     function openModal(meta, body) {
@@ -1231,14 +1216,9 @@
       description.textContent = productBody;
       content.appendChild(description);
       const modalContext = currentProductModal;
-      loadProductMarkdownLibraries().then(() => {
+      loadProductMarkdownLibraries().then((markdownModule) => {
         if (currentProductModal !== modalContext) return;
-        const renderedMarkdown = window.marked.parse(productBody);
-        description.innerHTML = window.DOMPurify.sanitize(renderedMarkdown, {
-          USE_PROFILES: { html: true },
-          FORBID_TAGS: ['style', 'iframe', 'object', 'embed'],
-          FORBID_ATTR: ['style']
-        });
+        description.innerHTML = markdownModule.renderMarkdown(productBody);
       }).catch((error) => {
         console.warn('Markdown detail rendering unavailable; keeping safe plain text.', error);
       });
