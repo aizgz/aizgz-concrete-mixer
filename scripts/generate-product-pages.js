@@ -241,12 +241,11 @@ async function main() {
         HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
         PRODUCT_JSON: JSON.stringify({
           '@context': 'https://schema.org', '@type': 'Product', name: title,
-          description, url: canonical, inLanguage: config.htmlLang,
+          description, url: canonical, mainEntityOfPage: canonical,
           ...(image ? { image: `${SITE_URL}${image}` } : {}),
           ...(meta.model ? { sku: String(meta.model).trim() } : {}),
           ...(meta.category ? { category: String(meta.category).trim() } : {}),
-          brand: { '@type': 'Brand', name: 'AIZGZ Machinery' },
-          isPartOf: { '@type': 'WebSite', name: 'AIZGZ Machinery', url: `${SITE_URL}/` }
+          brand: { '@type': 'Brand', name: 'AIZGZ Machinery' }
         }).replace(/</g, '\\u003c')
       });
       const outputDir = language === 'en'
