@@ -42,7 +42,7 @@
   }
   </script>
   <meta name="theme-color" content="#0f172a">
-  <style>html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .text-left{text-align:right}html[dir="rtl"] .text-right{text-align:left}html[dir="rtl"] #whatsapp-link{right:auto;left:1.5rem}html[dir="rtl"] #policy-modal button.absolute,html[dir="rtl"] #product-modal button.absolute{right:auto;left:1rem}.modal-close:focus-visible{outline:2px solid #f59e0b;outline-offset:2px}</style>
+  <style>html[dir="rtl"] body{direction:rtl}html[dir="rtl"] .text-left{text-align:right}html[dir="rtl"] .text-right{text-align:left}html[dir="rtl"] #whatsapp-link{right:auto;left:1.5rem}html[dir="rtl"] #policy-modal button.absolute{right:auto;left:1rem}.modal-close:focus-visible{outline:2px solid #f59e0b;outline-offset:2px}</style>
   <link rel="stylesheet" href="/assets/tailwind.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 </head>
@@ -329,13 +329,6 @@
     </section>
   </main>
 
-  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="if(event.target===this) closeModal()">
-    <div tabindex="-1" class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-6 shadow-2xl">
-      <button type="button" onclick="closeModal()" class="absolute right-4 top-4 text-2xl font-bold text-slate-400 hover:text-slate-700 modal-close" aria-label="Close details">&times;</button>
-      <div id="modal-content" class="pt-5"></div>
-    </div>
-  </div>
-
   <div id="policy-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="policy-title" onclick="if(event.target===this) closePolicyModal()">
     <div tabindex="-1" class="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-8 text-slate-800 shadow-2xl">
       <button type="button" onclick="closePolicyModal()" class="absolute right-4 top-4 text-2xl font-bold text-slate-400 hover:text-slate-700 modal-close" aria-label="Close policy">&times;</button>
@@ -376,13 +369,11 @@
     let activeProductCategory = 'all';
     let activeAnalyticsConsent = null;
     let currentPolicyType = null;
-    let currentProductModal = null;
-    let productModalPreviousFocus = null;
     let policyModalPreviousFocus = null;
     let contentCollectionsStarted = false;
 
     const policiesContent = {
-      privacy: { title:'Privacy Policy', body:'<p><strong>Website operator and data contact.</strong> This website is operated by 郑州市永友机械设备有限公司 (English rendering: Zhengzhou Yongyou Machinery Equipment Co., Ltd.; AIZGZ Machinery is the trading name displayed on this website). Business address supplied by the operator: 河南省郑州市荥阳市城关乡桃李工业园 (English rendering: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). For privacy requests and questions, contact aimr@qq.com.</p><p><strong>Information collected.</strong> Inquiry submissions may include your name, email, company name, country, phone or WhatsApp number, product/model of interest, and message. Hosting and security providers may process technical request information such as IP address, browser/device type, and access time. Do not submit passwords, payment-card details, identity numbers, or other sensitive information.</p><p><strong>Use of information.</strong> We use inquiry details to respond, prepare quotations, discuss equipment requirements, coordinate potential orders, provide support, and protect the website. Optional analytics is used only after consent where required. <strong>Regional language selection.</strong> The website may use the country code supplied by the hosting platform from the visitor\'s IP connection to suggest a language. It does not request browser geolocation or precise location.</p><p><strong>Service providers.</strong> Vercel provides hosting, Formspree processes inquiry forms, Google Analytics is used only after consent, and WhatsApp is used if you choose to contact us there. The website also loads selected code libraries from jsDelivr, including a Markdown renderer and YAML parser. These providers may process technical connection data under their own terms. We do not sell personal information. Disclosures may occur where required by law or necessary to protect rights and services.</p><p><strong>International processing and retention.</strong> Information may be processed in countries where our service providers operate. We retain inquiry information only as long as reasonably needed for the inquiry, business relationship, legal obligations, and dispute resolution, then delete or anonymize it where appropriate.</p><p><strong>Your choices.</strong> Depending on applicable law, you may request access, correction, deletion, restriction, or object to certain processing, and withdraw consent. Contact us using the email displayed on this website. You can reject optional analytics using the cookie controls.</p><p><strong>Important:</strong> The company name and address above are reproduced from the information supplied by the website operator. The Chinese company name and address are shown as supplied by the operator; the English wording is provided as a translation for convenience. This notice should also be checked against the actual service-provider settings and applicable privacy laws.</p>' },
+      privacy: { title:'Privacy Policy', body:'<p><strong>Website operator and data contact.</strong> This website is operated by 郑州市永友机械设备有限公司 (English rendering: Zhengzhou Yongyou Machinery Equipment Co., Ltd.; AIZGZ Machinery is the trading name displayed on this website). Business address supplied by the operator: 河南省郑州市荥阳市城关乡桃李工业园 (English rendering: Taoli Industrial Park, Chengguan Township, Xingyang City, Zhengzhou, Henan, China). For privacy requests and questions, contact aimr@qq.com.</p><p><strong>Information collected.</strong> Inquiry submissions may include your name, email, company name, country, phone or WhatsApp number, product/model of interest, and message. Hosting and security providers may process technical request information such as IP address, browser/device type, and access time. Do not submit passwords, payment-card details, identity numbers, or other sensitive information.</p><p><strong>Use of information.</strong> We use inquiry details to respond, prepare quotations, discuss equipment requirements, coordinate potential orders, provide support, and protect the website. Optional analytics is used only after consent where required. <strong>Regional language selection.</strong> The website may use the country code supplied by the hosting platform from the visitor\'s IP connection to suggest a language. It does not request browser geolocation or precise location.</p><p><strong>Service providers.</strong> Vercel provides hosting, Formspree processes inquiry forms, Google Analytics is used only after consent, and WhatsApp is used if you choose to contact us there. The website also loads selected code libraries from jsDelivr, including a YAML parser. These providers may process technical connection data under their own terms. We do not sell personal information. Disclosures may occur where required by law or necessary to protect rights and services.</p><p><strong>International processing and retention.</strong> Information may be processed in countries where our service providers operate. We retain inquiry information only as long as reasonably needed for the inquiry, business relationship, legal obligations, and dispute resolution, then delete or anonymize it where appropriate.</p><p><strong>Your choices.</strong> Depending on applicable law, you may request access, correction, deletion, restriction, or object to certain processing, and withdraw consent. Contact us using the email displayed on this website. You can reject optional analytics using the cookie controls.</p><p><strong>Important:</strong> The company name and address above are reproduced from the information supplied by the website operator. The Chinese company name and address are shown as supplied by the operator; the English wording is provided as a translation for convenience. This notice should also be checked against the actual service-provider settings and applicable privacy laws.</p>' },
       cookies: { title:'Cookie & Analytics Notice', body:'<p>This website uses essential browser storage to remember your language choice and analytics-consent choice. Google Analytics is optional and is not loaded until you select “Accept analytics”. If you reject analytics, the site will not intentionally load the Google Analytics tag. You can change your choice using “Cookie Settings” in the footer.</p><p>Hosting and security providers may process technical information needed to deliver and protect the website. Review this notice if advertising, embedded media, or additional tracking tools are added.</p>' },
       shipping: { title:'Shipping Information', body:'<p>Shipping arrangements are confirmed individually. Transport method, packing, loading, freight cost, export documents, and estimated schedule depend on the equipment, quantity, destination, and current logistics conditions.</p><p>Applicable Incoterms, named place or port, insurance, export/import clearance, duties, taxes, unloading, and inland delivery responsibilities must be stated in the written quotation or sales contract. Do not assume these costs are included unless expressly stated.</p><p>Production and dispatch dates are estimates until confirmed in writing. Buyers should verify destination-country import requirements, permits, electrical standards, and site conditions before ordering.</p>' },
       warranty: { title:'Warranty & After-Sales Information', body:'<p>Warranty period, coverage, exclusions, start date, spare-parts arrangements, technical support, and any repair, return, or replacement process vary by product and supplier. These terms must be confirmed in the written quotation or sales contract for the specific equipment.</p><p>Request warranty terms, commissioning requirements, maintenance schedules, spare-parts lists, and support scope before ordering. This general notice does not promise a fixed warranty period or service level.</p>' },
@@ -680,7 +671,6 @@
         fetchContentCollection('cases', 'cases-grid', 'case');
         fetchContentCollection('videos', 'videos-grid', 'video');
       }
-      if (currentProductModal) openModal(currentProductModal.meta, currentProductModal.body);
       if (currentPolicyType) openPolicy(currentPolicyType);
     }
 
@@ -1007,18 +997,6 @@
       return language === 'en' || Boolean(String(meta[fieldByLanguage[language]] || '').trim());
     }
 
-    function getLocalizedProductBody(meta = {}, englishBody = '', language = 'en') {
-      const fieldByLanguage = { es: 'body_es', ar: 'body_ar', ru: 'body_ru' };
-      const field = fieldByLanguage[language];
-      const localized = field ? String(meta[field] || '').trim() : '';
-      return localized || String(englishBody || '');
-    }
-
-    function hasLocalizedProductBody(meta = {}, language = 'en') {
-      const fieldByLanguage = { es: 'body_es', ar: 'body_ar', ru: 'body_ru' };
-      return language === 'en' || Boolean(String(meta[fieldByLanguage[language]] || '').trim());
-    }
-
     function getProductDetailPath(meta = {}, language = 'en') {
       const slug = String(meta.url_slug || '').trim();
       if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return '';
@@ -1148,123 +1126,6 @@
         }
       };
       return (valueTranslations[language] && valueTranslations[language][normalized]) || value;
-    }
-
-    const productMarkdownScriptPromises = new Map();
-
-    function loadProductMarkdownScript(src, globalName) {
-      if (window[globalName]) return Promise.resolve();
-      if (productMarkdownScriptPromises.has(src)) return productMarkdownScriptPromises.get(src);
-      const promise = new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-        script.onload = () => window[globalName] ? resolve() : reject(new Error(globalName + ' did not initialize'));
-        script.onerror = () => reject(new Error('Could not load ' + globalName));
-        document.head.appendChild(script);
-      }).catch((error) => {
-        productMarkdownScriptPromises.delete(src);
-        throw error;
-      });
-      productMarkdownScriptPromises.set(src, promise);
-      return promise;
-    }
-
-    function loadProductMarkdownLibraries() {
-      return Promise.all([
-        loadProductMarkdownScript('https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js', 'marked'),
-        loadProductMarkdownScript('https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js', 'DOMPurify')
-      ]);
-    }
-
-    function openModal(meta, body) {
-      currentProductModal = { meta: meta, body: body };
-      const content = document.getElementById('modal-content');
-      content.replaceChildren();
-      const detailImage = createImage(
-        meta.image,
-        meta.title || 'Equipment details',
-        'mb-4 block w-full h-auto max-h-[70vh] rounded-lg object-contain object-center',
-        'detail'
-      );
-      
-      detailImage.style.backgroundColor = '#f8fafc'; 
-      content.appendChild(detailImage);
-      const title = document.createElement('h2');
-      title.id = 'modal-title';
-      title.className = 'mb-1 text-2xl font-bold text-slate-900';
-      const productLanguage = document.documentElement.lang || 'en';
-      const localizedTitle = getLocalizedProductTitle(meta, productLanguage);
-      title.textContent = localizedTitle;
-      if (!hasLocalizedProductTitle(meta, productLanguage)) title.lang = 'en';
-      content.appendChild(title);
-      if (productLanguage !== 'en' && localizedTitle !== (meta.title || '') && meta.title) {
-        const originalTitle = document.createElement('p');
-        originalTitle.className = 'mb-4 text-sm text-slate-500';
-        originalTitle.lang = 'en';
-        originalTitle.textContent = meta.title;
-        content.appendChild(originalTitle);
-      }
-      if (isDisplayableCatalogValue(meta.model)) {
-        const model = document.createElement('p');
-        model.className = 'mb-4 font-mono text-sm text-amber-600';
-        model.textContent = currentTexts().label_model + ': ' + meta.model;
-        content.appendChild(model);
-      }
-      const specs = document.createElement('div');
-      specs.className = 'mb-6 grid grid-cols-1 gap-3 rounded-lg bg-slate-50 p-4 text-sm sm:grid-cols-2';
-      [[currentTexts().label_capacity, meta.capacity], [currentTexts().label_internal_capacity, meta.internal_capacity], ['Voltage', meta.voltage], ['Frequency', meta.frequency], ['Motor Power', meta.motor_power], ['Packaging Range', meta.packaging_range], ['Mixing Volume', meta.mixing_volume], ['Mixing Time', meta.mixing_time], ['Application', meta.application], ['Optional Components', meta.optional_components], ['Supply Status', meta.supply_status], ['Power Type', meta.power_type], ['Manufacturer', meta.manufacturer], ['Supply Relationship', meta.supply_relationship], [currentTexts().label_category, getProductCategory(meta)]].forEach(([label, value]) => {
-        if (!isDisplayableCatalogValue(value)) return;
-        const item = document.createElement('div');
-        const strong = document.createElement('strong');
-        strong.textContent = translateSpecLabel(label) + ': ';
-        item.append(strong, document.createTextNode(String(translateSpecValue(label, value))));
-        specs.appendChild(item);
-      });
-      content.appendChild(specs);
-      const description = document.createElement('div');
-      description.className = 'prose mb-6 max-w-none text-sm text-slate-700';
-      const productBody = getLocalizedProductBody(meta, body, productLanguage);
-      if (!hasLocalizedProductBody(meta, productLanguage)) description.lang = 'en';
-      // Render safe plain text immediately; load Markdown tooling only after a
-      // visitor opens a product detail, then upgrade the description if possible.
-      description.textContent = productBody;
-      content.appendChild(description);
-      const modalContext = currentProductModal;
-      loadProductMarkdownLibraries().then(() => {
-        if (currentProductModal !== modalContext) return;
-        const renderedMarkdown = window.marked.parse(productBody);
-        description.innerHTML = window.DOMPurify.sanitize(renderedMarkdown, {
-          USE_PROFILES: { html: true },
-          FORBID_TAGS: ['style', 'iframe', 'object', 'embed'],
-          FORBID_ATTR: ['style']
-        });
-      }).catch((error) => {
-        console.warn('Markdown detail rendering unavailable; keeping safe plain text.', error);
-      });
-      const link = document.createElement('a');
-      link.href = '#contact';
-      link.className = 'block w-full rounded-lg bg-amber-500 py-3 text-center font-bold text-slate-900 hover:bg-amber-600';
-      link.textContent = currentTexts().btn_inquire_product;
-      link.addEventListener('click', () => {
-        fillInquiryModel(meta.title || meta.model || 'Product Inquiry');
-        closeModal();
-      });
-      content.appendChild(link);
-      const modal = document.getElementById('product-modal');
-      if (modal.classList.contains('hidden')) productModalPreviousFocus = document.activeElement;
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      modal.querySelector('.relative > button')?.focus();
-    }
-
-    function closeModal() {
-      currentProductModal = null;
-      const modal = document.getElementById('product-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      if (productModalPreviousFocus?.isConnected) productModalPreviousFocus.focus();
-      productModalPreviousFocus = null;
     }
 
     function openPolicy(type) {
@@ -1499,13 +1360,10 @@
     }
 
     document.addEventListener('keydown', (event) => {
-      const productDialog = document.getElementById('product-modal');
       const policyDialog = document.getElementById('policy-modal');
-      if (!productDialog.classList.contains('hidden')) trapDialogFocus(event, productDialog);
-      else if (!policyDialog.classList.contains('hidden')) trapDialogFocus(event, policyDialog);
+      if (!policyDialog.classList.contains('hidden')) trapDialogFocus(event, policyDialog);
       if (event.key === 'Escape') {
         closeMobileMenu();
-        closeModal();
         closePolicyModal();
       }
     });
