@@ -161,8 +161,8 @@ function renderHomepageProductCard(meta, slug) {
     `<div class="p-6"><h3 class="text-xl font-bold text-slate-800">${title}</h3>${model}${capacity}${internalCapacity}</div>`,
     '</a>',
     '<div class="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 p-6 pt-4">',
-    `<a href="/products/${slug}/" class="rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900">Details</a>`,
-    '<a href="#contact" class="rounded bg-amber-500 px-4 py-2 text-xs font-bold text-slate-900 hover:bg-amber-600">Inquire →</a>',
+    `<a href="/products/${slug}/" class="rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900" aria-label="Details: ${title}">Details</a>`,
+    `<a href="#contact" class="rounded bg-amber-500 px-4 py-2 text-xs font-bold text-slate-900 hover:bg-amber-600" aria-label="Inquire: ${title}">Inquire →</a>`,
     '</div>',
     '</article>'
   ].join('');
