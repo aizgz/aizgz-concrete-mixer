@@ -158,7 +158,7 @@ function renderPage(language, allContent) {
 function renderHomepageSection(content) {
   const home = content.en.home;
   const optionCards = home.options.map((_, index) => `
-          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><h3 class="font-bold text-slate-900" data-i18n="custom_option_${index + 1}">${escapeHtml(home.options[index])}</h3></div>`).join('');
+          <li class="rounded-xl border border-slate-200 bg-slate-50 p-6"><h3 class="font-bold text-slate-900" data-i18n="custom_option_${index + 1}">${escapeHtml(home.options[index])}</h3></li>`).join('');
   return `<section id="customization" class="border-b border-slate-200 bg-white px-4 py-16">
       <div class="mx-auto max-w-7xl">
         <div class="mx-auto mb-10 max-w-3xl text-center">
