@@ -62,6 +62,13 @@ for (const language of LANGUAGES) {
   assert.equal(canonical, SITE_URL + route, file + ': canonical must match its language route');
   assert.match(html, new RegExp('<html lang="' + language + '" dir="' + (language === 'ar' ? 'rtl' : 'ltr') + '">'), file + ': language and text direction must be correct');
   assert.match(html, /Machinery|Maquinaria|المعدات|оборудования/i, file + ': localized page content is required');
+  assert.match(html, /<section id="inquiry"/, file + ': an on-page inquiry section is required');
+  assert.match(html, /<form id="custom-inquiry-form"/, file + ': an on-page inquiry form is required');
+  for (const field of ['name', 'email', 'product_model', 'phone', 'message']) {
+    assert.match(html, new RegExp('<(?:input|textarea)[^>]+name="' + field + '"'), file + ': inquiry field ' + field + ' is required');
+  }
+  assert.equal((html.match(/<a class="button" href="#inquiry">/g) || []).length, 3, file + ': all three inquiry calls to action must target the on-page form');
+  assert.doesNotMatch(html, /href="\\/#contact"/, file + ': inquiry calls to action must not send visitors back to the homepage');
   const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
   assert.equal(new Set(alternates.map((item) => item.language)).size, alternates.length, file + ': hreflang values must be unique');
