@@ -1,0 +1,462 @@
+{
+  "en": {
+    "htmlLang": "en",
+    "ogLocale": "en_US",
+    "dir": "ltr",
+    "label": "English",
+    "seoTitle": "Custom Machinery Solutions | AIZGZ",
+    "seoDescription": "Explore customized machinery, equipment beyond our catalog, and complete production line solutions. AIZGZ coordinates with manufacturers based on your project requirements.",
+    "home": {
+      "title": "Custom Machinery Solutions",
+      "subtitle": "Beyond Our Product Catalog — Machinery Customized Around Your Requirements.",
+      "intro": "Our online catalog showcases selected machinery, but our sourcing and customization services are not limited to the products listed here.",
+      "detail": "We help international buyers explore machinery options and coordinate customized equipment solutions based on their production needs, technical specifications, and project requirements.",
+      "optionsTitle": "Customization Options",
+      "options": [
+        "Equipment dimensions and production capacity",
+        "Machine configurations and functions",
+        "Voltage and electrical standards",
+        "Complete production lines and layouts",
+        "Special project requirements"
+      ],
+      "note": "Looking for machinery that is not listed in our catalog? Tell us what you need. We welcome inquiries for other machinery and customized production solutions.",
+      "cta": "Explore Custom Machinery Solutions"
+    },
+    "page": {
+      "title": "Custom Machinery Solutions",
+      "subtitle": "Machinery Customized Around Your Project Requirements.",
+      "intro": "AIZGZ helps international buyers explore equipment options and coordinate customized machinery solutions based on their project requirements. Our services go beyond the products currently displayed in our online catalog.",
+      "discuss": "Discuss Your Machinery Requirements",
+      "catalogTitle": "Machinery Solutions Beyond Our Catalog",
+      "catalog": [
+        "Our online catalog features a selection of machinery. It does not represent the full scope of equipment we can help customers source and customize.",
+        "Whether you need a particular machine, modifications to an existing equipment concept, or a complete production line, you can contact us with your requirements. We will review your inquiry and coordinate with suitable manufacturers to explore possible solutions."
+      ],
+      "optionsTitle": "What Can Be Customized?",
+      "options": [
+        [
+          "Equipment Size & Production Capacity",
+          "Discuss equipment dimensions, structural requirements, processing capacity, and target production output based on your project."
+        ],
+        [
+          "Configuration & Functions",
+          "Explore different machine configurations, functional options, and technical specifications to suit your intended application."
+        ],
+        [
+          "Voltage & Electrical Standards",
+          "Discuss voltage, frequency, electrical components, and relevant electrical requirements for your destination market."
+        ],
+        [
+          "Complete Production Lines & Layouts",
+          "Coordinate equipment combinations, production processes, and proposed production line layouts based on your site and operational requirements."
+        ],
+        [
+          "Special Project Requirements",
+          "Have specific requirements that are not covered above? Tell us about your application and the features or modifications you need."
+        ]
+      ],
+      "processTitle": "From Your Requirements to a Customized Solution",
+      "steps": [
+        [
+          "Share Your Requirements",
+          "Tell us what machinery you need, what materials you process, your intended application, and your production goals."
+        ],
+        [
+          "Review & Coordinate",
+          "We review your requirements and coordinate with relevant manufacturers to explore suitable equipment configurations and customization options."
+        ],
+        [
+          "Drawings & Technical Review",
+          "Where applicable, the manufacturer can provide equipment drawings and technical proposals for your review and confirmation."
+        ],
+        [
+          "Confirm the Solution",
+          "Review and confirm the proposed design, equipment configuration, technical specifications, and commercial terms before proceeding."
+        ],
+        [
+          "Manufacturing & Delivery Coordination",
+          "After the solution and order terms are confirmed, we coordinate the manufacturing and delivery arrangements with the relevant supplier."
+        ]
+      ],
+      "notListedTitle": "Looking for Machinery Not Listed in Our Catalog?",
+      "notListedBody": "Our current product catalog is only a selection of the machinery available for inquiry. If you cannot find the equipment you need, you are still welcome to contact us. We also welcome inquiries for machinery outside our current online catalog, customized equipment, and complete production solutions.",
+      "sendInquiry": "Send Your Inquiry",
+      "closingTitle": "Let's Discuss Your Machinery Requirements",
+      "closingBody": "Have a project in mind? Start with a brief description of the machinery or production solution you are looking for. You do not need to prepare a complete technical specification before contacting us. We can discuss the details with you during the inquiry process.",
+      "contact": "Contact AIZGZ",
+      "home": "Home",
+      "products": "Products"
+    },
+    "form": {
+      "title": "Send a Machinery Inquiry",
+      "intro": "Tell us briefly what equipment or production solution you are looking for. You can share detailed specifications later.",
+      "name": "Your Name *",
+      "email": "Email Address *",
+      "equipment": "Equipment Interested In",
+      "phone": "WhatsApp / Phone",
+      "requirements": "Your Requirements *",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@company.com",
+      "equipmentPlaceholder": "Machinery or project (optional)",
+      "phonePlaceholder": "+ country code",
+      "requirementsPlaceholder": "Briefly describe the machinery, application, or production requirements.",
+      "submit": "Send Inquiry",
+      "sending": "Sending…",
+      "sent": "Thank you. Your inquiry has been sent.",
+      "sendError": "We could not send your inquiry. Please try again.",
+      "notConfigured": "The inquiry form is not available right now. Please contact us by email.",
+      "security": "Please do not include passwords, payment card details, or other sensitive information."
+    },
+    "contact": {
+      "title": "Contact Us Directly",
+      "intro": "Prefer messaging? You can reach our team through either channel.",
+      "whatsapp": "Chat with us on WhatsApp",
+      "wechat": "Add or find us on WeChat using this phone number."
+    }
+  },
+  "es": {
+    "htmlLang": "es",
+    "ogLocale": "es_ES",
+    "dir": "ltr",
+    "label": "Español",
+    "seoTitle": "Maquinaria a Medida | AIZGZ",
+    "seoDescription": "Descubra maquinaria a medida, equipos fuera de nuestro catálogo y soluciones para líneas de producción completas. AIZGZ coordina con fabricantes según su proyecto.",
+    "home": {
+      "title": "Soluciones de Maquinaria a Medida",
+      "subtitle": "Más allá de nuestro catálogo: maquinaria adaptada a sus necesidades.",
+      "intro": "Nuestro catálogo en línea presenta una selección de maquinaria, pero nuestros servicios de búsqueda y personalización no se limitan a los productos que aparecen en él.",
+      "detail": "Ayudamos a compradores internacionales a explorar opciones de maquinaria y coordinamos soluciones de equipos personalizados según sus necesidades de producción, especificaciones técnicas y requisitos del proyecto.",
+      "optionsTitle": "Opciones de personalización",
+      "options": [
+        "Dimensiones de los equipos y capacidad de producción",
+        "Configuración y funciones de las máquinas",
+        "Voltaje y normas eléctricas",
+        "Líneas de producción completas y distribución",
+        "Requisitos específicos del proyecto"
+      ],
+      "note": "¿Busca maquinaria que no aparece en nuestro catálogo? Cuéntenos qué necesita. También aceptamos consultas sobre otros tipos de maquinaria y soluciones de producción personalizadas.",
+      "cta": "Explorar soluciones de maquinaria a medida"
+    },
+    "page": {
+      "title": "Soluciones de Maquinaria a Medida",
+      "subtitle": "Maquinaria adaptada a los requisitos de su proyecto.",
+      "intro": "AIZGZ ayuda a compradores internacionales a explorar opciones de equipos y coordina soluciones de maquinaria personalizadas según los requisitos de cada proyecto. Nuestros servicios van más allá de los productos que aparecen actualmente en nuestro catálogo en línea.",
+      "discuss": "Consulte sus necesidades de maquinaria",
+      "catalogTitle": "Soluciones de maquinaria más allá de nuestro catálogo",
+      "catalog": [
+        "Nuestro catálogo en línea presenta una selección de maquinaria. No representa la totalidad de los equipos que podemos ayudarle a buscar y personalizar.",
+        "Tanto si necesita una máquina específica como modificaciones de un concepto de equipo existente o una línea de producción completa, puede ponerse en contacto con nosotros y explicarnos sus necesidades. Revisaremos su consulta y coordinaremos con fabricantes adecuados para explorar posibles soluciones."
+      ],
+      "optionsTitle": "¿Qué se puede personalizar?",
+      "options": [
+        [
+          "Dimensiones de los equipos y capacidad de producción",
+          "Consulte las dimensiones, los requisitos estructurales, la capacidad de procesamiento y la producción prevista de los equipos según su proyecto."
+        ],
+        [
+          "Configuración y funciones",
+          "Explore distintas configuraciones de máquinas, opciones funcionales y especificaciones técnicas adaptadas a la aplicación prevista."
+        ],
+        [
+          "Voltaje y normas eléctricas",
+          "Consulte el voltaje, la frecuencia, los componentes eléctricos y los requisitos eléctricos correspondientes al mercado de destino."
+        ],
+        [
+          "Líneas de producción completas y distribución",
+          "Coordinamos las combinaciones de equipos, los procesos de producción y las propuestas de distribución de líneas de producción según las instalaciones y necesidades operativas de su proyecto."
+        ],
+        [
+          "Requisitos específicos del proyecto",
+          "¿Tiene requisitos que no se mencionan anteriormente? Cuéntenos sobre su aplicación y las características o modificaciones que necesita."
+        ]
+      ],
+      "processTitle": "De sus requisitos a una solución personalizada",
+      "steps": [
+        [
+          "Comparta sus requisitos",
+          "Indíquenos qué maquinaria necesita, qué materiales procesa, cuál será su aplicación y cuáles son sus objetivos de producción."
+        ],
+        [
+          "Evaluación y coordinación",
+          "Revisamos sus requisitos y coordinamos con los fabricantes correspondientes para explorar configuraciones de equipos y opciones de personalización adecuadas."
+        ],
+        [
+          "Planos y revisión técnica",
+          "Cuando corresponda, el fabricante puede proporcionar planos de los equipos y propuestas técnicas para que usted las revise y confirme."
+        ],
+        [
+          "Confirmación de la solución",
+          "Revise y confirme el diseño propuesto, la configuración del equipo, las especificaciones técnicas y las condiciones comerciales antes de continuar."
+        ],
+        [
+          "Coordinación de fabricación y entrega",
+          "Una vez confirmados la solución y los términos del pedido, coordinamos los preparativos de fabricación y entrega con el proveedor correspondiente."
+        ]
+      ],
+      "notListedTitle": "¿Busca maquinaria que no aparece en nuestro catálogo?",
+      "notListedBody": "Nuestro catálogo actual presenta únicamente una selección de la maquinaria disponible para consulta. Si no encuentra el equipo que necesita, puede ponerse en contacto con nosotros. También aceptamos consultas sobre maquinaria que no aparece en nuestro catálogo, equipos personalizados y soluciones de producción completas.",
+      "sendInquiry": "Enviar una consulta",
+      "closingTitle": "Hablemos de sus necesidades de maquinaria",
+      "closingBody": "¿Tiene un proyecto en mente? Comience con una breve descripción de la maquinaria o solución de producción que está buscando. No necesita preparar una especificación técnica completa antes de ponerse en contacto con nosotros. Podemos conversar sobre los detalles durante el proceso de consulta.",
+      "contact": "Contactar con AIZGZ",
+      "home": "Inicio",
+      "products": "Productos"
+    },
+    "form": {
+      "title": "Envíe una consulta sobre maquinaria",
+      "intro": "Cuéntenos brevemente qué equipo o solución de producción está buscando. Puede compartir las especificaciones detalladas más adelante.",
+      "name": "Su nombre *",
+      "email": "Correo electrónico *",
+      "equipment": "Maquinaria de interés",
+      "phone": "WhatsApp / Teléfono",
+      "requirements": "Sus requisitos *",
+      "namePlaceholder": "Su nombre",
+      "emailPlaceholder": "you@company.com",
+      "equipmentPlaceholder": "Maquinaria o proyecto (opcional)",
+      "phonePlaceholder": "+ código de país",
+      "requirementsPlaceholder": "Describa brevemente la maquinaria, la aplicación o sus necesidades de producción.",
+      "submit": "Enviar consulta",
+      "sending": "Enviando…",
+      "sent": "Gracias. Su consulta se ha enviado correctamente.",
+      "sendError": "No se pudo enviar su consulta. Inténtelo de nuevo.",
+      "notConfigured": "El formulario de consulta no está disponible en este momento. Contáctenos por correo electrónico.",
+      "security": "No incluya contraseñas, datos de tarjetas de pago ni otra información sensible."
+    },
+    "contact": {
+      "title": "Contáctenos directamente",
+      "intro": "¿Prefiere enviar un mensaje? Puede comunicarse con nuestro equipo por cualquiera de estos canales.",
+      "whatsapp": "Chatee con nosotros por WhatsApp",
+      "wechat": "Busque o añada nuestro contacto en WeChat con este número."
+    }
+  },
+  "ar": {
+    "htmlLang": "ar",
+    "ogLocale": "ar_AR",
+    "dir": "rtl",
+    "label": "العربية",
+    "seoTitle": "حلول مخصصة للآلات والمعدات | AIZGZ",
+    "seoDescription": "اكتشف حلول المعدات المخصصة والآلات غير المدرجة في كتالوجنا وخطوط الإنتاج المتكاملة. تنسق AIZGZ مع المصنّعين وفقًا لمتطلبات مشروعك.",
+    "home": {
+      "title": "حلول مخصصة للآلات والمعدات",
+      "subtitle": "خيارات تتجاوز كتالوج منتجاتنا — معدات مصممة وفقًا لمتطلباتك.",
+      "intro": "يعرض كتالوجنا الإلكتروني مجموعة مختارة من المعدات، لكن خدماتنا في توفير المعدات وتنسيق تخصيصها لا تقتصر على المنتجات المعروضة فيه.",
+      "detail": "نساعد المشترين الدوليين على استكشاف خيارات المعدات وتنسيق حلول مخصصة بناءً على احتياجات الإنتاج والمواصفات الفنية ومتطلبات المشروع.",
+      "optionsTitle": "خيارات التخصيص",
+      "options": [
+        "أبعاد المعدات والطاقة الإنتاجية",
+        "تكوين الآلات ووظائفها",
+        "الجهد الكهربائي والمعايير الكهربائية",
+        "خطوط الإنتاج المتكاملة وتخطيطها",
+        "متطلبات المشروع الخاصة"
+      ],
+      "note": "هل تبحث عن معدات غير مدرجة في كتالوجنا؟ أخبرنا بما تحتاج إليه. نرحب أيضًا باستفساراتكم حول أنواع المعدات الأخرى وحلول الإنتاج المخصصة.",
+      "cta": "استكشف حلول المعدات المخصصة"
+    },
+    "page": {
+      "title": "حلول مخصصة للآلات والمعدات",
+      "subtitle": "معدات مصممة وفقًا لمتطلبات مشروعك.",
+      "intro": "تساعد AIZGZ المشترين الدوليين على استكشاف خيارات المعدات وتنسيق حلول مخصصة للآلات وفقًا لمتطلبات مشاريعهم. تتجاوز خدماتنا المنتجات المعروضة حاليًا في كتالوجنا الإلكتروني.",
+      "discuss": "ناقش احتياجاتك من المعدات",
+      "catalogTitle": "حلول للمعدات تتجاوز كتالوجنا",
+      "catalog": [
+        "يعرض كتالوجنا الإلكتروني مجموعة مختارة من المعدات، ولا يمثل النطاق الكامل للمعدات التي يمكننا مساعدتك في توفيرها وتنسيق تخصيصها.",
+        "سواء كنت بحاجة إلى آلة معينة أو تعديلات على تصميم معدات موجود أو خط إنتاج متكامل، يمكنك التواصل معنا وإبلاغنا بمتطلباتك. سنراجع استفسارك ونتعاون مع المصنّعين المناسبين لاستكشاف الحلول الممكنة."
+      ],
+      "optionsTitle": "ما الذي يمكن تخصيصه؟",
+      "options": [
+        [
+          "أبعاد المعدات والطاقة الإنتاجية",
+          "ناقش أبعاد المعدات والمتطلبات الهيكلية وقدرة المعالجة والإنتاج المستهدف وفقًا لمشروعك."
+        ],
+        [
+          "التكوين والوظائف",
+          "استكشف تكوينات مختلفة للآلات والخيارات الوظيفية والمواصفات الفنية بما يتناسب مع الاستخدام المطلوب."
+        ],
+        [
+          "الجهد الكهربائي والمعايير الكهربائية",
+          "ناقش الجهد والتردد والمكونات الكهربائية والمتطلبات الكهربائية ذات الصلة بسوق وجهة المعدات."
+        ],
+        [
+          "خطوط الإنتاج المتكاملة وتخطيطها",
+          "ننسق مجموعات المعدات وعمليات الإنتاج ومقترحات تخطيط خطوط الإنتاج وفقًا لموقعك ومتطلبات التشغيل."
+        ],
+        [
+          "متطلبات المشروع الخاصة",
+          "هل لديك متطلبات محددة غير مذكورة أعلاه؟ أخبرنا عن طبيعة استخدام المعدات والميزات أو التعديلات التي تحتاج إليها."
+        ]
+      ],
+      "processTitle": "من متطلباتك إلى حل مخصص",
+      "steps": [
+        [
+          "شاركنا متطلباتك",
+          "أخبرنا بنوع المعدات التي تحتاج إليها والمواد التي ستقوم بمعالجتها والاستخدام المقصود وأهداف الإنتاج."
+        ],
+        [
+          "المراجعة والتنسيق",
+          "نراجع متطلباتك ونتعاون مع المصنّعين المعنيين لاستكشاف تكوينات المعدات وخيارات التخصيص المناسبة."
+        ],
+        [
+          "الرسومات والمراجعة الفنية",
+          "عند الاقتضاء، يمكن للمصنّع توفير رسومات المعدات والمقترحات الفنية لمراجعتها واعتمادها من جانبك."
+        ],
+        [
+          "اعتماد الحل",
+          "راجع التصميم المقترح وتكوين المعدات والمواصفات الفنية والشروط التجارية واعتمدها قبل المتابعة."
+        ],
+        [
+          "تنسيق التصنيع والتسليم",
+          "بعد اعتماد الحل وشروط الطلب، ننسق ترتيبات التصنيع والتسليم مع المورد المعني."
+        ]
+      ],
+      "notListedTitle": "هل تبحث عن معدات غير مدرجة في كتالوجنا؟",
+      "notListedBody": "يعرض كتالوج منتجاتنا الحالي مجموعة مختارة فقط من المعدات المتاحة للاستفسار. إذا لم تجد المعدات التي تحتاج إليها، يمكنك التواصل معنا. نرحب أيضًا بالاستفسارات المتعلقة بالمعدات غير المدرجة في كتالوجنا الحالي والمعدات المخصصة وحلول الإنتاج المتكاملة.",
+      "sendInquiry": "إرسال استفسار",
+      "closingTitle": "لنتحدث عن متطلبات مشروعك",
+      "closingBody": "هل لديك مشروع قيد التخطيط؟ ابدأ بوصف موجز للمعدات أو حل الإنتاج الذي تبحث عنه. لا تحتاج إلى إعداد مواصفات فنية كاملة قبل التواصل معنا. يمكننا مناقشة التفاصيل معك خلال عملية الاستفسار.",
+      "contact": "تواصل مع AIZGZ",
+      "home": "الرئيسية",
+      "products": "المنتجات"
+    },
+    "form": {
+      "title": "أرسل استفسارك عن المعدات",
+      "intro": "أخبرنا بإيجاز عن المعدات أو حل الإنتاج الذي تبحث عنه. يمكنك إرسال المواصفات التفصيلية لاحقًا.",
+      "name": "الاسم *",
+      "email": "عنوان البريد الإلكتروني *",
+      "equipment": "المعدات المطلوبة",
+      "phone": "واتساب / الهاتف",
+      "requirements": "متطلباتك *",
+      "namePlaceholder": "اسمك",
+      "emailPlaceholder": "you@company.com",
+      "equipmentPlaceholder": "المعدات أو المشروع (اختياري)",
+      "phonePlaceholder": "+ رمز الدولة",
+      "requirementsPlaceholder": "صف بإيجاز المعدات أو الاستخدام أو متطلبات الإنتاج.",
+      "submit": "إرسال الاستفسار",
+      "sending": "جارٍ الإرسال…",
+      "sent": "شكرًا لك. تم إرسال استفسارك بنجاح.",
+      "sendError": "تعذر إرسال استفسارك. يرجى المحاولة مرة أخرى.",
+      "notConfigured": "نموذج الاستفسار غير متاح حاليًا. يرجى التواصل معنا عبر البريد الإلكتروني.",
+      "security": "يرجى عدم إدخال كلمات المرور أو بيانات بطاقات الدفع أو أي معلومات حساسة أخرى."
+    },
+    "contact": {
+      "title": "تواصل معنا مباشرة",
+      "intro": "هل تفضل المراسلة؟ يمكنك التواصل مع فريقنا عبر أي من القناتين.",
+      "whatsapp": "راسلنا عبر واتساب",
+      "wechat": "ابحث عن جهة اتصالنا أو أضفها في WeChat باستخدام رقم الهاتف هذا."
+    }
+  },
+  "ru": {
+    "htmlLang": "ru",
+    "ogLocale": "ru_RU",
+    "dir": "ltr",
+    "label": "Русский",
+    "seoTitle": "Индивидуальные решения для оборудования | AIZGZ",
+    "seoDescription": "Подбор оборудования по индивидуальным требованиям, включая технику за пределами каталога и комплексные производственные линии. AIZGZ координирует работу с производителями.",
+    "home": {
+      "title": "Индивидуальные решения для оборудования",
+      "subtitle": "Не ограничиваемся каталогом — подбираем оборудование с учетом ваших требований.",
+      "intro": "В нашем онлайн-каталоге представлена лишь часть оборудования. Наши услуги по подбору и координации индивидуальных решений не ограничиваются представленными в нем моделями.",
+      "detail": "Мы помогаем международным покупателям рассматривать варианты оборудования и координируем подбор индивидуальных решений с учетом производственных задач, технических характеристик и требований проекта.",
+      "optionsTitle": "Возможности индивидуальной настройки",
+      "options": [
+        "Размеры оборудования и производительность",
+        "Комплектация и функции машин",
+        "Напряжение и электрические стандарты",
+        "Комплектные производственные линии и планировка",
+        "Особые требования проекта"
+      ],
+      "note": "Не нашли нужное оборудование в нашем каталоге? Расскажите нам о своих потребностях. Мы также принимаем запросы на другие виды оборудования и индивидуальные производственные решения.",
+      "cta": "Ознакомиться с индивидуальными решениями"
+    },
+    "page": {
+      "title": "Индивидуальные решения для оборудования",
+      "subtitle": "Оборудование с учетом требований вашего проекта.",
+      "intro": "AIZGZ помогает международным покупателям рассматривать варианты оборудования и координирует подбор индивидуальных решений с учетом требований проекта. Наши услуги не ограничиваются продукцией, представленной в текущем онлайн-каталоге.",
+      "discuss": "Обсудить требования к оборудованию",
+      "catalogTitle": "Решения для оборудования за пределами нашего каталога",
+      "catalog": [
+        "В нашем онлайн-каталоге представлена лишь часть оборудования. Каталог не отражает весь ассортимент техники, с подбором и индивидуальной настройкой которой мы можем помочь.",
+        "Если вам нужна определенная машина, изменение существующей концепции оборудования или комплексная производственная линия, свяжитесь с нами и расскажите о своих требованиях. Мы рассмотрим ваш запрос и согласуем с подходящими производителями возможные варианты решения."
+      ],
+      "optionsTitle": "Что можно настроить индивидуально?",
+      "options": [
+        [
+          "Размеры оборудования и производительность",
+          "Обсудим габариты оборудования, конструктивные требования, производительность обработки и планируемый объем выпуска с учетом вашего проекта."
+        ],
+        [
+          "Комплектация и функции",
+          "Рассмотрим различные варианты комплектации машин, функциональные возможности и технические характеристики с учетом предполагаемого применения."
+        ],
+        [
+          "Напряжение и электрические стандарты",
+          "Обсудим напряжение, частоту, электрические компоненты и соответствующие электротехнические требования рынка назначения."
+        ],
+        [
+          "Комплектные производственные линии и планировка",
+          "Согласуем состав оборудования, производственные процессы и предварительные варианты планировки производственной линии с учетом площадки и эксплуатационных требований вашего проекта."
+        ],
+        [
+          "Особые требования проекта",
+          "У вас есть требования, не перечисленные выше? Расскажите нам о сфере применения оборудования, необходимых функциях и изменениях."
+        ]
+      ],
+      "processTitle": "От ваших требований к индивидуальному решению",
+      "steps": [
+        [
+          "Расскажите о своих требованиях",
+          "Сообщите, какое оборудование вам нужно, какие материалы вы планируете обрабатывать, для каких задач оно предназначено и какие производственные показатели вам необходимы."
+        ],
+        [
+          "Рассмотрение и координация",
+          "Мы изучим ваши требования и согласуем с соответствующими производителями подходящие варианты комплектации и индивидуальной настройки оборудования."
+        ],
+        [
+          "Чертежи и техническое рассмотрение",
+          "При необходимости производитель может предоставить чертежи оборудования и технические предложения для вашего рассмотрения и согласования."
+        ],
+        [
+          "Подтверждение решения",
+          "Перед продолжением работ рассмотрите и подтвердите предложенную конструкцию, комплектацию оборудования, технические характеристики и коммерческие условия."
+        ],
+        [
+          "Координация производства и доставки",
+          "После согласования решения и условий заказа мы координируем вопросы производства и доставки с соответствующим поставщиком."
+        ]
+      ],
+      "notListedTitle": "Ищете оборудование, которого нет в нашем каталоге?",
+      "notListedBody": "В нашем текущем каталоге представлена только часть оборудования, по которому можно направить запрос. Если вы не нашли нужную технику, свяжитесь с нами. Мы также принимаем запросы на оборудование, отсутствующее в текущем каталоге, индивидуально настраиваемую технику и комплексные производственные решения.",
+      "sendInquiry": "Отправить запрос",
+      "closingTitle": "Обсудим ваши требования к оборудованию",
+      "closingBody": "У вас есть проект? Начните с краткого описания оборудования или производственного решения, которое вы ищете. Вам не нужно заранее готовить полную техническую спецификацию. Мы сможем обсудить детали в процессе рассмотрения вашего запроса.",
+      "contact": "Связаться с AIZGZ",
+      "home": "Главная",
+      "products": "Продукция"
+    },
+    "form": {
+      "title": "Отправить запрос об оборудовании",
+      "intro": "Кратко расскажите, какое оборудование или производственное решение вы ищете. Подробные технические характеристики можно предоставить позже.",
+      "name": "Ваше имя *",
+      "email": "Адрес электронной почты *",
+      "equipment": "Интересующее оборудование",
+      "phone": "WhatsApp / телефон",
+      "requirements": "Ваши требования *",
+      "namePlaceholder": "Ваше имя",
+      "emailPlaceholder": "you@company.com",
+      "equipmentPlaceholder": "Оборудование или проект (необязательно)",
+      "phonePlaceholder": "+ код страны",
+      "requirementsPlaceholder": "Кратко опишите оборудование, область применения или производственные требования.",
+      "submit": "Отправить запрос",
+      "sending": "Отправка…",
+      "sent": "Спасибо. Ваш запрос успешно отправлен.",
+      "sendError": "Не удалось отправить запрос. Попробуйте еще раз.",
+      "notConfigured": "Форма запроса сейчас недоступна. Свяжитесь с нами по электронной почте.",
+      "security": "Не указывайте пароли, данные банковских карт и другую конфиденциальную информацию."
+    },
+    "contact": {
+      "title": "Свяжитесь с нами напрямую",
+      "intro": "Предпочитаете переписку? Вы можете связаться с нашей командой любым из этих способов.",
+      "whatsapp": "Напишите нам в WhatsApp",
+      "wechat": "Найдите или добавьте нас в WeChat по этому номеру телефона."
+    }
+  }
+}

@@ -47,7 +47,40 @@ assert.ok(homepage.includes('<link rel="canonical" href="' + SITE_URL + '/">'), 
 const pages = await collectProductPages();
 assert.ok(pages.length > 0, 'Build must generate product detail pages');
 
+
 const expectedUrls = new Set([SITE_URL + '/']);
+const customMachineryPages = [];
+for (const language of LANGUAGES) {
+  const route = language === 'en' ? '/custom-machinery-solutions/' : '/' + language + '/custom-machinery-solutions/';
+  const file = path.join(ROOT, route.replace(/^\//, ''), 'index.html');
+  const html = await readFile(file, 'utf8');
+  const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1] || '';
+  const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
+  const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
+  assert.ok(title.trim(), file + ': title is required');
+  assert.ok(description.trim(), file + ': meta description is required');
+  assert.equal(canonical, SITE_URL + route, file + ': canonical must match its language route');
+  assert.match(html, new RegExp('<html lang="' + language + '" dir="' + (language === 'ar' ? 'rtl' : 'ltr') + '">'), file + ': language and text direction must be correct');
+  assert.match(html, /Machinery|Maquinaria|المعدات|оборудования/i, file + ': localized page content is required');
+  assert.match(html, /<section id="inquiry"/, file + ': an on-page inquiry section is required');
+  assert.match(html, /<form id="custom-inquiry-form"/, file + ': an on-page inquiry form is required');
+  for (const field of ['name', 'email', 'product_model', 'phone', 'message']) {
+    assert.match(html, new RegExp('<(?:input|textarea)[^>]+name="' + field + '"'), file + ': inquiry field ' + field + ' is required');
+  }
+  assert.equal((html.match(/<a class="button" href="#inquiry">/g) || []).length, 3, file + ': all three inquiry calls to action must target the on-page form');
+  assert.ok(!html.includes('href="/#contact"'), file + ': inquiry calls to action must not send visitors back to the homepage');
+  assert.equal((html.match(/class="contact-method(?: whatsapp| wechat)?"/g) || []).length, 2, file + ': WhatsApp and WeChat contact methods are required');
+  assert.ok(html.includes('https://wa.me/8615037113544'), file + ': WhatsApp link must use the supplied contact number');
+  assert.ok(html.includes('+86 150 3711 3544'), file + ': WhatsApp and WeChat number must be displayed');
+  assert.match(html, /\.cards\{display:grid;grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/, file + ': customization cards must use the balanced desktop grid');
+  const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
+    .map((match) => ({ language: match[1], url: match[2] }));
+  assert.equal(new Set(alternates.map((item) => item.language)).size, alternates.length, file + ': hreflang values must be unique');
+  assert.ok(alternates.some((item) => item.language === language && item.url === canonical), file + ': self hreflang is required');
+  assert.ok(alternates.some((item) => item.language === 'x-default' && item.url === SITE_URL + '/custom-machinery-solutions/'), file + ': x-default alternate is required');
+  expectedUrls.add(canonical);
+  customMachineryPages.push({ language, canonical, alternates });
+}
 const productGroups = new Map();
 for (const page of pages) {
   const html = await readFile(page.file, 'utf8');
@@ -102,9 +135,25 @@ for (const [slug, group] of productGroups) {
   }
 }
 
+
+for (const { language, canonical, alternates } of customMachineryPages) {
+  const actualLanguages = new Set(alternates.filter((item) => item.language !== 'x-default').map((item) => item.language));
+  assert.deepEqual(actualLanguages, new Set(LANGUAGES), canonical + ': every custom machinery page must advertise all four languages');
+  for (const alternate of alternates) {
+    assert.ok(expectedUrls.has(alternate.url), canonical + ': hreflang target must be included in generated pages');
+  }
+  const sitemapEntry = sitemapEntries.find((entry) => entry.loc === canonical);
+  assert.ok(sitemapEntry, canonical + ': sitemap entry is required');
+  assert.deepEqual(
+    new Set(sitemapEntry.alternates.map((item) => item.language)),
+    new Set([...LANGUAGES, 'x-default']),
+    canonical + ': sitemap hreflang entries must include all custom machinery languages'
+  );
+}
+
 const robots = await readFile(path.join(ROOT, 'robots.txt'), 'utf8');
 assert.match(robots, /^User-agent:\s*\*/m, 'robots.txt must contain a global user-agent rule');
 assert.match(robots, /^Allow:\s*\//m, 'robots.txt must allow public crawling');
 assert.ok(robots.includes('Sitemap: ' + SITE_URL + '/sitemap.xml'), 'robots.txt must reference the production sitemap');
 
-console.log('SEO regression checks passed for homepage, ' + pages.length + ' product language pages, sitemap, hreflang, structured data and robots.txt.');
+console.log('SEO regression checks passed for homepage, ' + pages.length + ' product language pages, four custom machinery pages, sitemap, hreflang, structured data and robots.txt.');
