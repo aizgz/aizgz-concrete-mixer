@@ -68,7 +68,7 @@ for (const language of LANGUAGES) {
     assert.match(html, new RegExp('<(?:input|textarea)[^>]+name="' + field + '"'), file + ': inquiry field ' + field + ' is required');
   }
   assert.equal((html.match(/<a class="button" href="#inquiry">/g) || []).length, 3, file + ': all three inquiry calls to action must target the on-page form');
-  assert.doesNotMatch(html, /href="\\/#contact"/, file + ': inquiry calls to action must not send visitors back to the homepage');
+  assert.ok(!html.includes('href="/#contact"'), file + ': inquiry calls to action must not send visitors back to the homepage');
   const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
   assert.equal(new Set(alternates.map((item) => item.language)).size, alternates.length, file + ': hreflang values must be unique');
