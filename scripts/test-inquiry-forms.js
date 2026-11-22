@@ -32,6 +32,20 @@ function assertHoneypot(form, source) {
   }
 }
 
+function getVisibleFieldNames(form) {
+  return [...form.matchAll(/<(?:input|textarea)\b[^>]*>/gi)]
+    .map(([element]) => (element.match(/\bname=["']([^"']+)["']/i) || [])[1])
+    .filter((name) => name && name !== '_gotcha');
+}
+
+function assertCompactFields(form, source, expected) {
+  assert.deepEqual(getVisibleFieldNames(form), expected, source + ': visible fields or order changed');
+  assert.ok(!/name=["'](?:company|country)["']/.test(form), source + ': company/country should not be requested');
+  const product = [...form.matchAll(/<(?:input|textarea)\b[^>]*>/gi)]
+    .map(([element]) => element).find((element) => /name=["']product_model["']/.test(element));
+  if (product) assert.doesNotMatch(product, /\brequired(?:\s|=|>)/i, source + ': product selection must remain optional');
+}
+
 function assertRequiredFields(form, source) {
   for (const name of ['name', 'email', 'message']) {
     const field = [...form.matchAll(/<(?:input|textarea)\b[^>]*>/gi)]
@@ -66,6 +80,7 @@ async function collectProductPages(directory) {
 const homepage = await read('index.html');
 const homepageForm = extractForm(homepage, 'inquiry-form', 'homepage');
 assertHoneypot(homepageForm, 'homepage');
+assertCompactFields(homepageForm, 'homepage', ['name', 'email', 'product_model', 'phone', 'message']);
 assertRequiredFields(homepageForm, 'homepage');
 assert.match(homepageForm, /onsubmit=["']submitFormspree\(event\)["']/i, 'homepage: submit handler changed');
 assert.match(homepage, /new FormData\(form\)/, 'homepage: FormData submission is missing');
@@ -75,6 +90,7 @@ assert.match(homepage, /https:\/\/formspree\.io\/f\//, 'homepage: Formspree endp
 const template = await read('templates/product.html');
 const templateForm = extractForm(template, 'product-inquiry-form', 'product template');
 assertHoneypot(templateForm, 'product template');
+assertCompactFields(templateForm, 'product template', ['name', 'email', 'phone', 'product_model', 'message']);
 assertRequiredFields(templateForm, 'product template');
 assert.match(template, /addEventListener\(['"]submit['"]/, 'product template: submit listener is missing');
 assert.match(template, /new FormData\(form\)/, 'product template: FormData submission is missing');
@@ -93,6 +109,7 @@ for (const pagePath of productPages) {
   const relativePath = path.relative(root, pagePath);
   const form = extractForm(html, 'product-inquiry-form', relativePath);
   assertHoneypot(form, relativePath);
+  assertCompactFields(form, relativePath, ['name', 'email', 'phone', 'product_model', 'message']);
   assertRequiredFields(form, relativePath);
   assert.match(html, /new FormData\(form\)/, relativePath + ': FormData submission is missing');
   assert.match(html, /method:\s*'POST'/i, relativePath + ': POST submission is missing');
