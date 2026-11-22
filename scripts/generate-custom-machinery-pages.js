@@ -202,7 +202,7 @@ async function updateHomepage(content) {
   const translations = JSON.stringify(buildHomepageTranslations(content), null, 2)
     .split('\n').map((line, index) => index === 0 ? line : '      ' + line).join('\n');
   const translationBlock = `    const customizationTranslations = ${translations};`;
-  const translationPattern = /    const customizationTranslations = \{[\s\S]*?\n    \};/;
+  const translationPattern = /    const customizationTranslations = \{[\s\S]*?\};/;
   if (!translationPattern.test(homepage)) throw new Error('Homepage customization translations were not found');
   homepage = homepage.replace(translationPattern, translationBlock);
   const dirLine = `      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';`;
@@ -210,7 +210,7 @@ async function updateHomepage(content) {
     if (!homepage.includes(dirLine)) throw new Error('Language switcher direction line was not found');
     homepage = homepage.replace(dirLine, dirLine + `
       const customPageLink = document.getElementById('custom-machinery-link');
-      if (customPageLink) customPageLink.href = language === 'en' ? '/custom-machinery-solutions/' : `/${language}/custom-machinery-solutions/`;`);
+      if (customPageLink) customPageLink.href = language === 'en' ? '/custom-machinery-solutions/' : '/' + language + '/custom-machinery-solutions/';`);
   }
   await writeFile(HOMEPAGE_PATH, homepage, 'utf8');
 }
