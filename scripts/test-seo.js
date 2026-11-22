@@ -69,6 +69,10 @@ for (const language of LANGUAGES) {
   }
   assert.equal((html.match(/<a class="button" href="#inquiry">/g) || []).length, 3, file + ': all three inquiry calls to action must target the on-page form');
   assert.ok(!html.includes('href="/#contact"'), file + ': inquiry calls to action must not send visitors back to the homepage');
+  assert.equal((html.match(/class="contact-method/g) || []).length, 2, file + ': WhatsApp and WeChat contact methods are required');
+  assert.ok(html.includes('https://wa.me/8615037113544'), file + ': WhatsApp link must use the supplied contact number');
+  assert.ok(html.includes('+86 150 3711 3544'), file + ': WhatsApp and WeChat number must be displayed');
+  assert.match(html, /\.cards\{display:grid;grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/, file + ': customization cards must use the balanced desktop grid');
   const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
   assert.equal(new Set(alternates.map((item) => item.language)).size, alternates.length, file + ': hreflang values must be unique');
