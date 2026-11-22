@@ -70,6 +70,26 @@ function renderPage(language, allContent) {
           <h3>${escapeHtml(title)}</h3>
           <p>${escapeHtml(description)}</p>
         </article>`).join('');
+  const contact = locale.contact;
+  const contactMethods = `
+    <section class="contact-section" aria-labelledby="contact-methods-title">
+      <div class="contact-heading">
+        <h2 id="contact-methods-title">${escapeHtml(contact.title)}</h2>
+        <p>${escapeHtml(contact.intro)}</p>
+      </div>
+      <div class="contact-methods">
+        <a class="contact-method whatsapp" href="https://wa.me/8615037113544" target="_blank" rel="noopener noreferrer">
+          <span class="contact-label">WhatsApp</span>
+          <strong>+86 150 3711 3544</strong>
+          <span class="contact-action">${escapeHtml(contact.whatsapp)}</span>
+        </a>
+        <div class="contact-method wechat">
+          <span class="contact-label">WeChat</span>
+          <strong>+86 150 3711 3544</strong>
+          <span class="contact-action">${escapeHtml(contact.wechat)}</span>
+        </div>
+      </div>
+    </section>`;
   const steps = page.steps.map(([title, description], index) => `
         <article class="step-card">
           <span class="step-number">${String(index + 1).padStart(2, '0')}</span>
@@ -115,8 +135,18 @@ function renderPage(language, allContent) {
     .section{padding:3rem 0}.section-heading{text-align:center;margin:0 auto 1.5rem;max-width:850px}
     h2{font-size:clamp(1.6rem,3vw,2.25rem);line-height:1.25;color:#0f172a;margin:0 0 .8rem}
     .section-heading p,.copy{color:#475569;max-width:850px;margin:.6rem auto}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1rem;margin-top:1.5rem}
-    .info-card,.step-card{background:#fff;border:1px solid #e2e8f0;border-radius:.8rem;padding:1.25rem;box-shadow:0 5px 20px #0f172a08}
+    .cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.1rem;margin:1.5rem auto 0}
+    .info-card{grid-column:span 2;min-height:100%;background:#fff;border:1px solid #e2e8f0;border-radius:.9rem;padding:1.5rem;box-shadow:0 5px 20px #0f172a08}
+    .info-card:nth-child(4){grid-column:2/span 2}.info-card:nth-child(5){grid-column:4/span 2}
+    .step-card{background:#fff;border:1px solid #e2e8f0;border-radius:.8rem;padding:1.25rem;box-shadow:0 5px 20px #0f172a08}
+    .info-card h3{margin:.85rem 0 .55rem}.info-card p{line-height:1.65}
+    .contact-section{margin:1.5rem auto 0;padding:clamp(1.5rem,4vw,2.5rem);background:#fff;border:1px solid #e2e8f0;border-radius:1rem}
+    .contact-heading{text-align:center;max-width:700px;margin:0 auto 1.25rem}.contact-heading p{color:#475569;margin:.4rem auto}
+    .contact-methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;max-width:820px;margin:auto}
+    .contact-method{display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:1.25rem;border:1px solid #e2e8f0;border-radius:.8rem;background:#f8fafc;text-align:center}
+    .contact-method.whatsapp{border-color:#bbf7d0;background:#f0fdf4}
+    .contact-label{font-weight:800;color:#0f172a}.contact-method strong{font-size:1.15rem;color:#0f172a}
+    .contact-action{font-size:.88rem;color:#475569}
     .number,.step-number{display:inline-flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:50%;background:#fef3c7;color:#92400e;font-size:.8rem;font-weight:800}
     h3{font-size:1.05rem;color:#0f172a;line-height:1.35;margin:.7rem 0 .4rem}.info-card p,.step-card p{font-size:.92rem;color:#475569;margin:0}
     .steps{display:grid;gap:.9rem;max-width:900px;margin:1.5rem auto 0}.step-card{display:flex;gap:1rem;align-items:flex-start}
@@ -139,7 +169,8 @@ function renderPage(language, allContent) {
     footer{background:#0f172a;color:#cbd5e1;padding:1.5rem 1rem;text-align:center;font-size:.85rem}
     footer a{color:#fbbf24}
     html[dir="rtl"] body{text-align:right}
-    @media(max-width:640px){.header-inner{align-items:flex-start}.top-nav{width:100%;justify-content:space-between}.languages{gap:.6rem}.hero{border-radius:.6rem}.step-card{gap:.7rem}}
+    @media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.info-card,.info-card:nth-child(4),.info-card:nth-child(5){grid-column:auto}.info-card:last-child{grid-column:1/-1;max-width:calc(50% - .55rem);justify-self:center}}
+    @media(max-width:640px){.header-inner{align-items:flex-start}.top-nav{width:100%;justify-content:space-between}.languages{gap:.6rem}.hero{border-radius:.6rem}.step-card{gap:.7rem}.cards,.contact-methods{grid-template-columns:1fr}.info-card,.info-card:last-child{grid-column:1;max-width:none}.info-card{padding:1.2rem}}
   </style>
 </head>
 <body>
@@ -188,6 +219,7 @@ function renderPage(language, allContent) {
       <a class="button" href="#inquiry">${escapeHtml(page.contact)}</a>
     </section>
     ${renderInquiryForm(locale)}
+    ${contactMethods}
   </main>
   <footer><a href="/">AIZGZ Machinery</a></footer>
   <script>
