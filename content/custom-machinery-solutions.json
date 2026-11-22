@@ -106,6 +106,12 @@
       "sendError": "We could not send your inquiry. Please try again.",
       "notConfigured": "The inquiry form is not available right now. Please contact us by email.",
       "security": "Please do not include passwords, payment card details, or other sensitive information."
+    },
+    "contact": {
+      "title": "Contact Us Directly",
+      "intro": "Prefer messaging? You can reach our team through either channel.",
+      "whatsapp": "Chat with us on WhatsApp",
+      "wechat": "Add or find us on WeChat using this phone number."
     }
   },
   "es": {
@@ -215,6 +221,12 @@
       "sendError": "No se pudo enviar su consulta. Inténtelo de nuevo.",
       "notConfigured": "El formulario de consulta no está disponible en este momento. Contáctenos por correo electrónico.",
       "security": "No incluya contraseñas, datos de tarjetas de pago ni otra información sensible."
+    },
+    "contact": {
+      "title": "Contáctenos directamente",
+      "intro": "¿Prefiere enviar un mensaje? Puede comunicarse con nuestro equipo por cualquiera de estos canales.",
+      "whatsapp": "Chatee con nosotros por WhatsApp",
+      "wechat": "Busque o añada nuestro contacto en WeChat con este número."
     }
   },
   "ar": {
@@ -324,6 +336,12 @@
       "sendError": "تعذر إرسال استفسارك. يرجى المحاولة مرة أخرى.",
       "notConfigured": "نموذج الاستفسار غير متاح حاليًا. يرجى التواصل معنا عبر البريد الإلكتروني.",
       "security": "يرجى عدم إدخال كلمات المرور أو بيانات بطاقات الدفع أو أي معلومات حساسة أخرى."
+    },
+    "contact": {
+      "title": "تواصل معنا مباشرة",
+      "intro": "هل تفضل المراسلة؟ يمكنك التواصل مع فريقنا عبر أي من القناتين.",
+      "whatsapp": "راسلنا عبر واتساب",
+      "wechat": "ابحث عن جهة اتصالنا أو أضفها في WeChat باستخدام رقم الهاتف هذا."
     }
   },
   "ru": {
@@ -433,6 +451,12 @@
       "sendError": "Не удалось отправить запрос. Попробуйте еще раз.",
       "notConfigured": "Форма запроса сейчас недоступна. Свяжитесь с нами по электронной почте.",
       "security": "Не указывайте пароли, данные банковских карт и другую конфиденциальную информацию."
+    },
+    "contact": {
+      "title": "Свяжитесь с нами напрямую",
+      "intro": "Предпочитаете переписку? Вы можете связаться с нашей командой любым из этих способов.",
+      "whatsapp": "Напишите нам в WhatsApp",
+      "wechat": "Найдите или добавьте нас в WeChat по этому номеру телефона."
     }
   }
 }
