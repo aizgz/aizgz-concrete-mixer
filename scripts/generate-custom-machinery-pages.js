@@ -15,22 +15,22 @@ function escapeHtml(value) {
   })[char]);
 }
 function routeFor(language) {
-  return language === 'en' ? '/custom-machinery-solutions/' : \`/\${language}/custom-machinery-solutions/\`;
+  return language === 'en' ? '/custom-machinery-solutions/' : `/${language}/custom-machinery-solutions/`;
 }
 function renderLinks(current, content) {
   return LANGUAGE_CODES.map((language) => {
     const active = language === current ? ' aria-current="page"' : '';
-    return \`<a href="\${routeFor(language)}"\${active}>\${escapeHtml(content[language].label)}</a>\`;
-  }).join('\\n');
+    return `<a href="${routeFor(language)}"${active}>${escapeHtml(content[language].label)}</a>`;
+  }).join('\n');
 }
 function renderPage(language, allContent) {
   const locale = allContent[language];
   const page = locale.page;
   const canonical = SITE_URL + routeFor(language);
   const alternates = LANGUAGE_CODES.map((code) =>
-    \`<link rel="alternate" hreflang="\${allContent[code].htmlLang}" href="\${SITE_URL}\${routeFor(code)}">\`
+    `<link rel="alternate" hreflang="${allContent[code].htmlLang}" href="${SITE_URL}${routeFor(code)}">`
   );
-  alternates.push(\`<link rel="alternate" hreflang="x-default" href="\${SITE_URL}\${routeFor('en')}">\`);
+  alternates.push(`<link rel="alternate" hreflang="x-default" href="${SITE_URL}${routeFor('en')}">`);
   const structuredData = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -39,39 +39,39 @@ function renderPage(language, allContent) {
     url: canonical,
     inLanguage: locale.htmlLang,
     isPartOf: { '@type': 'WebSite', name: 'AIZGZ Machinery', url: SITE_URL + '/' }
-  }).replace(/</g, '\\u003c');
-  const optionCards = page.options.map(([title, description], index) => \`
+  }).replace(/</g, String.fromCharCode(92) + 'u003c');
+  const optionCards = page.options.map(([title, description], index) => `
         <article class="info-card">
-          <span class="number">\${String(index + 1).padStart(2, '0')}</span>
-          <h3>\${escapeHtml(title)}</h3>
-          <p>\${escapeHtml(description)}</p>
-        </article>\`).join('');
-  const steps = page.steps.map(([title, description], index) => \`
+          <span class="number">${String(index + 1).padStart(2, '0')}</span>
+          <h3>${escapeHtml(title)}</h3>
+          <p>${escapeHtml(description)}</p>
+        </article>`).join('');
+  const steps = page.steps.map(([title, description], index) => `
         <article class="step-card">
-          <span class="step-number">\${String(index + 1).padStart(2, '0')}</span>
-          <div><h3>\${escapeHtml(title)}</h3><p>\${escapeHtml(description)}</p></div>
-        </article>\`).join('');
-  return \`<!DOCTYPE html>
-<html lang="\${escapeHtml(locale.htmlLang)}" dir="\${escapeHtml(locale.dir)}">
+          <span class="step-number">${String(index + 1).padStart(2, '0')}</span>
+          <div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(description)}</p></div>
+        </article>`).join('');
+  return `<!DOCTYPE html>
+<html lang="${escapeHtml(locale.htmlLang)}" dir="${escapeHtml(locale.dir)}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>\${escapeHtml(locale.seoTitle)}</title>
-  <meta name="description" content="\${escapeHtml(locale.seoDescription)}">
+  <title>${escapeHtml(locale.seoTitle)}</title>
+  <meta name="description" content="${escapeHtml(locale.seoDescription)}">
   <meta name="robots" content="index,follow">
-  <link rel="canonical" href="\${canonical}">
-  \${alternates.join('\\n  ')}
+  <link rel="canonical" href="${canonical}">
+  ${alternates.join('\n  ')}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AIZGZ Machinery">
-  <meta property="og:title" content="\${escapeHtml(locale.seoTitle)}">
-  <meta property="og:description" content="\${escapeHtml(locale.seoDescription)}">
-  <meta property="og:url" content="\${canonical}">
-  <meta property="og:locale" content="\${escapeHtml(locale.ogLocale)}">
+  <meta property="og:title" content="${escapeHtml(locale.seoTitle)}">
+  <meta property="og:description" content="${escapeHtml(locale.seoDescription)}">
+  <meta property="og:url" content="${canonical}">
+  <meta property="og:locale" content="${escapeHtml(locale.ogLocale)}">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="\${escapeHtml(locale.seoTitle)}">
-  <meta name="twitter:description" content="\${escapeHtml(locale.seoDescription)}">
+  <meta name="twitter:title" content="${escapeHtml(locale.seoTitle)}">
+  <meta name="twitter:description" content="${escapeHtml(locale.seoDescription)}">
   <meta name="theme-color" content="#0f172a">
-  <script type="application/ld+json">\${structuredData}</script>
+  <script type="application/ld+json">${structuredData}</script>
   <style>
     :root{color-scheme:light;font-family:Arial,Helvetica,sans-serif;color:#1e293b;background:#f8fafc}
     *{box-sizing:border-box}body{margin:0;line-height:1.7}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}
@@ -109,73 +109,73 @@ function renderPage(language, allContent) {
     <div class="header-inner">
       <a class="brand" href="/">AIZGZ <span>MACHINERY</span></a>
       <nav class="top-nav" aria-label="Main navigation">
-        <a href="/">\${escapeHtml(page.home)}</a>
-        <a href="/#products">\${escapeHtml(page.products)}</a>
+        <a href="/">${escapeHtml(page.home)}</a>
+        <a href="/#products">${escapeHtml(page.products)}</a>
       </nav>
-      <nav class="languages" aria-label="Available languages">\${renderLinks(language, allContent)}</nav>
+      <nav class="languages" aria-label="Available languages">${renderLinks(language, allContent)}</nav>
     </div>
   </header>
   <main class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">\${escapeHtml(page.home)}</a> / <span>\${escapeHtml(page.title)}</span></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">${escapeHtml(page.home)}</a> / <span>${escapeHtml(page.title)}</span></nav>
     <section class="hero">
       <p class="eyebrow">AIZGZ Machinery</p>
-      <h1>\${escapeHtml(page.title)}</h1>
-      <p class="hero-subtitle">\${escapeHtml(page.subtitle)}</p>
-      <p class="hero-intro">\${escapeHtml(page.intro)}</p>
-      <a class="button" href="/#contact">\${escapeHtml(page.discuss)}</a>
+      <h1>${escapeHtml(page.title)}</h1>
+      <p class="hero-subtitle">${escapeHtml(page.subtitle)}</p>
+      <p class="hero-intro">${escapeHtml(page.intro)}</p>
+      <a class="button" href="/#contact">${escapeHtml(page.discuss)}</a>
     </section>
     <section class="section">
-      <div class="section-heading"><h2>\${escapeHtml(page.catalogTitle)}</h2>
-        \${page.catalog.map((paragraph) => \`<p>\${escapeHtml(paragraph)}</p>\`).join('')}
+      <div class="section-heading"><h2>${escapeHtml(page.catalogTitle)}</h2>
+        ${page.catalog.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')}
       </div>
     </section>
     <section class="section">
-      <div class="section-heading"><h2>\${escapeHtml(page.optionsTitle)}</h2></div>
-      <div class="cards">\${optionCards}
+      <div class="section-heading"><h2>${escapeHtml(page.optionsTitle)}</h2></div>
+      <div class="cards">${optionCards}
       </div>
     </section>
     <section class="section">
-      <div class="section-heading"><h2>\${escapeHtml(page.processTitle)}</h2></div>
-      <div class="steps">\${steps}
+      <div class="section-heading"><h2>${escapeHtml(page.processTitle)}</h2></div>
+      <div class="steps">${steps}
       </div>
     </section>
     <section class="callout">
-      <h2>\${escapeHtml(page.notListedTitle)}</h2>
-      <p>\${escapeHtml(page.notListedBody)}</p>
-      <a class="button" href="/#contact">\${escapeHtml(page.sendInquiry)}</a>
+      <h2>${escapeHtml(page.notListedTitle)}</h2>
+      <p>${escapeHtml(page.notListedBody)}</p>
+      <a class="button" href="/#contact">${escapeHtml(page.sendInquiry)}</a>
     </section>
     <section class="callout">
-      <h2>\${escapeHtml(page.closingTitle)}</h2>
-      <p>\${escapeHtml(page.closingBody)}</p>
-      <a class="button" href="/#contact">\${escapeHtml(page.contact)}</a>
+      <h2>${escapeHtml(page.closingTitle)}</h2>
+      <p>${escapeHtml(page.closingBody)}</p>
+      <a class="button" href="/#contact">${escapeHtml(page.contact)}</a>
     </section>
   </main>
   <footer><a href="/">AIZGZ Machinery</a></footer>
 </body>
 </html>
-\`;
+`;
 }
 function renderHomepageSection(content) {
   const home = content.en.home;
-  const optionCards = home.options.map((_, index) => \`
-          <li class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800" data-i18n="custom_option_\${index + 1}">\${escapeHtml(home.options[index])}</li>\`).join('');
-  return \`<section id="customization" class="border-b border-slate-200 bg-white px-4 py-16">
+  const optionCards = home.options.map((_, index) => `
+          <li class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800" data-i18n="custom_option_${index + 1}">${escapeHtml(home.options[index])}</li>`).join('');
+  return `<section id="customization" class="border-b border-slate-200 bg-white px-4 py-16">
       <div class="mx-auto max-w-7xl">
         <div class="mx-auto mb-8 max-w-4xl text-center">
-          <h2 class="mb-3 text-3xl font-bold text-slate-900" data-i18n="custom_title">\${escapeHtml(home.title)}</h2>
-          <p class="mb-4 text-base font-semibold leading-relaxed text-slate-700 md:text-lg" data-i18n="custom_subtitle">\${escapeHtml(home.subtitle)}</p>
-          <p class="text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_intro">\${escapeHtml(home.intro)}</p>
-          <p class="mt-3 text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_detail">\${escapeHtml(home.detail)}</p>
+          <h2 class="mb-3 text-3xl font-bold text-slate-900" data-i18n="custom_title">${escapeHtml(home.title)}</h2>
+          <p class="mb-4 text-base font-semibold leading-relaxed text-slate-700 md:text-lg" data-i18n="custom_subtitle">${escapeHtml(home.subtitle)}</p>
+          <p class="text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_intro">${escapeHtml(home.intro)}</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_detail">${escapeHtml(home.detail)}</p>
         </div>
         <div class="mx-auto max-w-5xl">
-          <h3 class="mb-4 text-center text-lg font-bold text-slate-900" data-i18n="custom_options_title">\${escapeHtml(home.optionsTitle)}</h3>
-          <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">\${optionCards}
+          <h3 class="mb-4 text-center text-lg font-bold text-slate-900" data-i18n="custom_options_title">${escapeHtml(home.optionsTitle)}</h3>
+          <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">${optionCards}
           </ul>
-          <p class="mx-auto mt-6 max-w-4xl text-center text-sm leading-relaxed text-slate-600" data-i18n="custom_note">\${escapeHtml(home.note)}</p>
-          <div class="mt-6 text-center"><a id="custom-machinery-link" href="/custom-machinery-solutions/" class="inline-flex rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 hover:bg-amber-600" data-i18n="custom_cta">\${escapeHtml(home.cta)}</a></div>
+          <p class="mx-auto mt-6 max-w-4xl text-center text-sm leading-relaxed text-slate-600" data-i18n="custom_note">${escapeHtml(home.note)}</p>
+          <div class="mt-6 text-center"><a id="custom-machinery-link" href="/custom-machinery-solutions/" class="inline-flex rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 hover:bg-amber-600" data-i18n="custom_cta">${escapeHtml(home.cta)}</a></div>
         </div>
       </div>
-    </section>\`;
+    </section>`;
 }
 function buildHomepageTranslations(content) {
   const translations = {};
@@ -187,7 +187,7 @@ function buildHomepageTranslations(content) {
       custom_intro: home.intro,
       custom_detail: home.detail,
       custom_options_title: home.optionsTitle,
-      ...Object.fromEntries(home.options.map((value, index) => [\`custom_option_\${index + 1}\`, value])),
+      ...Object.fromEntries(home.options.map((value, index) => [`custom_option_${index + 1}`, value])),
       custom_note: home.note,
       custom_cta: home.cta
     };
@@ -196,21 +196,21 @@ function buildHomepageTranslations(content) {
 }
 async function updateHomepage(content) {
   let homepage = await readFile(HOMEPAGE_PATH, 'utf8');
-  const sectionPattern = /<section id="customization"[\\s\\S]*?<\\/section>/;
+  const sectionPattern = /<section id="customization"[\s\S]*?<\/section>/;
   if (!sectionPattern.test(homepage)) throw new Error('Homepage customization section was not found');
   homepage = homepage.replace(sectionPattern, renderHomepageSection(content));
   const translations = JSON.stringify(buildHomepageTranslations(content), null, 2)
-    .split('\\n').map((line, index) => index === 0 ? line : '      ' + line).join('\\n');
-  const translationBlock = \`    const customizationTranslations = \${translations};\`;
-  const translationPattern = /    const customizationTranslations = \\{[\\s\\S]*?\\n    \\};/;
+    .split('\n').map((line, index) => index === 0 ? line : '      ' + line).join('\n');
+  const translationBlock = `    const customizationTranslations = ${translations};`;
+  const translationPattern = /    const customizationTranslations = \{[\s\S]*?\n    \};/;
   if (!translationPattern.test(homepage)) throw new Error('Homepage customization translations were not found');
   homepage = homepage.replace(translationPattern, translationBlock);
-  const dirLine = \`      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';\`;
+  const dirLine = `      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';`;
   if (!homepage.includes('customPageLink')) {
     if (!homepage.includes(dirLine)) throw new Error('Language switcher direction line was not found');
-    homepage = homepage.replace(dirLine, dirLine + \`
+    homepage = homepage.replace(dirLine, dirLine + `
       const customPageLink = document.getElementById('custom-machinery-link');
-      if (customPageLink) customPageLink.href = language === 'en' ? '/custom-machinery-solutions/' : \`/\${language}/custom-machinery-solutions/\`;\`);
+      if (customPageLink) customPageLink.href = language === 'en' ? '/custom-machinery-solutions/' : `/${language}/custom-machinery-solutions/`;`);
   }
   await writeFile(HOMEPAGE_PATH, homepage, 'utf8');
 }
@@ -219,16 +219,16 @@ async function updateSitemap(content) {
   if (!current.includes('xmlns:xhtml="http://www.w3.org/1999/xhtml"')) {
     throw new Error('Generated sitemap is missing the XHTML namespace');
   }
-  const entries = [...current.matchAll(/<url>[\\s\\S]*?<\\/url>/g)].map((match) => match[0]);
-  const known = new Set(entries.map((entry) => entry.match(/<loc>([^<]+)<\\/loc>/)?.[1]).filter(Boolean));
+  const entries = [...current.matchAll(/<url>[\s\S]*?<\/url>/g)].map((match) => match[0]);
+  const known = new Set(entries.map((entry) => entry.match(/<loc>([^<]+)<\/loc>/)?.[1]).filter(Boolean));
   for (const language of LANGUAGE_CODES) {
     const loc = SITE_URL + routeFor(language);
     if (known.has(loc)) continue;
     const alternates = LANGUAGE_CODES.map((code) =>
-      \`    <xhtml:link rel="alternate" hreflang="\${content[code].htmlLang}" href="\${SITE_URL}\${routeFor(code)}" />\`
+      `    <xhtml:link rel="alternate" hreflang="${content[code].htmlLang}" href="${SITE_URL}${routeFor(code)}" />`
     );
-    alternates.push(\`    <xhtml:link rel="alternate" hreflang="x-default" href="\${SITE_URL}\${routeFor('en')}" />\`);
-    entries.push(['  <url>', \`    <loc>\${loc}</loc>\`, ...alternates, '  </url>'].join('\\n'));
+    alternates.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${routeFor('en')}" />`);
+    entries.push(['  <url>', `    <loc>${loc}</loc>`, ...alternates, '  </url>'].join('\n'));
   }
   const sitemap = [
     '<?xml version="1.0" encoding="UTF-8"?>',
@@ -236,14 +236,14 @@ async function updateSitemap(content) {
     ...entries,
     '</urlset>',
     ''
-  ].join('\\n');
+  ].join('\n');
   await writeFile(SITEMAP_PATH, sitemap, 'utf8');
 }
 async function main() {
   const content = JSON.parse(await readFile(DATA_PATH, 'utf8'));
   for (const language of LANGUAGE_CODES) {
-    if (!content[language]?.page || !content[language]?.home) throw new Error(\`Missing custom machinery content for \${language}\`);
-    const output = path.join(ROOT, routeFor(language).replace(/^\\//, ''), 'index.html');
+    if (!content[language]?.page || !content[language]?.home) throw new Error(`Missing custom machinery content for ${language}`);
+    const output = path.join(ROOT, routeFor(language).replace(/^\//, ''), 'index.html');
     await mkdir(path.dirname(output), { recursive: true });
     await writeFile(output, renderPage(language, content), 'utf8');
   }
