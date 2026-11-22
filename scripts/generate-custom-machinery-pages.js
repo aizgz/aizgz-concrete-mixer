@@ -158,18 +158,18 @@ function renderPage(language, allContent) {
 function renderHomepageSection(content) {
   const home = content.en.home;
   const optionCards = home.options.map((_, index) => `
-          <li class="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800" data-i18n="custom_option_${index + 1}">${escapeHtml(home.options[index])}</li>`).join('');
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-6"><h3 class="font-bold text-slate-900" data-i18n="custom_option_${index + 1}">${escapeHtml(home.options[index])}</h3></div>`).join('');
   return `<section id="customization" class="border-b border-slate-200 bg-white px-4 py-16">
       <div class="mx-auto max-w-7xl">
-        <div class="mx-auto mb-8 max-w-4xl text-center">
+        <div class="mx-auto mb-10 max-w-3xl text-center">
           <h2 class="mb-3 text-3xl font-bold text-slate-900" data-i18n="custom_title">${escapeHtml(home.title)}</h2>
-          <p class="mb-4 text-base font-semibold leading-relaxed text-slate-700 md:text-lg" data-i18n="custom_subtitle">${escapeHtml(home.subtitle)}</p>
+          <p class="text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_subtitle">${escapeHtml(home.subtitle)}</p>
           <p class="text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_intro">${escapeHtml(home.intro)}</p>
           <p class="mt-3 text-sm leading-relaxed text-slate-600 md:text-base" data-i18n="custom_detail">${escapeHtml(home.detail)}</p>
         </div>
         <div class="mx-auto max-w-5xl">
-          <h3 class="mb-4 text-center text-lg font-bold text-slate-900" data-i18n="custom_options_title">${escapeHtml(home.optionsTitle)}</h3>
-          <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">${optionCards}
+          <h3 class="mb-4 text-center font-bold text-slate-900" data-i18n="custom_options_title">${escapeHtml(home.optionsTitle)}</h3>
+          <ul class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">${optionCards}
           </ul>
           <p class="mx-auto mt-6 max-w-4xl text-center text-sm leading-relaxed text-slate-600" data-i18n="custom_note">${escapeHtml(home.note)}</p>
           <div class="mt-6 text-center"><a id="custom-machinery-link" href="/custom-machinery-solutions/" class="inline-flex rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 hover:bg-amber-600" data-i18n="custom_cta">${escapeHtml(home.cta)}</a></div>
