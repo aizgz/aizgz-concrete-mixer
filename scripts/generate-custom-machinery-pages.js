@@ -23,6 +23,30 @@ function renderLinks(current, content) {
     return `<a href="${routeFor(language)}"${active}>${escapeHtml(content[language].label)}</a>`;
   }).join('\n');
 }
+
+function renderInquiryForm(locale) {
+  const form = locale.form;
+  return `<section id="inquiry" class="inquiry-section" aria-labelledby="inquiry-title">
+    <div class="inquiry-heading">
+      <h2 id="inquiry-title">${escapeHtml(form.title)}</h2>
+      <p>${escapeHtml(form.intro)}</p>
+    </div>
+    <form id="custom-inquiry-form" class="inquiry-form">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="honeypot">
+      <input type="hidden" name="_subject" value="Custom Machinery Solutions Inquiry">
+      <div class="form-grid">
+        <div class="form-field"><label for="custom-name">${escapeHtml(form.name)}</label><input id="custom-name" name="name" type="text" required autocomplete="name" placeholder="${escapeHtml(form.namePlaceholder)}"></div>
+        <div class="form-field"><label for="custom-email">${escapeHtml(form.email)}</label><input id="custom-email" name="email" type="email" required autocomplete="email" placeholder="${escapeHtml(form.emailPlaceholder)}"></div>
+        <div class="form-field"><label for="custom-equipment">${escapeHtml(form.equipment)}</label><input id="custom-equipment" name="product_model" type="text" placeholder="${escapeHtml(form.equipmentPlaceholder)}"></div>
+        <div class="form-field"><label for="custom-phone">${escapeHtml(form.phone)}</label><input id="custom-phone" name="phone" type="text" autocomplete="tel" placeholder="${escapeHtml(form.phonePlaceholder)}"></div>
+        <div class="form-field full"><label for="custom-requirements">${escapeHtml(form.requirements)}</label><textarea id="custom-requirements" name="message" rows="5" required placeholder="${escapeHtml(form.requirementsPlaceholder)}"></textarea></div>
+      </div>
+      <button id="custom-submit" class="button form-submit" type="submit">${escapeHtml(form.submit)}</button>
+      <p id="custom-form-status" class="form-status" role="status" aria-live="polite" hidden></p>
+      <p class="form-security">${escapeHtml(form.security)}</p>
+    </form>
+  </section>`;
+}
 function renderPage(language, allContent) {
   const locale = allContent[language];
   const page = locale.page;
@@ -98,6 +122,20 @@ function renderPage(language, allContent) {
     .steps{display:grid;gap:.9rem;max-width:900px;margin:1.5rem auto 0}.step-card{display:flex;gap:1rem;align-items:flex-start}
     .step-card h3{margin:.1rem 0 .35rem}.callout{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;padding:2rem;text-align:center;margin-top:1rem}
     .callout p{max-width:850px;margin:.6rem auto 1.3rem;color:#475569}
+    .inquiry-section{margin:3rem auto 0;padding:clamp(1.5rem,4vw,3rem);background:#0f172a;color:#fff;border-radius:1rem;scroll-margin-top:1.5rem}
+    .inquiry-heading{text-align:center;max-width:760px;margin:0 auto 1.5rem}.inquiry-heading h2{color:#fbbf24}
+    .inquiry-heading p{color:#cbd5e1;margin:.5rem auto}
+    .inquiry-form{max-width:820px;margin:auto;padding:clamp(1rem,3vw,2rem);background:#1e293b;border-radius:.8rem}
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+    .form-field{display:flex;flex-direction:column;gap:.4rem}.form-field.full{grid-column:1/-1}
+    .form-field label{font-size:.9rem;font-weight:700;color:#e2e8f0}
+    .form-field input,.form-field textarea{width:100%;min-width:0;border:1px solid #475569;border-radius:.5rem;padding:.8rem;background:#334155;color:#fff;font:inherit}
+    .form-field input::placeholder,.form-field textarea::placeholder{color:#cbd5e1}
+    .form-field input:focus,.form-field textarea:focus{outline:2px solid #f59e0b;outline-offset:1px}
+    .form-submit{width:100%;margin-top:1.2rem;border:0;cursor:pointer}.form-submit:disabled{opacity:.6;cursor:wait}
+    .form-status{margin:1rem 0 0;text-align:center;font-weight:700}.form-security{margin:1rem 0 0;text-align:center;color:#cbd5e1;font-size:.75rem}
+    .form-status.success{color:#34d399}.form-status.error{color:#fda4af}
+    .honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
     footer{background:#0f172a;color:#cbd5e1;padding:1.5rem 1rem;text-align:center;font-size:.85rem}
     footer a{color:#fbbf24}
     html[dir="rtl"] body{text-align:right}
@@ -122,7 +160,7 @@ function renderPage(language, allContent) {
       <h1>${escapeHtml(page.title)}</h1>
       <p class="hero-subtitle">${escapeHtml(page.subtitle)}</p>
       <p class="hero-intro">${escapeHtml(page.intro)}</p>
-      <a class="button" href="/#contact">${escapeHtml(page.discuss)}</a>
+      <a class="button" href="#inquiry">${escapeHtml(page.discuss)}</a>
     </section>
     <section class="section">
       <div class="section-heading"><h2>${escapeHtml(page.catalogTitle)}</h2>
@@ -142,15 +180,59 @@ function renderPage(language, allContent) {
     <section class="callout">
       <h2>${escapeHtml(page.notListedTitle)}</h2>
       <p>${escapeHtml(page.notListedBody)}</p>
-      <a class="button" href="/#contact">${escapeHtml(page.sendInquiry)}</a>
+      <a class="button" href="#inquiry">${escapeHtml(page.sendInquiry)}</a>
     </section>
     <section class="callout">
       <h2>${escapeHtml(page.closingTitle)}</h2>
       <p>${escapeHtml(page.closingBody)}</p>
-      <a class="button" href="/#contact">${escapeHtml(page.contact)}</a>
+      <a class="button" href="#inquiry">${escapeHtml(page.contact)}</a>
     </section>
+    ${renderInquiryForm(locale)}
   </main>
   <footer><a href="/">AIZGZ Machinery</a></footer>
+  <script>
+    (() => {
+      const form = document.getElementById('custom-inquiry-form');
+      const status = document.getElementById('custom-form-status');
+      const button = document.getElementById('custom-submit');
+      const formMessages = ${JSON.stringify(locale.form).replace(/</g, String.fromCharCode(92) + 'u003c')};
+      let formspreeId = '';
+      fetch('/api/content/?collection=settings', { cache: 'no-store' })
+        .then((response) => { if (!response.ok) throw new Error('Settings unavailable'); return response.json(); })
+        .then((payload) => { formspreeId = String(payload.settings?.formspree_id || '').trim(); })
+        .catch((error) => console.warn('Could not load inquiry settings:', error));
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!formspreeId) {
+          status.textContent = formMessages.notConfigured;
+          status.className = 'form-status error';
+          status.hidden = false;
+          return;
+        }
+        button.disabled = true;
+        button.textContent = formMessages.sending;
+        status.hidden = true;
+        try {
+          const response = await fetch('https://formspree.io/f/' + encodeURIComponent(formspreeId), {
+            method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }
+          });
+          if (!response.ok) throw new Error('Inquiry submission failed: ' + response.status);
+          status.textContent = formMessages.sent;
+          status.className = 'form-status success';
+          status.hidden = false;
+          form.reset();
+        } catch (error) {
+          console.error(error);
+          status.textContent = formMessages.sendError;
+          status.className = 'form-status error';
+          status.hidden = false;
+        } finally {
+          button.disabled = false;
+          button.textContent = formMessages.submit;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
 `;
