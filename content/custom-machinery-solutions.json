@@ -86,6 +86,26 @@
       "contact": "Contact AIZGZ",
       "home": "Home",
       "products": "Products"
+    },
+    "form": {
+      "title": "Send a Machinery Inquiry",
+      "intro": "Tell us briefly what equipment or production solution you are looking for. You can share detailed specifications later.",
+      "name": "Your Name *",
+      "email": "Email Address *",
+      "equipment": "Equipment Interested In",
+      "phone": "WhatsApp / Phone",
+      "requirements": "Your Requirements *",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@company.com",
+      "equipmentPlaceholder": "Machinery or project (optional)",
+      "phonePlaceholder": "+ country code",
+      "requirementsPlaceholder": "Briefly describe the machinery, application, or production requirements.",
+      "submit": "Send Inquiry",
+      "sending": "Sending…",
+      "sent": "Thank you. Your inquiry has been sent.",
+      "sendError": "We could not send your inquiry. Please try again.",
+      "notConfigured": "The inquiry form is not available right now. Please contact us by email.",
+      "security": "Please do not include passwords, payment card details, or other sensitive information."
     }
   },
   "es": {
@@ -175,6 +195,26 @@
       "contact": "Contactar con AIZGZ",
       "home": "Inicio",
       "products": "Productos"
+    },
+    "form": {
+      "title": "Envíe una consulta sobre maquinaria",
+      "intro": "Cuéntenos brevemente qué equipo o solución de producción está buscando. Puede compartir las especificaciones detalladas más adelante.",
+      "name": "Su nombre *",
+      "email": "Correo electrónico *",
+      "equipment": "Maquinaria de interés",
+      "phone": "WhatsApp / Teléfono",
+      "requirements": "Sus requisitos *",
+      "namePlaceholder": "Su nombre",
+      "emailPlaceholder": "you@company.com",
+      "equipmentPlaceholder": "Maquinaria o proyecto (opcional)",
+      "phonePlaceholder": "+ código de país",
+      "requirementsPlaceholder": "Describa brevemente la maquinaria, la aplicación o sus necesidades de producción.",
+      "submit": "Enviar consulta",
+      "sending": "Enviando…",
+      "sent": "Gracias. Su consulta se ha enviado correctamente.",
+      "sendError": "No se pudo enviar su consulta. Inténtelo de nuevo.",
+      "notConfigured": "El formulario de consulta no está disponible en este momento. Contáctenos por correo electrónico.",
+      "security": "No incluya contraseñas, datos de tarjetas de pago ni otra información sensible."
     }
   },
   "ar": {
@@ -264,6 +304,26 @@
       "contact": "تواصل مع AIZGZ",
       "home": "الرئيسية",
       "products": "المنتجات"
+    },
+    "form": {
+      "title": "أرسل استفسارك عن المعدات",
+      "intro": "أخبرنا بإيجاز عن المعدات أو حل الإنتاج الذي تبحث عنه. يمكنك إرسال المواصفات التفصيلية لاحقًا.",
+      "name": "الاسم *",
+      "email": "عنوان البريد الإلكتروني *",
+      "equipment": "المعدات المطلوبة",
+      "phone": "واتساب / الهاتف",
+      "requirements": "متطلباتك *",
+      "namePlaceholder": "اسمك",
+      "emailPlaceholder": "you@company.com",
+      "equipmentPlaceholder": "المعدات أو المشروع (اختياري)",
+      "phonePlaceholder": "+ رمز الدولة",
+      "requirementsPlaceholder": "صف بإيجاز المعدات أو الاستخدام أو متطلبات الإنتاج.",
+      "submit": "إرسال الاستفسار",
+      "sending": "جارٍ الإرسال…",
+      "sent": "شكرًا لك. تم إرسال استفسارك بنجاح.",
+      "sendError": "تعذر إرسال استفسارك. يرجى المحاولة مرة أخرى.",
+      "notConfigured": "نموذج الاستفسار غير متاح حاليًا. يرجى التواصل معنا عبر البريد الإلكتروني.",
+      "security": "يرجى عدم إدخال كلمات المرور أو بيانات بطاقات الدفع أو أي معلومات حساسة أخرى."
     }
   },
   "ru": {
@@ -353,6 +413,26 @@
       "contact": "Связаться с AIZGZ",
       "home": "Главная",
       "products": "Продукция"
+    },
+    "form": {
+      "title": "Отправить запрос об оборудовании",
+      "intro": "Кратко расскажите, какое оборудование или производственное решение вы ищете. Подробные технические характеристики можно предоставить позже.",
+      "name": "Ваше имя *",
+      "email": "Адрес электронной почты *",
+      "equipment": "Интересующее оборудование",
+      "phone": "WhatsApp / телефон",
+      "requirements": "Ваши требования *",
+      "namePlaceholder": "Ваше имя",
+      "emailPlaceholder": "you@company.com",
+      "equipmentPlaceholder": "Оборудование или проект (необязательно)",
+      "phonePlaceholder": "+ код страны",
+      "requirementsPlaceholder": "Кратко опишите оборудование, область применения или производственные требования.",
+      "submit": "Отправить запрос",
+      "sending": "Отправка…",
+      "sent": "Спасибо. Ваш запрос успешно отправлен.",
+      "sendError": "Не удалось отправить запрос. Попробуйте еще раз.",
+      "notConfigured": "Форма запроса сейчас недоступна. Свяжитесь с нами по электронной почте.",
+      "security": "Не указывайте пароли, данные банковских карт и другую конфиденциальную информацию."
     }
   }
 }
