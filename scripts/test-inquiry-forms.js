@@ -33,17 +33,17 @@ function assertHoneypot(form, source) {
 }
 
 function getVisibleFieldNames(form) {
-  return [...form.matchAll(/<(?:input|textarea)\\b[^>]*>/gi)]
-    .map(([element]) => (element.match(/\\bname=["']([^"']+)["']/i) || [])[1])
+  return [...form.matchAll(/<(?:input|textarea)\b[^>]*>/gi)]
+    .map(([element]) => (element.match(/\bname=["']([^"']+)["']/i) || [])[1])
     .filter((name) => name && name !== '_gotcha');
 }
 
 function assertCompactFields(form, source, expected) {
   assert.deepEqual(getVisibleFieldNames(form), expected, source + ': visible fields or order changed');
   assert.ok(!/name=["'](?:company|country)["']/.test(form), source + ': company/country should not be requested');
-  const product = [...form.matchAll(/<(?:input|textarea)\\b[^>]*>/gi)]
+  const product = [...form.matchAll(/<(?:input|textarea)\b[^>]*>/gi)]
     .map(([element]) => element).find((element) => /name=["']product_model["']/.test(element));
-  if (product) assert.doesNotMatch(product, /\\brequired(?:\\s|=|>)/i, source + ': product selection must remain optional');
+  if (product) assert.doesNotMatch(product, /\brequired(?:\s|=|>)/i, source + ': product selection must remain optional');
 }
 
 function assertRequiredFields(form, source) {
