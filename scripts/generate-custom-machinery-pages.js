@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SITE_URL = 'https://aizgz.vercel.app';
+const SITE_URL = 'https://www.aizgz.com';
 const DATA_PATH = path.join(ROOT, 'content', 'custom-machinery-solutions.json');
 const HOMEPAGE_PATH = path.join(ROOT, 'index.html');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');

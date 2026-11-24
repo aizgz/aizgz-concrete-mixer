@@ -3,7 +3,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const SITE_URL = 'https://aizgz.vercel.app';
+const SITE_URL = 'https://www.aizgz.com';
 const LANGUAGES = ['en', 'es', 'ar', 'ru'];
 const PRODUCT_ROOTS = [
   ['en', path.join(ROOT, 'products')],
