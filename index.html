@@ -703,7 +703,7 @@
               if (activeAnalyticsConsent === true && typeof window.gtag === 'function') {
                 window.gtag('event', 'whatsapp_click', { method: 'floating_button' });
               }
-            }, { once: true });
+            });
           }
         }
         const youtubeButton = document.getElementById('youtube-btn');
