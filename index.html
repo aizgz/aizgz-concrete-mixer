@@ -697,6 +697,13 @@
           if (number) {
             const link = document.getElementById('whatsapp-link');
             link.href = `https://wa.me/${number}?text=${encodeURIComponent('Hello, I am interested in your industrial equipment.')}`;
+            link.addEventListener('click', () => {
+              // Track WhatsApp intent only after the visitor has accepted analytics.
+              // Do not send the phone number or prefilled message to Google Analytics.
+              if (activeAnalyticsConsent === true && typeof window.gtag === 'function') {
+                window.gtag('event', 'whatsapp_click', { method: 'floating_button' });
+              }
+            });
           }
         }
         const youtubeButton = document.getElementById('youtube-btn');
