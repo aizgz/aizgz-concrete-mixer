@@ -5,6 +5,7 @@ title_es: "Mezcladora horizontal de tornillo y cinta"
 title_ar: "خلاط أفقي للمونة والمعجون"
 title_ru: "Шнеково-ленточный смеситель"
 category: Dry Mix Mortar Plant
+equipment_category: mixing-equipment
 supply_status: Available for Supply
 power_type: Electric Motor
 capacity: 1-ton putty powder equipment, 2-ton putty powder equipment, 3-ton
