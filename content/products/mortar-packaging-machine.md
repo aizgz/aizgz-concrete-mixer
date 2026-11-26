@@ -5,6 +5,7 @@ title_es: "Máquina envasadora de mortero seco"
 title_ar: "آلة تعبئة الملاط الجاف"
 title_ru: "Упаковочная машина для сухих смесей"
 category: Packing & Auxiliary Equipment
+equipment_category: packaging-equipment
 supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/6.jpeg
