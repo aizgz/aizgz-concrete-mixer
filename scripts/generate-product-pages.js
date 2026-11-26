@@ -189,12 +189,10 @@ async function main() {
   const template = await readFile(TEMPLATE_PATH, 'utf8');
   const taxonomy = JSON.parse(await readFile(TAXONOMY_PATH, 'utf8'));
   const collectionById = new Map([...taxonomy.categories, ...taxonomy.solutions].map((item) => [item.id, item]));
-  const assignmentEntries = Object.entries(taxonomy.assignments || {});
-  const categoryFor = (slug) => {
-    const assignment = taxonomy.assignments[slug];
-    const collection = assignment && collectionById.get(assignment.collectionId);
-    if (!collection) throw new Error(`Missing or invalid equipment category assignment for ${slug}`);
-    return { ...collection, status: assignment.status || 'confirmed' };
+  const categoryFor = (meta, slug) => {
+    const collection = collectionById.get(String(meta.equipment_category || '').trim());
+    if (!collection) throw new Error(`Missing or invalid equipment_category for ${slug}`);
+    return { ...collection, status: meta.equipment_category_status || 'confirmed' };
   };
   const files = (await readdir(PRODUCTS_DIR)).filter((name) => name.toLowerCase().endsWith('.md')).sort();
   const products = [];
@@ -207,16 +205,9 @@ async function main() {
     if (seenSlugs.has(slug)) throw new Error(`Duplicate product url_slug: ${slug}`);
     seenSlugs.add(slug);
     if (!String(meta.title || '').trim() || !englishBody.trim()) throw new Error(`${filename}: English title and body are required`);
-    const category = categoryFor(slug);
+    const category = categoryFor(meta, slug);
     products.push({ meta, slug, englishBody, category });
   }
-
-  const productSlugs = new Set(products.map(({ slug }) => slug));
-  for (const slug of productSlugs) categoryFor(slug);
-  for (const slug of Object.keys(taxonomy.assignments || {})) {
-    if (!productSlugs.has(slug)) throw new Error(`Equipment category assignment references unknown product: ${slug}`);
-  }
-  if (assignmentEntries.length !== products.length) throw new Error('Every product must have exactly one equipment category assignment');
 
   let pageCount = 0;
   const sitemapEntries = [{ loc: `${SITE_URL}/`, alternates: [] }];
