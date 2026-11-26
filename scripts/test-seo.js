@@ -84,11 +84,11 @@ for (const language of LANGUAGES) {
 const equipmentPages = [];
 for (const language of LANGUAGES) {
   const route = language === 'en' ? '/equipment/' : '/' + language + '/equipment/';
-  const file = path.join(ROOT, route.replace(/^\\//, ''), 'index.html');
+  const file = path.join(ROOT, route.replace(/^\//, ''), 'index.html');
   const html = await readFile(file, 'utf8');
-  const canonical = html.match(/<link\\s+rel="canonical"\\s+href="([^"]+)"/i)?.[1] || '';
-  const title = html.match(/<title>([^<]+)<\\/title>/i)?.[1] || '';
-  const description = html.match(/<meta\\s+name="description"\\s+content="([^"]+)"/i)?.[1] || '';
+  const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1] || '';
+  const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
+  const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
   assert.ok(title.trim(), file + ': title is required');
   assert.ok(description.trim(), file + ': meta description is required');
   assert.equal(canonical, SITE_URL + route, file + ': canonical must match its language route');
@@ -99,7 +99,7 @@ for (const language of LANGUAGES) {
   }
   assert.match(html, /class="solution-section"/, file + ': dry mortar production line must be shown separately');
   assert.equal((html.match(/class="equipment-card"/g) || []).length, 11, file + ': catalogue must show the 11 single-equipment products');
-  const alternates = matchAll(html, /<link\\s+rel="alternate"\\s+hreflang="([^"]+)"\\s+href="([^"]+)"\\s*>/gi)
+  const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
   assert.equal(new Set(alternates.map((item) => item.language)).size, alternates.length, file + ': hreflang values must be unique');
   assert.ok(alternates.some((item) => item.language === language && item.url === canonical), file + ': self hreflang is required');
