@@ -5,6 +5,7 @@ title_es: "Mezcladora de paletas de doble eje"
 title_ar: "خلاط مجدافي مزدوج المحور"
 title_ru: "Двухвальный лопастной смеситель"
 category: Dry Mix Mortar Plant
+equipment_category: mixing-equipment
 supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/无标题1.jpeg
