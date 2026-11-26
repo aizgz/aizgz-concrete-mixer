@@ -5,6 +5,7 @@ title_es: "Elevador de cangilones con cadena de placas"
 title_ar: "رافعة دلاء بسلسلة صفائحية"
 title_ru: "Ковшовый элеватор с пластинчатой цепью"
 category: Packing & Auxiliary Equipment
+equipment_category: conveying-feeding-equipment
 supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/11.jpeg
