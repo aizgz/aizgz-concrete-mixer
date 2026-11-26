@@ -120,6 +120,14 @@ for (const page of pages) {
   assert.equal(canonical, expectedCanonical, page.file + ': canonical must match its language route');
   assert.match(html, /<script\s+type="application\/ld\+json">[\s\S]*?"@type":"Product"[\s\S]*?<\/script>/i, page.file + ': Product structured data is required');
 
+  assert.match(html, /<section class="inquiry-section" id="inquiry">/, page.file + ': on-page inquiry section is required');
+  assert.match(html, /<form id="product-inquiry-form"/, page.file + ': on-page inquiry form is required');
+  for (const field of ['product_model', 'application', 'material', 'required_capacity', 'additional_requirements', 'name', 'email']) {
+    assert.match(html, new RegExp('<(?:input|textarea)[^>]+name="' + field + '"'), page.file + ': inquiry field ' + field + ' is required');
+  }
+  assert.match(html, /class="customization"/, page.file + ': customization guidance is required');
+  assert.ok(!html.includes('inquiry-overlay'), page.file + ': legacy inquiry modal must be removed');
+
   const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
   assert.ok(alternates.some((item) => item.language === 'x-default' && item.url === SITE_URL + '/products/' + page.slug + '/'), page.file + ': x-default alternate is required');
