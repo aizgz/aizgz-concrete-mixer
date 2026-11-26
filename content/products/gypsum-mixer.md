@@ -5,6 +5,7 @@ title_es: "Mezcladora de yeso en polvo"
 title_ar: "خلاط مسحوق الجبس"
 title_ru: "Смеситель гипсового порошка"
 category: Mixing & Blending Equipment
+equipment_category: mixing-equipment
 supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/10.jpeg
