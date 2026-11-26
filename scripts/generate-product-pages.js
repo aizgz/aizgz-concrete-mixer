@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PRODUCTS_DIR = path.join(ROOT, 'content', 'products');
 const TEMPLATE_PATH = path.join(ROOT, 'templates', 'product.html');
+const TAXONOMY_PATH = path.join(ROOT, 'content', 'equipment-categories.json');
 const SITE_URL = 'https://www.aizgz.com';
 const LANGUAGES = {
   en: { htmlLang: 'en', ogLocale: 'en_US', dir: 'ltr', label: 'English', home: 'Home', products: 'Products', inquiry: 'Request a quotation', back: 'Back to product catalogue', footer: 'Product information and configuration are subject to confirmation.', titleKey: 'title', bodyKey: null },
@@ -13,7 +14,7 @@ const LANGUAGES = {
   ru: { htmlLang: 'ru', ogLocale: 'ru_RU', dir: 'ltr', label: 'Русский', home: 'Главная', products: 'Продукция', inquiry: 'Запросить предложение', back: 'Вернуться в каталог продукции', footer: 'Информация о продукте и его конфигурация подлежат подтверждению.', titleKey: 'title_ru', bodyKey: 'body_ru' }
 };
 const SPEC_FIELDS = [
-  ['model', 'Model'], ['category', 'Category'], ['capacity', 'Capacity / Throughput'],
+  ['model', 'Model'], ['category', 'Equipment Category'], ['capacity', 'Capacity / Throughput'],
   ['internal_capacity', 'Internal Material Capacity'], ['voltage', 'Voltage'],
   ['frequency', 'Frequency'], ['motor_power', 'Motor Power'],
   ['packaging_range', 'Packaging Range'], ['mixing_volume', 'Mixing Volume'],
@@ -142,7 +143,7 @@ function isDisplayableHomepageValue(value) {
     !/^(["']{2}|null|undefined|n\/a)$/i.test(String(value).trim()) &&
     !/[\u3400-\u9fff]/.test(String(value));
 }
-function renderHomepageProductCard(meta, slug) {
+function renderHomepageProductCard(meta, slug, category) {
   const title = escapeHtml(meta.title || 'Industrial Equipment');
   const image = safeImagePath(meta.image);
   const imageHtml = image
@@ -154,11 +155,12 @@ function renderHomepageProductCard(meta, slug) {
     ? `<p class="mt-2 text-sm text-slate-600"><strong>Capacity: </strong>${escapeHtml(meta.capacity)}</p>` : '';
   const internalCapacity = isDisplayableHomepageValue(meta.internal_capacity)
     ? `<p class="mt-2 text-sm text-slate-600"><strong>Internal Capacity: </strong>${escapeHtml(meta.internal_capacity)}</p>` : '';
+  const categoryLabel = `<p class="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-500">${escapeHtml(category.label)}</p>`;
   return [
     '<article class="flex flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl">',
     `<a href="/products/${slug}/" class="block flex-1 text-inherit no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-slate-700">`,
     `<div class="relative h-48 overflow-hidden bg-slate-100">${imageHtml}</div>`,
-    `<div class="p-6"><h3 class="text-xl font-bold text-slate-800">${title}</h3>${model}${capacity}${internalCapacity}</div>`,
+    `<div class="p-6"><h3 class="text-xl font-bold text-slate-800">${title}</h3>${categoryLabel}${model}${capacity}${internalCapacity}</div>`,
     '</a>',
     '<div class="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 p-6 pt-4">',
     `<a href="/products/${slug}/" class="rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900" aria-label="Details: ${title}">Details</a>`,
@@ -185,6 +187,15 @@ function fillTemplate(template, values) {
 
 async function main() {
   const template = await readFile(TEMPLATE_PATH, 'utf8');
+  const taxonomy = JSON.parse(await readFile(TAXONOMY_PATH, 'utf8'));
+  const collectionById = new Map([...taxonomy.categories, ...taxonomy.solutions].map((item) => [item.id, item]));
+  const assignmentEntries = Object.entries(taxonomy.assignments || {});
+  const categoryFor = (slug) => {
+    const assignment = taxonomy.assignments[slug];
+    const collection = assignment && collectionById.get(assignment.collectionId);
+    if (!collection) throw new Error(`Missing or invalid equipment category assignment for ${slug}`);
+    return { ...collection, status: assignment.status || 'confirmed' };
+  };
   const files = (await readdir(PRODUCTS_DIR)).filter((name) => name.toLowerCase().endsWith('.md')).sort();
   const products = [];
   const seenSlugs = new Set();
@@ -196,12 +207,20 @@ async function main() {
     if (seenSlugs.has(slug)) throw new Error(`Duplicate product url_slug: ${slug}`);
     seenSlugs.add(slug);
     if (!String(meta.title || '').trim() || !englishBody.trim()) throw new Error(`${filename}: English title and body are required`);
-    products.push({ meta, slug, englishBody });
+    const category = categoryFor(slug);
+    products.push({ meta, slug, englishBody, category });
   }
+
+  const productSlugs = new Set(products.map(({ slug }) => slug));
+  for (const slug of productSlugs) categoryFor(slug);
+  for (const slug of Object.keys(taxonomy.assignments || {})) {
+    if (!productSlugs.has(slug)) throw new Error(`Equipment category assignment references unknown product: ${slug}`);
+  }
+  if (assignmentEntries.length !== products.length) throw new Error('Every product must have exactly one equipment category assignment');
 
   let pageCount = 0;
   const sitemapEntries = [{ loc: `${SITE_URL}/`, alternates: [] }];
-  for (const { meta, slug, englishBody } of products) {
+  for (const { meta, slug, englishBody, category } of products) {
     const available = ['en', ...['es', 'ar', 'ru'].filter((language) =>
       String(meta[LANGUAGES[language].titleKey] || '').trim() &&
       String(meta[LANGUAGES[language].bodyKey] || '').trim()
@@ -236,7 +255,7 @@ async function main() {
         PRODUCT_TITLE: escapeHtml(title),
         PRODUCT_IMAGE: image ? `<picture class="product-picture"><source type="image/webp" srcset="${escapeHtml(image)}.400.webp 400w, ${escapeHtml(image)}.800.webp 800w" sizes="(min-width: 1132px) 1100px, calc(100vw - 32px)"><img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="eager" fetchpriority="high" decoding="async" onerror="this.parentElement.querySelector('source').remove();this.onerror=null;"></picture>` : '',
         SUMMARY: language === 'en' && meta.summary ? `<p class="summary">${escapeHtml(meta.summary)}</p>` : '',
-        SPECS: renderSpecs(meta), BODY: renderMarkdown(body),
+        SPECS: renderSpecs({ ...meta, category: category.label }), BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
         HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
         PRODUCT_JSON: JSON.stringify({
@@ -244,7 +263,7 @@ async function main() {
           description, url: canonical, mainEntityOfPage: canonical,
           ...(image ? { image: `${SITE_URL}${image}` } : {}),
           ...(meta.model ? { sku: String(meta.model).trim() } : {}),
-          ...(meta.category ? { category: String(meta.category).trim() } : {}),
+          category: category.label,
           brand: { '@type': 'Brand', name: 'AIZGZ Machinery' }
         }).replace(/</g, '\\u003c')
       });
@@ -263,7 +282,7 @@ async function main() {
   if (!homepage.includes(startMarker) || !homepage.includes(endMarker)) {
     throw new Error('index.html is missing the PRODUCT_CARDS markers');
   }
-  const homepageCards = products.map(({ meta, slug }) => renderHomepageProductCard(meta, slug)).join('\n');
+  const homepageCards = products.map(({ meta, slug, category }) => renderHomepageProductCard(meta, slug, category)).join('\n');
   const markerPattern = /<!-- PRODUCT_CARDS_START -->[\s\S]*?<!-- PRODUCT_CARDS_END -->/;
   await writeFile(homepagePath, homepage.replace(markerPattern, `${startMarker}\n${homepageCards}\n        ${endMarker}`), 'utf8');
 
