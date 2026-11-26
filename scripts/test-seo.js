@@ -81,6 +81,33 @@ for (const language of LANGUAGES) {
   expectedUrls.add(canonical);
   customMachineryPages.push({ language, canonical, alternates });
 }
+const equipmentPages = [];
+for (const language of LANGUAGES) {
+  const route = language === 'en' ? '/equipment/' : '/' + language + '/equipment/';
+  const file = path.join(ROOT, route.replace(/^\\//, ''), 'index.html');
+  const html = await readFile(file, 'utf8');
+  const canonical = html.match(/<link\\s+rel="canonical"\\s+href="([^"]+)"/i)?.[1] || '';
+  const title = html.match(/<title>([^<]+)<\\/title>/i)?.[1] || '';
+  const description = html.match(/<meta\\s+name="description"\\s+content="([^"]+)"/i)?.[1] || '';
+  assert.ok(title.trim(), file + ': title is required');
+  assert.ok(description.trim(), file + ': meta description is required');
+  assert.equal(canonical, SITE_URL + route, file + ': canonical must match its language route');
+  assert.match(html, new RegExp('<html lang="' + language + '" dir="' + (language === 'ar' ? 'rtl' : 'ltr') + '">'), file + ': language and text direction must be correct');
+  for (const category of ['mixing-equipment', 'conveying-feeding-equipment', 'packaging-equipment']) {
+    assert.match(html, new RegExp('<section class="catalog-section" id="' + category + '">'), file + ': category section ' + category + ' is required');
+    assert.match(html, new RegExp('<a href="#' + category + '">'), file + ': category navigation link ' + category + ' is required');
+  }
+  assert.match(html, /class="solution-section"/, file + ': dry mortar production line must be shown separately');
+  assert.equal((html.match(/class="equipment-card"/g) || []).length, 11, file + ': catalogue must show the 11 single-equipment products');
+  const alternates = matchAll(html, /<link\\s+rel="alternate"\\s+hreflang="([^"]+)"\\s+href="([^"]+)"\\s*>/gi)
+    .map((match) => ({ language: match[1], url: match[2] }));
+  assert.equal(new Set(alternates.map((item) => item.language)).size, alternates.length, file + ': hreflang values must be unique');
+  assert.ok(alternates.some((item) => item.language === language && item.url === canonical), file + ': self hreflang is required');
+  assert.ok(alternates.some((item) => item.language === 'x-default' && item.url === SITE_URL + '/equipment/'), file + ': x-default alternate is required');
+  expectedUrls.add(canonical);
+  equipmentPages.push({ language, canonical, alternates });
+}
+
 const productGroups = new Map();
 for (const page of pages) {
   const html = await readFile(page.file, 'utf8');
@@ -136,6 +163,19 @@ for (const [slug, group] of productGroups) {
 }
 
 
+for (const { language, canonical, alternates } of equipmentPages) {
+  const actualLanguages = new Set(alternates.filter((item) => item.language !== 'x-default').map((item) => item.language));
+  assert.deepEqual(actualLanguages, new Set(LANGUAGES), canonical + ': every equipment page must advertise all four languages');
+  for (const alternate of alternates) assert.ok(expectedUrls.has(alternate.url), canonical + ': hreflang target must be included in generated pages');
+  const sitemapEntry = sitemapEntries.find((entry) => entry.loc === canonical);
+  assert.ok(sitemapEntry, canonical + ': sitemap entry is required');
+  assert.deepEqual(
+    new Set(sitemapEntry.alternates.map((item) => item.language)),
+    new Set([...LANGUAGES, 'x-default']),
+    canonical + ': sitemap hreflang entries must include all equipment languages'
+  );
+}
+
 for (const { language, canonical, alternates } of customMachineryPages) {
   const actualLanguages = new Set(alternates.filter((item) => item.language !== 'x-default').map((item) => item.language));
   assert.deepEqual(actualLanguages, new Set(LANGUAGES), canonical + ': every custom machinery page must advertise all four languages');
@@ -156,4 +196,4 @@ assert.match(robots, /^User-agent:\s*\*/m, 'robots.txt must contain a global use
 assert.match(robots, /^Allow:\s*\//m, 'robots.txt must allow public crawling');
 assert.ok(robots.includes('Sitemap: ' + SITE_URL + '/sitemap.xml'), 'robots.txt must reference the production sitemap');
 
-console.log('SEO regression checks passed for homepage, ' + pages.length + ' product language pages, four custom machinery pages, sitemap, hreflang, structured data and robots.txt.');
+console.log('SEO regression checks passed for homepage, ' + pages.length + ' product language pages, four equipment catalogue pages, four custom machinery pages, sitemap, hreflang, structured data and robots.txt.');
