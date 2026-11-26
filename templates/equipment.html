@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{HTML_LANG}}" dir="{{DIR}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="{{CANONICAL}}">
+  {{ALTERNATES}}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AIZGZ Machinery">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="theme-color" content="#142b4a">
+  <style>
+    :root{font-family:Arial,Helvetica,sans-serif;color:#243449;background:#fff}
+    *{box-sizing:border-box}body{margin:0;line-height:1.65}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}
+    .site-header{border-bottom:1px solid #e5eaf0;background:#fff}.header-inner,.container{width:min(1160px,calc(100% - 40px));margin:auto}
+    .header-inner{height:76px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800;letter-spacing:.04em;color:#142b4a;font-size:1.35rem}.brand span{font-size:.68rem;letter-spacing:.16em;color:#718096;margin-left:.45rem}
+    .language-links{display:flex;gap:1rem;font-size:.85rem;color:#53657b}.language-links a[aria-current=page]{font-weight:700;color:#142b4a;text-decoration:underline}
+    .hero{background:#f5f8fb;padding:64px 0 54px;border-bottom:1px solid #e8edf3}.eyebrow{color:#60758d;font-size:.78rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.hero h1{max-width:850px;color:#142b4a;font-size:clamp(2rem,4vw,3.2rem);line-height:1.16;margin:.7rem 0 1rem}.hero p{max-width:780px;color:#596b80;font-size:1.08rem;margin:0}
+    .category-nav{display:flex;gap:.7rem;flex-wrap:wrap;padding:24px 0;border-bottom:1px solid #e8edf3}.category-nav a{border:1px solid #d8e0e9;border-radius:4px;padding:.55rem .9rem;color:#244363;font-size:.9rem;font-weight:600}.category-nav a:hover{background:#142b4a;color:#fff;text-decoration:none}
+    .catalog-section{padding:44px 0 12px;scroll-margin-top:20px}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:22px}.section-heading h2{font-size:1.65rem;line-height:1.2;color:#142b4a;margin:0}.section-heading p{color:#718096;margin:.4rem 0 0;max-width:720px}
+    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.equipment-card{border:1px solid #e1e7ee;border-radius:7px;overflow:hidden;background:#fff;display:flex;flex-direction:column;min-width:0}.equipment-image{display:block;background:#f2f5f8;aspect-ratio:4/3;overflow:hidden}.equipment-image img{width:100%;height:100%;object-fit:cover;display:block}.card-body{padding:18px;display:flex;flex-direction:column;flex:1}.category-label{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#718096}.equipment-card h3{font-size:1.08rem;line-height:1.35;color:#142b4a;margin:.5rem 0}.equipment-card p{font-size:.9rem;color:#65758a;margin:0 0 1rem}.card-actions{display:flex;gap:1.1rem;flex-wrap:wrap;margin-top:auto;padding-top:.5rem;font-size:.86rem;font-weight:700}.details-link{color:#244363}.quote-link{color:#9a6a1d}
+    .solution-section{margin:50px 0 10px;padding:28px;background:#f5f8fb;border:1px solid #e3eaf1;border-radius:7px}.solution-section h2{color:#142b4a;margin:0 0 .5rem}.solution-section p{color:#596b80;margin:.3rem 0 1rem}.solution-link{font-weight:700;color:#244363}
+    .cta{margin:48px 0 64px;padding:34px;background:#142b4a;color:#fff;border-radius:7px}.cta h2{margin:0 0 .4rem;font-size:1.5rem}.cta p{color:#d2dce7;margin:.2rem 0 1.2rem}.cta a{display:inline-block;background:#fff;color:#142b4a;border-radius:4px;padding:.65rem 1rem;font-weight:700}
+    footer{background:#f5f8fb;border-top:1px solid #e4eaf0;padding:24px 0;color:#708096;font-size:.85rem}
+    @media(max-width:850px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:560px){.header-inner,.container{width:calc(100% - 28px)}.hero{padding:42px 0}.product-grid{grid-template-columns:1fr}.section-heading{display:block}.category-nav{gap:.5rem}.category-nav a{font-size:.82rem}.cta{padding:24px}}
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="{{HOME_URL}}/">AIZGZ <span>MACHINERY</span></a><nav class="language-links" aria-label="Languages">{{LANGUAGE_LINKS}}</nav></div></header>
+  <section class="hero"><div class="container"><div class="eyebrow">{{EYEBROW}}</div><h1>{{HERO_TITLE}}</h1><p>{{HERO_DESCRIPTION}}</p></div></section>
+  <main class="container">
+    <nav class="category-nav" aria-label="Equipment categories">{{CATEGORY_NAV}}</nav>
+    {{CATEGORY_SECTIONS}}
+    {{SOLUTION_SECTION}}
+    <section class="cta"><h2>{{CTA_TITLE}}</h2><p>{{CTA_DESCRIPTION}}</p><a href="{{CTA_URL}}">{{CTA_LABEL}}</a></section>
+  </main>
+  <footer><div class="container">{{FOOTER}}</div></footer>
+</body>
+</html>
