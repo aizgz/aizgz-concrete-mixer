@@ -46,22 +46,16 @@ collections:
       - { label: "Product Title - Russian (俄语名称)", name: "title_ru", widget: "string", required: false }
       - { label: "Model (型号)", name: "model", widget: "string", required: false }
       - { label: "Internal Material Capacity (设备内部物料容量)", name: "internal_capacity", widget: "string", required: false }
-      # 👈 核心升级：新增设备分类下拉菜单，涵盖干粉砂浆及重型建机
-      - { 
-          label: "Category (设备大类)", 
-          name: "category", 
-          widget: "select", 
+      - {
+          label: "Equipment Category (设备分类)",
+          name: "equipment_category",
+          widget: "select",
           options: [
-            "Dry Mix Mortar Plant",
-            "Mixing & Blending Equipment", 
-            "Tile Adhesive Production Line", 
-            "Wall Putty Making Machine", 
-            "Concrete Equipment", 
-            "Block & Brick Making Machine", 
-            "Crushing & Screening Plant", 
-            "Packing & Auxiliary Equipment",
-            "Palletizers"
-          ] 
+            { label: "Mixing Equipment", value: "mixing-equipment" },
+            { label: "Conveying & Feeding Equipment", value: "conveying-feeding-equipment" },
+            { label: "Packaging Equipment", value: "packaging-equipment" },
+            { label: "Dry Mortar Production Line", value: "dry-mortar-production-line" }
+          ]
         }
       - { label: "Capacity / Throughput (产能)", name: "capacity", widget: "string", required: false }
       - { label: "Voltage (电压)", name: "voltage", widget: "string", required: false }
