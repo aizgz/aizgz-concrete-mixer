@@ -5,6 +5,8 @@ title_es: "Mezcladora, transportador y alimentador de tornillo"
 title_ar: "خلاط مسحوق وناقل لولبي ومغذٍ"
 title_ru: "Смеситель, шнековый конвейер и питатель"
 category: Mixing & Blending Equipment
+equipment_category: conveying-feeding-equipment
+equipment_category_status: provisional
 supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/8.jpeg
