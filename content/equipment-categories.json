@@ -8,7 +8,10 @@
       "description": "Mixers for dry-mix mortar, gypsum, putty and powder processing.",
       "label_es": "Equipos de mezcla",
       "label_ar": "معدات الخلط",
-      "label_ru": "Смесительное оборудование"
+      "label_ru": "Смесительное оборудование",
+      "description_es": "Mezcladoras para mortero seco, yeso, masilla y procesamiento de polvos.",
+      "description_ar": "خلاطات للملاط الجاف والجبس والمعجون ومعالجة المساحيق.",
+      "description_ru": "Mischer für Trockenmörtel, Gips, Spachtelmasse und Pulververarbeitung."
     },
     {
       "id": "conveying-feeding-equipment",
@@ -17,7 +20,10 @@
       "description": "Equipment for conveying, elevating and feeding bulk materials.",
       "label_es": "Equipos de transporte y alimentación",
       "label_ar": "معدات النقل والتغذية",
-      "label_ru": "Оборудование для транспортировки и подачи"
+      "label_ru": "Оборудование для транспортировки и подачи",
+      "description_es": "Equipos para transportar, elevar y alimentar materiales a granel.",
+      "description_ar": "معدات لنقل ورفع وتغذية المواد السائبة.",
+      "description_ru": "Оборудование для транспортировки, подъёма и подачи сыпучих материалов."
     },
     {
       "id": "packaging-equipment",
@@ -26,7 +32,10 @@
       "description": "Bagging and packaging equipment for dry powders and mortar.",
       "label_es": "Equipos de envasado",
       "label_ar": "معدات التعبئة والتغليف",
-      "label_ru": "Упаковочное оборудование"
+      "label_ru": "Упаковочное оборудование",
+      "description_es": "Equipos de ensacado y envasado de polvos secos y mortero.",
+      "description_ar": "معدات تعبئة وتغليف المساحيق الجافة والملاط.",
+      "description_ru": "Оборудование для фасовки и упаковки сухих порошков и строительных смесей."
     }
   ],
   "solutions": [
@@ -37,7 +46,10 @@
       "description": "Complete dry-mortar production line configurations coordinated to project requirements.",
       "label_es": "Planta de producción de mortero seco",
       "label_ar": "محطة إنتاج الملاط الجاف",
-      "label_ru": "Линия по производству сухих смесей"
+      "label_ru": "Линия по производству сухих смесей",
+      "description_es": "Configuraciones completas de líneas de producción de mortero seco coordinadas según los requisitos del proyecto.",
+      "description_ar": "تكوينات متكاملة لخطوط إنتاج الملاط الجاف وفقاً لمتطلبات المشروع.",
+      "description_ru": "Комплексные конфигурации линий по производству сухих строительных смесей с учётом требований проекта."
     }
   ]
 }
