@@ -5,6 +5,7 @@ title_es: "Mezcladora sin gravedad de doble eje"
 title_ar: "خلاط مزدوج المحور للمساحيق"
 title_ru: "Двухвальный безгравитационный смеситель"
 category: Mixing & Blending Equipment
+equipment_category: mixing-equipment
 supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/7.jpeg
