@@ -65,6 +65,7 @@ collections:
       - { label: "Mixing Volume (搅拌容积/批次容量)", name: "mixing_volume", widget: "string", required: false }
       - { label: "Mixing Time (搅拌时间)", name: "mixing_time", widget: "string", required: false }
       - { label: "Application (适用物料/用途)", name: "application", widget: "text", required: false }
+      - { label: "Main Features (主要特点)", name: "features", widget: "text", required: false }
       - { label: "Optional Components (可选配置)", name: "optional_components", widget: "text", required: false }
       - { label: "Supply Status (供货状态)", name: "supply_status", widget: "select", options: ["Available for Supply", "Sourcing on Request", "Temporarily Unavailable"], required: false }
       - { label: "Manufacturer (制造商)", name: "manufacturer", widget: "string", required: false }
