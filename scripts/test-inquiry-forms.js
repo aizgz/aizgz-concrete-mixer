@@ -46,8 +46,8 @@ function assertCompactFields(form, source, expected) {
   if (product) assert.doesNotMatch(product, /\brequired(?:\s|=|>)/i, source + ': product selection must remain optional');
 }
 
-function assertRequiredFields(form, source) {
-  for (const name of ['name', 'email', 'message']) {
+function assertRequiredFields(form, source, required = ['name', 'email', 'message']) {
+  for (const name of required) {
     const field = [...form.matchAll(/<(?:input|textarea)\b[^>]*>/gi)]
       .map(([element]) => element)
       .find((element) => new RegExp("\\bname=[\"']" + name + "[\"']").test(element));
@@ -90,8 +90,8 @@ assert.match(homepage, /https:\/\/formspree\.io\/f\//, 'homepage: Formspree endp
 const template = await read('templates/product.html');
 const templateForm = extractForm(template, 'product-inquiry-form', 'product template');
 assertHoneypot(templateForm, 'product template');
-assertCompactFields(templateForm, 'product template', ['name', 'email', 'phone', 'product_model', 'message']);
-assertRequiredFields(templateForm, 'product template');
+assertCompactFields(templateForm, 'product template', ['product_model', 'application', 'material', 'required_capacity', 'additional_requirements', 'name', 'email']);
+assertRequiredFields(templateForm, 'product template', ['name', 'email']);
 assert.match(template, /addEventListener\(['"]submit['"]/, 'product template: submit listener is missing');
 assert.match(template, /new FormData\(form\)/, 'product template: FormData submission is missing');
 assert.match(template, /method:\s*'POST'/i, 'product template: POST submission is missing');
@@ -109,8 +109,8 @@ for (const pagePath of productPages) {
   const relativePath = path.relative(root, pagePath);
   const form = extractForm(html, 'product-inquiry-form', relativePath);
   assertHoneypot(form, relativePath);
-  assertCompactFields(form, relativePath, ['name', 'email', 'phone', 'product_model', 'message']);
-  assertRequiredFields(form, relativePath);
+  assertCompactFields(form, relativePath, ['product_model', 'application', 'material', 'required_capacity', 'additional_requirements', 'name', 'email']);
+  assertRequiredFields(form, relativePath, ['name', 'email']);
   assert.match(html, /new FormData\(form\)/, relativePath + ': FormData submission is missing');
   assert.match(html, /method:\s*'POST'/i, relativePath + ': POST submission is missing');
 }
