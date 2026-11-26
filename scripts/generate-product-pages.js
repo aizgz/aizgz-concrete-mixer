@@ -316,7 +316,6 @@ async function main() {
         FORM_SUBMIT_LABEL: escapeHtml(PRODUCT_PAGE_TEXT[language].submit),
         FORM_NOTE: escapeHtml(PRODUCT_PAGE_TEXT[language].note),
         FOOTER_NOTE: escapeHtml(PRODUCT_PAGE_TEXT[language].footer),
-        SPECS_UNUSED: '',
         BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
         HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
