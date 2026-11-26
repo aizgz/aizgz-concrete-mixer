@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "mixing-equipment",
+      "label": "Mixing Equipment",
+      "path": "/equipment/mixing-equipment/",
+      "description": "Mixers for dry-mix mortar, gypsum, putty and powder processing."
+    },
+    {
+      "id": "conveying-feeding-equipment",
+      "label": "Conveying & Feeding Equipment",
+      "path": "/equipment/conveying-feeding-equipment/",
+      "description": "Equipment for conveying, elevating and feeding bulk materials."
+    },
+    {
+      "id": "packaging-equipment",
+      "label": "Packaging Equipment",
+      "path": "/equipment/packaging-equipment/",
+      "description": "Bagging and packaging equipment for dry powders and mortar."
+    }
+  ],
+  "solutions": [
+    {
+      "id": "dry-mortar-production-line",
+      "label": "Dry Mortar Production Line",
+      "path": "/solutions/dry-mortar-production-line/",
+      "description": "Complete dry-mortar production line configurations coordinated to project requirements."
+    }
+  ],
+  "assignments": {
+    "ultrasonic-heat-sealing-bagging-machine": {
+      "collectionId": "packaging-equipment",
+      "status": "confirmed"
+    },
+    "twin-shaft-paddle-mixer": {
+      "collectionId": "mixing-equipment",
+      "status": "confirmed"
+    },
+    "dual-axis-gravity-free-mixer": {
+      "collectionId": "mixing-equipment",
+      "status": "confirmed"
+    },
+    "plate-chain-bucket-elevator": {
+      "collectionId": "conveying-feeding-equipment",
+      "status": "confirmed"
+    },
+    "gypsum-powder-mixer": {
+      "collectionId": "mixing-equipment",
+      "status": "confirmed"
+    },
+    "horizontal-screw-belt-mixer": {
+      "collectionId": "mixing-equipment",
+      "status": "confirmed"
+    },
+    "dry-mortar-packaging-machine": {
+      "collectionId": "packaging-equipment",
+      "status": "confirmed"
+    },
+    "powder-mixer-screw-conveyor-feeder": {
+      "collectionId": "conveying-feeding-equipment",
+      "status": "provisional",
+      "note": "Contains a mixer, screw conveyor and feeder; confirm the primary equipment configuration from the actual product photos."
+    },
+    "dry-mortar-mixing-plant": {
+      "collectionId": "dry-mortar-production-line",
+      "status": "confirmed"
+    },
+    "automatic-valve-port-bagging-machine": {
+      "collectionId": "packaging-equipment",
+      "status": "confirmed"
+    },
+    "automatic-screw-fed-powder-packaging-machine": {
+      "collectionId": "packaging-equipment",
+      "status": "confirmed"
+    },
+    "horizontal-putty-bentonite-powder-mixer": {
+      "collectionId": "mixing-equipment",
+      "status": "confirmed"
+    }
+  }
+}
