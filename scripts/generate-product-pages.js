@@ -347,7 +347,7 @@ async function main() {
       HTML_LANG: config.htmlLang, DIR: config.dir,
       TITLE: escapeHtml(`${text.title} | AIZGZ Machinery`),
       DESCRIPTION: escapeHtml(description), CANONICAL: canonical,
-      ALTERNATES: alternates.join('\\n  '), HOME_URL: SITE_URL,
+      ALTERNATES: alternates.join('\n  '), HOME_URL: SITE_URL,
       EYEBROW: escapeHtml(text.eyebrow), HERO_TITLE: escapeHtml(text.title),
       HERO_DESCRIPTION: escapeHtml(text.description), CATEGORY_NAV: categoryNav,
       CATEGORY_SECTIONS: categorySections, SOLUTION_SECTION: solutionSection,
