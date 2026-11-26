@@ -5,19 +5,28 @@
       "id": "mixing-equipment",
       "label": "Mixing Equipment",
       "path": "/equipment/mixing-equipment/",
-      "description": "Mixers for dry-mix mortar, gypsum, putty and powder processing."
+      "description": "Mixers for dry-mix mortar, gypsum, putty and powder processing.",
+      "label_es": "Equipos de mezcla",
+      "label_ar": "معدات الخلط",
+      "label_ru": "Смесительное оборудование"
     },
     {
       "id": "conveying-feeding-equipment",
       "label": "Conveying & Feeding Equipment",
       "path": "/equipment/conveying-feeding-equipment/",
-      "description": "Equipment for conveying, elevating and feeding bulk materials."
+      "description": "Equipment for conveying, elevating and feeding bulk materials.",
+      "label_es": "Equipos de transporte y alimentación",
+      "label_ar": "معدات النقل والتغذية",
+      "label_ru": "Оборудование для транспортировки и подачи"
     },
     {
       "id": "packaging-equipment",
       "label": "Packaging Equipment",
       "path": "/equipment/packaging-equipment/",
-      "description": "Bagging and packaging equipment for dry powders and mortar."
+      "description": "Bagging and packaging equipment for dry powders and mortar.",
+      "label_es": "Equipos de envasado",
+      "label_ar": "معدات التعبئة والتغليف",
+      "label_ru": "Упаковочное оборудование"
     }
   ],
   "solutions": [
@@ -25,7 +34,10 @@
       "id": "dry-mortar-production-line",
       "label": "Dry Mortar Production Line",
       "path": "/solutions/dry-mortar-production-line/",
-      "description": "Complete dry-mortar production line configurations coordinated to project requirements."
+      "description": "Complete dry-mortar production line configurations coordinated to project requirements.",
+      "label_es": "Planta de producción de mortero seco",
+      "label_ar": "محطة إنتاج الملاط الجاف",
+      "label_ru": "Линия по производству сухих смесей"
     }
   ]
 }
