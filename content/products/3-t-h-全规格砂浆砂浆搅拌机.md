@@ -153,48 +153,22 @@ body_ru: |
   **Важно:** До подготовки коммерческого предложения или окончательного чертежа поставщик должен подтвердить принадлежность этих данных к каждому узлу и их применимость к требуемой конфигурации.
 ---
 
-# I. Main Body of Twin-Shaft Weightless Mixer
+# Main Twin-Shaft Paddle Mixer
 
-**Working principle:** The two mixing shafts operate in coordination to lift, disperse and cross-mix materials. Dispersing blades help distribute lightweight materials such as fibers and wood fibers. The source information gives an approximate mixing time of 3 minutes per batch; this figure should be confirmed with the supplier.
+**Working principle:** The two mixing shafts operate in coordination to lift, disperse and cross-mix materials. Dispersing blades help distribute lightweight materials such as fibers and wood fibers.
 
-# II. Secondary Mixing Finished Product Bin
+**Applications:** Intended for mixing powder materials and dry-mix formulations. Suitability for a specific material should be assessed against its properties and process requirements.
 
-**Function:** Distributes material to the discharge outlets and provides an additional mixing stage. According to the supplied description, it helps reduce material caking.
+**Mixing time:** The supplied information gives an approximate mixing time of 3 minutes per batch. This is indicative only and must be confirmed with the supplier for the selected material and configuration.
 
-# III. Weighing and Packaging Machine
+# Optional Auxiliary Equipment for a Complete Line
 
-**Listed features:** Impeller feeding, straightforward maintenance and high-speed operation. The supplied information states 5–6 seconds to pack a 25 kg bag, with an approximate accuracy error of ±0.2 kg. These figures should be confirmed for the selected configuration.
+Depending on project requirements, a complete solution may integrate separate equipment such as storage or pre-mixing bins, weighing hoppers, screw feeders and conveyors, bucket elevators, dust collectors, and weighing and packaging machines. These are optional auxiliary units; they are not part of the main mixer itself. Their selection depends on the production-line design.
 
-# IV. Pulse Dust Collector
+# Technical Data Requiring Allocation and Confirmation
 
-**Function:** Uses high-pressure air pulses to dislodge dust collected on the filter bags and return it to the feeding inlet for recovery.
+The original documentation mentions motors rated at 18.5 kW, 7.5 kW, 3 kW, 5.5 kW and 4 kW, a 3 kW blower, a 4 kW dispersing blade, a Φ108 mm main shaft, a No. 8 cycloidal reducer and three rows of drive chains. It also lists various plate and component thicknesses, a 12-bag dust collector and a lifting height of 2–8 m.
 
-# V. Bucket Elevator
+These figures appear to relate to different units within the overall system and cannot be reliably assigned to the main mixer. They are therefore not presented as confirmed mixer specifications. The supplier must identify the component associated with each figure and confirm its applicability to the selected configuration before a quotation or final drawing is prepared.
 
-**Listed features:** An eight-layer belt-type lifting design with ABS plastic buckets. The supplier description states that the buckets are wear-, heat- and compression-resistant. The lifting height and final configuration should be confirmed.
-
-# VI. Pre-Mixing Bin
-
-**Function:** Stores raw materials before mixing, helps the main machine operate more continuously, and reduces material-feeding and batching time.
-
-# VII. Weighing Hopper
-
-**Features:** Screw feeding and three sensors arranged symmetrically around the hopper to control the quantity of material delivered by each conveyor.
-
-# VIII. Screw Feeder and Conveying System
-
-The conveyor can be configured horizontally, at an incline, or in a combined arrangement. It can work with other conveying equipment for material collection, distribution, feeding, mixing, batching and discharge. Specific applications and functions depend on the project configuration.
-
-# Additional System Specifications — Subject to Supplier Confirmation
-
-The original information includes the following figures, but does not reliably identify which component each value belongs to. They are therefore retained as preliminary system-level information, not as confirmed specifications of the main mixer:
-
-- Listed motor ratings: 18.5 kW, 7.5 kW and 3 kW; a 6-pole 5.5 kW motor; plus a 4 kW motor and a 3 kW blower.
-- Listed dispersing-cutter rating: 4 kW.
-- Listed thicknesses: cylinder 6 mm; paddle plates 10 mm; end cap 10 mm; bearing-chamber frame 12 mm; other stated values include a 3 mm cylinder, 6 mm end cap and 8 mm mixing blades; 2 mm plate, 3 mm top cover and 3 mm steel plates.
-- Main mixing shaft diameter: Φ108 mm.
-- No. 8 cycloidal pinwheel reducer and three rows of drive chains.
-- Dust collector: 12-bag type.
-- Listed lifting height: 2–8 m.
-
-**Important:** The supplier must confirm which component each figure applies to and whether it is suitable for the requested configuration before a quotation or final drawing is issued.
+**Custom configuration:** The mixer and any auxiliary equipment are selected after clarifying the buyer’s materials, required capacity, process and installation conditions.
