@@ -1,19 +1,21 @@
 ---
 title: Dry-Mortar Packaging Machine
 url_slug: dry-mortar-packaging-machine
-title_es: "Máquina envasadora de mortero seco"
-title_ar: "آلة تعبئة الملاط الجاف"
-title_ru: "Упаковочная машина для сухих смесей"
+title_ar: آلة تعبئة الملاط الجاف
+title_ru: Упаковочная машина для сухих смесей
 category: Packaging Equipment
-catalog_visible: false
 supply_status: Available for Supply
+image: /uploads/6.jpeg.400.webp
+body_es: >
+  Página de referencia general sobre equipos de envasado. No se cuenta como una
+  máquina independiente en el catálogo principal.
+body_ru: >
+  Общая справочная страница об упаковочном оборудовании. Она не учитывается как
+  отдельная машина в основном каталоге.
+catalog_visible: false
+title_es: Máquina envasadora de mortero seco
 power_type: Electric Motor
-image: /uploads/6.jpeg
-body_es: |
-  Página de referencia general sobre equipos de envasado. No se cuenta como una máquina independiente en el catálogo principal.
 body_ar: |
   صفحة مرجعية عامة لمعدات التعبئة. ولا تُحتسب كآلة مستقلة في الكتالوج الرئيسي.
-body_ru: |
-  Общая справочная страница об упаковочном оборудовании. Она не учитывается как отдельная машина в основном каталоге.
 ---
 This general packaging overview page is retained for reference and is excluded from the main product count. The specific packaging machines are listed separately in the product catalogue.
