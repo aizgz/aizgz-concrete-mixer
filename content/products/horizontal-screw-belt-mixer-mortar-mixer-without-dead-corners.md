@@ -8,6 +8,9 @@ category: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Motor
 summary: "Horizontal ribbon mixer. The source records list HJJ series models and preliminary technical figures; model-to-value correspondence requires supplier confirmation."
+summary_es: "Mezcladora horizontal de cintas serie HJJ. Los valores técnicos registrados son preliminares; su correspondencia con cada modelo requiere confirmación."
+summary_ar: "خلاط شريطي أفقي من سلسلة HJJ. القيم الفنية المسجلة أولية، ويجب تأكيد مطابقة كل قيمة للطراز المعني."
+summary_ru: "Горизонтальный ленточный смеситель серии HJJ. Указанные технические значения предварительные; их соответствие моделям требует подтверждения."
 body_es: |
   ## Modelos indicados en los registros originales
   
