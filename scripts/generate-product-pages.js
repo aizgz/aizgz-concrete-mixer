@@ -240,12 +240,29 @@ async function main() {
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
         HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
         PRODUCT_JSON: JSON.stringify({
-          '@context': 'https://schema.org', '@type': 'Product', name: title,
-          description, url: canonical, mainEntityOfPage: canonical,
-          ...(image ? { image: `${SITE_URL}${image}` } : {}),
-          ...(meta.model ? { sku: String(meta.model).trim() } : {}),
-          ...(meta.category ? { category: String(meta.category).trim() } : {}),
-          brand: { '@type': 'Brand', name: 'AIZGZ Machinery' }
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'Product',
+              '@id': `${canonical}#product`,
+              name: title,
+              description,
+              url: canonical,
+              mainEntityOfPage: canonical,
+              ...(image ? { image: `${SITE_URL}${image}` } : {}),
+              ...(meta.model ? { sku: String(meta.model).trim() } : {}),
+              ...(meta.category ? { category: String(meta.category).trim() } : {}),
+              brand: { '@type': 'Brand', name: 'AIZGZ Machinery' }
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: config.home, item: `${SITE_URL}/` },
+                { '@type': 'ListItem', position: 2, name: config.products, item: `${SITE_URL}/#products` },
+                { '@type': 'ListItem', position: 3, name: title }
+              ]
+            }
+          ]
         }).replace(/</g, '\\u003c')
       });
       const outputDir = language === 'en'
