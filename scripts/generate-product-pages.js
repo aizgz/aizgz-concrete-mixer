@@ -295,7 +295,9 @@ async function main() {
   }
   const homepageCards = products.filter(({ meta }) => meta.catalog_visible !== false).map(({ meta, slug }) => renderHomepageProductCard(meta, slug)).join('\n');
   const markerPattern = /<!-- PRODUCT_CARDS_START -->[\s\S]*?<!-- PRODUCT_CARDS_END -->/;
-  const updatedHomepage = homepage.replace(markerPattern, `${startMarker}\\n${homepageCards}\\n        ${endMarker}`);
+  const updatedHomepage = homepage
+    .replace(markerPattern, `${startMarker}\\n${homepageCards}\\n        ${endMarker}`)
+    .replace('<!-- HOMEPAGE_HREFLANG -->', homepageAlternateTags);
   await writeFile(homepagePath, updatedHomepage, 'utf8');
 
   const localizedHomepages = {
@@ -305,13 +307,13 @@ async function main() {
   };
   const homepageAlternateTags = homepageAlternates.map(({ hreflang, href }) =>
     `<link rel="alternate" hreflang="${hreflang}" href="${href}">`
-  ).join('\\n  ');
+  ).join('\n  ');
   for (const [language, config] of Object.entries(localizedHomepages)) {
     const localized = updatedHomepage
       .replace('<html lang="en" class="scroll-smooth">', `<html lang="${config.htmlLang}"${language === 'ar' ? ' dir="rtl"' : ''} class="scroll-smooth">`)
       .replace('<title>Industrial Equipment Supplier | AIZGZ Machinery</title>', `<title>${config.title}</title>`)
       .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${config.description}">`)
-      .replace('<link rel="canonical" href="https://www.aizgz.com/">', `<link rel="canonical" href="${SITE_URL}/${language}/">\\n  ${homepageAlternateTags}`)
+      .replace('<link rel="canonical" href="https://www.aizgz.com/">', `<link rel="canonical" href="${SITE_URL}/${language}/">`)
       .replace('<meta property="og:title" content="Industrial Equipment Supplier | AIZGZ Machinery">', `<meta property="og:title" content="${config.title}">`)
       .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${config.description}">`)
       .replace('<meta property="og:url" content="https://www.aizgz.com/">', `<meta property="og:url" content="${SITE_URL}/${language}/">`)
