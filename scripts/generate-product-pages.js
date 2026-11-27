@@ -168,7 +168,8 @@ function renderHomepageProductCard(meta, slug, category) {
     ? `<p class="mt-2 text-sm text-slate-600"><strong>Capacity: </strong>${escapeHtml(meta.capacity)}</p>` : '';
   const internalCapacity = isDisplayableHomepageValue(meta.internal_capacity)
     ? `<p class="mt-2 text-sm text-slate-600"><strong>Internal Capacity: </strong>${escapeHtml(meta.internal_capacity)}</p>` : '';
-  const categoryLabel = `<p class="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-500">${escapeHtml(category.label)}</p>`;
+  const categoryText = category.status === 'provisional' ? 'Category under review' : category.label;
+  const categoryLabel = `<p class="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-500">${escapeHtml(categoryText)}</p>`;
   return [
     '<article class="flex flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-white shadow-md transition duration-300 hover:shadow-xl">',
     `<a href="/products/${slug}/" class="block flex-1 text-inherit no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-slate-700">`,
@@ -225,10 +226,22 @@ function renderEquipmentCard(product, language, category) {
 function renderEquipmentCategorySection(category, products, language) {
   const label = category[`label_${language}`] || category.label;
   const description = category[`description_${language}`] || category.description;
-  const cards = products.filter((product) => product.category.id === category.id)
+  const cards = products.filter((product) => product.category.id === category.id && product.category.status !== 'provisional')
     .map((product) => renderEquipmentCard(product, language, { ...category, label })).join('');
   if (!cards) return '';
   return `<section class="catalog-section" id="${escapeHtml(category.id)}"><div class="section-heading"><div><h2>${escapeHtml(label)}</h2><p>${escapeHtml(description)}</p></div></div><div class="product-grid">${cards}</div></section>`;
+}
+function renderProvisionalSection(products, language) {
+  const labels = {
+    en: { title: 'Equipment Under Review', description: 'These listings are being reviewed to confirm the exact equipment scope and category.', status: 'Classification under review' },
+    es: { title: 'Equipos en revisión', description: 'Estamos revisando estos productos para confirmar el tipo exacto de equipo y su categoría.', status: 'Clasificación en revisión' },
+    ar: { title: 'معدات قيد المراجعة', description: 'تتم مراجعة هذه العناصر لتأكيد نوع المعدات ونطاقها وفئتها بدقة.', status: 'التصنيف قيد المراجعة' },
+    ru: { title: 'Оборудование на проверке', description: 'Проверяем точный состав оборудования и его категорию для этих позиций.', status: 'Категория уточняется' }
+  }[language];
+  const pending = products.filter((product) => product.category.status === 'provisional');
+  if (!pending.length) return '';
+  const cards = pending.map((product) => renderEquipmentCard(product, language, { label: labels.status })).join('');
+  return `<section class="catalog-section provisional-section"><div class="section-heading"><div><h2>${escapeHtml(labels.title)}</h2><p>${escapeHtml(labels.description)}</p></div></div><div class="product-grid">${cards}</div></section>`;
 }
 function renderEquipmentSolution(solution, products, language) {
   const product = products.find((item) => item.category.id === solution.id);
@@ -378,6 +391,7 @@ async function main() {
     const categorySections = taxonomy.categories.map((category) =>
       renderEquipmentCategorySection(category, products, language)
     ).join('');
+    const provisionalSection = renderProvisionalSection(products, language);
     const solutionSection = taxonomy.solutions.map((solution) =>
       renderEquipmentSolution(solution, products, language)
     ).join('');
@@ -394,7 +408,7 @@ async function main() {
       ALTERNATES: alternates.join('\n  '), HOME_URL: SITE_URL,
       EYEBROW: escapeHtml(text.eyebrow), HERO_TITLE: escapeHtml(text.title),
       HERO_DESCRIPTION: escapeHtml(text.description), CATEGORY_NAV: categoryNav,
-      CATEGORY_SECTIONS: categorySections, SOLUTION_SECTION: solutionSection,
+      CATEGORY_SECTIONS: categorySections, PROVISIONAL_SECTION: provisionalSection, SOLUTION_SECTION: solutionSection,
       LANGUAGE_LINKS: languageLinks, PRIMARY_NAV: renderPrimaryNav(language, 'equipment'), CTA_TITLE: escapeHtml(text.ctaTitle),
       CTA_DESCRIPTION: escapeHtml(text.ctaDescription), CTA_LABEL: escapeHtml(text.ctaLabel),
       CTA_URL: `${SITE_URL}/#contact`, FOOTER: escapeHtml(text.footer)
