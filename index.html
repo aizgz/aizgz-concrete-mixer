@@ -840,7 +840,7 @@
           if (!parsed.meta || !parsed.meta.title) throw new Error(`Invalid product content: ${file.name}`);
           return { meta: parsed.meta, body: parsed.body, fileName: file.name };
         }));
-        allProducts = loaded.filter((result) => result.status === 'fulfilled').map((result) => result.value).filter((product) => product.meta.catalog_visible !== false);
+        allProducts = loaded.filter((result) => result.status === 'fulfilled').map((result) => result.value).filter((product) => String(product.meta.catalog_visible).toLowerCase() !== 'false');
         loaded.filter((result) => result.status === 'rejected').forEach((result) => console.error('Product failed to load:', result.reason));
         renderFilteredProducts();
         if (!allProducts.length) {
