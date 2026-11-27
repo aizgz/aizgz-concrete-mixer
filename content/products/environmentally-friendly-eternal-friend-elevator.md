@@ -33,12 +33,9 @@ body_ru: |
   
   В предоставленных записях отсутствуют подтверждённые значения высоты подъёма, производительности, скорости цепи, мощности двигателя, размеров ковшей и общих габаритов. Эти поля оставлены без указания значений.
 
-summary_es: |
-  "Elevador de cangilones con cadena de placas para transporte vertical en plantas de mortero seco. La altura y capacidad se confirman para cada proyecto."
-summary_ar: |
-  "رافعة دلاء بسلسلة صفائحية للنقل الرأسي في مصانع الملاط الجاف. يتم تأكيد الارتفاع والسعة لكل مشروع."
-summary_ru: |
-  "Ковшовый элеватор с пластинчатой цепью для вертикальной транспортировки на заводах сухих смесей. Высота и производительность подтверждаются для каждого проекта."
+summary_es: "Elevador de cangilones con cadena de placas para transporte vertical en plantas de mortero seco. La altura y capacidad se confirman para cada proyecto."
+summary_ar: "رافعة دلاء بسلسلة صفائحية للنقل الرأسي في مصانع الملاط الجاف. يتم تأكيد الارتفاع والسعة لكل مشروع."
+summary_ru: "Ковшовый элеватор с пластинчатой цепью для вертикальной транспортировки на заводах сухих смесей. Высота и производительность подтверждаются для каждого проекта."
 ---
 The existing product record describes a plate-chain bucket elevator for material feeding and vertical conveying in dry-mix mortar production plants.
 
