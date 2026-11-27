@@ -320,7 +320,7 @@ async function main() {
         PRODUCT_TITLE: escapeHtml(title),
         PRODUCT_IMAGE: image ? `<picture class="product-picture"><source type="image/webp" srcset="${escapeHtml(image)}.400.webp 400w, ${escapeHtml(image)}.800.webp 800w" sizes="(min-width: 1132px) 1100px, calc(100vw - 32px)"><img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="eager" fetchpriority="high" decoding="async" onerror="this.parentElement.querySelector('source').remove();this.onerror=null;"></picture>` : '',
         SUMMARY: `<p class="summary">${escapeHtml(makeDescription(meta, body, language))}</p>`,
-        CATEGORY_LABEL: escapeHtml(category[`label_${language}`] || category.label),
+        CATEGORY_LABEL: escapeHtml(category.status === 'provisional' ? ({ en: 'Classification under review', es: 'Clasificación en revisión', ar: 'التصنيف قيد المراجعة', ru: 'Категория уточняется' }[language]) : (category[`label_${language}`] || category.label)),
         EQUIPMENT_URL: `${SITE_URL}${language === 'en' ? '/equipment/' : `/${language}/equipment/`}`,
         EQUIPMENT_LABEL: escapeHtml(PRODUCT_PAGE_TEXT[language].equipment),
         OVERVIEW_TITLE: escapeHtml(PRODUCT_PAGE_TEXT[language].overview),
@@ -352,7 +352,7 @@ async function main() {
           description, url: canonical, mainEntityOfPage: canonical,
           ...(image ? { image: `${SITE_URL}${image}` } : {}),
           ...(meta.model ? { sku: String(meta.model).trim() } : {}),
-          category: category.label,
+          category: category.status === 'provisional' ? 'Classification under review' : category.label,
           brand: { '@type': 'Brand', name: 'AIZGZ Machinery' }
         }).replace(/</g, '\\u003c')
       });
