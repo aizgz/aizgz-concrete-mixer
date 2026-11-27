@@ -514,12 +514,11 @@
 
 
     function browserLanguageChoice() {
-      const candidates = Array.isArray(navigator.languages) ? navigator.languages : [navigator.language || 'en'];
-      for (const candidate of candidates) {
-        const code = String(candidate).toLowerCase().split(/[-_]/)[0];
-        if (['es', 'ar', 'ru'].includes(code)) return code;
-      }
-      return 'en';
+      const primaryLanguage = Array.isArray(navigator.languages) && navigator.languages.length
+        ? navigator.languages[0]
+        : (navigator.language || 'en');
+      const code = String(primaryLanguage).toLowerCase().split(/[-_]/)[0];
+      return ['es', 'ar', 'ru'].includes(code) ? code : 'en';
     }
 
     function loadAnalytics() {
@@ -605,7 +604,7 @@
       fetchContentCollection('cases', 'cases-grid', 'case');
       fetchContentCollection('videos', 'videos-grid', 'video');
 
-      // Apply country-based language only after the runtime endpoint responds.
+      // Apply the preview-only indexing guard after the runtime endpoint responds.
       // A timeout prevents a slow or unavailable function from blocking startup.
       (async () => {
         const controller = new AbortController();
