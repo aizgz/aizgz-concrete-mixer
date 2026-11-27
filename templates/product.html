@@ -47,13 +47,13 @@
 <body>
   <header class="site-header"><div class="header-inner"><a class="brand" href="{{HOME_URL}}/">AIZGZ <span>MACHINERY</span></a></div></header>
   <main class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{HOME_URL}}/">{{HOME_LABEL}}</a> / <a href="{{HOME_URL}}/#products">{{PRODUCTS_LABEL}}</a> / <span>{{PRODUCT_TITLE}}</span></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{HOME_URL}}/">{{HOME_LABEL}}</a> / <a href="{{EQUIPMENT_URL}}">{{EQUIPMENT_LABEL}}</a> / <span>{{PRODUCT_TITLE}}</span></nav>
     <article class="product">
       <header class="product-head"><h1>{{PRODUCT_TITLE}}</h1>{{SUMMARY}}</header>
       {{PRODUCT_IMAGE}}
       <dl class="specs">{{SPECS}}</dl>
       <div class="content">{{BODY}}</div>
-      <div class="actions"><button class="button" type="button" data-product-title="{{PRODUCT_TITLE}}" onclick="openInquiryModal(this)">{{INQUIRY_LABEL}}</button><a class="button secondary" href="{{HOME_URL}}/#products">{{BACK_LABEL}}</a></div>
+      <div class="actions"><button class="button" type="button" data-product-title="{{PRODUCT_TITLE}}" onclick="openInquiryModal(this)">{{INQUIRY_LABEL}}</button><a class="button secondary" href="{{EQUIPMENT_URL}}">{{BACK_LABEL}}</a></div>
     </article>
     <nav class="languages" aria-label="Available languages">{{LANGUAGE_LINKS}}</nav>
   </main>
