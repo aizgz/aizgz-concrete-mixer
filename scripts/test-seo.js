@@ -53,15 +53,15 @@ const expectedUrls = new Set(Object.values(homepageRoutes).map((route) => SITE_U
 for (const [language, route] of Object.entries(homepageRoutes)) {
   const file = path.join(ROOT, route === '/' ? 'index.html' : route.slice(1) + 'index.html');
   const html = await readFile(file, 'utf8');
-  const canonical = html.match(/<link\\s+rel="canonical"\\s+href="([^"]+)"/i)?.[1] || '';
+  const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1] || '';
   assert.equal(canonical, SITE_URL + route, file + ': homepage canonical must match its language route');
   assert.match(html, new RegExp('<html lang="' + language + '"' + (language === 'ar' ? ' dir="rtl"' : '')), file + ': homepage language and direction must be correct');
-  const alternates = matchAll(html, /<link\\s+rel="alternate"\\s+hreflang="([^"]+)"\\s+href="([^"]+)"\\s*>/gi)
+  const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
   assert.deepEqual(new Set(alternates.map((item) => item.language)), new Set(['en', 'es', 'ar', 'ru', 'x-default']), file + ': homepage hreflang set must be complete');
   assert.ok(alternates.some((item) => item.language === language && item.url === canonical), file + ': homepage self hreflang is required');
 }
-assert.match(homepage, /navigator\\.languages/, 'First-visit language must use browser preferred languages');
+assert.match(homepage, /navigator\.languages/, 'First-visit language must use browser preferred languages');
 assert.ok(!homepage.includes('countryLanguageChoice'), 'Country-based language override must not replace browser language');
 const customMachineryPages = [];
 for (const language of LANGUAGES) {
