@@ -30,6 +30,8 @@ collections:
           - { label: "TikTok Profile URL (TikTok主页)", name: "tiktok_url", widget: "string", default: "" }
           - { label: "Hero Title (首页大标题)", name: "hero_title", widget: "string", default: "Industrial Equipment for Construction & Material Handling" }
           - { label: "Hero Subtitle (首页副标题)", name: "hero_subtitle", widget: "text", default: "AIZGZ Machinery connects international buyers with equipment suppliers and helps review specifications, availability, quotations, and shipping requirements." }
+          - { label: "Homepage Hero Image (首页主视觉图片)", name: "hero_image", widget: "image", required: false, hint: "Upload and select the real equipment or production-line photo for the homepage. The original is preserved; responsive WebP versions are generated automatically." }
+          - { label: "Homepage Hero Image Alt Text (图片替代文字，可选)", name: "hero_image_alt", widget: "string", required: false, hint: "Describe the actual contents of the selected photo. Leave blank if not confirmed." }
           - { label: "About Us Text (关于我们介绍)", name: "about_text", widget: "text", default: "AIZGZ Machinery connects international buyers with equipment suppliers for construction, dry-mix materials, mixing, packaging, and material handling." }
 
   # 2. 产品管理（广泛/通用型设备）
