@@ -8,6 +8,9 @@ category: Dry Mortar Production Systems
 supply_status: Available for Supply
 power_type: Electric Motor
 summary: "A complete dry-mortar production line configured around the project's raw materials, process, target output and site conditions. Project figures in the source records are identified separately and require confirmation."
+summary_es: "Línea completa de producción de mortero seco, configurada según materias primas, proceso, capacidad prevista y emplazamiento. Los datos de proyecto requieren confirmación."
+summary_ar: "خط إنتاج متكامل للملاط الجاف يُهيأ وفق المواد الخام والعملية والإنتاج المستهدف وموقع المشروع. بيانات المشروع تحتاج إلى تأكيد."
+summary_ru: "Комплексная линия сухих смесей, конфигурируемая с учётом сырья, процесса, требуемой производительности и площадки. Проектные показатели требуют подтверждения."
 body_es: |
   Línea completa de producción de mortero seco, configurada según las materias primas, el proceso requerido, la producción prevista y las condiciones del emplazamiento. Se pueden preparar planos y una propuesta de configuración para que el comprador los revise. La fabricación se coordina después de aprobar el diseño y las especificaciones.
   
