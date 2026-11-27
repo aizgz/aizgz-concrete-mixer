@@ -1,4 +1,5 @@
 ---
+catalog_visible: false
 title: Plate-Chain Bucket Elevator
 url_slug: plate-chain-bucket-elevator
 title_es: Elevador de cangilones con cadena de placas
