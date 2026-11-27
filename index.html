@@ -105,13 +105,10 @@
       </div>
       <div id="product-filters" class="mb-8 flex flex-wrap gap-3">
         <button type="button" data-category="all" onclick="filterProducts('all')" class="filter-btn rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white" data-i18n="filter_all">All Equipment</button>
-        <button type="button" data-category="concrete-mixers" onclick="filterProducts('concrete-mixers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_concrete">Concrete Equipment</button>
-        <button type="button" data-category="mortar-equipment" onclick="filterProducts('mortar-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_mortar">Dry Mix & Mortar</button>
-        <button type="button" data-category="palletizers" onclick="filterProducts('palletizers')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_pallet">Bag Palletizing</button>
-        <button type="button" data-category="block-brick" onclick="filterProducts('block-brick')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_block">Block & Brick</button>
-        <button type="button" data-category="crushing-screening" onclick="filterProducts('crushing-screening')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_crushing">Crushing & Screening</button>
-        <button type="button" data-category="packing-auxiliary" onclick="filterProducts('packing-auxiliary')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_packing">Packing & Auxiliary</button>
-        <button type="button" data-category="mixing-blending" onclick="filterProducts('mixing-blending')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold" data-i18n="filter_mixing">Mixing & Blending</button>
+        <button type="button" data-category="mixing-blending" onclick="filterProducts('mixing-blending')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Mixing & Blending Equipment</button>
+        <button type="button" data-category="dry-mortar-systems" onclick="filterProducts('dry-mortar-systems')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Dry Mortar Production Systems</button>
+        <button type="button" data-category="packaging-equipment" onclick="filterProducts('packaging-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Packaging Equipment</button>
+        <button type="button" data-category="conveying-equipment" onclick="filterProducts('conveying-equipment')" class="filter-btn rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold">Conveying Equipment</button>
       </div>
       <p class="mb-5 text-xs text-slate-500" data-i18n="catalog_note">Product names are shown in the selected language alongside their original English names. Technical specifications are kept as supplied.</p>
       
@@ -801,33 +798,20 @@
     function getProductCategory(meta = {}) {
       const explicit = String(meta.category || '').trim().toLowerCase();
       const categoryAliases = {
-        'concrete-mixers': 'concrete-mixers',
-        'concrete equipment': 'concrete-mixers',
-        'concrete-equipment': 'concrete-mixers',
-        'mortar-equipment': 'mortar-equipment',
-        'dry mix mortar plant': 'mortar-equipment',
-        'dry-mix-mortar': 'mortar-equipment',
-        'tile adhesive production line': 'mortar-equipment',
-        'wall putty making machine': 'mortar-equipment',
-        'palletizers': 'palletizers',
-        'block & brick making machine': 'block-brick',
-        'block-brick': 'block-brick',
-        'crushing & screening plant': 'crushing-screening',
-        'crushing-screening': 'crushing-screening',
-        'packing & auxiliary equipment': 'packing-auxiliary',
         'mixing & blending equipment': 'mixing-blending',
         'mixing-blending': 'mixing-blending',
-        'packing-auxiliary': 'packing-auxiliary'
+        'dry mortar production systems': 'dry-mortar-systems',
+        'dry-mortar-systems': 'dry-mortar-systems',
+        'dry mix mortar plant': 'dry-mortar-systems',
+        'mortar-equipment': 'dry-mortar-systems',
+        'packaging equipment': 'packaging-equipment',
+        'packing & auxiliary equipment': 'packaging-equipment',
+        'packing-auxiliary': 'packaging-equipment',
+        'packaging-equipment': 'packaging-equipment',
+        'conveying equipment': 'conveying-equipment',
+        'conveying-equipment': 'conveying-equipment'
       };
       if (categoryAliases[explicit]) return categoryAliases[explicit];
-      const text = String(meta.title || '') + ' ' + String(meta.model || '') + ' ' + String(meta.category || '');
-      const normalizedText = text.toLowerCase();
-      if (/palletiz|码垛/.test(normalizedText)) return 'palletizers';
-      if (/mortar|砂浆|tile adhesive|putty/.test(normalizedText)) return 'mortar-equipment';
-      if (/block|brick|砌块|制砖/.test(normalizedText)) return 'block-brick';
-      if (/crushing|screening|破碎|筛分/.test(normalizedText)) return 'crushing-screening';
-      if (/packing|packaging|bagging|包装|装袋/.test(normalizedText)) return 'packing-auxiliary';
-      if (/concrete|cement mixer|混凝土/.test(normalizedText)) return 'concrete-mixers';
       return 'other';
     }
 
@@ -856,7 +840,7 @@
           if (!parsed.meta || !parsed.meta.title) throw new Error(`Invalid product content: ${file.name}`);
           return { meta: parsed.meta, body: parsed.body, fileName: file.name };
         }));
-        allProducts = loaded.filter((result) => result.status === 'fulfilled').map((result) => result.value);
+        allProducts = loaded.filter((result) => result.status === 'fulfilled').map((result) => result.value).filter((product) => product.meta.catalog_visible !== false);
         loaded.filter((result) => result.status === 'rejected').forEach((result) => console.error('Product failed to load:', result.reason));
         renderFilteredProducts();
         if (!allProducts.length) {
