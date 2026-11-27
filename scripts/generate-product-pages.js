@@ -308,9 +308,6 @@ async function main() {
     ar: { htmlLang: 'ar', ogLocale: 'ar_AR', title: 'معدات صناعية للبناء ومناولة المواد | AIZGZ Machinery', description: 'تربط AIZGZ Machinery المشترين الدوليين بموردي معدات البناء والخلط والتعبئة ومناولة المواد. تواصل معنا للحصول على التفاصيل وعروض الأسعار.' },
     ru: { htmlLang: 'ru', ogLocale: 'ru_RU', title: 'Промышленное оборудование для строительства и обработки материалов | AIZGZ Machinery', description: 'AIZGZ Machinery связывает международных покупателей с поставщиками строительного, смесительного, упаковочного и транспортного оборудования. Запросите информацию и предложение.' }
   };
-  const homepageAlternateTags = homepageAlternates.map(({ hreflang, href }) =>
-    `<link rel="alternate" hreflang="${hreflang}" href="${href}">`
-  ).join('\n  ');
   for (const [language, config] of Object.entries(localizedHomepages)) {
     const localized = updatedHomepage
       .replace('<html lang="en" class="scroll-smooth">', `<html lang="${config.htmlLang}"${language === 'ar' ? ' dir="rtl"' : ''} class="scroll-smooth">`)
