@@ -304,9 +304,9 @@ async function main() {
   await writeFile(homepagePath, updatedHomepage, 'utf8');
 
   const localizedHomepages = {
-    es: { htmlLang: 'es', ogLocale: 'es_ES', title: 'Maquinaria industrial para construcción y manejo de materiales | AIZGZ Machinery', description: 'AIZGZ Machinery conecta compradores internacionales con proveedores de equipos para construcción, mezclado, envasado y manejo de materiales. Solicite información y cotizaciones.' },
+    es: { htmlLang: 'es', ogLocale: 'es_ES', title: 'Maquinaria industrial para construcción | AIZGZ', description: 'AIZGZ Machinery conecta compradores con proveedores de equipos de construcción, mezcla, envasado y manejo de materiales. Solicite información y cotizaciones.' },
     ar: { htmlLang: 'ar', ogLocale: 'ar_AR', title: 'معدات صناعية للبناء ومناولة المواد | AIZGZ Machinery', description: 'تربط AIZGZ Machinery المشترين الدوليين بموردي معدات البناء والخلط والتعبئة ومناولة المواد. تواصل معنا للحصول على التفاصيل وعروض الأسعار.' },
-    ru: { htmlLang: 'ru', ogLocale: 'ru_RU', title: 'Промышленное оборудование для строительства и обработки материалов | AIZGZ Machinery', description: 'AIZGZ Machinery связывает международных покупателей с поставщиками строительного, смесительного, упаковочного и транспортного оборудования. Запросите информацию и предложение.' }
+    ru: { htmlLang: 'ru', ogLocale: 'ru_RU', title: 'Оборудование для строительства и материалов | AIZGZ', description: 'AIZGZ Machinery связывает покупателей с поставщиками строительного, смесительного, упаковочного и транспортного оборудования. Запросите информацию.' }
   };
   for (const [language, config] of Object.entries(localizedHomepages)) {
     const localized = updatedHomepage
