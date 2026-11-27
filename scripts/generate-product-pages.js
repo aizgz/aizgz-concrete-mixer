@@ -194,6 +194,20 @@ function renderLanguageLinks(slug, available, current) {
     return `<a href="${href}"${active}>${LANGUAGES[language].label}</a>`;
   }).join('\n');
 }
+function renderPrimaryNav(language, currentPage) {
+  const config = LANGUAGES[language];
+  const equipmentUrl = language === 'en' ? '/equipment/' : `/${language}/equipment/`;
+  const links = [
+    { label: config.home, href: `${SITE_URL}/`, key: 'home' },
+    { label: config.products, href: `${SITE_URL}${equipmentUrl}`, key: 'equipment' },
+    { label: config.inquiry, href: currentPage === 'product' ? '#inquiry' : `${SITE_URL}/#contact`, key: 'inquiry' }
+  ];
+  return `<nav class="primary-nav" aria-label="Main navigation">${links.map((link) => {
+    const active = link.key === currentPage ? ' aria-current="page"' : '';
+    const className = link.key === 'inquiry' ? ' class="nav-inquiry"' : '';
+    return `<a href="${link.href}"${active}${className}>${escapeHtml(link.label)}</a>`;
+  }).join('')}</nav>`;
+}
 function renderEquipmentCard(product, language, category) {
   const config = LANGUAGES[language];
   const text = EQUIPMENT_PAGE_TEXT[language];
@@ -318,6 +332,7 @@ async function main() {
         FOOTER_NOTE: escapeHtml(PRODUCT_PAGE_TEXT[language].footer),
         BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
+        PRIMARY_NAV: renderPrimaryNav(language, 'product'),
         HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
         PRODUCT_JSON: JSON.stringify({
           '@context': 'https://schema.org', '@type': 'Product', name: title,
@@ -380,7 +395,7 @@ async function main() {
       EYEBROW: escapeHtml(text.eyebrow), HERO_TITLE: escapeHtml(text.title),
       HERO_DESCRIPTION: escapeHtml(text.description), CATEGORY_NAV: categoryNav,
       CATEGORY_SECTIONS: categorySections, SOLUTION_SECTION: solutionSection,
-      LANGUAGE_LINKS: languageLinks, CTA_TITLE: escapeHtml(text.ctaTitle),
+      LANGUAGE_LINKS: languageLinks, PRIMARY_NAV: renderPrimaryNav(language, 'equipment'), CTA_TITLE: escapeHtml(text.ctaTitle),
       CTA_DESCRIPTION: escapeHtml(text.ctaDescription), CTA_LABEL: escapeHtml(text.ctaLabel),
       CTA_URL: `${SITE_URL}/#contact`, FOOTER: escapeHtml(text.footer)
     });
