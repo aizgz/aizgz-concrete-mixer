@@ -4,23 +4,21 @@ url_slug: plate-chain-bucket-elevator
 title_es: "Elevador de cangilones con cadena de placas"
 title_ar: "رافعة دلاء بسلسلة صفائحية"
 title_ru: "Ковшовый элеватор с пластинчатой цепью"
-category: Packing & Auxiliary Equipment
+category: Conveying Equipment
 supply_status: Available for Supply
 power_type: Electric Motor
-image: /uploads/11.jpeg
+summary: "Plate-chain bucket elevator for vertical material conveying in dry-mix mortar production plants. Lifting height and conveying capacity are configured for the project and require confirmation."
 body_es: |
-  Elevador de cangilones con cadena de placas diseñado para la alimentación y el transporte vertical de materiales a granel en plantas de mortero seco. Eleva los materiales hasta la siguiente etapa del proceso de producción.
-
-  La configuración del equipo, la altura de elevación y la capacidad de transporte pueden personalizarse según los requisitos del comprador, la distribución de la planta y las condiciones de instalación. Se pueden preparar planos y una propuesta de configuración para que el comprador los revise y apruebe antes de coordinar la fabricación.
+  Elevador de cangilones con cadena de placas para el transporte vertical de materiales en plantas de mortero seco. La altura de elevación y la capacidad de transporte se configuran para cada proyecto y deben confirmarse.
 body_ar: |
-  رافعة دلاء ذات سلسلة صفائحية مصممة لتغذية المواد السائبة ونقلها رأسياً في مصانع الملاط الجاف. ترفع المواد إلى المرحلة التالية من عملية الإنتاج.
-
-  يمكن تخصيص تكوين المعدات وارتفاع الرفع وقدرة النقل وفقاً لمتطلبات المشتري وتخطيط المصنع وظروف التركيب. ويمكن إعداد الرسومات ومقترح التكوين ليقوم المشتري بمراجعتهما واعتمادهما قبل تنسيق التصنيع.
+  رافعة دلاء بسلسلة صفائحية لنقل المواد رأسياً في مصانع الملاط الجاف. يتم تحديد ارتفاع الرفع وقدرة النقل لكل مشروع ويجب تأكيدهما.
 body_ru: |
-  Ковшовый элеватор с пластинчатой цепью, предназначенный для подачи и вертикальной транспортировки сыпучих материалов на заводах сухих строительных смесей. Он поднимает материалы на следующий этап производственного процесса.
-
-  Конфигурация оборудования, высота подъёма и производительность транспортировки могут быть адаптированы к требованиям покупателя, планировке предприятия и условиям монтажа. Чертежи и предлагаемая конфигурация могут быть подготовлены для рассмотрения и согласования покупателем до организации изготовления.
+  Ковшовый элеватор с пластинчатой цепью для вертикальной транспортировки материалов на заводах сухих строительных смесей. Высота подъёма и производительность определяются для проекта и требуют подтверждения.
 ---
-A plate-chain bucket elevator designed for material feeding and vertical conveying in dry-mix mortar production plants. It lifts bulk materials to the next stage of the production process.
+The existing product record describes a plate-chain bucket elevator for material feeding and vertical conveying in dry-mix mortar production plants.
 
-The equipment configuration, lifting height and conveying capacity can be customized according to the buyer's requirements, plant layout and installation conditions. Equipment drawings and a proposed configuration can be prepared for the buyer's review and approval before manufacturing is arranged.
+The equipment configuration, lifting height and conveying capacity are determined according to the buyer's requirements, plant layout and installation conditions. Drawings and a proposed configuration can be prepared for the buyer's review before manufacturing is coordinated.
+
+## Technical parameters
+
+The supplied records do not include confirmed values for lifting height, conveying capacity, chain speed, motor power, bucket dimensions or overall dimensions. These fields are left unspecified.

@@ -263,7 +263,7 @@ async function main() {
   if (!homepage.includes(startMarker) || !homepage.includes(endMarker)) {
     throw new Error('index.html is missing the PRODUCT_CARDS markers');
   }
-  const homepageCards = products.map(({ meta, slug }) => renderHomepageProductCard(meta, slug)).join('\n');
+  const homepageCards = products.filter(({ meta }) => meta.catalog_visible !== false).map(({ meta, slug }) => renderHomepageProductCard(meta, slug)).join('\n');
   const markerPattern = /<!-- PRODUCT_CARDS_START -->[\s\S]*?<!-- PRODUCT_CARDS_END -->/;
   await writeFile(homepagePath, homepage.replace(markerPattern, `${startMarker}\n${homepageCards}\n        ${endMarker}`), 'utf8');
 

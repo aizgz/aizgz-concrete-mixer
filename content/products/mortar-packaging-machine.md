@@ -4,16 +4,16 @@ url_slug: dry-mortar-packaging-machine
 title_es: "Máquina envasadora de mortero seco"
 title_ar: "آلة تعبئة الملاط الجاف"
 title_ru: "Упаковочная машина для сухих смесей"
-category: Packing & Auxiliary Equipment
+category: Packaging Equipment
+catalog_visible: false
 supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/6.jpeg
-summary: ""
 body_es: |
-  Máquina envasadora de mortero seco para llenar sacos con materiales en polvo, como masilla, adhesivo para baldosas y morteros a base de cemento. Podemos ayudarle a seleccionar el equipo y ajustar la formulación y los parámetros de funcionamiento. También se ofrece orientación técnica remota.
+  Página de referencia general sobre equipos de envasado. No se cuenta como una máquina independiente en el catálogo principal.
 body_ar: |
-  آلة تعبئة للملاط الجاف، مخصصة لملء الأكياس بالمواد المسحوقة مثل المعجون ولاصق البلاط والملاط القائم على الأسمنت. يمكننا المساعدة في اختيار المعدات وضبط التركيبة ومعايير التشغيل، كما تتوفر إرشادات فنية عن بُعد.
+  صفحة مرجعية عامة لمعدات التعبئة. ولا تُحتسب كآلة مستقلة في الكتالوج الرئيسي.
 body_ru: |
-  Упаковочная машина для сухих строительных смесей, предназначенная для фасовки порошковых материалов, таких как шпатлёвка, плиточный клей и смеси на цементной основе. Помогаем подобрать оборудование и настроить состав и рабочие параметры. Также предоставляются дистанционные технические консультации.
+  Общая справочная страница об упаковочном оборудовании. Она не учитывается как отдельная машина в основном каталоге.
 ---
-Dry mortar packaging machine for bagging dry powder materials such as putty powder, tile adhesive, and cement-based mortar. Contact us for product selection, ingredient and parameter adjustment, and remote technical guidance.
+This general packaging overview page is retained for reference and is excluded from the main product count. The specific packaging machines are listed separately in the product catalogue.
