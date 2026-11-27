@@ -1,20 +1,42 @@
 ---
-title: "Dry-Mortar Screw-Belt Mixer"
+title: "Horizontal Ribbon Mixer"
 url_slug: horizontal-screw-belt-mixer
-title_es: "Mezcladora horizontal de tornillo y cinta"
-title_ar: "خلاط أفقي للمونة والمعجون"
-title_ru: "Шнеково-ленточный смеситель"
-category: Dry Mix Mortar Plant
+title_es: "Mezcladora horizontal de cintas"
+title_ar: "خلاط الشريط الأفقي"
+title_ru: "Горизонтальный ленточный смеситель"
+category: Mixing & Blending Equipment
 supply_status: Available for Supply
 power_type: Electric Motor
-capacity: 1-ton putty powder equipment, 2-ton putty powder equipment, 3-ton
-  putty powder equipment, 5-ton putty powder equipment, customized
-image: /uploads/5.jpeg
+summary: "Horizontal ribbon mixer. The source records list HJJ series models and preliminary technical figures; model-to-value correspondence requires supplier confirmation."
 body_es: |
-  Mezcladora horizontal de tornillo y cinta para mezclar mortero seco, masilla en polvo y materiales similares. Se ofrecen opciones de equipos de 1, 2, 3 y 5 toneladas, además de configuraciones personalizadas. Estas capacidades corresponden a opciones de escala del equipo; la configuración final debe confirmarse según el material y las necesidades de producción.
+  Mezcladora horizontal de cintas. Los registros disponibles incluyen modelos de la serie HJJ y datos técnicos preliminares. La correspondencia entre cada modelo y sus valores debe confirmarse con el proveedor.
 body_ar: |
-  خلاط أفقي لولبي شريطي لخلط الملاط الجاف ومسحوق المعجون والمواد المشابهة. تتوفر خيارات للمعدات بسعات 1 و2 و3 و5 أطنان، بالإضافة إلى تكوينات مخصصة. تشير هذه القيم إلى خيارات حجم المعدات، ويجب تأكيد التكوين النهائي وفق نوع المواد واحتياجات الإنتاج.
+  خلاط شريطي أفقي. تتضمن السجلات المتاحة طرازات من سلسلة HJJ وبيانات فنية أولية. يجب تأكيد مطابقة كل طراز للقيم الخاصة به مع المورد.
 body_ru: |
-  Горизонтальный шнеково-ленточный смеситель для сухих строительных смесей, шпатлёвочного порошка и аналогичных материалов. Доступны варианты оборудования на 1, 2, 3 и 5 тонн, а также индивидуальные конфигурации. Эти значения обозначают варианты масштаба оборудования; окончательное исполнение подбирается с учётом материала и производственных потребностей.
+  Горизонтальный ленточный смеситель. В имеющихся записях указаны модели серии HJJ и предварительные технические данные. Соответствие значений каждой модели необходимо подтвердить у поставщика.
 ---
-Dry powder mixer, horizontal lightweight gypsum putty powder, feed mixer, plastering mortar mixer
+## Models listed in the source records
+
+- HJJ300
+- HJJ500
+- HJJ1000
+- HJJ2000
+- HJJ5000
+
+## Technical figures recorded — model mapping to be confirmed
+
+- Motor power: 4 / 5.5 / 7.5 / 11 / 18.5 kW
+- Spiral lifting power: 2.2 / 2.2 / 2.2 / 4 / 4 kW
+- Batch quantity: 300 / 500 / 1000 / 2000 / 5000 kg
+- Mixing uniformity: 95% (test method and conditions not supplied)
+- Mixing time: 5–10 minutes (applicable models and material conditions not supplied)
+
+The figures above are transcribed from the supplied records. Their one-to-one correspondence with the listed models and the test conditions have not yet been confirmed.
+
+## Materials listed in the source records
+
+Dry-mix mortar, tile adhesive, coatings, waterproofing materials, chemical materials, ceramics and refractory materials.
+
+## Other source-recorded information
+
+The source description refers to a horizontal barrel and inner and outer ribbon elements. It also mentions liquid addition, with a stated maximum of 10%; this figure requires confirmation before publication as a technical limit.
