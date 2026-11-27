@@ -1,4 +1,5 @@
 ---
+catalog_visible: false
 title: Horizontal Ribbon Mixer
 url_slug: horizontal-screw-belt-mixer
 title_es: Mezcladora horizontal de cintas
