@@ -91,6 +91,22 @@ collections:
       - { label: "Technical Details - Arabic (阿拉伯语详细说明)", name: "body_ar", widget: "markdown", required: false }
       - { label: "Technical Details - Russian (俄语详细说明)", name: "body_ru", widget: "markdown", required: false }
 
+  # 3. 产品资料审核区：仅供内部核对，不参与前台产品目录
+  - name: "product-review"
+    label: "Product Material Review (产品资料审核区)"
+    folder: "content/product-review"
+    create: true
+    delete: false
+    slug: "{{slug}}"
+    fields:
+      - { label: "Review Title (审核资料名称)", name: "review_title", widget: "string" }
+      - { label: "Source Group (资料批次)", name: "source_group", widget: "select", options: ["Original 12 Records (原有12份资料)", "Current 9 Catalogue Records (现有9款目录资料)"] }
+      - { label: "Source File (原始文件路径)", name: "source_file", widget: "string" }
+      - { label: "Related Product (关联产品)", name: "related_product", widget: "string", required: false }
+      - { label: "Retention Decision (留存决定)", name: "decision", widget: "select", options: ["Pending Review (待审核)", "Keep (保留)", "Merge (合并)", "Archive (归档)", "Remove (淘汰)"], default: "Pending Review (待审核)" }
+      - { label: "Review Notes (审核备注)", name: "review_notes", widget: "text", required: false }
+      - { label: "Original Material Snapshot (原始资料快照)", name: "body", widget: "markdown" }
+
   # 3. 发货与工程成功案例
   - name: "cases"
     label: "Shipment & Cases (发货与工程案例)"
