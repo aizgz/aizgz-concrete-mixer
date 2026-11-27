@@ -200,7 +200,20 @@ async function main() {
   }
 
   let pageCount = 0;
-  const sitemapEntries = [{ loc: `${SITE_URL}/`, alternates: [] }];
+  const homepageLanguages = [
+    { code: 'en', hreflang: 'en', route: '/' },
+    { code: 'es', hreflang: 'es', route: '/es/' },
+    { code: 'ar', hreflang: 'ar', route: '/ar/' },
+    { code: 'ru', hreflang: 'ru', route: '/ru/' }
+  ];
+  const homepageAlternates = [
+    ...homepageLanguages.map(({ hreflang, route }) => ({ hreflang, href: `${SITE_URL}${route}` })),
+    { hreflang: 'x-default', href: `${SITE_URL}/` }
+  ];
+  const sitemapEntries = homepageLanguages.map(({ route }) => ({
+    loc: `${SITE_URL}${route}`,
+    alternates: homepageAlternates
+  }));
   for (const { meta, slug, englishBody } of products) {
     const available = ['en', ...['es', 'ar', 'ru'].filter((language) =>
       String(meta[LANGUAGES[language].titleKey] || '').trim() &&
@@ -282,7 +295,33 @@ async function main() {
   }
   const homepageCards = products.filter(({ meta }) => meta.catalog_visible !== false).map(({ meta, slug }) => renderHomepageProductCard(meta, slug)).join('\n');
   const markerPattern = /<!-- PRODUCT_CARDS_START -->[\s\S]*?<!-- PRODUCT_CARDS_END -->/;
-  await writeFile(homepagePath, homepage.replace(markerPattern, `${startMarker}\n${homepageCards}\n        ${endMarker}`), 'utf8');
+  const updatedHomepage = homepage.replace(markerPattern, `${startMarker}\\n${homepageCards}\\n        ${endMarker}`);
+  await writeFile(homepagePath, updatedHomepage, 'utf8');
+
+  const localizedHomepages = {
+    es: { htmlLang: 'es', ogLocale: 'es_ES', title: 'Maquinaria industrial para construcción y manejo de materiales | AIZGZ Machinery', description: 'AIZGZ Machinery conecta compradores internacionales con proveedores de equipos para construcción, mezclado, envasado y manejo de materiales. Solicite información y cotizaciones.' },
+    ar: { htmlLang: 'ar', ogLocale: 'ar_AR', title: 'معدات صناعية للبناء ومناولة المواد | AIZGZ Machinery', description: 'تربط AIZGZ Machinery المشترين الدوليين بموردي معدات البناء والخلط والتعبئة ومناولة المواد. تواصل معنا للحصول على التفاصيل وعروض الأسعار.' },
+    ru: { htmlLang: 'ru', ogLocale: 'ru_RU', title: 'Промышленное оборудование для строительства и обработки материалов | AIZGZ Machinery', description: 'AIZGZ Machinery связывает международных покупателей с поставщиками строительного, смесительного, упаковочного и транспортного оборудования. Запросите информацию и предложение.' }
+  };
+  const homepageAlternateTags = homepageAlternates.map(({ hreflang, href }) =>
+    `<link rel="alternate" hreflang="${hreflang}" href="${href}">`
+  ).join('\\n  ');
+  for (const [language, config] of Object.entries(localizedHomepages)) {
+    const localized = updatedHomepage
+      .replace('<html lang="en" class="scroll-smooth">', `<html lang="${config.htmlLang}"${language === 'ar' ? ' dir="rtl"' : ''} class="scroll-smooth">`)
+      .replace('<title>Industrial Equipment Supplier | AIZGZ Machinery</title>', `<title>${config.title}</title>`)
+      .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${config.description}">`)
+      .replace('<link rel="canonical" href="https://www.aizgz.com/">', `<link rel="canonical" href="${SITE_URL}/${language}/">\\n  ${homepageAlternateTags}`)
+      .replace('<meta property="og:title" content="Industrial Equipment Supplier | AIZGZ Machinery">', `<meta property="og:title" content="${config.title}">`)
+      .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${config.description}">`)
+      .replace('<meta property="og:url" content="https://www.aizgz.com/">', `<meta property="og:url" content="${SITE_URL}/${language}/">`)
+      .replace('<meta property="og:locale" content="en_US">', `<meta property="og:locale" content="${config.ogLocale}">`)
+      .replace('<meta name="twitter:title" content="Industrial Equipment Supplier | AIZGZ Machinery">', `<meta name="twitter:title" content="${config.title}">`)
+      .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${config.description}">`);
+    const outputDir = path.join(ROOT, language);
+    await mkdir(outputDir, { recursive: true });
+    await writeFile(path.join(outputDir, 'index.html'), localized, 'utf8');
+  }
 
   const sitemapXml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
