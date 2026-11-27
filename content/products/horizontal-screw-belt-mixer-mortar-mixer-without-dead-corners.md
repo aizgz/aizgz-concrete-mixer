@@ -37,6 +37,15 @@ The figures above are transcribed from the supplied records. Their one-to-one co
 
 Dry-mix mortar, tile adhesive, coatings, waterproofing materials, chemical materials, ceramics and refractory materials.
 
-## Other source-recorded information
+## Construction and features listed in the source records
 
-The source description refers to a horizontal barrel and inner and outer ribbon elements. It also mentions liquid addition, with a stated maximum of 10%; this figure requires confirmation before publication as a technical limit.
+The source describes a horizontal mixing chamber with inner and outer ribbon elements. It also lists the following features and options:
+
+- An adjustable clearance between the outer ribbon and the chamber wall.
+- A cleaning / access door intended to support low-residue operation.
+- Scrapers may be fitted to the ribbon elements.
+- Different ribbon arrangements can be selected for the material.
+- A screw elevator or bucket elevator can be configured for feeding, depending on the plant layout.
+- The source describes stable operation, relatively low noise and convenient installation and maintenance.
+
+The source also mentions liquid addition, with a stated maximum of 10%; this figure requires confirmation before publication as a technical limit.
