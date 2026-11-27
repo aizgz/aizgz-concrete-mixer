@@ -296,10 +296,10 @@ async function main() {
   const homepageCards = products.filter(({ meta }) => meta.catalog_visible !== false).map(({ meta, slug }) => renderHomepageProductCard(meta, slug)).join('\n');
   const markerPattern = /<!-- PRODUCT_CARDS_START -->[\s\S]*?<!-- PRODUCT_CARDS_END -->/;
   const homepageAlternateTags = homepageAlternates.map(({ hreflang, href }) =>
-    \`<link rel="alternate" hreflang="\${hreflang}" href="\${href}">\`
+    '<link rel="alternate" hreflang="' + hreflang + '" href="' + href + '">'
   ).join('\n  ');
   const updatedHomepage = homepage
-    .replace(markerPattern, `${startMarker}\\n${homepageCards}\\n        ${endMarker}`)
+    .replace(markerPattern, `${startMarker}\n${homepageCards}\n        ${endMarker}`)
     .replace('<!-- HOMEPAGE_HREFLANG -->', homepageAlternateTags);
   await writeFile(homepagePath, updatedHomepage, 'utf8');
 
