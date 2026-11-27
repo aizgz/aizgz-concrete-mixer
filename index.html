@@ -89,6 +89,10 @@
         <p class="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-amber-400">AIZGZ Machinery</p>
         <h1 id="hero-title" data-i18n="hero_title" class="mb-5 text-4xl font-extrabold leading-tight md:text-6xl">Industrial Equipment for Construction & Material Handling</h1>
         <p id="hero-subtitle" data-i18n="hero_subtitle" class="mx-auto mb-8 max-w-3xl text-lg text-slate-300 md:text-xl">Explore concrete mixers, bag palletizing machines, and mortar equipment. Contact us for product specifications, availability, and quotations.</p>
+        <picture id="hero-image-picture" hidden class="mx-auto mb-8 block w-full max-w-6xl overflow-hidden rounded-xl border border-slate-600/40 bg-slate-900/30 shadow-xl">
+          <source id="hero-image-webp" type="image/webp">
+          <img id="hero-image" class="mx-auto max-h-[520px] w-full object-contain" loading="eager" decoding="async" alt="">
+        </picture>
         <div class="flex flex-wrap justify-center gap-4">
           <a href="#products" class="rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 shadow-lg hover:bg-amber-600" data-i18n="btn_browse">Browse Products</a>
           <a href="#contact" onclick="fillInquiryModel('Product Catalog Request')" class="rounded-lg bg-slate-700 px-6 py-3 font-bold text-white shadow-lg hover:bg-slate-600" data-i18n="btn_catalog">Request Product Catalog</a>
@@ -683,6 +687,20 @@
           setText('hero-title', globalSettings.hero_title);
           setText('hero-subtitle', globalSettings.hero_subtitle);
           setText('about-text', globalSettings.about_text);
+        }
+        const heroImagePath = typeof globalSettings.hero_image === 'string' ? globalSettings.hero_image.trim() : '';
+        if (heroImagePath.startsWith('/uploads/') && !heroImagePath.includes('..') && !heroImagePath.includes('\\')) {
+          const heroPicture = document.getElementById('hero-image-picture');
+          const heroSource = document.getElementById('hero-image-webp');
+          const heroImage = document.getElementById('hero-image');
+          if (heroPicture && heroSource && heroImage) {
+            heroSource.srcset = `${heroImagePath}.800.webp 800w, ${heroImagePath}.webp 1200w`;
+            heroSource.sizes = '(min-width: 1024px) 960px, calc(100vw - 32px)';
+            heroImage.src = heroImagePath;
+            heroImage.alt = typeof globalSettings.hero_image_alt === 'string' ? globalSettings.hero_image_alt.trim() : '';
+            heroImage.onerror = () => { heroPicture.hidden = true; };
+            heroPicture.hidden = false;
+          }
         }
         if (globalSettings.contact_email) {
           const emailLink = document.getElementById('contact-email');
