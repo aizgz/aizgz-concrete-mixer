@@ -8,6 +8,9 @@ category: Dry Mortar Production Systems
 supply_status: Available for Supply
 power_type: Electric Motor
 summary: "A configured mixing station built around a twin-shaft gravity-free mixer. The equipment list below is transcribed from the supplied product records; final configuration and specifications require confirmation."
+summary_es: "Estación de mezclado configurada en torno a un mezclador de doble eje sin gravedad. Los componentes y parámetros finales deben confirmarse para cada proyecto."
+summary_ar: "محطة خلط مُهيأة حول خلاط مزدوج المحور بدون جاذبية. يجب تأكيد المكونات والمعلمات النهائية لكل مشروع."
+summary_ru: "Смесительная установка на базе двухвального безгравитационного смесителя. Состав оборудования и итоговые параметры подтверждаются для каждого проекта."
 body_es: |
   ## Equipos del sistema indicados en los registros originales
   
