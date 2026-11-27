@@ -73,6 +73,7 @@ for (const language of LANGUAGES) {
   const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
   assert.ok(title.trim(), file + ': title is required');
   assert.ok(description.trim(), file + ': meta description is required');
+  assert.ok(description.length <= 160, file + ': homepage meta description should be concise (160 characters or fewer)');
   assert.equal(canonical, SITE_URL + route, file + ': canonical must match its language route');
   assert.match(html, new RegExp('<html lang="' + language + '" dir="' + (language === 'ar' ? 'rtl' : 'ltr') + '">'), file + ': language and text direction must be correct');
   assert.match(html, /Machinery|Maquinaria|المعدات|оборудования/i, file + ': localized page content is required');
