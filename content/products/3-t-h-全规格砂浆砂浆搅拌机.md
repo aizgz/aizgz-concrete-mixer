@@ -14,143 +14,66 @@ summary_es: "Mezcladora de paletas de doble eje para producir mortero seco, con 
 summary_ar: "خلاط مجدافي مزدوج المحور لإنتاج الملاط الجاف، مع معدات مساعدة اختيارية تُحدد وفقًا لمتطلبات المشروع."
 summary_ru: "Двухвальный лопастной смеситель для производства сухих строительных смесей с дополнительным оборудованием по требованиям проекта."
 body_es: |
-  # I. Cuerpo principal de la mezcladora de doble eje sin gravedad
-
-  **Principio de funcionamiento:** Los dos ejes de mezcla trabajan de forma coordinada para elevar, dispersar y mezclar los materiales. Las cuchillas dispersoras ayudan a distribuir materiales ligeros, como fibras y fibras de madera. El tiempo de mezcla indicado para cada lote es de aproximadamente 3 minutos; este dato debe confirmarse con el proveedor.
-
-  # II. Tolva secundaria para el producto mezclado
-
-  **Función:** Distribuye el material hacia las distintas salidas y proporciona una etapa adicional de mezcla. Según la descripción suministrada, ayuda a reducir la formación de grumos.
-
-  # III. Máquina de pesaje y envasado
-
-  **Características indicadas:** Alimentación mediante impulsor, mantenimiento sencillo y funcionamiento de alta velocidad. Los datos facilitados indican entre 5 y 6 segundos para envasar una bolsa de 25 kg y un error de precisión aproximado de ±0,2 kg. Estas cifras deben confirmarse para la configuración seleccionada.
-
-  # IV. Colector de polvo por pulsos
-
-  **Función:** Utiliza pulsos de aire a alta presión para desprender el polvo acumulado en las mangas filtrantes y devolverlo a la entrada de alimentación para su recuperación.
-
-  # V. Elevador de cangilones
-
-  **Características indicadas:** Elevador de banda con ocho capas y cangilones de plástico ABS. La descripción del proveedor señala resistencia al desgaste, al calor y a la compresión. La altura de elevación y la configuración final deben confirmarse.
-
-  # VI. Tolva de premezcla
-
-  **Función:** Almacena las materias primas antes de la mezcla, ayuda a mantener un funcionamiento más continuo de la máquina principal y reduce el tiempo de alimentación y dosificación.
-
-  # VII. Tolva de pesaje
-
-  **Características:** Alimentación por tornillo y tres sensores dispuestos simétricamente alrededor de la tolva para controlar la dosificación del material suministrado por cada transportador.
-
-  # VIII. Alimentador de tornillo y sistema de transporte
-
-  El transportador puede configurarse en posición horizontal, inclinada o combinada. Puede integrarse con otros equipos de transporte para realizar operaciones de recogida, distribución, alimentación, mezcla, dosificación y descarga. La aplicación y las funciones concretas dependen de la configuración del proyecto.
-
-  # Datos técnicos adicionales del conjunto — pendientes de confirmación del proveedor
-
-  La información original incluye los siguientes datos, pero no permite asignar con seguridad cada valor a un componente específico. Por ello, se conservan aquí como datos preliminares del conjunto y no como especificaciones confirmadas de la máquina principal:
-
-  - Motores indicados: 18,5 kW; 7,5 kW; 3 kW; motor de 6 polos y 5,5 kW; además de un motor de 4 kW y un ventilador de 3 kW.
-  - Cuchilla dispersora indicada: 4 kW.
-  - Espesores indicados: cilindro 6 mm; paletas 10 mm; tapa de extremo 10 mm; estructura de la cámara de rodamientos 12 mm; otros espesores de cilindro de 3 mm, tapa de extremo de 6 mm y cuchillas de mezcla de 8 mm; placa de 2 mm, cubierta superior de 3 mm y placas de acero de 3 mm.
-  - Eje principal de mezcla: Φ108 mm.
-  - Reductor cicloidal de tamaño n.º 8 y tres filas de cadenas de transmisión.
-  - Colector de polvo: tipo de 12 mangas.
-  - Altura de elevación indicada: 2–8 m.
-
-  **Importante:** La asignación de estos datos a cada equipo, así como su aplicabilidad a la configuración solicitada, debe confirmarse con el proveedor antes de emitir una oferta o plano definitivo.
+  # Mezcladora principal de paletas de doble eje
+  
+  **Principio de funcionamiento:** Los dos ejes trabajan coordinadamente para elevar, dispersar y mezclar los materiales. Las paletas dispersoras ayudan a distribuir materiales ligeros, como fibras.
+  
+  **Aplicaciones:** Mezcla de materiales en polvo y formulaciones secas. La idoneidad para cada material debe comprobarse según sus propiedades y los requisitos del proceso.
+  
+  **Tiempo de mezcla:** La información recibida indica aproximadamente 3 minutos por lote. Es un dato orientativo que debe confirmar el proveedor para el material y la configuración elegidos.
+  
+  # Equipos auxiliares opcionales para una línea completa
+  
+  Según el proyecto, la línea puede integrar tolvas de almacenamiento o premezcla, tolvas de pesaje, alimentadores y transportadores de tornillo, elevadores de cangilones, colectores de polvo y equipos de pesaje y envasado. Son unidades auxiliares opcionales, no componentes de la mezcladora principal.
+  
+  # Datos técnicos pendientes de asignación y confirmación
+  
+  La documentación menciona motores de 18,5, 7,5, 3, 5,5 y 4 kW, un ventilador de 3 kW, una cuchilla dispersora de 4 kW, un eje principal de Φ108 mm, un reductor cicloidal n.º 8 y tres filas de cadenas. También enumera varios espesores, un colector de polvo de 12 mangas y una altura de elevación de 2–8 m.
+  
+  Estos datos parecen corresponder a distintos equipos y no pueden atribuirse con seguridad a la mezcladora principal. No se presentan como especificaciones confirmadas. El proveedor debe identificar y confirmar cada valor para la configuración solicitada antes de preparar una oferta o un plano definitivo.
+  
+  **Configuración a medida:** La selección se realiza después de conocer los materiales, la capacidad requerida, el proceso y las condiciones de instalación.
 body_ar: |
-  # I. الجسم الرئيسي للخلاط مزدوج المحور بدون جاذبية
-
-  **مبدأ العمل:** يعمل محورا الخلط بتناسق لرفع المواد وتشتيتها وخلطها. وتساعد شفرات التشتيت على توزيع المواد الخفيفة مثل الألياف وألياف الخشب. ويبلغ زمن الخلط المذكور لكل دفعة نحو 3 دقائق، ويجب تأكيد هذه المعلومة مع المورد.
-
-  # II. خزان المنتج النهائي للخلط الثانوي
-
-  **الوظيفة:** يوزّع المواد على منافذ التفريغ المختلفة ويوفر مرحلة خلط إضافية. ووفقاً للوصف المقدم، يساعد على الحد من تكوّن التكتلات.
-
-  # III. آلة الوزن والتعبئة
-
-  **الخصائص المذكورة:** تغذية بواسطة دافعة، وسهولة الصيانة، وتشغيل بسرعة عالية. تشير البيانات المقدمة إلى أن تعبئة كيس بوزن 25 كجم تستغرق نحو 5–6 ثوانٍ، مع خطأ دقة يقارب ±0.2 كجم. يجب تأكيد هذه الأرقام وفقاً للتكوين المختار.
-
-  # IV. مجمّع الغبار النبضي
-
-  **الوظيفة:** يستخدم نبضات هواء عالية الضغط لإزالة الغبار المتراكم على أكياس الترشيح وإعادته إلى مدخل التغذية لاسترداده.
-
-  # V. رافعة الدلاء
-
-  **الخصائص المذكورة:** رافعة تعمل بسير مكوّن من ثماني طبقات ودلاء مصنوعة من بلاستيك ABS. ويشير وصف المورد إلى مقاومتها للتآكل والحرارة والضغط. يجب تأكيد ارتفاع الرفع والتكوين النهائي.
-
-  # VI. خزان الخلط المسبق
-
-  **الوظيفة:** يخزن المواد الخام قبل الخلط، ويساعد الآلة الرئيسية على العمل بصورة أكثر استمرارية، ويقلل وقت التغذية والوزن.
-
-  # VII. قادوس الوزن
-
-  **الخصائص:** تغذية لولبية وثلاثة مستشعرات موزعة بشكل متماثل حول القادوس للتحكم في كمية المواد التي ينقلها كل ناقل.
-
-  # VIII. المغذي اللولبي ونظام النقل
-
-  يمكن تجهيز الناقل بوضع أفقي أو مائل أو مركب. ويمكن دمجه مع معدات نقل أخرى لتنفيذ عمليات التجميع والتوزيع والتغذية والخلط والوزن والتفريغ. وتعتمد التطبيقات والوظائف المحددة على تكوين المشروع.
-
-  # بيانات فنية إضافية للمجموعة — بانتظار تأكيد المورد
-
-  تتضمن المعلومات الأصلية البيانات التالية، لكنها لا تحدد بشكل موثوق الجزء الذي تنتمي إليه كل قيمة. لذلك نحتفظ بها هنا كبيانات أولية للمجموعة، وليس كمواصفات مؤكدة للآلة الرئيسية:
-
-  - قدرات المحركات المذكورة: 18.5 و7.5 و3 كيلوواط؛ ومحرك بستة أقطاب بقدرة 5.5 كيلوواط؛ بالإضافة إلى محرك 4 كيلوواط ومروحة 3 كيلوواط.
-  - قدرة شفرة التشتيت المذكورة: 4 كيلوواط.
-  - السماكات المذكورة: الأسطوانة 6 مم؛ الشفرات 10 مم؛ الغطاء الطرفي 10 مم؛ هيكل حجرة المحامل 12 مم؛ وسماكات أخرى للأسطوانة 3 مم والغطاء الطرفي 6 مم وشفرات الخلط 8 مم؛ وصفيحة 2 مم وغطاء علوي 3 مم وصفائح فولاذية 3 مم.
-  - قطر عمود الخلط الرئيسي: Φ108 مم.
-  - مخفض سرعة دوراني مقاس رقم 8 وثلاثة صفوف من سلاسل النقل.
-  - مجمّع الغبار: نوع مزود بـ12 كيس ترشيح.
-  - ارتفاع الرفع المذكور: 2–8 أمتار.
-
-  **مهم:** يجب تأكيد ارتباط هذه البيانات بكل معدة ومدى انطباقها على التكوين المطلوب مع المورد قبل إصدار عرض سعر أو رسم نهائي.
+  # الخلاط الرئيسي ذو المجدافين والمحورين
+  
+  **مبدأ العمل:** يعمل محورا الخلط بتناسق لرفع المواد وتشتيتها وخلطها. وتساعد شفرات التشتيت على توزيع المواد الخفيفة مثل الألياف.
+  
+  **التطبيقات:** خلط المواد المسحوقة والتركيبات الجافة. يجب التحقق من ملاءمة الخلاط لكل مادة وفق خصائصها ومتطلبات العملية.
+  
+  **زمن الخلط:** تشير المعلومات المستلمة إلى نحو 3 دقائق لكل دفعة. وهذه قيمة إرشادية يجب تأكيدها مع المورد وفق المادة والتكوين المختارين.
+  
+  # معدات مساعدة اختيارية لخط متكامل
+  
+  وفقاً للمشروع، يمكن أن يشتمل الخط على خزانات التخزين أو الخلط المسبق، وقواديس الوزن، والمغذيات والناقلات اللولبية، ورافعات الدلاء، ومجمعات الغبار، ومعدات الوزن والتعبئة. هذه وحدات مساعدة اختيارية وليست مكونات من الخلاط الرئيسي.
+  
+  # بيانات فنية تحتاج إلى تحديد وتأكيد
+  
+  تذكر الوثائق محركات بقدرات 18.5 و7.5 و3 و5.5 و4 كيلوواط، ومروحة 3 كيلوواط، وشفرة تشتيت 4 كيلوواط، وعموداً رئيسياً بقطر Φ108 مم، ومخفضاً دورانياً رقم 8 وثلاثة صفوف من السلاسل. كما تسرد سماكات متعددة، ومجمع غبار مزوداً بـ12 كيس ترشيح، وارتفاع رفع 2–8 أمتار.
+  
+  يبدو أن هذه البيانات تخص معدات مختلفة، ولا يمكن نسبتها بثقة إلى الخلاط الرئيسي. لذلك لا تُعرض كمواصفات مؤكدة. يجب على المورد تحديد كل قيمة وتأكيدها للتكوين المطلوب قبل إعداد عرض السعر أو الرسم النهائي.
+  
+  **تكوين حسب الطلب:** يتم الاختيار بعد معرفة المواد والطاقة الإنتاجية المطلوبة والعملية وظروف التركيب.
 body_ru: |
-  # I. Основной корпус двухвального безгравитационного смесителя
+  # Основной двухвальный лопастной смеситель
+  
+  **Принцип работы:** Два вала работают согласованно, поднимая, рассеивая и перемешивая материал. Разбрасывающие лопатки помогают распределять лёгкие материалы, например волокно.
+  
+  **Применение:** Смешивание порошкообразных материалов и сухих смесей. Пригодность для конкретного материала следует оценивать с учётом его свойств и требований процесса.
+  
+  **Время смешивания:** В предоставленной информации указано около 3 минут на партию. Это ориентировочное значение необходимо подтвердить у поставщика для выбранного материала и конфигурации.
+  
+  # Дополнительное оборудование для комплектной линии — опционально
+  
+  В зависимости от проекта линия может включать накопительные или предварительные бункеры, весовые бункеры, шнековые питатели и конвейеры, ковшовые элеваторы, пылеуловители, весовое и упаковочное оборудование. Это дополнительные узлы, а не компоненты основного смесителя.
+  
+  # Технические данные, требующие уточнения и подтверждения
+  
+  В документации упоминаются двигатели мощностью 18,5; 7,5; 3; 5,5 и 4 кВт, вентилятор 3 кВт, разбрасывающая лопатка 4 кВт, главный вал диаметром Φ108 мм, циклоидальный редуктор № 8 и три ряда приводных цепей. Также перечислены различные толщины, пылеуловитель с 12 фильтровальными рукавами и высота подъёма 2–8 м.
+  
+  Вероятно, эти данные относятся к разным узлам и не могут достоверно относиться к основному смесителю. Они не представлены как подтверждённые характеристики. Поставщик должен определить назначение каждого значения и подтвердить его для выбранной конфигурации до подготовки предложения или чертежа.
+  
+  **Индивидуальная конфигурация:** Оборудование подбирается после уточнения материалов, требуемой производительности, процесса и условий установки.
 
-  **Принцип работы:** Два смесительных вала работают согласованно, поднимая, рассеивая и перемешивая материал. Разбрасывающие лопатки помогают распределять лёгкие материалы, например волокно и древесное волокно. Указанное время смешивания одной партии составляет около 3 минут; этот показатель необходимо подтвердить у поставщика.
-
-  # II. Бункер вторичного смешивания готового продукта
-
-  **Назначение:** Распределяет материал по разгрузочным выходам и обеспечивает дополнительную стадию смешивания. Согласно предоставленному описанию, помогает уменьшить образование комков.
-
-  # III. Весовая упаковочная машина
-
-  **Указанные характеристики:** Подача с помощью крыльчатки, простое обслуживание и высокая скорость работы. В предоставленных данных указано 5–6 секунд на упаковку одного мешка массой 25 кг и погрешность около ±0,2 кг. Эти показатели необходимо подтвердить для выбранной конфигурации.
-
-  # IV. Импульсный пылеуловитель
-
-  **Назначение:** Использует импульсы воздуха высокого давления для очистки фильтровальных рукавов от накопившейся пыли и возврата пыли во входное отверстие подачи для повторного использования.
-
-  # V. Ковшовый элеватор
-
-  **Указанные характеристики:** Ленточный элеватор с восьмислойной лентой и ковшами из пластика ABS. В описании поставщика указана устойчивость к износу, нагреву и сжатию. Высоту подъёма и окончательную конфигурацию необходимо подтвердить.
-
-  # VI. Бункер предварительного смешивания
-
-  **Назначение:** Хранит сырьё до смешивания, помогает основной машине работать более непрерывно и сокращает время подачи и дозирования материалов.
-
-  # VII. Весовой бункер
-
-  **Характеристики:** Шнековая подача и три датчика, симметрично расположенные вокруг бункера, для контроля количества материала, подаваемого каждым конвейером.
-
-  # VIII. Шнековый питатель и транспортная система
-
-  Конвейер может иметь горизонтальное, наклонное или комбинированное исполнение. Он может работать совместно с другим транспортным оборудованием для сбора, распределения, подачи, смешивания, дозирования и выгрузки материала. Конкретное применение и функции зависят от конфигурации проекта.
-
-  # Дополнительные технические данные комплекса — требуют подтверждения поставщика
-
-  В исходной информации приведены следующие данные, однако по ней нельзя надёжно определить, к какому именно узлу относится каждое значение. Поэтому они сохранены как предварительные данные всего комплекса, а не как подтверждённые характеристики основного смесителя:
-
-  - Указанная мощность двигателей: 18,5; 7,5 и 3 кВт; двигатель на 6 полюсов мощностью 5,5 кВт; также двигатель 4 кВт и вентилятор 3 кВт.
-  - Указанная мощность разбрасывающего ножа: 4 кВт.
-  - Указанная толщина: корпус цилиндра 6 мм; лопасти 10 мм; торцевая крышка 10 мм; каркас корпуса подшипников 12 мм; другие значения — цилиндр 3 мм, торцевая крышка 6 мм и смесительные лопасти 8 мм; лист 2 мм, верхняя крышка 3 мм и стальные листы 3 мм.
-  - Диаметр главного смесительного вала: Φ108 мм.
-  - Циклоидальный редуктор № 8 и три ряда приводных цепей.
-  - Пылеуловитель: исполнение с 12 фильтровальными рукавами.
-  - Указанная высота подъёма: 2–8 м.
-
-  **Важно:** До подготовки коммерческого предложения или окончательного чертежа поставщик должен подтвердить принадлежность этих данных к каждому узлу и их применимость к требуемой конфигурации.
 ---
 
 # Main Twin-Shaft Paddle Mixer
