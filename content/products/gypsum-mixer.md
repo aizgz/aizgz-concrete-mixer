@@ -5,14 +5,15 @@ title_es: "Mezcladora de yeso en polvo"
 title_ar: "خلاط مسحوق الجبس"
 title_ru: "Смеситель гипсового порошка"
 category: Mixing & Blending Equipment
+catalog_visible: false
 supply_status: Available for Supply
 power_type: Electric Motor
 image: /uploads/10.jpeg
 body_es: |
-  Mezcladora horizontal para polvo de yeso y otros materiales secos. También puede utilizarse para mezclas de masilla en polvo, adhesivo para baldosas y mortero inorgánico. La selección del equipo depende de las características del material y de los requisitos del proceso.
+  Página conservada como referencia. No se incluye en el catálogo principal hasta que se confirme que corresponde a un producto independiente.
 body_ar: |
-  خلاط أفقي لمسحوق الجبس والمواد الجافة الأخرى. ويمكن استخدامه أيضًا لخلط مسحوق المعجون ولاصق البلاط والملاط غير العضوي. يعتمد اختيار المعدات على خصائص المواد ومتطلبات عملية الإنتاج.
+  تم الاحتفاظ بهذه الصفحة كمرجع. ولن تُدرج في الكتالوج الرئيسي حتى يتم تأكيد أنها تمثل منتجاً مستقلاً.
 body_ru: |
-  Горизонтальный смеситель для гипсового порошка и других сухих материалов. Также может применяться для смешивания шпатлёвочного порошка, плиточного клея и неорганических растворов. Выбор оборудования зависит от свойств материала и требований технологического процесса.
+  Страница сохранена как справочная. Она не включена в основной каталог до подтверждения, что речь идёт об отдельном продукте.
 ---
-Horizontal dry powder mortar mixer, putty powder ceramic tile adhesive mixer, inorganic mortar mixer
+This legacy page is retained for reference but is excluded from the main product catalogue until a separate gypsum mixer product and its supporting specifications are confirmed.
