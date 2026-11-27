@@ -4,7 +4,7 @@
   "scripts": {
     "build:css": "mkdir -p assets && tailwindcss -c ./tailwind.config.cjs -i ./styles/tailwind.css -o ./assets/tailwind.min.css --minify",
     "build:products": "node scripts/generate-product-pages.js",
-    "build": "npm run build:css && npm run build:products && npm run build:custom-machinery",
+    "build": "npm run build:css && npm run build:custom-machinery && npm run build:products",
     "test:seo": "node scripts/test-seo.js",
     "build:custom-machinery": "node scripts/generate-custom-machinery-pages.js"
   },

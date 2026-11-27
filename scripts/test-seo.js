@@ -48,7 +48,21 @@ const pages = await collectProductPages();
 assert.ok(pages.length > 0, 'Build must generate product detail pages');
 
 
-const expectedUrls = new Set([SITE_URL + '/']);
+const homepageRoutes = { en: '/', es: '/es/', ar: '/ar/', ru: '/ru/' };
+const expectedUrls = new Set(Object.values(homepageRoutes).map((route) => SITE_URL + route));
+for (const [language, route] of Object.entries(homepageRoutes)) {
+  const file = path.join(ROOT, route === '/' ? 'index.html' : route.slice(1) + 'index.html');
+  const html = await readFile(file, 'utf8');
+  const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1] || '';
+  assert.equal(canonical, SITE_URL + route, file + ': homepage canonical must match its language route');
+  assert.match(html, new RegExp('<html lang="' + language + '"' + (language === 'ar' ? ' dir="rtl"' : '')), file + ': homepage language and direction must be correct');
+  const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
+    .map((match) => ({ language: match[1], url: match[2] }));
+  assert.deepEqual(new Set(alternates.map((item) => item.language)), new Set(['en', 'es', 'ar', 'ru', 'x-default']), file + ': homepage hreflang set must be complete');
+  assert.ok(alternates.some((item) => item.language === language && item.url === canonical), file + ': homepage self hreflang is required');
+}
+assert.match(homepage, /navigator\.languages/, 'First-visit language must use browser preferred languages');
+assert.ok(!homepage.includes('countryLanguageChoice'), 'Country-based language override must not replace browser language');
 const customMachineryPages = [];
 for (const language of LANGUAGES) {
   const route = language === 'en' ? '/custom-machinery-solutions/' : '/' + language + '/custom-machinery-solutions/';
@@ -59,6 +73,7 @@ for (const language of LANGUAGES) {
   const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
   assert.ok(title.trim(), file + ': title is required');
   assert.ok(description.trim(), file + ': meta description is required');
+  assert.ok(description.length <= 160, file + ': homepage meta description should be concise (160 characters or fewer)');
   assert.equal(canonical, SITE_URL + route, file + ': canonical must match its language route');
   assert.match(html, new RegExp('<html lang="' + language + '" dir="' + (language === 'ar' ? 'rtl' : 'ltr') + '">'), file + ': language and text direction must be correct');
   assert.match(html, /Machinery|Maquinaria|المعدات|оборудования/i, file + ': localized page content is required');
@@ -115,7 +130,7 @@ const sitemapEntries = matchAll(sitemap, /<url>([\s\S]*?)<\/url>/gi).map((match)
 });
 const sitemapUrls = sitemapEntries.map((entry) => entry.loc);
 assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, 'Sitemap URLs must be unique');
-assert.deepEqual(new Set(sitemapUrls), expectedUrls, 'Sitemap must contain the homepage and every generated product language page, with no stale URLs');
+assert.deepEqual(new Set(sitemapUrls), expectedUrls, 'Sitemap must contain all four homepage language URLs and every generated page, with no stale URLs');
 
 for (const [slug, group] of productGroups) {
   const expectedLanguages = new Set(group.map((item) => item.page.language));

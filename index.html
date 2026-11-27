@@ -6,6 +6,7 @@
   <title>Industrial Equipment Supplier | AIZGZ Machinery</title>
   <meta name="description" content="AIZGZ Machinery supplies concrete mixers, mortar equipment and bag palletizing systems. Contact us for specifications and customization.">
   <link rel="canonical" href="https://www.aizgz.com/">
+  <!-- HOMEPAGE_HREFLANG -->
 
   <!-- Open Graph: social sharing previews -->
   <meta property="og:type" content="website">
@@ -513,23 +514,11 @@
 
 
     function browserLanguageChoice() {
-      const candidates = Array.isArray(navigator.languages) ? navigator.languages : [navigator.language || 'en'];
-      for (const candidate of candidates) {
-        const code = String(candidate).toLowerCase().split(/[-_]/)[0];
-        if (['es', 'ar', 'ru'].includes(code)) return code;
-      }
-      return 'en';
-    }
-
-    function countryLanguageChoice(country) {
-      const code = String(country || '').toUpperCase();
-      const spanish = ['ES','MX','AR','BO','CL','CO','CR','CU','DO','EC','GT','HN','NI','PA','PE','PY','SV','UY','VE','GQ'];
-      const arabic = ['SA','AE','QA','KW','BH','OM','YE','IQ','JO','LB','SY','PS','EG','SD','LY','TN','DZ','MA','MR','SO','DJ','KM'];
-      const russian = ['RU','BY','KZ','KG'];
-      if (spanish.includes(code)) return 'es';
-      if (arabic.includes(code)) return 'ar';
-      if (russian.includes(code)) return 'ru';
-      return 'en';
+      const primaryLanguage = Array.isArray(navigator.languages) && navigator.languages.length
+        ? navigator.languages[0]
+        : (navigator.language || 'en');
+      const code = String(primaryLanguage).toLowerCase().split(/[-_]/)[0];
+      return ['es', 'ar', 'ru'].includes(code) ? code : 'en';
     }
 
     function loadAnalytics() {
@@ -598,7 +587,13 @@
       // Render the interface and start content requests immediately. Regional
       // runtime detection is optional and must never block the catalogue.
       const hasStoredLanguage = Boolean(storedLanguage && i18nText[storedLanguage]);
-      const initialLanguage = hasStoredLanguage ? storedLanguage : browserLanguageChoice();
+      const routeLanguage = /^\/(es|ar|ru)\/?$/.exec(window.location.pathname)?.[1] || '';
+      const preferredLanguage = hasStoredLanguage ? storedLanguage : browserLanguageChoice();
+      if (!routeLanguage && preferredLanguage !== 'en') {
+        window.location.replace('/' + preferredLanguage + '/');
+        return;
+      }
+      const initialLanguage = routeLanguage || preferredLanguage;
       changeLanguage(initialLanguage, false);
       if (activeAnalyticsConsent === true) loadAnalytics();
       if (activeAnalyticsConsent === null) showCookieBanner();
@@ -609,7 +604,7 @@
       fetchContentCollection('cases', 'cases-grid', 'case');
       fetchContentCollection('videos', 'videos-grid', 'video');
 
-      // Apply country-based language only after the runtime endpoint responds.
+      // Apply the preview-only indexing guard after the runtime endpoint responds.
       // A timeout prevents a slow or unavailable function from blocking startup.
       (async () => {
         const controller = new AbortController();
@@ -623,9 +618,6 @@
             let robots = document.querySelector('meta[name="robots"]');
             if (!robots) { robots = document.createElement('meta'); robots.name = 'robots'; document.head.appendChild(robots); }
             robots.content = 'noindex, nofollow';
-          }
-          if (!hasStoredLanguage && initialLanguage === 'en') {
-            changeLanguage(countryLanguageChoice(runtime.country), false);
           }
         } catch (error) {
           console.warn('Regional language detection unavailable; continuing with the current language.', error);
@@ -657,7 +649,14 @@
         const selector = document.getElementById(id);
         if (selector) selector.value = language;
       });
-      if (persist) { try { localStorage.setItem('aizgz_language', language); } catch (_) {} }
+      if (persist) {
+        try { localStorage.setItem('aizgz_language', language); } catch (_) {}
+        const targetPath = language === 'en' ? '/' : '/' + language + '/';
+        if (window.location.pathname !== targetPath) {
+          window.location.assign(targetPath);
+          return;
+        }
+      }
       if (language === 'en' && globalSettings.hero_title) {
         setText('hero-title', globalSettings.hero_title);
         setText('hero-subtitle', globalSettings.hero_subtitle);
