@@ -2,7 +2,7 @@ backend:
   name: github
   repo: aizgz/aizgz-concrete-mixer
   branch: main
-  base_url: https://aizgz.vercel.app # 如果还没绑定二级域名，可以暂改回 https://aizgz.vercel.app
+  base_url: https://www.aizgz.com
   auth_endpoint: /api/auth
 
 media_folder: "uploads"
