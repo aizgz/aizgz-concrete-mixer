@@ -49,11 +49,10 @@ collections:
       - { label: "Short Summary (简短介绍，可选)", name: "summary", widget: "text", required: false, hint: "One or two factual sentences. Leave blank if not ready." }
       - { label: "Main Product Image (产品主图，可后续补充)", name: "image", widget: "image", required: false, hint: "Upload a real matching product photo only. This field can be left blank and completed later." }
       - { label: "Product Description & Technical Details (产品介绍与详细资料)", name: "body", widget: "markdown", required: true, hint: "Paste the supplied product description, features and technical parameter table. Keep source values and confirmation notes; do not guess missing specifications." }
-      - label: "Optional Technical Parameters (可选技术参数)"
+      - label: "Optional Technical Parameters (可选技术参数；有资料再填写)"
         name: "specifications"
         widget: "object"
         collapsed: true
-        summary: "{{fields.capacity}}"
         fields:
           - { label: "Internal Material Capacity (设备内部物料容量)", name: "internal_capacity", widget: "string", required: false }
           - { label: "Capacity / Throughput (产能)", name: "capacity", widget: "string", required: false }
