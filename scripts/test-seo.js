@@ -116,6 +116,9 @@ for (const language of LANGUAGES) {
   assert.match(html, /Machinery|Maquinaria|المعدات|оборудования/i, file + ': localized page content is required');
   assert.match(html, /<section id="inquiry"/, file + ': an on-page inquiry section is required');
   assert.match(html, /<form id="custom-inquiry-form"/, file + ': an on-page inquiry form is required');
+  assert.match(html, /const formspreeIdPromise = fetch\('\/api\/content\/\?collection=settings'/, file + ': inquiry settings must be loaded as a promise');
+  assert.match(html, /const formspreeId = await formspreeIdPromise/, file + ': submission must wait for inquiry settings before checking configuration');
+  assert.match(html, /button\.disabled = true;[\s\S]*?const formspreeId = await formspreeIdPromise/, file + ': submit control must be locked while settings load');
   for (const field of ['name', 'email', 'product_model', 'phone', 'message']) {
     assert.match(html, new RegExp('<(?:input|textarea)[^>]+name="' + field + '"'), file + ': inquiry field ' + field + ' is required');
   }

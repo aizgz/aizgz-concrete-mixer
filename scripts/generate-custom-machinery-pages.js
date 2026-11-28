@@ -228,23 +228,26 @@ function renderPage(language, allContent) {
       const status = document.getElementById('custom-form-status');
       const button = document.getElementById('custom-submit');
       const formMessages = ${JSON.stringify(locale.form).replace(/</g, String.fromCharCode(92) + 'u003c')};
-      let formspreeId = '';
-      fetch('/api/content/?collection=settings', { cache: 'no-store' })
+      const formspreeIdPromise = fetch('/api/content/?collection=settings', { cache: 'no-store' })
         .then((response) => { if (!response.ok) throw new Error('Settings unavailable'); return response.json(); })
-        .then((payload) => { formspreeId = String(payload.settings?.formspree_id || '').trim(); })
-        .catch((error) => console.warn('Could not load inquiry settings:', error));
+        .then((payload) => String(payload.settings?.formspree_id || '').trim())
+        .catch((error) => {
+          console.warn('Could not load inquiry settings:', error);
+          return '';
+        });
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        if (!formspreeId) {
-          status.textContent = formMessages.notConfigured;
-          status.className = 'form-status error';
-          status.hidden = false;
-          return;
-        }
         button.disabled = true;
         button.textContent = formMessages.sending;
         status.hidden = true;
         try {
+          const formspreeId = await formspreeIdPromise;
+          if (!formspreeId) {
+            status.textContent = formMessages.notConfigured;
+            status.className = 'form-status error';
+            status.hidden = false;
+            return;
+          }
           const response = await fetch('https://formspree.io/f/' + encodeURIComponent(formspreeId), {
             method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }
           });
