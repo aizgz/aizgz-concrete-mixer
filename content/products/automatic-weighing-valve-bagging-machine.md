@@ -2,16 +2,17 @@
 title: Automatic Weighing Valve Bagging Machine
 url_slug: automatic-weighing-valve-bagging-machine
 category: Packaging Equipment
-supply_status: Available for Supply
-capacity: "Approximately 8 tons/hour (source-recorded; material-dependent)"
-voltage: "AC 380 V, three-phase, four-wire"
-motor_power: "3 kW"
-air_pressure: "0.4–0.6 MPa dry compressed air"
-dimensions: "1100 × 670 × 1030 mm"
-operating_temperature: "−5 °C to +40 °C"
-bagging_rate: "25 kg: 5 seconds/bag; 50 kg: 10 seconds/bag"
 catalog_visible: true
 summary: Automatic quantitative valve-bag packing equipment with rotor-type and screw-type feeding options. Technical figures below are transcribed from the supplied record and depend on material and configuration.
+specifications:
+  supply_status: Available for Supply
+  capacity: "Approximately 8 tons/hour (source-recorded; material-dependent)"
+  voltage: "AC 380 V, three-phase, four-wire"
+  motor_power: "3 kW"
+  air_pressure: "0.4–0.6 MPa dry compressed air"
+  dimensions: "1100 × 670 × 1030 mm"
+  operating_temperature: "−5 °C to +40 °C"
+  bagging_rate: "25 kg: 5 seconds/bag; 50 kg: 10 seconds/bag"
 ---
 ## Product description
 
