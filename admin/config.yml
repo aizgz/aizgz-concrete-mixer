@@ -103,5 +103,5 @@ collections:
         name: "image"
         widget: "image"
         required: false
-        hint: "通常不需要上传。YouTube 自动使用视频封面；只有想替换封面，或 TikTok 无法自动获取封面时，才上传图片。"
+        hint: "通常不需要上传。YouTube 会自动使用视频封面；只有需要替换封面时，才上传图片。"
 
