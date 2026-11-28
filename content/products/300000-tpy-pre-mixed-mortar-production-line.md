@@ -3,6 +3,10 @@ title: 300,000 T/Y Pre-mixed Mortar Production Line
 url_slug: 300000-tpy-pre-mixed-mortar-production-line
 category: Dry Mortar Production Systems
 supply_status: Available for Supply
+capacity: "300,000 tons/year nominal; approximately 40–60 tons/hour (source-recorded; project basis to confirm)"
+mixing_volume: "6 m³ main mixer (source-recorded)"
+batch_quantity: "6–8 tons/batch (source-recorded; confirm project basis)"
+operator_count: "5–8 people (source-recorded)"
 catalog_visible: true
 summary: Pre-mixed mortar production line described for 300,000 tons per year, with a 6 m³ main mixer, batching, storage, conveying, valve-bag packing and automatic control. Actual output depends on project configuration and operating conditions.
 ---
