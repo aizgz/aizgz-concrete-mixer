@@ -156,7 +156,7 @@ for (const page of pages) {
     const translated = productTranslations[page.slug][page.language];
     assert.ok(translated && html.includes(translated.title), page.file + ': localized product title must be rendered');
     assert.ok(html.includes(translated.summary), page.file + ': localized product summary must be rendered');
-    assert.ok(html.includes(translated.body.split('\n')[0].replace(/^#+\\s*/, '')), page.file + ': localized product body must be rendered');
+    assert.ok(html.includes(translated.body.split('\n').find((line) => line && !line.startsWith('#'))), page.file + ': localized product body must be rendered');
     assert.match(html, new RegExp('<html lang="' + page.language + '"' + (page.language === 'ar' ? ' dir="rtl"' : '')), page.file + ': product language and direction must be correct');
     assert.ok(html.includes('aria-current="page"'), page.file + ': current language must be marked in the language switcher');
     assert.ok(!html.includes('<dt>Capacity / Throughput</dt>'), page.file + ': specification labels must be localized');
