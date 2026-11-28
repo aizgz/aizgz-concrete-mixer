@@ -186,17 +186,24 @@ function fillTemplate(template, values) {
 async function main() {
   const template = await readFile(TEMPLATE_PATH, 'utf8');
   const files = (await readdir(PRODUCTS_DIR)).filter((name) => name.toLowerCase().endsWith('.md')).sort();
+  const archiveDir = path.join(ROOT, 'content', 'product-archive');
+  let archivedFiles = [];
+  try { archivedFiles = (await readdir(archiveDir)).filter((name) => name.toLowerCase().endsWith('.md')).sort(); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
   const products = [];
   const seenSlugs = new Set();
-  for (const filename of files) {
-    const source = await readFile(path.join(PRODUCTS_DIR, filename), 'utf8');
+  for (const [directory, names, archived] of [[PRODUCTS_DIR, files, false], [archiveDir, archivedFiles, true]]) {
+   for (const filename of names) {
+    const source = await readFile(path.join(directory, filename), 'utf8');
     const { data: meta, body: englishBody } = parseFrontMatter(source, filename);
+    if (archived) meta.catalog_visible = false;
     const slug = String(meta.url_slug || '').trim();
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error(`${filename}: invalid or missing url_slug "${slug}"`);
     if (seenSlugs.has(slug)) throw new Error(`Duplicate product url_slug: ${slug}`);
     seenSlugs.add(slug);
     if (!String(meta.title || '').trim() || !englishBody.trim()) throw new Error(`${filename}: English title and body are required`);
     products.push({ meta, slug, englishBody });
+   }
   }
 
   let pageCount = 0;
