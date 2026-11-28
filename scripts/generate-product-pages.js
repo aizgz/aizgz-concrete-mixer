@@ -126,8 +126,8 @@ function renderMarkdown(markdown) {
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i];
     const next = lines[i + 1] || '';
-    const tableStart = line.trim().startsWith('|') && next.trim().startsWith('|') && isSeparator(next);
-    const tableContinuation = table.length > 0 && line.trim().startsWith('|');
+    const tableStart = line.includes('|') && next.includes('|') && isSeparator(next);
+    const tableContinuation = table.length > 0 && line.includes('|');
     if (tableStart || tableContinuation) {
       flushParagraph(); flushList(); table.push(line); continue;
     }
