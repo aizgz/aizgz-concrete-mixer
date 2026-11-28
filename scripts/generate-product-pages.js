@@ -348,7 +348,8 @@ async function main() {
       .replace('<meta property="og:url" content="https://www.aizgz.com/">', `<meta property="og:url" content="${SITE_URL}/${language}/">`)
       .replace('<meta property="og:locale" content="en_US">', `<meta property="og:locale" content="${config.ogLocale}">`)
       .replace('<meta name="twitter:title" content="Dry Mix Mortar Production Lines | AIZGZ Machinery">', `<meta name="twitter:title" content="${config.title}">`)
-      .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${config.description}">`);
+      .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${config.description}">`)
+      .replaceAll('href="/custom-machinery-solutions/"', `href="/${language}/custom-machinery-solutions/"`);
     const outputDir = path.join(ROOT, language);
     await mkdir(outputDir, { recursive: true });
     await writeFile(path.join(outputDir, 'index.html'), localized, 'utf8');
