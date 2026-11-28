@@ -64,6 +64,14 @@ collections:
       - { label: "Voltage (电压)", name: "voltage", widget: "string", required: false }
       - { label: "Frequency (频率)", name: "frequency", widget: "string", required: false }
       - { label: "Motor Power (电机功率)", name: "motor_power", widget: "string", required: false }
+      - { label: "Batch Quantity (批次容量)", name: "batch_quantity", widget: "string", required: false }
+      - { label: "Bagging Rate (包装速度)", name: "bagging_rate", widget: "string", required: false }
+      - { label: "Weighing Accuracy (计量精度)", name: "weighing_accuracy", widget: "string", required: false }
+      - { label: "Air Pressure (气源压力)", name: "air_pressure", widget: "string", required: false }
+      - { label: "Air Consumption (耗气量)", name: "air_consumption", widget: "string", required: false }
+      - { label: "Dimensions (外形尺寸)", name: "dimensions", widget: "string", required: false }
+      - { label: "Operating Temperature (工作温度)", name: "operating_temperature", widget: "string", required: false }
+      - { label: "Operator Count (操作人员)", name: "operator_count", widget: "string", required: false }
       - { label: "Packaging Range (包装重量范围)", name: "packaging_range", widget: "string", required: false }
       - { label: "Mixing Volume (搅拌容积/批次容量)", name: "mixing_volume", widget: "string", required: false }
       - { label: "Mixing Time (搅拌时间)", name: "mixing_time", widget: "string", required: false }
