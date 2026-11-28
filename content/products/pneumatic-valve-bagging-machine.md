@@ -2,16 +2,17 @@
 title: Pneumatic Valve Bagging Machine
 url_slug: pneumatic-valve-bagging-machine
 category: Packaging Equipment
-supply_status: Available for Supply
-capacity: "3–6 bags/min; 4–5 t/h per spout (source-recorded); maximum 12 t/h requires configuration confirmation"
-packaging_range: "10–50 kg"
-voltage: "AC 220 V, 50 Hz, three-phase (confirm electrical configuration)"
-frequency: "50 Hz (source-listed)"
-air_pressure: "0.4–0.8 MPa"
-air_consumption: "0.7 m³/min"
-weighing_accuracy: "±0.2%–0.4% (source-recorded)"
 catalog_visible: true
 summary: Pneumatic valve-bag packing machine for free-flowing powders and granular materials. Source-recorded bagging range is 10–50 kg; final electrical and throughput configuration requires confirmation.
+specifications:
+  supply_status: Available for Supply
+  capacity: "3–6 bags/min; 4–5 t/h per spout (source-recorded); maximum 12 t/h requires configuration confirmation"
+  packaging_range: "10–50 kg"
+  voltage: "AC 220 V, 50 Hz, three-phase (confirm electrical configuration)"
+  frequency: "50 Hz (source-listed)"
+  air_pressure: "0.4–0.8 MPa"
+  air_consumption: "0.7 m³/min"
+  weighing_accuracy: "±0.2%–0.4% (source-recorded)"
 ---
 ## Product description
 
