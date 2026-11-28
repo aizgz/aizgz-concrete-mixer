@@ -2,10 +2,11 @@
 title: 100,000 T/Y Pre-mixed Mortar Production Line
 url_slug: 100000-tpy-pre-mixed-mortar-production-line
 category: Dry Mortar Production Systems
-supply_status: Available for Supply
-capacity: "100,000 tons/year (nominal source figure; project basis to confirm)"
 catalog_visible: true
 summary: Annual 100,000-ton dry-mix mortar plant with mixing, storage, conveying, batching, packing, dust collection and control systems. Drying, screening and crushing can be added according to project needs.
+specifications:
+  supply_status: Available for Supply
+  capacity: "100,000 tons/year (nominal source figure; project basis to confirm)"
 ---
 ## Product description
 
