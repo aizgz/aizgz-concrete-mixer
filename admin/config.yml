@@ -42,55 +42,39 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Product Title - English (产品英文名称)", name: "title", widget: "string" }
-      - { label: "Product URL Slug (稳定产品网址标识)", name: "url_slug", widget: "string", required: true, pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Only lowercase English letters, numbers, and single hyphens are allowed."], hint: "Use lowercase English letters, numbers and single hyphens only. Keep unchanged after publication." }
-      - { label: "Product Title - Spanish (西班牙语名称)", name: "title_es", widget: "string", required: false }
-      - { label: "Product Title - Arabic (阿拉伯语名称)", name: "title_ar", widget: "string", required: false }
-      - { label: "Product Title - Russian (俄语名称)", name: "title_ru", widget: "string", required: false }
-      - { label: "Model (型号)", name: "model", widget: "string", required: false }
-      - { label: "Internal Material Capacity (设备内部物料容量)", name: "internal_capacity", widget: "string", required: false }
-      # 👈 核心升级：新增设备分类下拉菜单，涵盖干粉砂浆及重型建机
-      - { 
-          label: "Category (设备大类)", 
-          name: "category", 
-          widget: "select", 
-          options: [
-            "Dry Mortar Production Systems",
-            "Mixing & Blending Equipment",
-            "Packaging Equipment"
-          ] 
-        }
-      - { label: "Capacity / Throughput (产能)", name: "capacity", widget: "string", required: false }
-      - { label: "Voltage (电压)", name: "voltage", widget: "string", required: false }
-      - { label: "Frequency (频率)", name: "frequency", widget: "string", required: false }
-      - { label: "Motor Power (电机功率)", name: "motor_power", widget: "string", required: false }
-      - { label: "Batch Quantity (批次容量)", name: "batch_quantity", widget: "string", required: false }
-      - { label: "Bagging Rate (包装速度)", name: "bagging_rate", widget: "string", required: false }
-      - { label: "Weighing Accuracy (计量精度)", name: "weighing_accuracy", widget: "string", required: false }
-      - { label: "Air Pressure (气源压力)", name: "air_pressure", widget: "string", required: false }
-      - { label: "Air Consumption (耗气量)", name: "air_consumption", widget: "string", required: false }
-      - { label: "Dimensions (外形尺寸)", name: "dimensions", widget: "string", required: false }
-      - { label: "Operating Temperature (工作温度)", name: "operating_temperature", widget: "string", required: false }
-      - { label: "Operator Count (操作人员)", name: "operator_count", widget: "string", required: false }
-      - { label: "Packaging Range (包装重量范围)", name: "packaging_range", widget: "string", required: false }
-      - { label: "Mixing Volume (搅拌容积/批次容量)", name: "mixing_volume", widget: "string", required: false }
-      - { label: "Mixing Time (搅拌时间)", name: "mixing_time", widget: "string", required: false }
-      - { label: "Application (适用物料/用途)", name: "application", widget: "text", required: false }
-      - { label: "Optional Components (可选配置)", name: "optional_components", widget: "text", required: false }
-      - { label: "Supply Status (供货状态)", name: "supply_status", widget: "select", options: ["Available for Supply", "Sourcing on Request", "Temporarily Unavailable"], required: false }
-      - { 
-          label: "Power / Control Type (动力/控制方式)", 
-          name: "power_type", 
-          widget: "select", 
-          options: ["Electric Motor", "Automatic PLC System", "Electric Engine", "Diesel Engine", "Semi-Automatic"],
-          required: false
-        }
-      - { label: "Product Image (产品主图，可后续上传)", name: "image", widget: "image", required: false, hint: "Optional. Upload the actual product photo when available; do not use an unrelated placeholder." }
-      - { label: "Short Summary (简短介绍/摘要)", name: "summary", widget: "text", required: false }
-      - { label: "Technical Specifications & Details - English (英文技术参数与说明)", name: "body", widget: "markdown" }
-      - { label: "Technical Details - Spanish (西班牙语详细说明)", name: "body_es", widget: "markdown", required: false }
-      - { label: "Technical Details - Arabic (阿拉伯语详细说明)", name: "body_ar", widget: "markdown", required: false }
-      - { label: "Technical Details - Russian (俄语详细说明)", name: "body_ru", widget: "markdown", required: false }
+      - { label: "Product Name (产品名称)", name: "title", widget: "string", required: true, hint: "Enter the English product name. Other languages are managed centrally; no need to enter translations here." }
+      - { label: "Product URL Slug (产品网址标识)", name: "url_slug", widget: "string", required: true, pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase English letters, numbers and single hyphens only."], hint: "Keep this unchanged after publication so the product URL does not change." }
+      - { label: "Category (产品分类)", name: "category", widget: "select", required: true, options: ["Dry Mortar Production Systems", "Mixing & Blending Equipment", "Packaging Equipment"] }
+      - { label: "Model (型号，如有)", name: "model", widget: "string", required: false }
+      - { label: "Short Summary (简短介绍，可选)", name: "summary", widget: "text", required: false, hint: "One or two factual sentences. Leave blank if not ready." }
+      - { label: "Main Product Image (产品主图，可后续补充)", name: "image", widget: "image", required: false, hint: "Upload a real matching product photo only. This field can be left blank and completed later." }
+      - { label: "Product Description & Technical Details (产品介绍与详细资料)", name: "body", widget: "markdown", required: true, hint: "Paste the supplied product description, features and technical parameter table. Keep source values and confirmation notes; do not guess missing specifications." }
+      - label: "Optional Technical Parameters (可选技术参数)"
+        name: "specifications"
+        widget: "object"
+        collapsed: true
+        summary: "{{fields.capacity}}"
+        fields:
+          - { label: "Internal Material Capacity (设备内部物料容量)", name: "internal_capacity", widget: "string", required: false }
+          - { label: "Capacity / Throughput (产能)", name: "capacity", widget: "string", required: false }
+          - { label: "Batch Quantity (批次容量)", name: "batch_quantity", widget: "string", required: false }
+          - { label: "Bagging Rate (包装速度)", name: "bagging_rate", widget: "string", required: false }
+          - { label: "Weighing Accuracy (计量精度)", name: "weighing_accuracy", widget: "string", required: false }
+          - { label: "Air Pressure (气源压力)", name: "air_pressure", widget: "string", required: false }
+          - { label: "Air Consumption (耗气量)", name: "air_consumption", widget: "string", required: false }
+          - { label: "Voltage (电压)", name: "voltage", widget: "string", required: false }
+          - { label: "Frequency (频率)", name: "frequency", widget: "string", required: false }
+          - { label: "Motor Power (电机功率)", name: "motor_power", widget: "string", required: false }
+          - { label: "Dimensions (外形尺寸)", name: "dimensions", widget: "string", required: false }
+          - { label: "Operating Temperature (工作温度)", name: "operating_temperature", widget: "string", required: false }
+          - { label: "Operator Count (操作人员)", name: "operator_count", widget: "string", required: false }
+          - { label: "Packaging Range (包装重量范围)", name: "packaging_range", widget: "string", required: false }
+          - { label: "Mixing Volume (搅拌容积)", name: "mixing_volume", widget: "string", required: false }
+          - { label: "Mixing Time (搅拌时间)", name: "mixing_time", widget: "string", required: false }
+          - { label: "Supply Status (供货状态)", name: "supply_status", widget: "select", options: ["Available for Supply", "Sourcing on Request", "Temporarily Unavailable"], required: false }
+          - { label: "Power / Control Type (动力/控制方式)", name: "power_type", widget: "select", options: ["Electric Motor", "Automatic PLC System", "Electric Engine", "Diesel Engine", "Semi-Automatic"], required: false }
+          - { label: "Application (适用物料/用途)", name: "application", widget: "text", required: false }
+          - { label: "Optional Components (可选配置)", name: "optional_components", widget: "text", required: false }
 
   # 4. 视频展厅管理：平台自动识别，YouTube 封面自动获取
   - name: "videos"
