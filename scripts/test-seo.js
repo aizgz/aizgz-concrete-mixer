@@ -57,7 +57,7 @@ for (const [language, route] of Object.entries(homepageRoutes)) {
   assert.equal(canonical, SITE_URL + route, file + ': homepage canonical must match its language route');
   assert.match(html, new RegExp('<html lang="' + language + '"' + (language === 'ar' ? ' dir="rtl"' : '')), file + ': homepage language and direction must be correct');
   if (language !== 'en') {
-    const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
+  const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
     const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
     const ogTitle = html.match(/<meta\s+property="og:title"\s+content="([^"]+)"/i)?.[1] || '';
     const ogDescription = html.match(/<meta\s+property="og:description"\s+content="([^"]+)"/i)?.[1] || '';
@@ -136,9 +136,24 @@ for (const language of LANGUAGES) {
   expectedUrls.add(canonical);
   customMachineryPages.push({ language, canonical, alternates });
 }
+const expectedStructuredSpecs = {
+  '100000-tpy-pre-mixed-mortar-production-line': ['100,000 tons/year'],
+  '300000-tpy-pre-mixed-mortar-production-line': ['300,000 tons/year', '6 m³', '6–8 tons/batch'],
+  'automatic-weighing-valve-bagging-machine': ['Approximately 8 tons/hour', 'AC 380 V', '0.4–0.6 MPa'],
+  'compact-standalone-dry-mortar-production-line': ['10–20 tons/day', '1 ton/batch'],
+  'horizontal-ploughshare-mixer': ['LDH-0.1 to LDH-4', '40–2,400 kg/batch'],
+  'horizontal-ribbon-mixer': ['HJJ300–HJJ5000', '300–5,000 kg/batch'],
+  'pneumatic-valve-bagging-machine': ['10–50 kg', '3–6 bags/min', '0.4–0.8 MPa'],
+  'twin-shaft-gravity-free-mixing-production-line': ['3–5 tons/hour', '18.5 kW main drive']
+};
 const productGroups = new Map();
 for (const page of pages) {
   const html = await readFile(page.file, 'utf8');
+  if (expectedStructuredSpecs[page.slug] && page.language === 'en') {
+    for (const value of expectedStructuredSpecs[page.slug]) {
+      assert.ok(html.includes(value), page.file + ': structured key specification "' + value + '" must be rendered from product data');
+    }
+  }
   const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
   const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
   const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1] || '';

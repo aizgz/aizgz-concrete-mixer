@@ -14,6 +14,9 @@ const LANGUAGES = {
 };
 const SPEC_FIELDS = [
   ['model', 'Model'], ['category', 'Category'], ['capacity', 'Capacity / Throughput'],
+  ['batch_quantity', 'Batch Quantity'], ['bagging_rate', 'Bagging Rate'], ['weighing_accuracy', 'Weighing Accuracy'],
+  ['air_pressure', 'Air Pressure'], ['air_consumption', 'Air Consumption'], ['dimensions', 'Dimensions'],
+  ['operating_temperature', 'Operating Temperature'], ['operator_count', 'Operating Personnel'],
   ['internal_capacity', 'Internal Material Capacity'], ['voltage', 'Voltage'],
   ['frequency', 'Frequency'], ['motor_power', 'Motor Power'],
   ['packaging_range', 'Packaging Range'], ['mixing_volume', 'Mixing Volume'],
