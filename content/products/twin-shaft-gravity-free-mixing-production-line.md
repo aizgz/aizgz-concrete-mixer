@@ -3,6 +3,9 @@ title: Twin-Shaft Gravity-Free Mixing Production Line
 url_slug: twin-shaft-gravity-free-mixing-production-line
 category: Dry Mortar Production Systems
 supply_status: Available for Supply
+capacity: "3–5 tons/hour (source-recorded; not a guaranteed output)"
+motor_power: "18.5 kW main drive + 4 kW chopper motor (one listed configuration; confirm)"
+operator_count: "3–6 people (source-recorded)"
 catalog_visible: true
 summary: Dry-mix production system arranged around a twin-shaft paddle gravity-free mixer, with pre-mixing, minor-ingredient dosing, finished-product storage, packing, dust collection and conveying equipment. Capacity and component specifications require project confirmation.
 ---
