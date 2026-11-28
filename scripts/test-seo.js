@@ -83,6 +83,23 @@ for (const [language, route] of Object.entries(homepageRoutes)) {
 }
 assert.match(homepage, /navigator\.languages/, 'First-visit language must use browser preferred languages');
 assert.ok(!homepage.includes('countryLanguageChoice'), 'Country-based language override must not replace browser language');
+const homepageUiTranslations = {
+  en: { title: 'Dry Mix Mortar Production Lines & Powder Processing Equipment', dry: 'Dry Mortar Production Systems', packaging: 'Packaging Equipment', mixing: 'Mixing & Blending Equipment' },
+  es: { title: 'Líneas de producción de mortero seco y equipos para procesar polvos', dry: 'Sistemas de producción de mortero seco', packaging: 'Equipos de envasado', mixing: 'Equipos de mezcla y homogeneización' },
+  ar: { title: 'خطوط إنتاج الملاط الجاف ومعدات معالجة المساحيق', dry: 'أنظمة إنتاج الملاط الجاف', packaging: 'معدات التعبئة', mixing: 'معدات الخلط والمزج' },
+  ru: { title: 'Линии сухих строительных смесей и оборудование для обработки порошков', dry: 'Линии производства сухих смесей', packaging: 'Фасовочное оборудование', mixing: 'Оборудование для смешивания' }
+};
+for (const [language, labels] of Object.entries(homepageUiTranslations)) {
+  const route = homepageRoutes[language];
+  const file = path.join(ROOT, route === '/' ? 'index.html' : route.slice(1) + 'index.html');
+  const html = await readFile(file, 'utf8');
+  assert.ok(html.includes('"hero_title":"' + labels.title + '"'), file + ': hero title translation must match the current equipment focus');
+  for (const [key, value] of [['filter_dry_systems', labels.dry], ['filter_packaging', labels.packaging], ['filter_mixing', labels.mixing]]) {
+    assert.ok(html.includes('"' + key + '":"' + value + '"'), file + ': localized category filter ' + key + ' is required');
+  }
+  assert.match(html, /id="product-filters" class="mb-8 flex flex-wrap gap-3"/, file + ': category filters must wrap on narrow screens');
+}
+assert.match(homepage, /font-size:clamp\(1\.875rem,4vw,3\.75rem\)/, 'Hero heading must scale progressively across viewport sizes');
 const customMachineryPages = [];
 for (const language of LANGUAGES) {
   const route = language === 'en' ? '/custom-machinery-solutions/' : '/' + language + '/custom-machinery-solutions/';
