@@ -174,14 +174,14 @@ for (const page of pages) {
   const expectedCanonical = SITE_URL + (page.language === 'en' ? '' : '/' + page.language) + '/products/' + page.slug + '/';
   assert.equal(canonical, expectedCanonical, page.file + ': canonical must match its language route');
   assert.match(html, /<script\s+type="application\/ld\+json">[\s\S]*?"@type":"Product"[\s\S]*?<\/script>/i, page.file + ': Product structured data is required');
-  const schemaText = html.match(/<script\\s+type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/i)?.[1] || '';
+  const schemaText = html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1] || '';
   const schema = JSON.parse(schemaText);
   const breadcrumb = schema['@graph']?.find((item) => item['@type'] === 'BreadcrumbList');
   const localizedHome = SITE_URL + (page.language === 'en' ? '/' : '/' + page.language + '/');
   assert.ok(breadcrumb, page.file + ': BreadcrumbList structured data is required');
   assert.equal(breadcrumb.itemListElement?.[0]?.item, localizedHome, page.file + ': breadcrumb home must use the current language');
   assert.equal(breadcrumb.itemListElement?.[1]?.item, localizedHome + '#products', page.file + ': breadcrumb product catalogue must use the current language');
-  assert.match(html, new RegExp('<a class="brand" href="' + localizedHome.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\  assert.match(html, /<script\s+type="application\/ld\+json">[\s\S]*?"@type":"Product"[\s\S]*?<\/script>/i, page.file + ': Product structured data is required');').replace(/\\/$/, '') + '/">'), page.file + ': brand link must remain in the current language');
+  assert.ok(html.includes('<a class="brand" href="' + localizedHome + '">'), page.file + ': brand link must remain in the current language');
 
   const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
