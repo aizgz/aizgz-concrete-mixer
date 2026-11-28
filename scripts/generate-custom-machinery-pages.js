@@ -272,7 +272,7 @@ function renderPage(language, allContent) {
 function renderHomepageSection(content) {
   const home = content.en.home;
   const optionCards = home.options.map((_, index) => `
-          <li class="rounded-xl border border-slate-200 bg-slate-50 p-6"><h3 class="font-bold text-slate-900" data-i18n="custom_option_${index + 1}">${escapeHtml(home.options[index])}</h3></li>`).join('');
+          <li class="customization-option-card"><h3 class="font-bold text-slate-900" data-i18n="custom_option_${index + 1}">${escapeHtml(home.options[index])}</h3></li>`).join('');
   return `<section id="customization" class="border-b border-slate-200 bg-white px-4 py-16">
       <div class="mx-auto max-w-7xl">
         <div class="mx-auto mb-10 max-w-3xl text-center">
@@ -283,7 +283,14 @@ function renderHomepageSection(content) {
         </div>
         <div class="mx-auto max-w-5xl">
           <h3 class="mb-4 text-center font-bold text-slate-900" data-i18n="custom_options_title">${escapeHtml(home.optionsTitle)}</h3>
-          <ul class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">${optionCards}
+          <style>
+            #customization .customization-options-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+            #customization .customization-option-card{min-width:0;border:1px solid #e2e8f0;border-radius:.75rem;background:#f8fafc;padding:1.5rem}
+            #customization .customization-option-card h3{font-weight:700;color:#0f172a;line-height:1.45}
+            @media(min-width:640px){#customization .customization-options-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+            @media(min-width:1024px){#customization .customization-options-grid{grid-template-columns:repeat(6,minmax(0,1fr))}#customization .customization-option-card{grid-column:span 2}#customization .customization-option-card:nth-child(4){grid-column:2/span 2}#customization .customization-option-card:nth-child(5){grid-column:4/span 2}}
+          </style>
+          <ul class="customization-options-grid">${optionCards}
           </ul>
           <p class="mx-auto mt-6 max-w-4xl text-center text-sm leading-relaxed text-slate-600" data-i18n="custom_note">${escapeHtml(home.note)}</p>
           <div class="mt-6 text-center"><a id="custom-machinery-link" href="/custom-machinery-solutions/" class="inline-flex rounded-lg bg-amber-500 px-6 py-3 font-bold text-slate-900 hover:bg-amber-600" data-i18n="custom_cta">${escapeHtml(home.cta)}</a></div>
