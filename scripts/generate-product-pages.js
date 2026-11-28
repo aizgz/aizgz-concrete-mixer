@@ -52,6 +52,28 @@ function parseFrontMatter(source, filename) {
     if (!field) throw new Error(`${filename}:${i + 1}: unsupported front matter syntax`);
     const key = field[1];
     const raw = field[2] || '';
+    if (!raw && i + 1 < lines.length && /^  [A-Za-z0-9_-]+:/.test(lines[i + 1])) {
+      const nested = {};
+      while (i + 1 < lines.length && /^  [A-Za-z0-9_-]+:/.test(lines[i + 1])) {
+        i += 1;
+        const nestedField = lines[i].match(/^  ([A-Za-z0-9_-]+):(?:\\s*(.*))?$/);
+        if (!nestedField) throw new Error(`${filename}:${i + 1}: unsupported nested front matter syntax`);
+        const nestedKey = nestedField[1];
+        const nestedRaw = nestedField[2] || '';
+        if (nestedRaw === '|' || nestedRaw === '|-' || nestedRaw === '>' || nestedRaw === '>-') {
+          const block = [];
+          while (i + 1 < lines.length && (/^    /.test(lines[i + 1]) || !lines[i + 1].trim())) {
+            i += 1;
+            block.push(lines[i].replace(/^ {4}/, ''));
+          }
+          nested[nestedKey] = block.join(nestedRaw.startsWith('>') ? ' ' : '\\n').trim();
+        } else {
+          nested[nestedKey] = parseScalar(nestedRaw);
+        }
+      }
+      data[key] = nested;
+      continue;
+    }
     if (raw === '|' || raw === '|-' || raw === '>' || raw === '>-') {
       const block = [];
       while (i + 1 < lines.length && (/^\s+/.test(lines[i + 1]) || !lines[i + 1].trim())) {
@@ -240,7 +262,10 @@ async function main() {
   for (const [directory, names, archived] of [[PRODUCTS_DIR, files, false], [archiveDir, archivedFiles, true]]) {
    for (const filename of names) {
     const source = await readFile(path.join(directory, filename), 'utf8');
-    const { data: meta, body: englishBody } = parseFrontMatter(source, filename);
+    const { data: parsedMeta, body: englishBody } = parseFrontMatter(source, filename);
+    // Support the simplified CMS nested specifications object while retaining legacy flat front matter.
+    const meta = { ...parsedMeta, ...(parsedMeta.specifications && typeof parsedMeta.specifications === 'object' ? parsedMeta.specifications : {}) };
+    delete meta.specifications;
     if (archived) meta.catalog_visible = false;
     const slug = String(meta.url_slug || '').trim();
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error(`${filename}: invalid or missing url_slug "${slug}"`);
