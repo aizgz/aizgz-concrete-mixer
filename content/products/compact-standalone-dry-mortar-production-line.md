@@ -2,13 +2,14 @@
 title: Compact Standalone Dry Mortar Production Line
 url_slug: compact-standalone-dry-mortar-production-line
 category: Dry Mortar Production Systems
-supply_status: Available for Supply
-capacity: "10–20 tons/day (source-recorded; confirm operating basis)"
-batch_quantity: "1 ton/batch (source-recorded)"
-operator_count: "2–3 people (source-recorded)"
-dimensions: "Overall height below 3 m (source-recorded; verify site conditions)"
 catalog_visible: true
 summary: Compact dry-mortar line built around a gravity-free mixer, finished-product bin and lifting equipment. The source describes a small initial-investment configuration and records a 1-ton batch with a stated daily output of 10–20 tons.
+specifications:
+  supply_status: Available for Supply
+  capacity: "10–20 tons/day (source-recorded; confirm operating basis)"
+  batch_quantity: "1 ton/batch (source-recorded)"
+  operator_count: "2–3 people (source-recorded)"
+  dimensions: "Overall height below 3 m (source-recorded; verify site conditions)"
 ---
 ## Product description
 
