@@ -100,29 +100,52 @@ function renderMarkdown(markdown) {
   const output = [];
   let paragraph = [];
   let list = [];
+  let table = [];
   const flushParagraph = () => {
-    if (paragraph.length) output.push(`<p>${paragraph.map(renderInline).join('<br>')}</p>`);
+    if (paragraph.length) output.push('<p>' + paragraph.map(renderInline).join('<br>') + '</p>');
     paragraph = [];
   };
   const flushList = () => {
-    if (list.length) output.push(`<ul>${list.map((item) => `<li>${renderInline(item)}</li>`).join('')}</ul>`);
+    if (list.length) output.push('<ul>' + list.map((item) => '<li>' + renderInline(item) + '</li>').join('') + '</ul>');
     list = [];
   };
-  for (const line of lines) {
+  const splitCells = (line) => line.trim().replace(/^\|/, '').replace(/\|$/, '')
+    .split(/(?<!\\)\|/).map((cell) => cell.replace(/\\\|/g, '|').trim());
+  const isSeparator = (line) => splitCells(line).every((cell) => /^:?-{3,}:?$/.test(cell.replace(/\s/g, '')));
+  const flushTable = () => {
+    if (!table.length) return;
+    const rows = table.map(splitCells);
+    const hasHeader = rows.length > 1 && isSeparator(table[1]);
+    const header = hasHeader ? rows[0] : [];
+    const bodyRows = hasHeader ? rows.slice(2) : rows;
+    const headHtml = header.length ? '<thead><tr>' + header.map((cell) => '<th scope="col">' + renderInline(cell) + '</th>').join('') + '</tr></thead>' : '';
+    const bodyHtml = '<tbody>' + bodyRows.map((row) => '<tr>' + row.map((cell) => '<td>' + renderInline(cell) + '</td>').join('') + '</tr>').join('') + '</tbody>';
+    output.push('<div class="table-scroll"><table>' + headHtml + bodyHtml + '</table></div>');
+    table = [];
+  };
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    const next = lines[i + 1] || '';
+    const tableStart = line.includes('|') && next.includes('|') && isSeparator(next);
+    const tableContinuation = table.length > 0 && line.includes('|');
+    if (tableStart || tableContinuation) {
+      flushParagraph(); flushList(); table.push(line); continue;
+    }
+    if (table.length) flushTable();
     const heading = line.match(/^(#{1,4})\s+(.+)$/);
     const item = line.match(/^\s*[-*+]\s+(.+)$/);
     if (!line.trim()) { flushParagraph(); flushList(); continue; }
     if (heading) {
       flushParagraph(); flushList();
       const level = Math.min(heading[1].length + 1, 6);
-      output.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
+      output.push('<h' + level + '>' + renderInline(heading[2]) + '</h' + level + '>');
     } else if (item) {
       flushParagraph(); list.push(item[1]);
     } else {
       flushList(); paragraph.push(line.trim());
     }
   }
-  flushParagraph(); flushList();
+  flushParagraph(); flushList(); flushTable();
   return output.join('\n');
 }
 function plainText(markdown) {
@@ -161,7 +184,6 @@ function renderHomepageProductCard(meta, slug) {
     `<div class="p-6"><h3 class="text-xl font-bold text-slate-800">${title}</h3>${model}${capacity}${internalCapacity}</div>`,
     '</a>',
     '<div class="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 p-6 pt-4">',
-    `<a href="/products/${slug}/" class="rounded bg-slate-800 px-4 py-2 text-xs font-bold text-white hover:bg-slate-900" aria-label="Details: ${title}">Details</a>`,
     `<a href="#contact" class="rounded bg-amber-500 px-4 py-2 text-xs font-bold text-slate-900 hover:bg-amber-600" aria-label="Inquire: ${title}">Inquire →</a>`,
     '</div>',
     '</article>'
@@ -318,15 +340,16 @@ async function main() {
   for (const [language, config] of Object.entries(localizedHomepages)) {
     const localized = updatedHomepage
       .replace('<html lang="en" class="scroll-smooth">', `<html lang="${config.htmlLang}"${language === 'ar' ? ' dir="rtl"' : ''} class="scroll-smooth">`)
-      .replace('<title>Industrial Equipment Supplier | AIZGZ Machinery</title>', `<title>${config.title}</title>`)
+      .replace('<title>Dry Mix Mortar Production Lines | AIZGZ Machinery</title>', `<title>${config.title}</title>`)
       .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${config.description}">`)
       .replace('<link rel="canonical" href="https://www.aizgz.com/">', `<link rel="canonical" href="${SITE_URL}/${language}/">`)
-      .replace('<meta property="og:title" content="Industrial Equipment Supplier | AIZGZ Machinery">', `<meta property="og:title" content="${config.title}">`)
+      .replace('<meta property="og:title" content="Dry Mix Mortar Production Lines | AIZGZ Machinery">', `<meta property="og:title" content="${config.title}">`)
       .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${config.description}">`)
       .replace('<meta property="og:url" content="https://www.aizgz.com/">', `<meta property="og:url" content="${SITE_URL}/${language}/">`)
       .replace('<meta property="og:locale" content="en_US">', `<meta property="og:locale" content="${config.ogLocale}">`)
-      .replace('<meta name="twitter:title" content="Industrial Equipment Supplier | AIZGZ Machinery">', `<meta name="twitter:title" content="${config.title}">`)
-      .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${config.description}">`);
+      .replace('<meta name="twitter:title" content="Dry Mix Mortar Production Lines | AIZGZ Machinery">', `<meta name="twitter:title" content="${config.title}">`)
+      .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${config.description}">`)
+      .replaceAll('href="/custom-machinery-solutions/"', `href="/${language}/custom-machinery-solutions/"`);
     const outputDir = path.join(ROOT, language);
     await mkdir(outputDir, { recursive: true });
     await writeFile(path.join(outputDir, 'index.html'), localized, 'utf8');
