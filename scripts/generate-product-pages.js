@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PRODUCTS_DIR = path.join(ROOT, 'content', 'products');
 const TEMPLATE_PATH = path.join(ROOT, 'templates', 'product.html');
+const TRANSLATIONS_PATH = path.join(ROOT, 'content', 'product-translations.json');
 const SITE_URL = 'https://www.aizgz.com';
 const LANGUAGES = {
   en: { htmlLang: 'en', ogLocale: 'en_US', dir: 'ltr', label: 'English', home: 'Home', products: 'Products', inquiry: 'Request a quotation', back: 'Back to product catalogue', footer: 'Product information and configuration are subject to confirmation.', titleKey: 'title', bodyKey: null },
@@ -193,9 +194,27 @@ function renderHomepageProductCard(meta, slug) {
   ].join('');
 }
 
-function renderSpecs(meta) {
+const SPEC_LABELS = {
+  es: {model:'Modelo',category:'Categoría',capacity:'Capacidad / producción',batch_quantity:'Cantidad por lote',bagging_rate:'Velocidad de envasado',weighing_accuracy:'Precisión de pesaje',air_pressure:'Presión de aire',air_consumption:'Consumo de aire',dimensions:'Dimensiones',operating_temperature:'Temperatura de funcionamiento',operator_count:'Personal de operación',voltage:'Tensión',frequency:'Frecuencia',motor_power:'Potencia del motor',packaging_range:'Rango de envasado',mixing_volume:'Volumen de mezcla',mixing_time:'Tiempo de mezcla',supply_status:'Disponibilidad'},
+  ar: {model:'الطراز',category:'الفئة',capacity:'الطاقة الإنتاجية',batch_quantity:'كمية الدفعة',bagging_rate:'سرعة التعبئة',weighing_accuracy:'دقة الوزن',air_pressure:'ضغط الهواء',air_consumption:'استهلاك الهواء',dimensions:'الأبعاد',operating_temperature:'درجة حرارة التشغيل',operator_count:'عدد المشغلين',voltage:'الجهد الكهربائي',frequency:'التردد',motor_power:'قدرة المحرك',packaging_range:'نطاق التعبئة',mixing_volume:'حجم الخلط',mixing_time:'زمن الخلط',supply_status:'حالة التوريد'},
+  ru: {model:'Модель',category:'Категория',capacity:'Производительность',batch_quantity:'Размер партии',bagging_rate:'Скорость фасовки',weighing_accuracy:'Точность взвешивания',air_pressure:'Давление воздуха',air_consumption:'Расход воздуха',dimensions:'Габариты',operating_temperature:'Рабочая температура',operator_count:'Количество операторов',voltage:'Напряжение',frequency:'Частота',motor_power:'Мощность двигателя',packaging_range:'Диапазон фасовки',mixing_volume:'Объём смешивания',mixing_time:'Время смешивания',supply_status:'Статус поставки'}
+};
+const CATEGORY_LABELS = {
+  es:{'Dry Mortar Production Systems':'Sistemas de producción de mortero seco','Mixing & Blending Equipment':'Equipos de mezcla y homogeneización','Packaging Equipment':'Equipos de envasado'},
+  ar:{'Dry Mortar Production Systems':'أنظمة إنتاج الملاط الجاف','Mixing & Blending Equipment':'معدات الخلط والمزج','Packaging Equipment':'معدات التعبئة'},
+  ru:{'Dry Mortar Production Systems':'Линии производства сухих смесей','Mixing & Blending Equipment':'Оборудование для смешивания','Packaging Equipment':'Фасовочное оборудование'}
+};
+function renderSpecs(meta, language) {
+  const labels = SPEC_LABELS[language] || {};
   return SPEC_FIELDS.filter(([key]) => meta[key] !== undefined && meta[key] !== null && String(meta[key]).trim())
-    .map(([key, label]) => `<div class="spec"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(meta[key])}</dd></div>`).join('\n');
+    .map(([key, label]) => {
+      let value = meta[key];
+      if (key === 'category') value = CATEGORY_LABELS[language]?.[value] || value;
+      if (key === 'supply_status' && language === 'es') value = 'Disponible para suministro';
+      if (key === 'supply_status' && language === 'ar') value = 'متاح للتوريد';
+      if (key === 'supply_status' && language === 'ru') value = 'Доступно для поставки';
+      return '<div class="spec"><dt>' + escapeHtml(labels[key] || label) + '</dt><dd>' + escapeHtml(value) + '</dd></div>';
+    }).join('\n');
 }
 function renderLanguageLinks(slug, available, current) {
   return available.map((language) => {
@@ -210,6 +229,7 @@ function fillTemplate(template, values) {
 
 async function main() {
   const template = await readFile(TEMPLATE_PATH, 'utf8');
+  const translations = JSON.parse(await readFile(TRANSLATIONS_PATH, 'utf8'));
   const files = (await readdir(PRODUCTS_DIR)).filter((name) => name.toLowerCase().endsWith('.md')).sort();
   const archiveDir = path.join(ROOT, 'content', 'product-archive');
   let archivedFiles = [];
@@ -227,7 +247,7 @@ async function main() {
     if (seenSlugs.has(slug)) throw new Error(`Duplicate product url_slug: ${slug}`);
     seenSlugs.add(slug);
     if (!String(meta.title || '').trim() || !englishBody.trim()) throw new Error(`${filename}: English title and body are required`);
-    products.push({ meta, slug, englishBody });
+    products.push({ meta, slug, englishBody, archived });
    }
   }
 
@@ -246,15 +266,14 @@ async function main() {
     loc: `${SITE_URL}${route}`,
     alternates: homepageAlternates
   }));
-  for (const { meta, slug, englishBody } of products) {
-    const available = ['en', ...['es', 'ar', 'ru'].filter((language) =>
-      String(meta[LANGUAGES[language].titleKey] || '').trim() &&
-      String(meta[LANGUAGES[language].bodyKey] || '').trim()
-    )];
+  for (const { meta, slug, englishBody, archived } of products) {
+    const available = ['en', ...['es', 'ar', 'ru'].filter((language) => String(translations[slug]?.[language]?.title || '').trim() && String(translations[slug]?.[language]?.summary || '').trim() && String(translations[slug]?.[language]?.body || '').trim())];
+    if (!archived && available.length !== 4) throw new Error(slug + ': complete es/ar/ru translations are required');
     for (const language of available) {
       const config = LANGUAGES[language];
-      const title = String(meta[config.titleKey] || '').trim();
-      const body = language === 'en' ? englishBody : String(meta[config.bodyKey]).trim();
+      const localized = language === 'en' ? null : translations[slug][language];
+      const title = language === 'en' ? String(meta.title || '').trim() : String(localized.title).trim();
+      const body = language === 'en' ? englishBody : String(localized.body).trim();
       const route = language === 'en' ? `/products/${slug}/` : `/${language}/products/${slug}/`;
       const canonical = `${SITE_URL}${route}`;
       const sitemapAlternates = available.map((code) => ({
@@ -263,7 +282,8 @@ async function main() {
       }));
       sitemapAlternates.push({ hreflang: 'x-default', href: `${SITE_URL}/products/${slug}/` });
       sitemapEntries.push({ loc: canonical, alternates: sitemapAlternates });
-      const description = makeDescription(meta, body, language);
+      const descriptionSource = language === 'en' ? makeDescription(meta, body, language) : String(localized.summary).trim();
+      const description = descriptionSource.length > 160 ? descriptionSource.slice(0, 157).trimEnd() + '...' : descriptionSource;
       const image = safeImagePath(meta.image);
       const alternates = available.map((code) => {
         const href = code === 'en' ? `/products/${slug}/` : `/${code}/products/${slug}/`;
@@ -280,8 +300,8 @@ async function main() {
         TWITTER_IMAGE: image ? `<meta name="twitter:image" content="${SITE_URL}${escapeHtml(image)}">` : '',
         PRODUCT_TITLE: escapeHtml(title),
         PRODUCT_IMAGE: image ? `<picture class="product-picture"><source type="image/webp" srcset="${escapeHtml(image)}.400.webp 400w, ${escapeHtml(image)}.800.webp 800w" sizes="(min-width: 1132px) 1100px, calc(100vw - 32px)"><img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="eager" fetchpriority="high" decoding="async" onerror="this.parentElement.querySelector('source').remove();this.onerror=null;"></picture>` : '',
-        SUMMARY: language === 'en' && meta.summary ? `<p class="summary">${escapeHtml(meta.summary)}</p>` : '',
-        SPECS: renderSpecs(meta), BODY: renderMarkdown(body),
+        SUMMARY: (language === 'en' ? meta.summary : localized.summary) ? `<p class="summary">${escapeHtml(language === 'en' ? meta.summary : localized.summary)}</p>` : '',
+        SPECS: renderSpecs(meta, language), BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
         HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
         PRODUCT_JSON: JSON.stringify({
