@@ -46,6 +46,9 @@ assert.ok(homepage.includes('<link rel="canonical" href="' + SITE_URL + '/">'), 
 
 const pages = await collectProductPages();
 assert.ok(pages.length > 0, 'Build must generate product detail pages');
+assert.equal(pages.length, 44, 'Build must generate 8 current products in four languages plus 12 archived English URLs');
+const productTranslations = JSON.parse(await readFile(path.join(ROOT, 'content', 'product-translations.json'), 'utf8'));
+assert.equal(Object.keys(productTranslations).length, 8, 'All eight current products must have translation records');
 
 
 const homepageRoutes = { en: '/', es: '/es/', ar: '/ar/', ru: '/ru/' };
@@ -149,6 +152,15 @@ const expectedStructuredSpecs = {
 const productGroups = new Map();
 for (const page of pages) {
   const html = await readFile(page.file, 'utf8');
+  if (productTranslations[page.slug] && page.language !== 'en') {
+    const translated = productTranslations[page.slug][page.language];
+    assert.ok(translated && html.includes(translated.title), page.file + ': localized product title must be rendered');
+    assert.ok(html.includes(translated.summary), page.file + ': localized product summary must be rendered');
+    assert.ok(html.includes(translated.body.split('\\n')[0].replace(/^#+\\s*/, '')), page.file + ': localized product body must be rendered');
+    assert.match(html, new RegExp('<html lang="' + page.language + '"' + (page.language === 'ar' ? ' dir="rtl"' : '')), page.file + ': product language and direction must be correct');
+    assert.ok(html.includes('aria-current="page"'), page.file + ': current language must be marked in the language switcher');
+    assert.ok(!html.includes('<dt>Capacity / Throughput</dt>'), page.file + ': specification labels must be localized');
+  }
   if (expectedStructuredSpecs[page.slug] && page.language === 'en') {
     for (const value of expectedStructuredSpecs[page.slug]) {
       assert.ok(html.includes(value), page.file + ': structured key specification "' + value + '" must be rendered from product data');
