@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PRODUCTS_DIR = path.join(ROOT, 'content', 'products');
 const TEMPLATE_PATH = path.join(ROOT, 'templates', 'product.html');
+const TRANSLATIONS_PATH = path.join(ROOT, 'content', 'product-translations.json');
 const SITE_URL = 'https://www.aizgz.com';
 const LANGUAGES = {
   en: { htmlLang: 'en', ogLocale: 'en_US', dir: 'ltr', label: 'English', home: 'Home', products: 'Products', inquiry: 'Request a quotation', back: 'Back to product catalogue', footer: 'Product information and configuration are subject to confirmation.', titleKey: 'title', bodyKey: null },
@@ -210,6 +211,7 @@ function fillTemplate(template, values) {
 
 async function main() {
   const template = await readFile(TEMPLATE_PATH, 'utf8');
+  const translations = JSON.parse(await readFile(TRANSLATIONS_PATH, 'utf8'));
   const files = (await readdir(PRODUCTS_DIR)).filter((name) => name.toLowerCase().endsWith('.md')).sort();
   const archiveDir = path.join(ROOT, 'content', 'product-archive');
   let archivedFiles = [];
@@ -247,14 +249,13 @@ async function main() {
     alternates: homepageAlternates
   }));
   for (const { meta, slug, englishBody } of products) {
-    const available = ['en', ...['es', 'ar', 'ru'].filter((language) =>
-      String(meta[LANGUAGES[language].titleKey] || '').trim() &&
-      String(meta[LANGUAGES[language].bodyKey] || '').trim()
-    )];
+    const available = ['en', ...['es', 'ar', 'ru'].filter((language) => String(translations[slug]?.[language]?.title || '').trim() && String(translations[slug]?.[language]?.summary || '').trim() && String(translations[slug]?.[language]?.body || '').trim())];
+    if (available.length !== 4) throw new Error(slug + ': complete es/ar/ru translations are required');
     for (const language of available) {
       const config = LANGUAGES[language];
-      const title = String(meta[config.titleKey] || '').trim();
-      const body = language === 'en' ? englishBody : String(meta[config.bodyKey]).trim();
+      const localized = language === 'en' ? null : translations[slug][language];
+      const title = language === 'en' ? String(meta.title || '').trim() : String(localized.title).trim();
+      const body = language === 'en' ? englishBody : String(localized.body).trim();
       const route = language === 'en' ? `/products/${slug}/` : `/${language}/products/${slug}/`;
       const canonical = `${SITE_URL}${route}`;
       const sitemapAlternates = available.map((code) => ({
@@ -263,7 +264,7 @@ async function main() {
       }));
       sitemapAlternates.push({ hreflang: 'x-default', href: `${SITE_URL}/products/${slug}/` });
       sitemapEntries.push({ loc: canonical, alternates: sitemapAlternates });
-      const description = makeDescription(meta, body, language);
+      const description = language === 'en' ? makeDescription(meta, body, language) : String(localized.summary).trim();
       const image = safeImagePath(meta.image);
       const alternates = available.map((code) => {
         const href = code === 'en' ? `/products/${slug}/` : `/${code}/products/${slug}/`;
@@ -280,7 +281,7 @@ async function main() {
         TWITTER_IMAGE: image ? `<meta name="twitter:image" content="${SITE_URL}${escapeHtml(image)}">` : '',
         PRODUCT_TITLE: escapeHtml(title),
         PRODUCT_IMAGE: image ? `<picture class="product-picture"><source type="image/webp" srcset="${escapeHtml(image)}.400.webp 400w, ${escapeHtml(image)}.800.webp 800w" sizes="(min-width: 1132px) 1100px, calc(100vw - 32px)"><img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(title)}" loading="eager" fetchpriority="high" decoding="async" onerror="this.parentElement.querySelector('source').remove();this.onerror=null;"></picture>` : '',
-        SUMMARY: language === 'en' && meta.summary ? `<p class="summary">${escapeHtml(meta.summary)}</p>` : '',
+        SUMMARY: (language === 'en' ? meta.summary : localized.summary) ? `<p class="summary">${escapeHtml(language === 'en' ? meta.summary : localized.summary)}</p>` : '',
         SPECS: renderSpecs(meta), BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
         HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
