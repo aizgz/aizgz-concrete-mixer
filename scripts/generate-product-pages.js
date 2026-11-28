@@ -247,7 +247,7 @@ async function main() {
     if (seenSlugs.has(slug)) throw new Error(`Duplicate product url_slug: ${slug}`);
     seenSlugs.add(slug);
     if (!String(meta.title || '').trim() || !englishBody.trim()) throw new Error(`${filename}: English title and body are required`);
-    products.push({ meta, slug, englishBody });
+    products.push({ meta, slug, englishBody, archived });
    }
   }
 
@@ -266,9 +266,9 @@ async function main() {
     loc: `${SITE_URL}${route}`,
     alternates: homepageAlternates
   }));
-  for (const { meta, slug, englishBody } of products) {
+  for (const { meta, slug, englishBody, archived } of products) {
     const available = ['en', ...['es', 'ar', 'ru'].filter((language) => String(translations[slug]?.[language]?.title || '').trim() && String(translations[slug]?.[language]?.summary || '').trim() && String(translations[slug]?.[language]?.body || '').trim())];
-    if (available.length !== 4) throw new Error(slug + ': complete es/ar/ru translations are required');
+    if (!archived && available.length !== 4) throw new Error(slug + ': complete es/ar/ru translations are required');
     for (const language of available) {
       const config = LANGUAGES[language];
       const localized = language === 'en' ? null : translations[slug][language];
