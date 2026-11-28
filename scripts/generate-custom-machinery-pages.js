@@ -64,9 +64,16 @@ function renderPage(language, allContent) {
     inLanguage: locale.htmlLang,
     isPartOf: { '@type': 'WebSite', name: 'AIZGZ Machinery', url: SITE_URL + '/' }
   }).replace(/</g, String.fromCharCode(92) + 'u003c');
+  const optionIcons = [
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M6 4v6m12-6v6M5 20h14M7 17V7m10 10V7M4 17h16"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8V4m0 16v-4m4-4h4M4 12h4m7.5-7.5 2.8 2.8m-12.6 12.6 2.8-2.8m7 0 2.8 2.8M5.5 5.5l2.8 2.8"/><circle cx="12" cy="12" r="4"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 10-13h-7l1-7Z"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6M8 10h.01M16 10h.01"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 14 8l5-2-2 5 5 2-5 2 2 5-5-2-2 5-2-5-5 2 2-5-5-2 5-2-2-5 5 2 2-5Z"/></svg>'
+  ];
   const optionCards = page.options.map(([title, description], index) => `
         <article class="info-card">
-          <span class="number">${String(index + 1).padStart(2, '0')}</span>
+          <span class="option-icon">${optionIcons[index] || optionIcons[4]}</span>
           <h3>${escapeHtml(title)}</h3>
           <p>${escapeHtml(description)}</p>
         </article>`).join('');
@@ -135,9 +142,11 @@ function renderPage(language, allContent) {
     .section{padding:3rem 0}.section-heading{text-align:center;margin:0 auto 1.5rem;max-width:850px}
     h2{font-size:clamp(1.6rem,3vw,2.25rem);line-height:1.25;color:#0f172a;margin:0 0 .8rem}
     .section-heading p,.copy{color:#475569;max-width:850px;margin:.6rem auto}
-    .cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.1rem;margin:1.5rem auto 0}
-    .info-card{grid-column:span 2;min-height:100%;background:#fff;border:1px solid #e2e8f0;border-radius:.9rem;padding:1.5rem;box-shadow:0 5px 20px #0f172a08}
-    .info-card:nth-child(4){grid-column:2/span 2}.info-card:nth-child(5){grid-column:4/span 2}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem;margin:1.5rem auto 0}
+    .info-card{min-width:0;min-height:100%;background:#fff;border:1px solid #e2e8f0;border-radius:.9rem;padding:1.5rem;box-shadow:0 5px 20px #0f172a08}
+    .info-card:last-child{grid-column:1/-1}
+    .option-icon{display:inline-flex;align-items:center;justify-content:center;width:2.8rem;height:2.8rem;border-radius:.75rem;background:#fffbeb;color:#b45309}
+    .option-icon svg{width:1.45rem;height:1.45rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
     .step-card{background:#fff;border:1px solid #e2e8f0;border-radius:.8rem;padding:1.25rem;box-shadow:0 5px 20px #0f172a08}
     .info-card h3{margin:.85rem 0 .55rem}.info-card p{line-height:1.65}
     .contact-section{margin:1.5rem auto 0;padding:clamp(1.5rem,4vw,2.5rem);background:#fff;border:1px solid #e2e8f0;border-radius:1rem}
@@ -169,7 +178,6 @@ function renderPage(language, allContent) {
     footer{background:#0f172a;color:#cbd5e1;padding:1.5rem 1rem;text-align:center;font-size:.85rem}
     footer a{color:#fbbf24}
     html[dir="rtl"] body{text-align:right}
-    @media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.info-card,.info-card:nth-child(4),.info-card:nth-child(5){grid-column:auto}.info-card:last-child{grid-column:1/-1;max-width:calc(50% - .55rem);justify-self:center}}
     @media(max-width:640px){.header-inner{align-items:flex-start}.top-nav{width:100%;justify-content:space-between}.languages{gap:.6rem}.hero{border-radius:.6rem}.step-card{gap:.7rem}.cards,.contact-methods{grid-template-columns:1fr}.info-card,.info-card:last-child{grid-column:1;max-width:none}.info-card{padding:1.2rem}}
   </style>
 </head>
