@@ -340,14 +340,14 @@ async function main() {
   for (const [language, config] of Object.entries(localizedHomepages)) {
     const localized = updatedHomepage
       .replace('<html lang="en" class="scroll-smooth">', `<html lang="${config.htmlLang}"${language === 'ar' ? ' dir="rtl"' : ''} class="scroll-smooth">`)
-      .replace('<title>Dry Mix Mortar Production Lines &amp; Powder Processing Equipment | AIZGZ</title>', `<title>${config.title}</title>`)
+      .replace('<title>Dry Mix Mortar Production Lines | AIZGZ Machinery</title>', `<title>${config.title}</title>`)
       .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${config.description}">`)
       .replace('<link rel="canonical" href="https://www.aizgz.com/">', `<link rel="canonical" href="${SITE_URL}/${language}/">`)
-      .replace('<meta property="og:title" content="Dry Mix Mortar Production Lines &amp; Powder Processing Equipment | AIZGZ">', `<meta property="og:title" content="${config.title}">`)
+      .replace('<meta property="og:title" content="Dry Mix Mortar Production Lines | AIZGZ Machinery">', `<meta property="og:title" content="${config.title}">`)
       .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${config.description}">`)
       .replace('<meta property="og:url" content="https://www.aizgz.com/">', `<meta property="og:url" content="${SITE_URL}/${language}/">`)
       .replace('<meta property="og:locale" content="en_US">', `<meta property="og:locale" content="${config.ogLocale}">`)
-      .replace('<meta name="twitter:title" content="Dry Mix Mortar Production Lines &amp; Powder Processing Equipment | AIZGZ">', `<meta name="twitter:title" content="${config.title}">`)
+      .replace('<meta name="twitter:title" content="Dry Mix Mortar Production Lines | AIZGZ Machinery">', `<meta name="twitter:title" content="${config.title}">`)
       .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${config.description}">`);
     const outputDir = path.join(ROOT, language);
     await mkdir(outputDir, { recursive: true });
