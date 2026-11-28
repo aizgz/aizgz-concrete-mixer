@@ -56,6 +56,26 @@ for (const [language, route] of Object.entries(homepageRoutes)) {
   const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1] || '';
   assert.equal(canonical, SITE_URL + route, file + ': homepage canonical must match its language route');
   assert.match(html, new RegExp('<html lang="' + language + '"' + (language === 'ar' ? ' dir="rtl"' : '')), file + ': homepage language and direction must be correct');
+  if (language !== 'en') {
+    const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
+    const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
+    const ogTitle = html.match(/<meta\s+property="og:title"\s+content="([^"]+)"/i)?.[1] || '';
+    const ogDescription = html.match(/<meta\s+property="og:description"\s+content="([^"]+)"/i)?.[1] || '';
+    const twitterTitle = html.match(/<meta\s+name="twitter:title"\s+content="([^"]+)"/i)?.[1] || '';
+    const twitterDescription = html.match(/<meta\s+name="twitter:description"\s+content="([^"]+)"/i)?.[1] || '';
+    assert.ok(title.trim(), file + ': localized homepage title is required');
+    assert.ok(description.trim() && description.length <= 160, file + ': localized homepage description must be concise');
+    assert.equal(ogTitle, title, file + ': Open Graph title must match the localized title');
+    assert.equal(ogDescription, description, file + ': Open Graph description must match the localized description');
+    assert.equal(twitterTitle, title, file + ': Twitter title must match the localized title');
+    assert.equal(twitterDescription, description, file + ': Twitter description must match the localized description');
+    const focusTerms = {
+      es: /mortero seco|mezcla de polvo|ensacadoras de válvula/i,
+      ar: /الملاط الجاف|خلط المساحيق|الأكياس ذات الصمام/,
+      ru: /сухих строительных смесей|смешивания порошков|клапанные фасовочные машины/i
+    };
+    assert.match(title + ' ' + description, focusTerms[language], file + ': localized SEO metadata must reflect the current dry-mortar and powder-equipment focus');
+  }
   const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
   assert.deepEqual(new Set(alternates.map((item) => item.language)), new Set(['en', 'es', 'ar', 'ru', 'x-default']), file + ': homepage hreflang set must be complete');

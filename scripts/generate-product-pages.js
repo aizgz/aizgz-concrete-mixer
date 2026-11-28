@@ -333,9 +333,9 @@ async function main() {
   await writeFile(homepagePath, updatedHomepage, 'utf8');
 
   const localizedHomepages = {
-    es: { htmlLang: 'es', ogLocale: 'es_ES', title: 'Maquinaria industrial para construcción | AIZGZ', description: 'AIZGZ Machinery conecta compradores con proveedores de equipos de construcción, mezcla, envasado y manejo de materiales. Solicite información y cotizaciones.' },
-    ar: { htmlLang: 'ar', ogLocale: 'ar_AR', title: 'معدات صناعية للبناء ومناولة المواد | AIZGZ Machinery', description: 'تربط AIZGZ Machinery المشترين الدوليين بموردي معدات البناء والخلط والتعبئة ومناولة المواد. تواصل معنا للحصول على التفاصيل وعروض الأسعار.' },
-    ru: { htmlLang: 'ru', ogLocale: 'ru_RU', title: 'Оборудование для строительства и материалов | AIZGZ', description: 'AIZGZ Machinery связывает покупателей с поставщиками строительного, смесительного, упаковочного и транспортного оборудования. Запросите информацию.' }
+    es: { htmlLang: 'es', ogLocale: 'es_ES', title: 'Líneas de producción de mortero seco | AIZGZ', description: 'Explore líneas de mortero seco, equipos de mezcla de polvo y máquinas ensacadoras de válvula de un proveedor chino de soluciones y abastecimiento industrial.' },
+    ar: { htmlLang: 'ar', ogLocale: 'ar_AR', title: 'خطوط إنتاج الملاط الجاف | AIZGZ Machinery', description: 'اكتشف خطوط إنتاج الملاط الجاف ومعدات خلط المساحيق وآلات تعبئة الأكياس ذات الصمام، مع خدمات توريد وحلول صناعية من الصين.' },
+    ru: { htmlLang: 'ru', ogLocale: 'ru_RU', title: 'Линии сухих строительных смесей | AIZGZ', description: 'Сухие строительные смеси: производственные линии, смесители порошков и клапанные фасовочные машины от китайского поставщика промышленных решений.' }
   };
   for (const [language, config] of Object.entries(localizedHomepages)) {
     const localized = updatedHomepage
