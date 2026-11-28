@@ -56,7 +56,7 @@ function parseFrontMatter(source, filename) {
       const nested = {};
       while (i + 1 < lines.length && /^  [A-Za-z0-9_-]+:/.test(lines[i + 1])) {
         i += 1;
-        const nestedField = lines[i].match(/^  ([A-Za-z0-9_-]+):(?:\\s*(.*))?$/);
+        const nestedField = lines[i].match(/^  ([A-Za-z0-9_-]+):(?:\s*(.*))?$/);
         if (!nestedField) throw new Error(`${filename}:${i + 1}: unsupported nested front matter syntax`);
         const nestedKey = nestedField[1];
         const nestedRaw = nestedField[2] || '';
@@ -66,7 +66,7 @@ function parseFrontMatter(source, filename) {
             i += 1;
             block.push(lines[i].replace(/^ {4}/, ''));
           }
-          nested[nestedKey] = block.join(nestedRaw.startsWith('>') ? ' ' : '\\n').trim();
+          nested[nestedKey] = block.join(nestedRaw.startsWith('>') ? ' ' : '\n').trim();
         } else {
           nested[nestedKey] = parseScalar(nestedRaw);
         }
