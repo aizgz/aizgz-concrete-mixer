@@ -1,4 +1,5 @@
 ---
+catalog_visible: false
 title: Dry Mortar Production Line
 url_slug: dry-mortar-mixing-plant
 title_es: Línea de producción de mortero seco

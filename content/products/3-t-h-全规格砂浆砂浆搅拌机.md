@@ -1,4 +1,5 @@
 ---
+catalog_visible: false
 title: Twin-Shaft Paddle Mixer
 url_slug: twin-shaft-paddle-mixer
 title_es: Mezcladora de paletas de doble eje

@@ -1,4 +1,5 @@
 ---
+catalog_visible: false
 title: Twin-Shaft Gravity-Free Mixing Plant
 url_slug: dual-shaft-gravity-free-mixer
 title_es: Planta de mezcla sin gravedad de doble eje
