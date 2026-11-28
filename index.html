@@ -682,6 +682,7 @@
         globalSettings = payload.settings && typeof payload.settings === 'object' ? payload.settings : {};
         setText('brand-name', globalSettings.brand_name);
         setText('brand-tagline', globalSettings.brand_tagline);
+        if (document.documentElement.lang === 'en') {
         if (globalSettings.seo_title) {
           document.title = globalSettings.seo_title;
           document.querySelector('meta[property="og:title"]')?.setAttribute('content', globalSettings.seo_title);
@@ -692,7 +693,6 @@
           document.querySelector('meta[property="og:description"]')?.setAttribute('content', globalSettings.seo_description);
           document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', globalSettings.seo_description);
         }
-        if (document.documentElement.lang === 'en') {
           setText('hero-title', globalSettings.hero_title);
           setText('hero-subtitle', globalSettings.hero_subtitle);
           setText('about-text', globalSettings.about_text);
