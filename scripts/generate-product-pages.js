@@ -282,7 +282,8 @@ async function main() {
       }));
       sitemapAlternates.push({ hreflang: 'x-default', href: `${SITE_URL}/products/${slug}/` });
       sitemapEntries.push({ loc: canonical, alternates: sitemapAlternates });
-      const description = language === 'en' ? makeDescription(meta, body, language) : String(localized.summary).trim();
+      const descriptionSource = language === 'en' ? makeDescription(meta, body, language) : String(localized.summary).trim();
+      const description = descriptionSource.length > 160 ? descriptionSource.slice(0, 157).trimEnd() + '...' : descriptionSource;
       const image = safeImagePath(meta.image);
       const alternates = available.map((code) => {
         const href = code === 'en' ? `/products/${slug}/` : `/${code}/products/${slug}/`;
