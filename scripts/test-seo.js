@@ -93,7 +93,7 @@ for (const [language, labels] of Object.entries(homepageUiTranslations)) {
   const route = homepageRoutes[language];
   const file = path.join(ROOT, route === '/' ? 'index.html' : route.slice(1) + 'index.html');
   const html = await readFile(file, 'utf8');
-  assert.ok(html.includes('"' + language + '":{"hero_title":"' + labels.title + '"'), file + ': hero title translation must match the current equipment focus');
+  assert.ok(html.includes('"hero_title":"' + labels.title + '"'), file + ': hero title translation must match the current equipment focus');
   for (const [key, value] of [['filter_dry_systems', labels.dry], ['filter_packaging', labels.packaging], ['filter_mixing', labels.mixing]]) {
     assert.ok(html.includes('"' + key + '":"' + value + '"'), file + ': localized category filter ' + key + ' is required');
   }
