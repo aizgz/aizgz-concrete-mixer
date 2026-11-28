@@ -2,11 +2,12 @@
 title: Horizontal Ploughshare Mixer
 url_slug: horizontal-ploughshare-mixer
 category: Mixing & Blending Equipment
-supply_status: Available for Supply
 model: "LDH-0.1 to LDH-4 (listed model series; model-to-capacity mapping to confirm)"
-batch_quantity: "40–2,400 kg/batch across listed models (confirm selected model mapping)"
 catalog_visible: true
 summary: Horizontal ploughshare mixer with plough blades, optional high-speed choppers, liquid-spray assembly and discharge valve. The source lists LDH series models and batch quantities; parts of the specification table are damaged and require supplier confirmation.
+specifications:
+  supply_status: Available for Supply
+  batch_quantity: "40–2,400 kg/batch across listed models (confirm selected model mapping)"
 ---
 ## Product description and construction
 

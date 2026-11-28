@@ -2,13 +2,14 @@
 title: Horizontal Ribbon Mixer
 url_slug: horizontal-ribbon-mixer
 category: Mixing & Blending Equipment
-supply_status: Available for Supply
 model: "HJJ300–HJJ5000 (listed models)"
-motor_power: "4–18.5 kW main motor (by model; confirm selected model)"
-batch_quantity: "300–5,000 kg/batch (by model; confirm selected model)"
-mixing_time: "5–10 minutes (source-recorded; material and test conditions to confirm)"
 catalog_visible: true
 summary: Horizontal ribbon mixer with inner and outer spiral ribbons. The supplied record lists HJJ300–HJJ5000 models, batch quantities, motor-power figures, 95% mixing uniformity and a 5–10 minute mixing time; model mapping and test conditions should be confirmed.
+specifications:
+  supply_status: Available for Supply
+  motor_power: "4–18.5 kW main motor (by model; confirm selected model)"
+  batch_quantity: "300–5,000 kg/batch (by model; confirm selected model)"
+  mixing_time: "5–10 minutes (source-recorded; material and test conditions to confirm)"
 ---
 ## Product description
 
