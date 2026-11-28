@@ -303,7 +303,7 @@ async function main() {
         SUMMARY: (language === 'en' ? meta.summary : localized.summary) ? `<p class="summary">${escapeHtml(language === 'en' ? meta.summary : localized.summary)}</p>` : '',
         SPECS: renderSpecs(meta, language), BODY: renderMarkdown(body),
         LANGUAGE_LINKS: renderLanguageLinks(slug, available, language),
-        HOME_URL: SITE_URL, HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
+        HOME_URL: (language === 'en' ? SITE_URL : `${SITE_URL}/${language}`), HOME_LABEL: config.home, PRODUCTS_LABEL: config.products, INQUIRY_LABEL: config.inquiry, BACK_LABEL: config.back, FOOTER_NOTE: config.footer, INQUIRY_URL: `${SITE_URL}/#contact`,
         PRODUCT_JSON: JSON.stringify({
           '@context': 'https://schema.org',
           '@graph': [
@@ -322,8 +322,8 @@ async function main() {
             {
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: config.home, item: `${SITE_URL}/` },
-                { '@type': 'ListItem', position: 2, name: config.products, item: `${SITE_URL}/#products` },
+                { '@type': 'ListItem', position: 1, name: config.home, item: `${SITE_URL}${language === 'en' ? '/' : `/${language}/`}` },
+                { '@type': 'ListItem', position: 2, name: config.products, item: `${SITE_URL}${language === 'en' ? '/' : `/${language}/`}#products` },
                 { '@type': 'ListItem', position: 3, name: title }
               ]
             }
