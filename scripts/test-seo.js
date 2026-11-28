@@ -57,11 +57,6 @@ for (const [language, route] of Object.entries(homepageRoutes)) {
   assert.equal(canonical, SITE_URL + route, file + ': homepage canonical must match its language route');
   assert.match(html, new RegExp('<html lang="' + language + '"' + (language === 'ar' ? ' dir="rtl"' : '')), file + ': homepage language and direction must be correct');
   if (language !== 'en') {
-    if (expectedStructuredSpecs[page.slug]) {
-    for (const value of expectedStructuredSpecs[page.slug]) {
-      assert.ok(html.includes(value), page.file + ': structured key specification "' + value + '" must be rendered from product data');
-    }
-  }
   const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
     const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
     const ogTitle = html.match(/<meta\s+property="og:title"\s+content="([^"]+)"/i)?.[1] || '';
@@ -154,6 +149,11 @@ const expectedStructuredSpecs = {
 const productGroups = new Map();
 for (const page of pages) {
   const html = await readFile(page.file, 'utf8');
+  if (expectedStructuredSpecs[page.slug] && page.language === 'en') {
+    for (const value of expectedStructuredSpecs[page.slug]) {
+      assert.ok(html.includes(value), page.file + ': structured key specification "' + value + '" must be rendered from product data');
+    }
+  }
   const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
   const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
   const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1] || '';
