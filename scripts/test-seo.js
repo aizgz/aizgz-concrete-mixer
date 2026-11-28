@@ -57,12 +57,12 @@ for (const [language, route] of Object.entries(homepageRoutes)) {
   assert.equal(canonical, SITE_URL + route, file + ': homepage canonical must match its language route');
   assert.match(html, new RegExp('<html lang="' + language + '"' + (language === 'ar' ? ' dir="rtl"' : '')), file + ': homepage language and direction must be correct');
   if (language !== 'en') {
-    const title = html.match(/<title>([^<]+)<\\/title>/i)?.[1] || '';
-    const description = html.match(/<meta\\s+name="description"\\s+content="([^"]+)"/i)?.[1] || '';
-    const ogTitle = html.match(/<meta\\s+property="og:title"\\s+content="([^"]+)"/i)?.[1] || '';
-    const ogDescription = html.match(/<meta\\s+property="og:description"\\s+content="([^"]+)"/i)?.[1] || '';
-    const twitterTitle = html.match(/<meta\\s+name="twitter:title"\\s+content="([^"]+)"/i)?.[1] || '';
-    const twitterDescription = html.match(/<meta\\s+name="twitter:description"\\s+content="([^"]+)"/i)?.[1] || '';
+    const title = html.match(/<title>([^<]+)<\/title>/i)?.[1] || '';
+    const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1] || '';
+    const ogTitle = html.match(/<meta\s+property="og:title"\s+content="([^"]+)"/i)?.[1] || '';
+    const ogDescription = html.match(/<meta\s+property="og:description"\s+content="([^"]+)"/i)?.[1] || '';
+    const twitterTitle = html.match(/<meta\s+name="twitter:title"\s+content="([^"]+)"/i)?.[1] || '';
+    const twitterDescription = html.match(/<meta\s+name="twitter:description"\s+content="([^"]+)"/i)?.[1] || '';
     assert.ok(title.trim(), file + ': localized homepage title is required');
     assert.ok(description.trim() && description.length <= 160, file + ': localized homepage description must be concise');
     assert.equal(ogTitle, title, file + ': Open Graph title must match the localized title');
