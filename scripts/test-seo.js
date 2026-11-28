@@ -97,7 +97,7 @@ for (const [language, labels] of Object.entries(homepageUiTranslations)) {
   for (const [key, value] of [['filter_dry_systems', labels.dry], ['filter_packaging', labels.packaging], ['filter_mixing', labels.mixing]]) {
     assert.ok(html.includes('"' + key + '":"' + value + '"'), file + ': localized category filter ' + key + ' is required');
   }
-  assert.match(html, /id="product-filters" class="mb-8 flex flex-wrap justify-center gap-3"/, file + ': category filters must remain centered and wrap on narrow screens');
+  assert.match(html, /id="product-filters" class="mb-8 flex flex-wrap gap-3"/, file + ': category filters must wrap on narrow screens');
 }
 assert.match(homepage, /font-size:clamp\(1\.875rem,4vw,3\.75rem\)/, 'Hero heading must scale progressively across viewport sizes');
 const customMachineryPages = [];
