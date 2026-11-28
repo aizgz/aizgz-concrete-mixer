@@ -76,7 +76,7 @@ for (const [language, route] of Object.entries(homepageRoutes)) {
     };
     assert.match(title + ' ' + description, focusTerms[language], file + ': localized SEO metadata must reflect the current dry-mortar and powder-equipment focus');
   }
-  const alternates = matchAll(html, /<link\\s+rel="alternate"\\s+hreflang="([^"]+)"\\s+href="([^"]+)"\\s*>/gi)
+  const alternates = matchAll(html, /<link\s+rel="alternate"\s+hreflang="([^"]+)"\s+href="([^"]+)"\s*>/gi)
     .map((match) => ({ language: match[1], url: match[2] }));
   assert.deepEqual(new Set(alternates.map((item) => item.language)), new Set(['en', 'es', 'ar', 'ru', 'x-default']), file + ': homepage hreflang set must be complete');
   assert.ok(alternates.some((item) => item.language === language && item.url === canonical), file + ': homepage self hreflang is required');
